@@ -1,0 +1,142 @@
+/* =========================================================
+   Sara Ankava — שכבת שדרוג (נטענת אחרי style.css)
+   שפת העיצוב: הריבוע של הלוגו (נקודה שמתרחבת, מסתובבת ומאירה),
+   איים צפים בהדר, כפתורים עם "נקודת לוגו", מחשבון דליפה אינטראקטיבי.
+   ========================================================= */
+
+/* ---------- כפתורים: נקודת הלוגו שמתרחבת וממלאת את הכפתור ---------- */
+.btn{--dot:var(--violet);--ox:calc(100% - 1.55em);padding:.62em 1.6em .62em 1.5em;padding-inline-start:3em;gap:.7em}
+.btn:not(:has(.arr)){padding-inline:1.5em;padding-inline-start:3em}
+.btn::before{clip-path:circle(0 at var(--ox) 50%);transition:clip-path .7s var(--ease)}
+.btn:hover::before,.btn:focus-visible::before{clip-path:circle(160% at var(--ox) 50%)}
+.btn::after{content:"";position:absolute;inset-inline-start:1.25em;top:50%;width:.5em;height:.5em;margin-top:-.25em;border-radius:1px;background:var(--dot);transition:transform .7s var(--ease),background-color .4s var(--ease)}
+.btn:hover::after,.btn:focus-visible::after{transform:rotate(225deg) scale(1.15);background:var(--navy)}
+.btn--ghost{--dot:var(--lime)}
+.btn--dark,.on-light .btn--primary{--dot:var(--lime)}
+.on-light .btn--primary:hover::after{background:var(--lime)}
+.on-light .btn--ghost{--dot:var(--violet)}
+.fit__card .btn--primary{--dot:var(--violet)}
+.btn--sm{padding-block:.3em}
+.btn .arr{transition:transform .6s var(--ease)}
+.btn:hover .arr{transform:translateX(-7px)}
+.btn:active{transform:scale(.97)}
+
+/* ---------- הדר: שלושה איים צפים ---------- */
+.hdr.is-scrolled{background:none;border-bottom-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+.logo{isolation:isolate}
+.logo::before{content:"";position:absolute;z-index:-1;inset:-.65rem -1.15rem;border-radius:999px;background:rgb(18 26 59 / .82);border:1px solid var(--paper-12);box-shadow:0 14px 34px -18px rgb(0 0 0 / .7);opacity:0;transform:scale(.9);transition:opacity .45s var(--ease),transform .6s var(--ease)}
+.hdr.is-scrolled .logo::before{opacity:1;transform:none}
+.hdr.is-open .logo::before{opacity:0}
+.hdr__cta{box-shadow:0 14px 34px -18px rgb(0 0 0 / .7)}
+.capsule a{overflow:hidden}
+.capsule .roll{vertical-align:baseline}
+.capsule__live{display:none;align-items:center;gap:.55em;margin-inline-start:4px;padding:0 1rem 0 .7rem;border-inline-start:1px solid var(--paper-12);font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;color:var(--paper-70);white-space:nowrap;z-index:1}
+.capsule__live i{width:7px;height:7px;border-radius:1px;background:var(--paper-50)}
+.capsule__live.is-open i{background:var(--lime);animation:livePulse 2.2s var(--ease) infinite}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgb(207 248 57 / .55)}70%,100%{box-shadow:0 0 0 7px rgb(207 248 57 / 0)}}
+.paused .capsule__live i{animation:none}
+@media (min-width:1180px){.capsule__live{display:inline-flex}}
+
+/* ---------- ריבוע הלוגו כסימן קריאה: האיבר הקטן שמסתובב ---------- */
+.js .eyebrow.rv:not(.in)::before{transform:rotate(-135deg) scale(.3);opacity:0}
+.eyebrow::before{transition:transform .9s var(--ease),opacity .6s}
+
+/* ---------- זרקור שעוקב אחרי העכבר בתוך כרטיסים ---------- */
+.spot-host{position:relative}
+.spot{position:absolute;inset:0;z-index:3;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .45s var(--ease);background:radial-gradient(460px circle at var(--mx,50%) var(--my,50%),rgb(207 248 57 / .10),transparent 62%)}
+.on-light .spot{background:radial-gradient(460px circle at var(--mx,50%) var(--my,50%),rgb(114 59 248 / .10),transparent 62%)}
+.spot-host:hover>.spot{opacity:1}
+
+/* ---------- פינג של ריבוע בלחיצה ---------- */
+.ping{position:fixed;z-index:360;width:14px;height:14px;margin:-7px 0 0 -7px;border:1.5px solid var(--lime);border-radius:2px;pointer-events:none;animation:ping .8s var(--ease) forwards}
+@keyframes ping{from{transform:rotate(0) scale(1);opacity:.9}to{transform:rotate(135deg) scale(5);opacity:0}}
+
+/* ---------- מעבר בין עמודים: מסך עם ריבוע הלוגו ---------- */
+.pt{position:fixed;inset:0;z-index:500;display:grid;place-items:center;background:var(--ink);pointer-events:none;clip-path:inset(0 0 100% 0)}
+.pt i{width:clamp(40px,6vw,72px);aspect-ratio:1;border-radius:4px;background:var(--lime);transform:scale(0) rotate(-90deg)}
+.pt.is-in{clip-path:inset(0);pointer-events:all;transition:clip-path .55s var(--ease-io)}
+.pt.is-in i{transform:none;transition:transform .7s var(--ease) .15s}
+.pt.is-cover{clip-path:inset(0);transition:none}
+.pt.is-cover i{transform:none;transition:none}
+.pt.is-out{clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease-io)}
+.pt.is-out i{transform:scale(0) rotate(90deg);transition:transform .45s var(--ease)}
+
+/* =========================================================
+   מחשבון הדליפה
+   ========================================================= */
+.leak{background:var(--navy)}
+.leak__head{max-width:640px;margin-bottom:var(--sp-group)}
+.leak__head p{margin:var(--sp-inner) 0 0;color:var(--paper-70);max-width:44ch}
+.leak__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:start}
+.leak__ctl{display:grid;gap:clamp(24px,3vw,40px);align-content:start}
+.leak__note{margin:0;color:var(--paper-50)}
+.rng{display:block}
+.rng__top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:10px;color:var(--paper-70)}
+.rng output{font-family:var(--f-mono);font-weight:500;font-size:clamp(1.15rem,1.6vw,1.45rem);color:var(--lime);font-variant-numeric:tabular-nums;direction:ltr}
+.rng input{--p:30%;-webkit-appearance:none;appearance:none;display:block;width:100%;height:34px;margin:0;background:transparent;cursor:pointer;touch-action:pan-y}
+.rng input::-webkit-slider-runnable-track{height:2px;border-radius:2px;background:linear-gradient(to left,var(--lime) var(--p),var(--paper-25) var(--p))}
+.rng input::-moz-range-track{height:2px;border-radius:2px;background:var(--paper-25)}
+.rng input::-moz-range-progress{height:2px;background:var(--lime)}
+.rng input::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-10px;border:0;border-radius:4px;background:var(--lime);box-shadow:0 0 0 6px rgb(207 248 57 / .0);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.rng input::-moz-range-thumb{width:22px;height:22px;border:0;border-radius:4px;background:var(--lime);transition:transform .35s var(--ease)}
+.rng input:hover::-webkit-slider-thumb{box-shadow:0 0 0 7px rgb(207 248 57 / .16)}
+.rng input:active::-webkit-slider-thumb{transform:rotate(45deg) scale(1.15);box-shadow:0 0 0 9px rgb(207 248 57 / .2)}
+.rng input:active::-moz-range-thumb{transform:rotate(45deg) scale(1.15)}
+.rng input:focus-visible{outline:2px solid var(--lime);outline-offset:4px;border-radius:6px}
+.leak__viz{padding:clamp(18px,2.6vw,34px);border-radius:var(--r-out);border:1px solid var(--paper-12);background:linear-gradient(160deg,rgb(255 255 255 / .07),rgb(255 255 255 / .015));display:grid;gap:clamp(16px,2vw,26px)}
+.field{display:grid;grid-template-columns:repeat(50,minmax(0,1fr));gap:3px}
+.field i{display:block;aspect-ratio:1;border-radius:1.5px;background:var(--paper-12);transition:background-color .5s var(--ease),transform .5s var(--ease)}
+.field i.on{background:var(--lime);transform:scale(1.15)}
+.field i.up{background:var(--violet);transform:scale(1.15)}
+.leak__key{display:flex;flex-wrap:wrap;gap:6px 20px;color:var(--paper-50);font-size:.7rem}
+.leak__key span{display:inline-flex;align-items:center;gap:.6em}
+.leak__key .k{display:block;width:9px;height:9px;border-radius:1.5px;background:var(--paper-25)}
+.leak__key .k--on{background:var(--lime)}.leak__key .k--up{background:var(--violet)}
+.leak__out{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-inner)}
+.leak__out>div{display:grid;gap:6px;align-content:start;padding-top:14px;border-top:1px solid var(--paper-12)}
+.leak__out .label{color:var(--paper-50);font-size:.72rem}
+.leak__out b{font-family:var(--f-display);font-weight:700;font-size:clamp(1.9rem,3.6vw,3.2rem);line-height:1;font-variant-numeric:tabular-nums;direction:ltr;text-align:end}
+.leak__out .up b{color:var(--lime)}
+.leak__out .small{color:var(--paper-70)}
+.leak__viz .btn{justify-self:start}
+@media (max-width:900px){
+  .leak__grid{grid-template-columns:1fr}
+  .field{grid-template-columns:repeat(40,minmax(0,1fr));gap:2px}
+  .leak__out{grid-template-columns:1fr}
+  .leak__viz .btn{justify-self:stretch}
+}
+
+/* =========================================================
+   אודות: רקע כחול, פאנל בהיר לטקסט, כרטיס תיק עבודות עם מספרים
+   ========================================================= */
+.about{background:var(--navy)}
+.about__textcol{background:var(--paper);color:var(--navy);border-radius:var(--r-out);padding:clamp(26px,4.5vw,64px)}
+.about__hi{color:rgb(9 16 44 / .7);font-weight:500}
+.about__title{color:var(--navy);font-weight:500}
+.about__title b{font-weight:700}
+.about__big{color:var(--navy);font-weight:500;font-size:clamp(1.2rem,1.85vw,1.7rem);line-height:1.42}
+.about__big .key{font-weight:700;font-size:1.08em;border-inline-start-color:var(--violet)}
+.about__big .belief{color:var(--violet)}
+.about .hi{background-image:linear-gradient(var(--violet),var(--violet))}
+.about .sq{background:var(--violet)}
+.about .facts3 li{border-top-color:rgb(9 16 44 / .14)}
+.about .facts3 .label{color:rgb(9 16 44 / .62)}
+.about .facts3 b{color:var(--navy)}
+.about .facts3 span:not(.label):not(.num){color:rgb(9 16 44 / .72)}
+.about .num{color:var(--violet)}
+.about__textcol .btn--primary{background:var(--navy);color:var(--paper);--btn-fill:var(--violet);--dot:var(--lime)}
+.about__media{max-width:none;justify-self:stretch}
+.pcard{position:relative;display:grid;gap:14px;padding:14px;border-radius:var(--r-out);border:1px solid var(--paper-12);background:linear-gradient(160deg,rgb(255 255 255 / .08),rgb(255 255 255 / .02));transform-style:preserve-3d;will-change:transform;transition:transform .5s var(--ease)}
+.pcard__top{display:flex;justify-content:space-between;padding:4px 6px 0;color:var(--paper-50);font-size:.72rem}
+.pcard__photo{position:relative;margin:0;aspect-ratio:5/6;border-radius:var(--r-in);overflow:hidden;background:linear-gradient(160deg,#1B1F57 0%,var(--navy-2) 55%,#2A1670 100%)}
+.pcard__photo svg,.pcard__photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pcard__nums{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pcard__nums li{display:grid;gap:2px;padding:10px 6px 4px;border-top:1px solid var(--paper-12)}
+.pcard__nums .num{font-size:clamp(1.7rem,2.6vw,2.4rem);line-height:1;color:var(--lime)}
+.pcard__nums span:not([data-count]){font-size:.82rem;color:var(--paper-70);line-height:1.3}
+.pcard.is-tilting{transition:transform .12s linear}
+@media (max-width:900px){.pcard__photo{aspect-ratio:4/3}}
+
+/* ---------- reduced motion ---------- */
+.reduce .pt,.reduce .ping{display:none}
+@media (prefers-reduced-motion:reduce){.pt,.ping{display:none}.btn::before,.btn::after{transition:none}}

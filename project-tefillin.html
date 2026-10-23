@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>אתר תפילין ומזוזות — פרויקט | Sara Ankava</title>
+<meta name="description" content="קטלוג מוצרים דיגיטלי לעסק משפחתי של תפילין ומזוזות: מה היה לפני, מה ראיתי בנתונים, ומה נבנה.">
+<meta name="theme-color" content="#09102C">
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/SaraAnkava-Bold-v1.2.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css?v=24">
+<link rel="stylesheet" href="assets/css/enhance.css?v=2">
+<script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<!-- הצורה הבסיסית של האתר: ה-a מהלוגו -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="a" viewBox="0 0 700 520"><path vector-effect="non-scaling-stroke" d="M260 520A260 260 0 0 1 0 260A350 260 0 0 1 350 0A350 260 0 0 1 700 260L700 490Q700 520 670 520L500 520L500 275.6A160 86 0 1 0 486 299.5L486 520Z"/></symbol>
+</svg>
+
+<!-- 01 · Header: לוגו מימין, קפסולה צפה עם אינדיקטור פעיל ופס התקדמות, CTA אחד משמאל. במובייל: כפתור שפותח מסך מלא -->
+<header class="hdr">
+  <a class="logo" href="index.html" aria-label="Sara Ankava, לדף הבית"><img class="logo__img logo__img--light" src="assets/brand/logo-light.png" width="1066" height="123" alt="Sara Ankava"><img class="logo__img logo__img--dark" src="assets/brand/logo-dark.png" width="1066" height="123" alt="" aria-hidden="true"><i class="logo__sq" aria-hidden="true"></i></a>
+  <nav class="capsule" aria-label="ניווט ראשי">
+    <span class="capsule__ind" aria-hidden="true"></span>
+    <a href="index.html#process" data-sec="process">איך אני עובדת</a>
+    <a href="projects.html" aria-current="page" data-sec="projects">פרויקטים</a>
+    <a href="index.html#about" data-sec="about">אודות</a>
+    <a href="#contact" data-sec="contact">צרו קשר</a>
+    <span class="capsule__live" aria-hidden="true"><i></i><span data-live>זמינה</span></span>
+    <span class="capsule__bar" aria-hidden="true"></span>
+  </nav>
+  <a class="btn btn--primary btn--sm magnetic hdr__cta" href="#contact">שיחת אבחון <span class="arr" aria-hidden="true">←</span></a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="פתיחת התפריט"><span class="menu-btn__lines" aria-hidden="true"><i></i><i></i></span></button>
+</header>
+
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="תפריט ראשי">
+  <div class="menu__body">
+    <p class="menu__kicker label" lang="en" dir="ltr">Index / Navigation</p>
+    <ul class="menu__list" role="list">
+      <li style="--i:0"><a class="menu__item" href="index.html#process"><span class="menu__num" aria-hidden="true">01</span><span class="menu__txt">איך אני עובדת</span><span class="menu__arr" aria-hidden="true">←</span></a></li>
+      <li style="--i:1"><a class="menu__item" href="projects.html" aria-current="page"><span class="menu__num" aria-hidden="true">02</span><span class="menu__txt">פרויקטים</span><span class="menu__arr" aria-hidden="true">←</span></a></li>
+      <li style="--i:2"><a class="menu__item" href="index.html#about"><span class="menu__num" aria-hidden="true">03</span><span class="menu__txt">אודות</span><span class="menu__arr" aria-hidden="true">←</span></a></li>
+      <li style="--i:3"><a class="menu__item" href="#contact"><span class="menu__num" aria-hidden="true">04</span><span class="menu__txt">צרו קשר</span><span class="menu__arr" aria-hidden="true">←</span></a></li>
+    </ul>
+  </div>
+  <div class="menu__foot">
+    <p class="status-live" data-status-wrap><i aria-hidden="true"></i><span data-status>זמינה לשיחות</span><span class="mono" data-clock dir="ltr" lang="en"></span></p>
+    <div class="ctas">
+      <a class="btn btn--primary" data-wa href="#contact">הודעה בוואטסאפ <span class="arr" aria-hidden="true">←</span></a>
+      <a class="link" href="tel:+972533175560" dir="ltr">053-3175560</a>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+  <section class="page-head wrap" aria-labelledby="page-title" style="padding-bottom:var(--sp-section)">
+    <a class="back rv" href="projects.html"><span aria-hidden="true">→</span> חזרה לכל הפרויקטים</a>
+    <div class="grid case-hero" style="margin-top:var(--sp-group)">
+      <div class="case-hero__text">
+        <span class="label rv" style="color:var(--lime)">קטלוג דיגיטלי · יודאיקה · 2026</span>
+        <h1 class="h1" id="page-title" data-split style="font-size:var(--fs-2)">
+          <span class="line"><span>אתר תפילין</span></span>
+          <span class="line"><span>ומזוזות<span class="sq" aria-hidden="true"></span></span></span>
+        </h1>
+        <p class="lead muted rv" style="margin:0">קטלוג מוצרים מסודר עם פנייה ישירה בוואטסאפ. הלקוחות רואים, בוחרים ושואלים בהודעה אחת.</p>
+        <ul class="facts rv" aria-label="מה כלל הפרויקט"><li>אפיון</li><li>עיצוב</li><li>פיתוח</li><li>תוכנית שיווק</li></ul>
+      </div>
+      <div class="case-hero__media rv d1"><div class="mk mk--tef" aria-hidden="true"><div class="mk__win"><div class="mk__bar"><b></b><b></b><b></b><span lang="en" dir="ltr">tefillin-mezuzot.co.il</span></div>
+  <div class="mk__page">
+    <div class="mk__nav"><span class="mk__brand">תפילין ומזוזות</span><span class="mk__links"><span>קטלוג</span><span>איך בוחרים</span><span>שאלות</span><span>צור קשר</span></span><span class="mk__cta">שאלו בוואטסאפ</span></div>
+    <div class="mk__hero">
+      <div><h4 class="mk__h">תפילין ומזוזות.<br>בחירה פשוטה.</h4><p class="mk__p">קטלוג מסודר, והשאלות נענות בהודעה אחת.</p><div class="mk__btns"><span class="mk__btn">לקטלוג</span><span class="mk__btn mk__btn--wa">שאלו בוואטסאפ</span></div></div>
+      <div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 72C60 94 44 98 40 116" fill="none" stroke="#1d1610" stroke-width="8" stroke-linecap="round"/><path d="M62 72C64 92 82 96 86 114" fill="none" stroke="#1d1610" stroke-width="8" stroke-linecap="round"/><rect x="36" y="24" width="50" height="50" rx="5" fill="#1d1610"/><rect x="40" y="28" width="42" height="9" rx="2" fill="#3a2d22"/><path d="M47 52h28M47 61h28" stroke="#B08D57" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+    </div>
+    <div class="mk__row">
+      <div class="mk__card"><div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 72C60 94 44 98 40 116" fill="none" stroke="#1d1610" stroke-width="8" stroke-linecap="round"/><path d="M62 72C64 92 82 96 86 114" fill="none" stroke="#1d1610" stroke-width="8" stroke-linecap="round"/><rect x="36" y="24" width="50" height="50" rx="5" fill="#1d1610"/><rect x="40" y="28" width="42" height="9" rx="2" fill="#3a2d22"/><path d="M47 52h28M47 61h28" stroke="#B08D57" stroke-width="2.2" stroke-linecap="round"/></svg></div><b>תפילין</b><small>לפרטים</small></div>
+      <div class="mk__card"><div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="45" y="10" width="30" height="100" rx="10" fill="#B08D57"/><rect x="50" y="15" width="20" height="90" rx="7" fill="none" stroke="#2B2118" stroke-opacity=".28"/><text x="60" y="68" text-anchor="middle" font-size="27" font-weight="700" fill="#2B2118" font-family="Sara Ankava,Rubik,sans-serif">ש</text></svg></div><b>מזוזות</b><small>לפרטים</small></div>
+      <div class="mk__card"><div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="30" y="28" width="60" height="64" rx="9" fill="#B08D57"/><rect x="38" y="36" width="44" height="48" rx="5" fill="none" stroke="#2B2118" stroke-opacity=".35"/><circle cx="60" cy="60" r="8" fill="#2B2118"/></svg></div><b>בתים ונרתיקים</b><small>לפרטים</small></div>
+      <div class="mk__card"><div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="26" y="40" width="68" height="50" rx="8" fill="#2B2118"/><path d="M46 40v-8a14 14 0 0 1 28 0v8" fill="none" stroke="#2B2118" stroke-width="6"/><rect x="26" y="58" width="68" height="6" fill="#B08D57"/></svg></div><b>תיקים</b><small>לפרטים</small></div>
+    </div>
+  </div><span class="mk__wa"></span></div><div class="mk__phone"><div class="mk__scr">
+    <div class="mk__ptop"><span class="mk__brand">תפילין ומזוזות</span><span class="mk__ham"><i></i><i></i></span></div>
+    <div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="45" y="10" width="30" height="100" rx="10" fill="#B08D57"/><rect x="50" y="15" width="20" height="90" rx="7" fill="none" stroke="#2B2118" stroke-opacity=".28"/><text x="60" y="68" text-anchor="middle" font-size="27" font-weight="700" fill="#2B2118" font-family="Sara Ankava,Rubik,sans-serif">ש</text></svg></div>
+    <b class="mk__ph">מזוזה</b>
+    <div class="mk__chips"><span class="on">רגיל</span><span>מהודר</span><span>מהודר+</span></div>
+    <span class="mk__pbtn">שאלו על הפריט</span>
+  </div></div></div></div>
+    </div>
+  </section>
+
+  <section class="section on-light wrap" aria-labelledby="before-title">
+    <div class="grid split">
+      <div class="split__label"><span class="eyebrow rv">01 · מה היה לפני</span></div>
+      <div class="split__body">
+        <h2 class="h2 rv" id="before-title">שם טוב, שעבד בעיקר בטלפון<span class="sq" aria-hidden="true"></span></h2>
+        <p class="lead rv" style="margin-top:var(--sp-inner);max-width:46ch">עסק משפחתי שבנה שם לאורך שנים, מפה לאוזן. כמעט כל מכירה התחילה בשיחה: מה יש עכשיו, מה ההבדל בין הסוגים, כמה זה עולה. העסק עבד, אבל כל לקוח חדש היה תלוי בזמן פנוי לענות לו.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" style="background:var(--ink)" aria-labelledby="data-title">
+    <div class="section__head">
+      <span class="eyebrow rv">02 · מה ראיתי בנתונים</span>
+      <h2 class="h2" id="data-title" data-split><span class="line"><span>שלושה דברים</span></span><span class="line"><span>שקבעו את האתר<span class="sq" aria-hidden="true"></span></span></span></h2>
+    </div>
+    <div class="findings">
+      <div class="finding rv"><p>רוב הפניות מגיעות מהנייד, ובדרך כלל בשעות הערב.</p><p class="decision"><b>ההחלטה:</b> האתר נבנה קודם למובייל, עם וואטסאפ שתמיד בהישג יד.</p></div>
+      <div class="finding rv d1"><p>אותן שאלות חוזרות כמעט בכל שיחה: כשרות, רמת הכתב, מחיר וזמן אספקה.</p><p class="decision"><b>ההחלטה:</b> כל מוצר עונה על השאלות האלה בעמוד עצמו, לפני שצריך לשאול.</p></div>
+      <div class="finding rv d2"><p>לקוחות רוצים לראות את הפריט לפני שהם קונים, לא רק לשמוע עליו.</p><p class="decision"><b>ההחלטה:</b> קטלוג עם צילומים, השוואה בין רמות וסינון לפי סוג ותקציב.</p></div>
+    </div>
+  </section>
+
+  <section class="section on-light wrap" aria-labelledby="built-title">
+    <div class="section__head">
+      <span class="eyebrow rv">03 · מה בניתי</span>
+      <h2 class="h2" id="built-title" data-split><span class="line"><span>מסך אחרי מסך<span class="sq" aria-hidden="true"></span></span></span></h2>
+    </div>
+    <div class="screens">
+      <div class="screen grid">
+        <div class="screen__media rv"><div class="mk mk--tef" aria-hidden="true"><div class="mk__win"><div class="mk__bar"><b></b><b></b><b></b><span lang="en" dir="ltr">tefillin-mezuzot.co.il</span></div>
+  <div class="mk__page">
+    <div class="mk__nav"><span class="mk__brand">תפילין ומזוזות</span><span class="mk__links"><span>קטלוג</span><span>איך בוחרים</span><span>שאלות</span><span>צור קשר</span></span><span class="mk__cta">שאלו בוואטסאפ</span></div>
+    <div class="mk__hero">
+      <div><h4 class="mk__h">תפילין ומזוזות.<br>בחירה פשוטה.</h4><p class="mk__p">קטלוג מסודר, והשאלות נענות בהודעה אחת.</p><div class="mk__btns"><span class="mk__btn">לקטלוג</span><span class="mk__btn mk__btn--wa">שאלו בוואטסאפ</span></div></div>
+      <div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 72C60 94 44 98 40 116" fill="none" stroke="#1d1610" stroke-width="8" stroke-linecap="round"/><path d="M62 72C64 92 82 96 86 114" fill="none" stroke="#1d1610" stroke-width="8" stroke-linecap="round"/><rect x="36" y="24" width="50" height="50" rx="5" fill="#1d1610"/><rect x="40" y="28" width="42" height="9" rx="2" fill="#3a2d22"/><path d="M47 52h28M47 61h28" stroke="#B08D57" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+    </div>
+    <div class="mk__row">
+      <div class="mk__card"><div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 72C60 94 44 98 40 116" fill="none" stroke="#1d1610" stroke-width="8" stroke-linecap="round"/><path d="M62 72C64 92 82 96 86 114" fill="none" stroke="#1d1610" stroke-width="8" stroke-linecap="round"/><rect x="36" y="24" width="50" height="50" rx="5" fill="#1d1610"/><rect x="40" y="28" width="42" height="9" rx="2" fill="#3a2d22"/><path d="M47 52h28M47 61h28" stroke="#B08D57" stroke-width="2.2" stroke-linecap="round"/></svg></div><b>תפילין</b><small>לפרטים</small></div>
+      <div class="mk__card"><div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="45" y="10" width="30" height="100" rx="10" fill="#B08D57"/><rect x="50" y="15" width="20" height="90" rx="7" fill="none" stroke="#2B2118" stroke-opacity=".28"/><text x="60" y="68" text-anchor="middle" font-size="27" font-weight="700" fill="#2B2118" font-family="Sara Ankava,Rubik,sans-serif">ש</text></svg></div><b>מזוזות</b><small>לפרטים</small></div>
+      <div class="mk__card"><div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="30" y="28" width="60" height="64" rx="9" fill="#B08D57"/><rect x="38" y="36" width="44" height="48" rx="5" fill="none" stroke="#2B2118" stroke-opacity=".35"/><circle cx="60" cy="60" r="8" fill="#2B2118"/></svg></div><b>בתים ונרתיקים</b><small>לפרטים</small></div>
+      <div class="mk__card"><div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="26" y="40" width="68" height="50" rx="8" fill="#2B2118"/><path d="M46 40v-8a14 14 0 0 1 28 0v8" fill="none" stroke="#2B2118" stroke-width="6"/><rect x="26" y="58" width="68" height="6" fill="#B08D57"/></svg></div><b>תיקים</b><small>לפרטים</small></div>
+    </div>
+  </div><span class="mk__wa"></span></div></div></div>
+        <div class="screen__cap rv d1"><span class="label">מסך 01</span><h3 class="h3">דף הבית</h3><p>מה יש, למי זה מתאים ואיך פונים, כבר במסך הראשון. הוואטסאפ צף בכל גלילה.</p></div>
+      </div>
+      <div class="screen grid">
+        <div class="screen__media rv"><div class="mk mk--tef" aria-hidden="true"><div class="mk__win"><div class="mk__bar"><b></b><b></b><b></b><span lang="en" dir="ltr">tefillin-mezuzot.co.il/mezuzot</span></div>
+  <div class="mk__page mk__page--pdp">
+    <div class="mk__nav"><span class="mk__brand">תפילין ומזוזות</span><span class="mk__links"><span>קטלוג</span><span>איך בוחרים</span><span>שאלות</span></span><span class="mk__cta">שאלו בוואטסאפ</span></div>
+    <div class="mk__pdp">
+      <div><div class="mk__vis mk__vis--lg"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="45" y="10" width="30" height="100" rx="10" fill="#B08D57"/><rect x="50" y="15" width="20" height="90" rx="7" fill="none" stroke="#2B2118" stroke-opacity=".28"/><text x="60" y="68" text-anchor="middle" font-size="27" font-weight="700" fill="#2B2118" font-family="Sara Ankava,Rubik,sans-serif">ש</text></svg></div><div class="mk__thumbs"><div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="45" y="10" width="30" height="100" rx="10" fill="#B08D57"/><rect x="50" y="15" width="20" height="90" rx="7" fill="none" stroke="#2B2118" stroke-opacity=".28"/><text x="60" y="68" text-anchor="middle" font-size="27" font-weight="700" fill="#2B2118" font-family="Sara Ankava,Rubik,sans-serif">ש</text></svg></div><div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="30" y="28" width="60" height="64" rx="9" fill="#B08D57"/><rect x="38" y="36" width="44" height="48" rx="5" fill="none" stroke="#2B2118" stroke-opacity=".35"/><circle cx="60" cy="60" r="8" fill="#2B2118"/></svg></div><div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 72C60 94 44 98 40 116" fill="none" stroke="#1d1610" stroke-width="8" stroke-linecap="round"/><path d="M62 72C64 92 82 96 86 114" fill="none" stroke="#1d1610" stroke-width="8" stroke-linecap="round"/><rect x="36" y="24" width="50" height="50" rx="5" fill="#1d1610"/><rect x="40" y="28" width="42" height="9" rx="2" fill="#3a2d22"/><path d="M47 52h28M47 61h28" stroke="#B08D57" stroke-width="2.2" stroke-linecap="round"/></svg></div><div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="26" y="40" width="68" height="50" rx="8" fill="#2B2118"/><path d="M46 40v-8a14 14 0 0 1 28 0v8" fill="none" stroke="#2B2118" stroke-width="6"/><rect x="26" y="58" width="68" height="6" fill="#B08D57"/></svg></div></div></div>
+      <div><small class="mk__crumb">קטלוג / מזוזות</small><h4 class="mk__h">מזוזה</h4><p class="mk__p">בחרו רמת כתב, השוו בין האפשרויות ושאלו על הפריט בהודעה אחת.</p>
+        <div class="mk__chips mk__chips--lg"><span class="on">רגיל</span><span>מהודר</span><span>מהודר+</span></div>
+        <div class="mk__table"><i></i><i></i><i></i></div>
+        <div class="mk__btns"><span class="mk__btn mk__btn--wa">שאלו על הפריט</span><span class="mk__btn">להשוואה</span></div></div>
+    </div>
+  </div></div></div></div>
+        <div class="screen__cap rv d1"><span class="label">מסך 02</span><h3 class="h3">עמוד מוצר</h3><p>רמות כתב להשוואה, תמונות מכמה זוויות, וכפתור ששולח שאלה על הפריט הספציפי.</p></div>
+      </div>
+      <div class="screen grid">
+        <div class="screen__media rv"><div class="mk mk--tef mk--phones" aria-hidden="true"><div class="mk__phone"><div class="mk__scr">
+    <div class="mk__ptop"><span class="mk__brand">תפילין ומזוזות</span><span class="mk__ham"><i></i><i></i></span></div>
+    <div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="45" y="10" width="30" height="100" rx="10" fill="#B08D57"/><rect x="50" y="15" width="20" height="90" rx="7" fill="none" stroke="#2B2118" stroke-opacity=".28"/><text x="60" y="68" text-anchor="middle" font-size="27" font-weight="700" fill="#2B2118" font-family="Sara Ankava,Rubik,sans-serif">ש</text></svg></div>
+    <b class="mk__ph">מזוזה</b>
+    <div class="mk__chips"><span class="on">רגיל</span><span>מהודר</span><span>מהודר+</span></div>
+    <span class="mk__pbtn">שאלו על הפריט</span>
+  </div></div><div class="mk__phone"><div class="mk__scr">
+    <div class="mk__ptop"><span class="mk__brand">תפילין ומזוזות</span><span class="mk__ham"><i></i><i></i></span></div>
+    <div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 72C60 94 44 98 40 116" fill="none" stroke="#1d1610" stroke-width="8" stroke-linecap="round"/><path d="M62 72C64 92 82 96 86 114" fill="none" stroke="#1d1610" stroke-width="8" stroke-linecap="round"/><rect x="36" y="24" width="50" height="50" rx="5" fill="#1d1610"/><rect x="40" y="28" width="42" height="9" rx="2" fill="#3a2d22"/><path d="M47 52h28M47 61h28" stroke="#B08D57" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+    <b class="mk__ph">תפילין</b>
+    <div class="mk__chips"><span class="on">רגיל</span><span>מהודר</span><span>מהודר+</span></div>
+    <span class="mk__pbtn">שאלו על הפריט</span>
+  </div></div><div class="mk__phone"><div class="mk__scr">
+    <div class="mk__ptop"><span class="mk__brand">תפילין ומזוזות</span><span class="mk__ham"><i></i><i></i></span></div>
+    <div class="mk__vis"><svg class="mk__art" viewBox="0 0 120 120" aria-hidden="true"><rect x="26" y="40" width="68" height="50" rx="8" fill="#2B2118"/><path d="M46 40v-8a14 14 0 0 1 28 0v8" fill="none" stroke="#2B2118" stroke-width="6"/><rect x="26" y="58" width="68" height="6" fill="#B08D57"/></svg></div>
+    <b class="mk__ph">תיקים</b>
+    <div class="mk__chips"><span class="on">רגיל</span><span>מהודר</span><span>מהודר+</span></div>
+    <span class="mk__pbtn">שאלו על הפריט</span>
+  </div></div></div>
+        <div class="screen__cap rv d1"><span class="label">מסך 03</span><h3 class="h3">מובייל</h3><p>רוב הלקוחות מגיעים מהטלפון, אז כל מסך תוכנן קודם לאגודל.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · מה יצא: האזור נכנס רק כשיש מספר אמיתי (כמות + זמן + רלוונטיות), למשל "גידול של X% בפניות תוך חודשיים" -->
+
+  <section class="section wrap" style="padding-bottom:var(--sp-group)" aria-label="ניווט בין פרויקטים">
+    <div class="next">
+      <a href="projects.html" class="rv"><span class="label">חזרה</span><span class="h3"><span aria-hidden="true">→ </span>לכל הפרויקטים</span></a>
+      <div class="rv d1"><span class="label">הפרויקט הבא</span><span class="h3">הכל לגן <span class="small muted" style="font-family:var(--f-body);font-weight:400">· בבנייה</span></span></div>
+    </div>
+  </section>
+
+  <!-- 07 · יצירת קשר -->
+  <section class="section contact wrap" id="contact" aria-labelledby="contact-title">
+    <svg class="contact__a" viewBox="0 0 700 520" aria-hidden="true"><use href="#a" width="700" height="520"/></svg>
+    <div class="contact__head">
+      <div>
+        <span class="eyebrow rv">יצירת קשר</span>
+        <h2 class="h2" id="contact-title" data-split>
+          <span class="line"><span>יש לכם עסק שגדל?</span></span>
+          <span class="line"><span>בואו נבין מה השלב</span></span>
+          <span class="line"><span>הבא שלו<span class="sq" aria-hidden="true"></span></span></span>
+        </h2>
+      </div>
+      <ul class="contact__promise rv" role="list">
+        <li><i aria-hidden="true"></i>חוזרת אליכם תוך <b class="num">24</b> שעות</li>
+        <li><i aria-hidden="true"></i>שיחה ראשונה להבנת העסק</li>
+        <li><i aria-hidden="true"></i>קודם מבינים, אחר כך מחליטים מה לבנות</li>
+      </ul>
+    </div>
+
+    <div data-contact>
+      <form novalidate>
+        <p class="madlib rv">היי שרי, קוראים לי <input name="name" autocomplete="name" placeholder="השם שלכם" aria-label="השם שלכם" required>, ויש לי עסק של <input name="about" placeholder="מה העסק עושה" aria-label="מה העסק עושה (לא חובה)">. אפשר לחזור אליי למספר <input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="הטלפון שלכם" aria-label="מספר טלפון לחזרה" dir="ltr" required>.</p>
+        <input type="hidden" name="pains">
+        <p class="contact__err" role="alert"></p>
+        <div class="contact__actions">
+          <button class="btn btn--primary magnetic" type="submit">המשך לשליחה <span class="arr" aria-hidden="true">←</span></button>
+          <a class="link or-wa" data-wa href="#contact">או פשוט כתבו לי בוואטסאפ <span aria-hidden="true">←</span></a>
+        </div>
+        <p class="fine small" style="margin-top:var(--sp-inner)">הפרטים ישמשו רק לחזרה אליכם. השליחה מתבצעת דרך וואטסאפ, אחרי אישור שלכם. <a href="legal.html#privacy">מדיניות פרטיות</a></p>
+      </form>
+      <div class="done" tabindex="-1">
+        <h3 class="h2">תודה, <span data-who></span><span class="sq" aria-hidden="true"></span></h3>
+        <p class="lead">עוד צעד אחד והפרטים אצלי. מה קורה עכשיו:</p>
+        <ol>
+          <li><span>לחיצה על הכפתור פותחת וואטסאפ עם מה שכבר כתבתם. רק לשלוח.</span></li>
+          <li><span>תוך 24 שעות (בימי עבודה) אני חוזרת אליכם לתיאום שיחה.</span></li>
+          <li><span>בשיחה מכירים את העסק ומבינים מה השלב הבא שלו.</span></li>
+        </ol>
+        <div class="ctas"><a class="btn btn--primary magnetic" data-send href="#contact">פתיחת וואטסאפ <span class="arr" aria-hidden="true">←</span></a><button class="linkbtn" type="button" data-edit>רוצים לתקן משהו?</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- פוטר -->
+<footer class="ftr wrap">
+  <div class="ftr__top grid">
+    <div class="ftr__brand">
+      <a class="logo" href="index.html" aria-label="Sara Ankava, לדף הבית"><img class="logo__img logo__img--light" src="assets/brand/logo-light.png" width="1066" height="123" alt="Sara Ankava"><img class="logo__img logo__img--dark" src="assets/brand/logo-dark.png" width="1066" height="123" alt="" aria-hidden="true"><i class="logo__sq" aria-hidden="true"></i></a>
+      <p>אבחון עסקי, תוכנית שיווק ונכס דיגיטלי אחד, לעסקים שהצליחו בפה לאוזן ומוכנים לשלב הבא.</p>
+      <a class="btn btn--primary" data-wa href="#contact">הודעה בוואטסאפ <span class="arr" aria-hidden="true">←</span></a>
+    </div>
+    <div class="ftr__col">
+      <h2>ניווט</h2>
+      <ul><li><a href="index.html#about">אודות</a></li><li><a href="index.html#process">איך אני עובדת</a></li><li><a href="projects.html">פרויקטים</a></li><li><a href="#contact">צרו קשר</a></li></ul>
+    </div>
+    <div class="ftr__col">
+      <h2>קשר</h2>
+      <ul><li><a data-wa href="#contact">וואטסאפ</a></li><li><a href="tel:+972533175560" dir="ltr">053-3175560</a></li></ul>
+    </div>
+    <div class="ftr__col">
+      <h2>מידע</h2>
+      <ul><li><a href="legal.html#accessibility">הצהרת נגישות</a></li><li><a href="legal.html#privacy">מדיניות פרטיות</a></li><li><button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">עצירת אנימציות</button></li></ul>
+    </div>
+  </div>
+  
+  <div class="ftr__bottom"><span dir="ltr">© <span data-year>2026</span> Sara Ankava</span><span>אסטרטגיה, עיצוב ופיתוח: Sara Ankava</span></div>
+</footer>
+
+<!-- 08 · וואטסאפ צף -->
+<a class="wa" data-wa href="#contact" aria-label="שליחת הודעה בוואטסאפ">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.7 11.7 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="assets/js/main.js?v=25" defer></script>
+<script src="assets/js/enhance.js?v=2" defer></script>
+</body>
+</html>
