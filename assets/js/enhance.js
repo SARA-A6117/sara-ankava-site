@@ -108,3 +108,51 @@
     });
   }
 })();
+
+/* ---- הירו: מסירת ההמלצה מבועה לבועה ועד הכפתור ---- */
+(() => {
+  const rl = document.querySelector('[data-relay]'); if (!rl) return;
+  const g = window.gsap, root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const as = [...rl.querySelectorAll('.relay__a')], docks = as.map(a => a.querySelector('.relay__dock'));
+  const msg = rl.querySelector('.relay__msg'), cta = document.querySelector('#top .hero__ctas .btn');
+  const lit = (a, on) => a.classList.toggle('is-lit', on);
+  if (!g || reduce) { as.forEach(a => lit(a, true)); return; }
+
+  const P = el => { const r = el.getBoundingClientRect(), b = rl.getBoundingClientRect(); return { x: r.left - b.left + r.width / 2, y: r.top - b.top + r.height / 2, s: r.width / 14 }; };
+  const ctaDot = () => { const r = cta.getBoundingClientRect(), b = rl.getBoundingClientRect(), fs = parseFloat(getComputedStyle(cta).fontSize); return { x: r.right - b.left - 1.5 * fs, y: r.top - b.top + r.height / 2, s: fs * .5 / 14 }; };
+  const pop = a => g.fromTo(a.querySelector('svg'), { scale: .95 }, { scale: 1, duration: .7, ease: 'back.out(3)' });
+  let cur = null, timer = null;
+
+  const run = () => {
+    clearTimeout(timer);
+    const r = rl.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight || document.hidden || root.classList.contains('paused')) { timer = setTimeout(run, 1200); return; }
+    as.forEach(a => lit(a, false)); cta.classList.remove('is-hot');
+    const p = docks.map(P), end = ctaDot();
+    g.set(msg, { x: p[0].x, y: p[0].y, scale: p[0].s, rotate: 0, opacity: 1 });
+    const tl = cur = g.timeline({ onComplete: run });
+    const hop = (from, to, t) => {
+      tl.to(msg, { x: to.x, scale: to.s, rotate: '+=180', duration: .95, ease: 'sine.inOut' }, t)
+        .to(msg, { y: Math.min(from.y, to.y) - 64, duration: .475, ease: 'power2.out' }, t)
+        .to(msg, { y: to.y, duration: .475, ease: 'power2.in' }, t + .475);
+    };
+    tl.call(() => { lit(as[0], true); pop(as[0]); }, null, .3);
+    hop(p[0], p[1], 1.1); tl.call(() => { lit(as[1], true); pop(as[1]); }, null, 2.05);
+    hop(p[1], p[2], 2.6); tl.call(() => { lit(as[2], true); pop(as[2]); }, null, 3.55);
+    hop(p[2], end, 4.1); tl.call(() => cta.classList.add('is-hot'), null, 5.05);
+    tl.to(msg, { opacity: 0, duration: .4 }, 5.2).call(() => cta.classList.remove('is-hot'), null, 6.6).to({}, { duration: .4 }, 7);
+  };
+  const start = () => setTimeout(run, 1300);
+  document.fonts && document.fonts.ready ? document.fonts.ready.then(start) : start();
+  rl.addEventListener('pointerdown', () => { if (cur) cur.kill(); run(); });
+
+  /* הבועות מטות את הראש לכיוון העכבר */
+  if (fine) addEventListener('pointermove', e => {
+    as.forEach(a => {
+      const b = a.getBoundingClientRect(), dx = (e.clientX - (b.left + b.width / 2)) / innerWidth;
+      g.to(a, { rotate: Math.max(-7, Math.min(7, dx * 16)), x: dx * 14, duration: .9, ease: 'power3.out', overwrite: 'auto' });
+    });
+  }, { passive: true });
+})();

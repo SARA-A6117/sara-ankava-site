@@ -140,3 +140,40 @@
 /* ---------- reduced motion ---------- */
 .reduce .pt,.reduce .ping{display:none}
 @media (prefers-reduced-motion:reduce){.pt,.ping{display:none}.btn::before,.btn::after{transition:none}}
+
+/* =========================================================
+   הירו: ה-a כבועת דיבור (#top בלבד)
+   שלוש בועות מעבירות ביניהן את הריבוע, וההמלצה נוחתת על הכפתור
+   ========================================================= */
+#top{display:flex;flex-direction:column;justify-content:center;gap:clamp(32px,6vh,64px)}
+#top .hero__eyebrow{margin-bottom:clamp(14px,2.2vh,26px)}
+#top .hero__title{font-size:clamp(34px,4.4vw,64px);line-height:1.12;margin:0}
+@media (min-width:960px){#top .hero__title .line>span{white-space:nowrap}}
+.relay{position:relative;display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:34px}
+.relay__a{position:relative;direction:ltr;flex:none;width:var(--w);aspect-ratio:880/520;margin:0;transform-origin:50% 100%}
+.relay__a--1{--w:clamp(128px,25vw,330px)}
+.relay__a--2{--w:clamp(96px,18vw,240px)}
+.relay__a--3{--w:clamp(70px,13vw,170px)}
+.relay__a svg{position:absolute;left:0;top:0;width:79.55%;height:100%;overflow:visible;transform-origin:50% 100%}
+.relay__a use{fill:transparent;stroke:var(--paper-25);stroke-width:1.5;transition:fill .6s var(--ease),stroke .6s var(--ease)}
+.relay__a.is-lit use{fill:var(--violet);stroke:var(--violet)}
+.relay__dock{position:absolute;right:0;bottom:0;width:15.9%;aspect-ratio:1;border-radius:3px;background:var(--paper-25);transition:background-color .5s var(--ease)}
+.relay__a.is-lit .relay__dock{background:var(--lime)}
+.relay__a figcaption{position:absolute;right:0;top:calc(100% + 14px);direction:rtl;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;white-space:nowrap;color:var(--paper-50);transition:color .5s var(--ease)}
+.relay__a.is-lit figcaption{color:var(--paper-70)}
+.js .relay__a{opacity:0}
+.is-ready .relay__a{opacity:1;transition:opacity 1.1s var(--ease) .7s}
+.is-ready .relay__a--2{transition-delay:.9s}.is-ready .relay__a--3{transition-delay:1.1s}
+.relay__msg{position:absolute;left:0;top:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:2px;background:var(--lime);opacity:0;pointer-events:none;z-index:2;will-change:transform}
+#top .hero__foot{display:flex;align-items:flex-end;justify-content:space-between;gap:24px 40px;flex-wrap:wrap}
+#top .hero__p{margin:0}
+#top .hero__ctas{margin:0}
+.btn.is-hot::before{clip-path:circle(160% at var(--ox) 50%)}
+.btn.is-hot::after{transform:rotate(225deg) scale(1.15);background:var(--navy)}
+.btn.is-hot .arr{transform:translateX(-7px)}
+@media (max-width:900px){
+  #top{padding-top:calc(var(--hdr) + 28px);padding-bottom:64px;min-height:100svh}
+  #top .hero__foot{flex-direction:column;align-items:stretch}
+  #top .hero__ctas .btn{width:100%}
+  .relay__a figcaption{font-size:.66rem;letter-spacing:.04em}
+}
