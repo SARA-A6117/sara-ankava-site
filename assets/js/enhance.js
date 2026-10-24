@@ -109,50 +109,68 @@
   }
 })();
 
-/* ---- הירו: מסירת ההמלצה מבועה לבועה ועד הכפתור ---- */
+/* ---- הירו: ה-a כבועת דיבור מריבועים. גל דיבור יוצא מהריבוע הלימוני, והעכבר מדליק ריבועים ---- */
 (() => {
-  const rl = document.querySelector('[data-relay]'); if (!rl) return;
-  const g = window.gsap, root = document.documentElement;
+  const box = document.querySelector('[data-pa]'), sym = document.querySelector('#a path'); if (!box || !sym) return;
+  const cv = box.querySelector('canvas'), ctx = cv.getContext('2d');
+  const D = sym.getAttribute('d'), root = document.documentElement;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
-  const as = [...rl.querySelectorAll('.relay__a')], docks = as.map(a => a.querySelector('.relay__dock'));
-  const msg = rl.querySelector('.relay__msg'), cta = document.querySelector('#top .hero__ctas .btn');
-  const lit = (a, on) => a.classList.toggle('is-lit', on);
-  if (!g || reduce) { as.forEach(a => lit(a, true)); return; }
+  const VW = 880, VH = 520, UNIT = 20, OX = 810, OY = 450;
+  const VIOLET = [114, 59, 248], LIME = [207, 248, 57];
+  let W = 0, H = 0, dpr = 1, S = 1, cells = [], t0 = performance.now(), wave = { x: OX, y: OY, t: -1e9 };
+  let mouse = { x: -999, y: -999 }, amt = 0, target = 0, visible = true, raf = 0;
 
-  const P = el => { const r = el.getBoundingClientRect(), b = rl.getBoundingClientRect(); return { x: r.left - b.left + r.width / 2, y: r.top - b.top + r.height / 2, s: r.width / 14 }; };
-  const ctaDot = () => { const r = cta.getBoundingClientRect(), b = rl.getBoundingClientRect(), fs = parseFloat(getComputedStyle(cta).fontSize); return { x: r.right - b.left - 1.5 * fs, y: r.top - b.top + r.height / 2, s: fs * .5 / 14 }; };
-  const pop = a => g.fromTo(a.querySelector('svg'), { scale: .95 }, { scale: 1, duration: .7, ease: 'back.out(3)' });
-  let cur = null, timer = null;
-
-  const run = () => {
-    clearTimeout(timer);
-    const r = rl.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > innerHeight || document.hidden || root.classList.contains('paused')) { timer = setTimeout(run, 1200); return; }
-    as.forEach(a => lit(a, false)); cta.classList.remove('is-hot');
-    const p = docks.map(P), end = ctaDot();
-    g.set(msg, { x: p[0].x, y: p[0].y, scale: p[0].s, rotate: 0, opacity: 1 });
-    const tl = cur = g.timeline({ onComplete: run });
-    const hop = (from, to, t) => {
-      tl.to(msg, { x: to.x, scale: to.s, rotate: '+=180', duration: .95, ease: 'sine.inOut' }, t)
-        .to(msg, { y: Math.min(from.y, to.y) - 64, duration: .475, ease: 'power2.out' }, t)
-        .to(msg, { y: to.y, duration: .475, ease: 'power2.in' }, t + .475);
-    };
-    tl.call(() => { lit(as[0], true); pop(as[0]); }, null, .3);
-    hop(p[0], p[1], 1.1); tl.call(() => { lit(as[1], true); pop(as[1]); }, null, 2.05);
-    hop(p[1], p[2], 2.6); tl.call(() => { lit(as[2], true); pop(as[2]); }, null, 3.55);
-    hop(p[2], end, 4.1); tl.call(() => cta.classList.add('is-hot'), null, 5.05);
-    tl.to(msg, { opacity: 0, duration: .4 }, 5.2).call(() => cta.classList.remove('is-hot'), null, 6.6).to({}, { duration: .4 }, 7);
+  const build = () => {
+    const r = box.getBoundingClientRect(); if (!r.width) return;
+    W = Math.round(r.width); H = Math.round(W * VH / VW); dpr = Math.min(devicePixelRatio || 1, 2); S = W / VW;
+    cv.width = W * dpr; cv.height = H * dpr; cv.style.height = H + 'px';
+    const m = document.createElement('canvas'); m.width = W; m.height = H;
+    const mc = m.getContext('2d', { willReadFrequently: true }); mc.scale(S, S); mc.fill(new Path2D(D));
+    const px = mc.getImageData(0, 0, W, H).data, cs = UNIT * S; cells = [];
+    for (let y = 0; y + cs <= H + 1; y += cs) for (let x = 0; x + cs <= W + 1; x += cs) {
+      const cx = Math.min(W - 1, Math.floor(x + cs / 2)), cy = Math.min(H - 1, Math.floor(y + cs / 2));
+      if (px[(cy * W + cx) * 4 + 3] > 128) cells.push({ ph: Math.random() * 6.28, x, y, lx: (x + cs / 2) / S, ly: (y + cs / 2) / S, d: Math.hypot((x + cs / 2) / S - OX, (y + cs / 2) / S - OY) });
+    }
   };
-  const start = () => setTimeout(run, 1300);
-  document.fonts && document.fonts.ready ? document.fonts.ready.then(start) : start();
-  rl.addEventListener('pointerdown', () => { if (cur) cur.kill(); run(); });
+  const mix = (g, f) => 'rgb(' + VIOLET.map((v, i) => Math.round((v + (LIME[i] - v) * g) * f)).join(',') + ')';
 
-  /* הבועות מטות את הראש לכיוון העכבר */
-  if (fine) addEventListener('pointermove', e => {
-    as.forEach(a => {
-      const b = a.getBoundingClientRect(), dx = (e.clientX - (b.left + b.width / 2)) / innerWidth;
-      g.to(a, { rotate: Math.max(-7, Math.min(7, dx * 16)), x: dx * 14, duration: .9, ease: 'power3.out', overwrite: 'auto' });
-    });
-  }, { passive: true });
+  const draw = now => {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+    const tt = reduce ? 99 : (now - t0) / 1000, cs = UNIT * S, gap = Math.max(1.5, cs * .16), base = cs - gap;
+    const introR = Math.min(1, tt / 2.4) * 1250, wr = (now - wave.t) / 1000 * 620, fade = Math.max(0, 1 - wr / 1350);
+    amt += (target - amt) * .12;
+    for (const c of cells) {
+      const lit = Math.max(0, Math.min(1, (introR - c.d) / 90));
+      let g = 0;
+      if (lit > .01) {
+        const wd = Math.hypot(c.lx - wave.x, c.ly - wave.y);
+        g = Math.exp(-(((wd - wr) / 95) ** 2)) * fade;
+        if (amt > .01) g = Math.max(g, Math.exp(-((Math.hypot(c.lx - mouse.x, c.ly - mouse.y) / 120) ** 2)) * amt);
+      }
+      const s = base * (.55 + .45 * lit) + g * cs * .3, o = (cs - s) / 2;
+      ctx.fillStyle = lit > .01 ? mix(Math.min(1, g * 1.1), .8 + .2 * Math.sin(tt * 1.4 + c.ph)) : 'rgba(245,244,241,.08)';
+      ctx.globalAlpha = lit > .01 ? .55 + .45 * lit : 1;
+      ctx.fillRect(c.x + o, c.y + o, s, s);
+    }
+    ctx.globalAlpha = 1;
+    /* הריבוע הלימוני של הלוגו: נושם, ומשם יוצא הדיבור */
+    const pulse = 1 + .05 * Math.sin(tt * 2.2), ds = 140 * S * pulse, dc = OX * S, dy = OY * S;
+    ctx.fillStyle = 'rgb(207,248,57)'; ctx.beginPath();
+    ctx.roundRect ? ctx.roundRect(dc - ds / 2, dy - ds / 2, ds, ds, 14 * S) : ctx.rect(dc - ds / 2, dc * 0 + dy - ds / 2, ds, ds);
+    ctx.fill();
+    if (!reduce && tt > 2.4 && now - wave.t > 5200) wave = { x: OX, y: OY, t: now };
+  };
+  const loop = now => { raf = 0; if (!visible) return; if (!root.classList.contains('paused')) draw(now); raf = requestAnimationFrame(loop); };
+  const kick = () => { if (!raf && visible && !reduce) raf = requestAnimationFrame(loop); };
+
+  build(); draw(performance.now());
+  if (reduce) { new ResizeObserver(() => { build(); draw(performance.now()); }).observe(box); return; }
+  new ResizeObserver(() => { build(); }).observe(box);
+  new IntersectionObserver(es => { visible = es.some(e => e.isIntersecting); if (visible) kick(); }).observe(box);
+  const toLogical = e => { const r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) / S, y: (e.clientY - r.top) / S }; };
+  cv.addEventListener('pointermove', e => { mouse = toLogical(e); target = 1; });
+  cv.addEventListener('pointerleave', () => { target = 0; });
+  if (window.gsap && matchMedia('(hover:hover) and (pointer:fine)').matches) addEventListener('pointermove', e => { const nx = e.clientX / innerWidth - .5, ny = e.clientY / innerHeight - .5; gsap.to(box, { rotateY: nx * 9, rotateX: ny * -7, transformPerspective: 1000, duration: 1, ease: 'power3.out', overwrite: 'auto' }); }, { passive: true });
+  cv.addEventListener('pointerdown', e => { const p = toLogical(e); wave = { x: p.x, y: p.y, t: performance.now() }; mouse = p; target = 1; });
+  kick();
 })();

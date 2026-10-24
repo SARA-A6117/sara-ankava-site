@@ -5,34 +5,34 @@
 .b{background:var(--paper)}
 .b .logo::before{opacity:1;transform:none}
 .b .hdr__cta{background:var(--navy);color:var(--paper);--btn-fill:var(--violet);--dot:var(--lime)}
-.b .capsule{background:rgb(9 16 44 / .94)}
+.b .capsule{background:rgb(21 0 41 / .94)}
 .b .menu-btn{background:var(--navy);color:var(--paper);border-color:var(--paper-12)}
 
 /* ---------- הירו ---------- */
 .bhero{position:relative;isolation:isolate;overflow:hidden;min-height:100svh;display:flex;flex-direction:column;justify-content:center;gap:clamp(28px,5vh,56px);padding-block:calc(var(--hdr) + clamp(28px,5vh,56px)) clamp(48px,7vh,88px)}
-.bhero__ghost{position:absolute;z-index:-1;inset-inline-start:-1vw;bottom:-4vw;font-family:var(--f-display);font-weight:700;font-size:clamp(160px,31vw,460px);line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgb(9 16 44 / .09);white-space:nowrap;pointer-events:none;user-select:none}
-.bhero__eyebrow{display:block;margin-bottom:clamp(14px,2.2vh,26px);color:rgb(9 16 44 / .62)}
+.bhero__ghost{position:absolute;z-index:-1;inset-inline-start:-1vw;bottom:-4vw;font-family:var(--f-display);font-weight:700;font-size:clamp(160px,31vw,460px);line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgb(21 0 41 / .09);white-space:nowrap;pointer-events:none;user-select:none}
+.bhero__eyebrow{display:block;margin-bottom:clamp(14px,2.2vh,26px);color:rgb(21 0 41 / .62)}
 .bhero__title{font-size:clamp(34px,4.6vw,66px);line-height:1.12;margin:0}
 .bhero .hl{color:var(--violet)}
-.bhero .sq{background:var(--lime);outline:1px solid rgb(9 16 44 / .14)}
+.bhero .sq{background:var(--lime);outline:1px solid rgb(21 0 41 / .14)}
 @media (min-width:960px){.bhero__title .line>span{white-space:nowrap}}
 .bhero__row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:end}
-.bhero__p{margin:0 0 var(--sp-inner);font-size:1.125rem;max-width:34ch;color:rgb(9 16 44 / .78)}
+.bhero__p{margin:0 0 var(--sp-inner);font-size:1.125rem;max-width:34ch;color:rgb(21 0 41 / .78)}
 .bhero__ctas{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
 
 /* ---------- צ'אט ---------- */
-.chat{grid-column:2;grid-row:1;position:relative;display:grid;gap:12px;padding:14px;border-radius:var(--r-out);background:#FBFAF8;border:1px solid var(--navy-12);box-shadow:0 40px 80px -48px rgb(9 16 44 / .55)}
+.chat{grid-column:2;grid-row:1;position:relative;display:grid;gap:12px;padding:14px;border-radius:var(--r-out);background:#FBFAF8;border:1px solid var(--navy-12);box-shadow:0 40px 80px -48px rgb(21 0 41 / .55)}
 .chat__bar{display:flex;align-items:center;gap:12px;padding:4px 6px 12px;border-bottom:1px solid var(--navy-12)}
 .av{display:grid;place-items:center;flex:none;width:42px;height:42px;border-radius:50%;background:var(--violet)}
 .av svg{width:22px;height:auto;fill:var(--paper)}
 .chat__who{display:grid;line-height:1.25;margin-inline-end:auto}
 .chat__who b{font-weight:500;color:var(--navy)}
-.chat__who small{font-size:.8rem;color:rgb(9 16 44 / .66)}
+.chat__who small{font-size:.8rem;color:rgb(21 0 41 / .66)}
 .chat__replay{width:40px;height:40px;border-radius:50%;border:1px solid var(--navy-25);background:transparent;color:var(--navy);font-size:1.1rem;cursor:pointer;transition:background-color .3s,color .3s}
 .chat__replay:hover{background:var(--navy);color:var(--paper)}
 .chat__body{display:grid;gap:10px;padding:6px}
 .msg{margin:0;max-width:88%;padding:13px 18px;font-size:1.02rem;line-height:1.5;transition:opacity .5s var(--ease),transform .6s var(--ease)}
-.msg--in{justify-self:start;background:rgb(9 16 44 / .07);color:var(--navy);border-radius:26px 26px 26px 26px;border-end-start-radius:6px}
+.msg--in{justify-self:start;background:rgb(21 0 41 / .07);color:var(--navy);border-radius:26px 26px 26px 26px;border-end-start-radius:6px}
 .msg--out{justify-self:end;background:var(--violet);color:var(--paper);border-radius:26px 26px 6px 26px}
 .typing{display:none;justify-self:end;gap:6px;padding:16px 20px;border-radius:26px 26px 6px 26px;background:var(--violet)}
 .typing i{width:8px;height:8px;border-radius:2px;background:var(--lime);animation:typing 1s var(--ease) infinite}
@@ -52,7 +52,7 @@
 
 /* ---------- הצהרה ---------- */
 .bsay{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,10fr);gap:var(--sp-inner);padding-block:var(--sp-section)}
-.bsay__lab{color:rgb(9 16 44 / .6);padding-top:.9em}
+.bsay__lab{color:rgb(21 0 41 / .6);padding-top:.9em}
 .bsay__t{margin:0;font-family:var(--f-display);font-weight:700;font-size:clamp(1.9rem,4.6vw,4rem);line-height:1.12;color:var(--navy)}
 .bsay__t .ln{display:block}
 .bsay__t .ln:last-child{color:var(--violet)}
@@ -76,15 +76,15 @@
 /* ---------- שיחה אינטראקטיבית ---------- */
 .talk{background:#ECE8FB;padding-block:var(--sp-section)}
 .talk__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,80px);align-items:start}
-.talk__head p{margin:var(--sp-inner) 0 0;color:rgb(9 16 44 / .75);max-width:34ch}
-.talk__box{display:grid;gap:var(--sp-inner);padding:clamp(18px,2.6vw,32px);border-radius:var(--r-out);background:#FBFAF8;border:1px solid var(--navy-12);box-shadow:0 40px 80px -52px rgb(9 16 44 / .5)}
+.talk__head p{margin:var(--sp-inner) 0 0;color:rgb(21 0 41 / .75);max-width:34ch}
+.talk__box{display:grid;gap:var(--sp-inner);padding:clamp(18px,2.6vw,32px);border-radius:var(--r-out);background:#FBFAF8;border:1px solid var(--navy-12);box-shadow:0 40px 80px -52px rgb(21 0 41 / .5)}
 .talk__chips{display:flex;flex-wrap:wrap;gap:10px}
 .tchip{min-height:48px;padding:.7em 1.3em;border-radius:999px;border:1px solid var(--navy-25);background:transparent;color:var(--navy);font:inherit;font-size:1rem;line-height:1.3;text-align:start;cursor:pointer;transition:background-color .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease),transform .35s var(--ease)}
 .tchip:hover{border-color:var(--violet);transform:translateY(-2px)}
 .tchip[aria-pressed="true"]{background:var(--navy);color:var(--paper);border-color:var(--navy)}
 .tchip:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
 .talk__log{display:grid;gap:10px;align-content:start;min-height:clamp(220px,24vw,280px);padding:6px}
-.talk__hint{margin:0;color:rgb(9 16 44 / .55);font-size:.75rem}
+.talk__hint{margin:0;color:rgb(21 0 41 / .55);font-size:.75rem}
 .talk__log .msg{opacity:1;transform:none;animation:msgIn .6s var(--ease) backwards}
 @keyframes msgIn{from{opacity:0;transform:translateY(14px) scale(.97)}}
 .talk__log .btn{justify-self:end;margin-top:6px}
