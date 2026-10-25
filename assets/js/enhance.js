@@ -87,10 +87,6 @@
     setTimeout(reveal, 6000);
   }
 
-  /* ---- חלון הפרויקט נפתח בגלילה ---- */
-  if (g && window.ScrollTrigger && !reduce) {
-    $$('.case__media').forEach(m => g.fromTo(m, { clipPath: 'inset(7% 7% 7% 7% round 26px)' }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none', scrollTrigger: { trigger: m, start: 'top 95%', end: 'top 50%', scrub: true } }));
-  }
 
   /* ---- מעבר בין עמודים: מסך עם ריבוע הלוגו ---- */
   if (!reduce) {
@@ -115,14 +111,14 @@
   const cv = box.querySelector('canvas'), ctx = cv.getContext('2d');
   const D = sym.getAttribute('d'), root = document.documentElement;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const VW = 880, VH = 520, UNIT = 20, OX = 810, OY = 450;
+  let UNIT = 20; const VW = 880, VH = 520, OX = 810, OY = 450;
   const VIOLET = [114, 59, 248], LIME = [207, 248, 57];
   let W = 0, H = 0, dpr = 1, S = 1, cells = [], t0 = performance.now(), wave = { x: OX, y: OY, t: -1e9 };
   let mouse = { x: -999, y: -999 }, amt = 0, target = 0, visible = true, raf = 0;
 
   const build = () => {
     const r = box.getBoundingClientRect(); if (!r.width) return;
-    W = Math.round(r.width); H = Math.round(W * VH / VW); dpr = Math.min(devicePixelRatio || 1, 2); S = W / VW;
+    W = Math.round(r.width); H = Math.round(W * VH / VW); dpr = Math.min(devicePixelRatio || 1, 2); S = W / VW; UNIT = Math.max(20, Math.min(40, 12 * VW / W));
     cv.width = W * dpr; cv.height = H * dpr; cv.style.height = H + 'px';
     const m = document.createElement('canvas'); m.width = W; m.height = H;
     const mc = m.getContext('2d', { willReadFrequently: true }); mc.scale(S, S); mc.fill(new Path2D(D));
@@ -170,7 +166,73 @@
   const toLogical = e => { const r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) / S, y: (e.clientY - r.top) / S }; };
   cv.addEventListener('pointermove', e => { mouse = toLogical(e); target = 1; });
   cv.addEventListener('pointerleave', () => { target = 0; });
-  if (window.gsap && matchMedia('(hover:hover) and (pointer:fine)').matches) addEventListener('pointermove', e => { const nx = e.clientX / innerWidth - .5, ny = e.clientY / innerHeight - .5; gsap.to(box, { rotateY: nx * 9, rotateX: ny * -7, transformPerspective: 1000, duration: 1, ease: 'power3.out', overwrite: 'auto' }); }, { passive: true });
   cv.addEventListener('pointerdown', e => { const p = toLogical(e); wave = { x: p.x, y: p.y, t: performance.now() }; mouse = p; target = 1; });
+  addEventListener('sa:speak', () => { const n = performance.now(); if (n - wave.t > 380) wave = { x: OX, y: OY, t: n }; });
   kick();
+})();
+
+/* ---- הירו: הבועה עונה בשם העסק. הכול נשאר בדפדפן, בלי שליחה לשרת ---- */
+(() => {
+  const inp = document.querySelector('[data-biz]'), sp = document.querySelector('[data-speak]'); if (!inp || !sp) return;
+  const nameEl = sp.querySelector('[data-name]'), sr = sp.querySelector('[data-sr]');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DEFAULT = 'העסק שלכם';
+  let srTimer = null, popTimer = null;
+  window.__saBiz = '';
+  const render = () => {
+    const v = inp.value.replace(/\s+/g, ' ').trim();
+    window.__saBiz = v; nameEl.textContent = v || DEFAULT;
+    sp.classList.toggle('is-long', v.length > 16 && v.length <= 26); sp.classList.toggle('is-xlong', v.length > 26);
+    clearTimeout(srTimer); srTimer = setTimeout(() => { sr.textContent = 'שמעתי על ' + (v || DEFAULT) + '. הגיע הזמן לשלב הבא.'; }, 700);
+    if (!reduce) { sp.classList.add('is-pop'); clearTimeout(popTimer); popTimer = setTimeout(() => sp.classList.remove('is-pop'), 160); window.dispatchEvent(new Event('sa:speak')); }
+    window.dispatchEvent(new Event('sa:biz'));
+  };
+  inp.addEventListener('input', render);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); const b = document.querySelector('.hf__cta .btn'); if (b) b.click(); } });
+})();
+
+/* ---- הבועה שמלווה בגלילה ----
+   המשפטים כאן הם טיוטה לאישור. עד שמאשרים (APPROVED = true) היא לא מוצגת באתר.
+   לתצוגה מקדימה: להוסיף ?bubble=1 לכתובת. ---- */
+(() => {
+  const APPROVED = false;
+  if (!APPROVED && !/[?&]bubble=1/.test(location.search)) return;
+  const LINES = {
+    why: 'זה החלק שבו עסקים מאבדים לקוחות.',
+    leak: 'הזיזו את המחוונים. אלה המספרים שאני מתחילה מהם.',
+    fit: 'סמנו מה מוכר לכם. זה לוקח עשר שניות.',
+    process: 'ככה אני עובדת, בסדר הזה.',
+    projects: 'הנה מה שבניתי.',
+    about: 'ככה הגעתי לזה.',
+    contact: 'ואז מדברים.'
+  };
+  const withName = n => 'ואז נדבר על ' + n + '.';   // השם מהירו, בשימוש אחד בלבד
+  let closed = false; try { closed = sessionStorage.getItem('sa-sb-x') === '1'; } catch (e) {}
+  if (closed) return;
+  const secs = Object.keys(LINES).map(id => document.getElementById(id)).filter(Boolean);
+  if (!secs.length) return;
+  const el = document.createElement('aside'); el.className = 'sb'; el.setAttribute('aria-live', 'polite');
+  el.innerHTML = '<svg class="sb__a" viewBox="0 0 880 520" aria-hidden="true"><use href="#a" width="700" height="520"/><rect x="740" y="380" width="140" height="140" rx="14" fill="#CFF839"/></svg><p class="sb__t"></p><button class="sb__x" type="button" aria-label="סגירת הבועה">×</button>';
+  document.body.append(el);
+  const t = el.querySelector('.sb__t'), mobile = matchMedia('(max-width: 900px)');
+  let key = null, tick = false;
+  const text = k => (k === 'contact' && window.__saBiz) ? withName(window.__saBiz) : LINES[k];
+  const set = k => {
+    key = k;
+    const show = !!k && !(k === 'contact' && mobile.matches);
+    el.classList.toggle('is-on', show); document.body.classList.toggle('has-sb', show && mobile.matches);
+    if (!k) return;
+    const next = text(k); if (t.textContent === next) return;
+    if (!t.textContent) { t.textContent = next; return; }
+    t.classList.add('is-swap'); setTimeout(() => { t.textContent = next; t.classList.remove('is-swap'); }, 250);
+  };
+  const pick = () => {
+    tick = false; const mid = innerHeight * .45; let k = null;
+    for (const s of secs) { const r = s.getBoundingClientRect(); if (r.top <= mid && r.bottom > mid) { k = s.id; break; } }
+    set(k);
+  };
+  const req = () => { if (!tick) { tick = true; requestAnimationFrame(pick); } };
+  addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); addEventListener('sa:biz', () => { if (key === 'contact') { t.textContent = text('contact'); } });
+  el.querySelector('.sb__x').addEventListener('click', () => { try { sessionStorage.setItem('sa-sb-x', '1'); } catch (e) {} el.remove(); document.body.classList.remove('has-sb'); removeEventListener('scroll', req); });
+  pick();
 })();

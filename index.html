@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" href="assets/fonts/SaraAnkava-Bold-v1.2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css?v=26">
-<link rel="stylesheet" href="assets/css/enhance.css?v=5">
+<link rel="stylesheet" href="assets/css/enhance.css?v=10">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Sara Ankava","description":"אבחון עסקי, תוכנית שיווק ובניית נכסים דיגיטליים (אתרים, חנויות ומערכות) לעסקים קיימים.","areaServed":"IL","inLanguage":"he","telephone":"+972533175560","founder":{"@type":"Person","name":"Sara Ankava","jobTitle":"Digital Strategy & Design"},"knowsAbout":["אפיון אתרים","תוכנית שיווק","עיצוב אתרים","חנויות אונליין"]}
@@ -67,25 +67,32 @@
 
 <main id="main">
 
-  <!-- 02 · הירו: ה-a כבועת דיבור, בנוי מריבועים של הלוגו. גל של דיבור יוצא מהריבוע הלימוני ועובר דרך הבועה; העכבר מדליק ריבועים -->
+  <!-- 02 · הירו: הבועה (ה-a) עונה בשם העסק שהלקוח מקליד. הכול נשאר בדפדפן -->
   <section class="hero wrap" id="top" aria-labelledby="hero-title">
     <div class="hero__text">
       <span class="label hero__eyebrow"><span dir="ltr" lang="en">Sara Ankava / Digital Strategy &amp; Design</span></span>
       <h1 class="h1 hero__title" id="hero-title" data-split>
         <span class="line"><span>העסק שלכם הצליח בפה לאוזן<span class="sq" aria-hidden="true"></span></span></span>
-        <span class="line"><span class="hl">הגיע הזמן לשלב הבא<span class="sq" aria-hidden="true"></span></span></span>
+        <span class="line"><span>הגיע הזמן לשלב <span class="hl">הבא</span><span class="sq" aria-hidden="true"></span></span></span>
       </h1>
     </div>
 
-    <div class="hero__row">
-    <div class="hero__foot">
-      <p class="hero__p rv">מתחילים מהבנה של העסק שלכם, ואז בונים תוכנית שיווק ונכס דיגיטלי אחד שלוקחים אותו רחוק יותר.</p>
-      <div class="hero__ctas rv d1">
-        <a class="btn btn--primary magnetic" href="#contact">השאירו פרטים, אחזור תוך 24 שעות <span class="arr" aria-hidden="true">←</span></a>
+    <div class="hello">
+      <div class="hf">
+        <label class="hf__lab" for="biz">איך קוראים לעסק שלכם?</label>
+        <input class="hf__in" id="biz" type="text" name="biz" maxlength="40" autocomplete="off" autocapitalize="words" spellcheck="false" dir="auto" placeholder="הקלידו את שם העסק" data-biz>
+        <div class="hf__cta hero__ctas">
+          <a class="btn btn--primary magnetic" href="#contact">השאירו פרטים, אחזור תוך 24 שעות <span class="arr" aria-hidden="true">←</span></a>
+        </div>
+        <p class="hero__p">מתחילים מהבנה של העסק שלכם, ואז בונים תוכנית שיווק ונכס דיגיטלי אחד שלוקחים אותו רחוק יותר.</p>
       </div>
-    </div>
-
-      <div class="pa" data-pa aria-hidden="true"><canvas></canvas><span class="pb pb--p" style="--x:-3%;--y:14%;--d:0s">שמעתי עלייך מחברה</span><span class="pb pb--v" style="--x:44%;--y:-8%;--d:2s">מי בנתה לך את האתר?</span><span class="pb pb--p" style="--x:66%;--y:50%;--d:4s">תני לי את הטלפון</span><span class="pb pb--v" style="--x:8%;--y:62%;--d:6s">המליצו לי עלייך</span><span class="pb pb--p" style="--x:30%;--y:24%;--d:8s">שווה לדבר איתה</span></div>
+      <div class="cast">
+        <div class="speak" data-speak>
+          <p class="speak__txt" aria-hidden="true"><span>שמעתי על </span><bdi class="speak__name" data-name dir="auto">העסק שלכם</bdi><span>.</span><br><span>הגיע הזמן לשלב הבא.</span></p>
+          <span class="sr-only" aria-live="polite" data-sr>שמעתי על העסק שלכם. הגיע הזמן לשלב הבא.</span>
+        </div>
+        <div class="pa" data-pa aria-hidden="true"><canvas></canvas></div>
+      </div>
     </div>
 
     <div class="hero__frame label" aria-hidden="true">
@@ -103,15 +110,9 @@
           <span class="line"><span>באמצע המדבר<span class="sq" aria-hidden="true"></span></span></span>
         </h2>
       </div>
-      <div class="why__ctrl">
-        <span class="why__count label" lang="en" dir="ltr"><b data-why-n>01</b> / 03</span>
-        <button class="why__btn" type="button" data-why="prev" aria-label="למצב הקודם">→</button>
-        <button class="why__btn" type="button" data-why="next" aria-label="למצב הבא">←</button>
-      </div>
     </div>
-    <div class="why__scroller" tabindex="0" role="region" aria-label="שלושה מצבים. גללו הצידה" data-why-scroller>
-      <div class="why__track">
-        <article class="panel">
+    <div class="wl">
+        <article class="panel rv">
           <span class="panel__num" aria-hidden="true">01</span>
           <div class="panel__txt">
             <span class="label">מצב 01</span>
@@ -131,7 +132,7 @@
             </svg>
           </div>
         </article>
-        <article class="panel">
+        <article class="panel rv">
           <span class="panel__num" aria-hidden="true">02</span>
           <div class="panel__txt">
             <span class="label">מצב 02</span>
@@ -153,11 +154,11 @@
             </svg>
           </div>
         </article>
-        <article class="panel panel--good">
+        <article class="panel panel--good rv">
           <span class="panel__num" aria-hidden="true">03</span>
           <div class="panel__txt">
             <span class="label">איך זה צריך להיות</span>
-            <h3 class="h2">גם הדרך, <span class="hl">גם היעד</span><span class="sq" aria-hidden="true"></span></h3>
+            <h3 class="h2">גם הדרך, גם <span class="hl">היעד</span><span class="sq" aria-hidden="true"></span></h3>
             <p>קודם מבינים את העסק. אחר כך בונים את שני החלקים יחד: תוכנית שיווק שמביאה אנשים, ונכס דיגיטלי שהופך אותם ללקוחות.</p>
             <a class="link" href="#process">ככה זה עובד <span aria-hidden="true">↓</span></a>
           </div>
@@ -178,9 +179,7 @@
             </svg>
           </div>
         </article>
-      </div>
     </div>
-    <p class="why__hint label rv">גללו הצידה או גררו</p>
   </section>
 
   <!-- מחשבון הדליפה: אזור אינטראקטיבי. ההמחשה בלבד, לא הבטחה -->
@@ -333,7 +332,7 @@
     <div class="cases">
       <article class="case case--a">
         <a class="case__link" href="project-tefillin.html" data-cursor="לצפייה"><span class="sr-only">לפרויקט המלא: אתר תפילין ומזוזות</span></a>
-        <div class="case__media rv"><div class="mk mk--tef" aria-hidden="true"><div class="mk__win"><div class="mk__bar"><b></b><b></b><b></b><span lang="en" dir="ltr">tefillin-mezuzot.co.il</span></div>
+        <div class="case__media"><div class="mk mk--tef" aria-hidden="true"><div class="mk__win"><div class="mk__bar"><b></b><b></b><b></b><span lang="en" dir="ltr">tefillin-mezuzot.co.il</span></div>
   <div class="mk__page">
     <div class="mk__nav"><span class="mk__brand">תפילין ומזוזות</span><span class="mk__links"><span>קטלוג</span><span>איך בוחרים</span><span>שאלות</span><span>צור קשר</span></span><span class="mk__cta">שאלו בוואטסאפ</span></div>
     <div class="mk__hero">
@@ -353,17 +352,18 @@
     <div class="mk__chips"><span class="on">רגיל</span><span>מהודר</span><span>מהודר+</span></div>
     <span class="mk__pbtn">שאלו על הפריט</span>
   </div></div></div></div>
-        <div class="case__info rv d1">
+        <div class="case__info">
           <div class="case__meta label" lang="en" dir="ltr"><span>01</span><span>CATALOG · 2026</span></div>
           <h3 class="case__title">אתר תפילין ומזוזות</h3>
           <p>קטלוג מוצרים מסודר, עם פנייה ישירה בוואטסאפ. במקום לענות על אותן שאלות בטלפון, הלקוחות רואים, בוחרים ושואלים בהודעה אחת.</p>
+          <dl class="facts"><div><dt>1</dt><dd>הודעה בוואטסאפ מספיקה כדי לשאול על פריט</dd></div><div class="facts__todo" data-todo><dt>?</dt><dd>נתון נוסף לאישור: מוצרים בקטלוג או זמן עלייה לאוויר</dd></div></dl>
           <ul class="tags" lang="en" dir="ltr" role="list"><li>CATALOG</li><li>WHATSAPP-CTA</li><li>MOBILE-FIRST</li></ul>
           <div class="case__foot"><span class="pill-st live"><i></i>באוויר</span><span class="link" aria-hidden="true">לפרויקט המלא <span>←</span></span></div>
         </div>
       </article>
 
       <article class="case case--b" data-cursor="בבנייה">
-        <div class="case__media rv d1"><div class="mk mk--gan" aria-hidden="true"><div class="mk__win"><div class="mk__bar"><b></b><b></b><b></b><span lang="en" dir="ltr">hakol-lagan.co.il</span></div>
+        <div class="case__media"><div class="mk mk--gan" aria-hidden="true"><div class="mk__win"><div class="mk__bar"><b></b><b></b><b></b><span lang="en" dir="ltr">hakol-lagan.co.il</span></div>
   <div class="mk__page">
     <div class="mk__nav"><span class="mk__brand">הכל לגן</span><span class="mk__links"><span>קטגוריות</span><span>סניפים</span><span>מבצעים</span><span>צור קשר</span></span><span class="mk__cta">לסניף הקרוב</span></div>
     <div class="mk__hero">
@@ -376,10 +376,11 @@
     <div class="mk__search mk__search--sm"><span>מה הגננת מחפשת?</span></div>
     <div class="mk__grid6"><div style="--c:#FF7A3D"><i></i><span>ריהוט</span></div><div style="--c:#7FD1C7"><i></i><span>יצירה</span></div><div style="--c:#B9A7FF"><i></i><span>משחקים</span></div><div style="--c:#9ED36A"><i></i><span>חצר</span></div><div style="--c:#FFC1D6"><i></i><span>כיתה</span></div><div style="--c:#FFD66B"><i></i><span>אומנות</span></div></div>
   </div></div></div></div>
-        <div class="case__info rv d2">
+        <div class="case__info">
           <div class="case__meta label" lang="en" dir="ltr"><span>02</span><span>REDESIGN · IN PROGRESS</span></div>
           <h3 class="case__title">הכל לגן</h3>
           <p>אפיון ואתר חדש לרשת של ארבע חנויות לציוד גני ילדים. אתר שמסדר את המבחר הענק לפי מה שגננת באמת מחפשת.</p>
+          <dl class="facts"><div><dt>4</dt><dd>סניפים</dd></div><div><dt>2</dt><dd>אתרים</dd></div></dl>
           <ul class="tags" lang="en" dir="ltr" role="list"><li>DISCOVERY</li><li>SEARCH-FIRST</li><li>4 STORES</li></ul>
           <div class="case__foot"><span class="pill-st"><i></i>בבנייה</span></div>
         </div>
@@ -394,6 +395,11 @@
         <span class="btn btn--primary" aria-hidden="true">ספרו לי על העסק <span class="arr">←</span></span>
       </a>
     </div>
+
+    <figure class="qslot" data-todo>
+      <span class="label" lang="he">ציטוט לקוח - לאישור</span>
+      <span class="qslot__t">כאן ייכנס ציטוט אמיתי של לקוח. עד אז המספרים מדברים.</span>
+    </figure>
   </section>
 
   <!-- 05 · אודות: רקע כהה מלא, טקסט דק וגדול, בולד למשפט המרכזי. תמונה עגולה עם משפט מסתובב -->
@@ -410,9 +416,9 @@
           <figure class="pcard__photo">
             <!-- התמונה שלך: שמרי קובץ בשם sara.jpg בתיקייה assets/img והיא תחליף את הצורה כאן אוטומטית -->
             <svg viewBox="0 0 400 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-              <defs><pattern id="ap" width="100" height="84" patternUnits="userSpaceOnUse"><use href="#a" x="22" y="28" width="56" height="42" fill="none" stroke="rgb(245 244 241 / .18)" stroke-width="1"/></pattern></defs>
-              <rect width="400" height="480" fill="url(#ap)"/>
-              <use href="#a" x="105" y="190" width="190" height="143" fill="#723BF8"/><rect x="262" y="296" width="36" height="36" rx="3" fill="#CFF839"/>
+              <path d="M96 120h208a46 46 0 0 1 46 46v108a12 12 0 0 1-12 12H96a46 46 0 0 1-46-46V166a46 46 0 0 1 46-46Z" fill="#723BF8"/>
+              <use href="#a" x="118" y="150" width="170" height="126" fill="#F5F4F1"/><rect x="298" y="242" width="34" height="34" rx="4" fill="#CFF839"/>
+              <g fill="#CFF839"><rect x="50" y="340" width="12" height="12" rx="2"/><rect x="70" y="340" width="12" height="12" rx="2" opacity=".6"/><rect x="90" y="340" width="12" height="12" rx="2" opacity=".3"/></g>
             </svg>
             <img src="assets/img/sara.jpg" alt="שרי אנקווה" width="800" height="960" onerror="this.remove()">
           </figure>
@@ -534,6 +540,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="assets/js/main.js?v=26" defer></script>
-<script src="assets/js/enhance.js?v=5" defer></script>
+<script src="assets/js/enhance.js?v=9" defer></script>
 </body>
 </html>
