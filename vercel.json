@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "/versions/v3/index.html", "permanent": false }
+  ],
+  "headers": [
+    { "source": "/(.*)", "headers": [ { "key": "X-Robots-Tag", "value": "noindex, nofollow" } ] }
+  ]
+}
