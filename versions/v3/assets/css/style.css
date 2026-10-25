@@ -797,17 +797,17 @@ a.card:hover .card__media .mock{transform:scale(1.04) rotate(-1deg)}
 
 /* גלילת אזורים בדסקטופ */
 .why--v .why__pin{position:relative;height:100svh;overflow:hidden}
-.why--v .why__track{display:block;position:absolute;inset:0}
-.why--v .panel{position:absolute;inset:0;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:var(--sp-group);width:auto;height:100%;padding-block:calc(var(--hdr) + 40px) 60px;padding-inline:max(var(--sp-outer),calc((100% - 1200px) / 2));background:var(--navy);will-change:transform}
+.why--v .why__track{display:flex;width:max-content;height:100%}
+.why--v .panel{position:relative;flex:none;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:var(--sp-group);width:100vw;height:100%;padding-block:calc(var(--hdr) + 40px) 60px;padding-inline:max(var(--sp-outer),calc((100vw - 1200px) / 2));background:var(--navy)}
 .why--v .panel:nth-child(2){background:radial-gradient(60% 70% at 78% 60%,rgb(30 15 63 / .9),transparent 70%),var(--navy)}
 .why--v .panel:nth-child(3){background:radial-gradient(60% 70% at 22% 60%,rgb(129 65 252 / .22),transparent 70%),#0F0620}
 .why--v .panel--good{background:radial-gradient(70% 80% at 25% 55%,rgb(129 65 252 / .42),transparent 70%),var(--navy)}
 .why--v .panel::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--paper-06) 1px,transparent 1px),linear-gradient(90deg,var(--paper-06) 1px,transparent 1px);background-size:96px 96px;-webkit-mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent);mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent)}
 .why--v .panel>*{position:relative}
-.why--v .panel__num{position:absolute;inset-block-start:calc(var(--hdr) + 8px);inset-inline-start:max(var(--sp-outer),calc((100% - 1200px) / 2))}
-.why--v .why__dots{display:flex;flex-direction:column;gap:10px;position:absolute;inset-block-start:50%;transform:translateY(-50%);inset-inline-end:clamp(10px,2vw,28px);inset-inline-start:auto;z-index:3}
-.why--v .why__dots i{width:3px;height:28px}
-.why--v .why__dots i.on{width:3px;height:52px}
+.why--v .panel__num{position:absolute;inset-block-start:calc(var(--hdr) + 8px);inset-inline-start:max(var(--sp-outer),calc((100vw - 1200px) / 2))}
+.why--v .why__dots{display:flex;gap:8px;position:absolute;inset-block-end:28px;inset-inline-start:max(var(--sp-outer),calc((100vw - 1200px) / 2));z-index:3}
+.why--v .why__dots i{width:28px;height:3px}
+.why--v .why__dots i.on{width:48px;height:3px}
 
 /* תוכן עניינים במסך הפתיחה */
 .why__toc{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:var(--sp-group) 0 0;padding:0}
@@ -836,3 +836,16 @@ a.card:hover .card__media .mock{transform:scale(1.04) rotate(-1deg)}
 }
 @media (prefers-reduced-motion:reduce){.fx--card,.fx--chip{animation:none}}
 @media (max-width:900px){.fx--card{width:max-content;max-width:100%}}
+
+
+/* שדרוג 4 (v3): הדר קריא על כל הרקעים */
+.hdr .logo::before{opacity:1;transform:none;background:rgb(30 15 63 / .92)}
+.hdr.is-open .logo::before{opacity:0}
+.hdr>.btn .btn__t{box-shadow:0 0 0 1px rgb(20 8 42 / .45),0 12px 26px -12px rgb(0 0 0 / .65)}
+.hdr>.btn .btn__i{filter:drop-shadow(0 0 1px rgb(20 8 42 / .6))}
+.hdr>.btn:hover .btn__t{box-shadow:0 0 0 1px rgb(20 8 42 / .45),0 12px 26px -12px rgb(0 0 0 / .65)}
+@media (min-width:901px){.nav{background:rgb(30 15 63 / .96)}}
+@media (max-width:900px){.hdr .menu-btn{background:rgb(30 15 63 / .92);border-color:var(--paper-25)}}
+.hdr>.btn{--b-ibg:#1E0F3F;--b-ifg:var(--paper)}
+.hdr>.btn:hover{--b-ibg:var(--lime);--b-ifg:var(--navy)}
+.hdr>.btn .btn__i{filter:drop-shadow(0 0 1px rgb(245 244 241 / .7))}
