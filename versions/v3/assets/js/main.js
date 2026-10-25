@@ -258,18 +258,23 @@ const WA_TEXT = 'היי שרי, הגעתי מהאתר ואשמח לדבר על �
 
   const mm = gsap.matchMedia();
 
-  /* ---- למה: גלילה אופקית מוצמדת ---- */
+  /* ---- למה: גלילת אזורים. כל גלילה מכניסה אזור שלם מלמטה ---- */
   const why = $('.why');
   if (why) mm.add('(min-width: 901px)', () => {
-    why.classList.add('why--h');
-    const track = $('.why__track', why), panels = $$('.panel', track), dots = $$('.why__dots i', why);
-    const dist = () => track.scrollWidth - innerWidth;
+    why.classList.add('why--v');
+    const track = $('.why__track', why), panels = $$('.panel', track), dots = $$('.why__dots i', why), n = panels.length;
+    gsap.set(panels.slice(1), { yPercent: 100 });
     panels[0].classList.add('is-active');
-    gsap.to(track, { x: () => dist(), ease: 'none', scrollTrigger: {
-      trigger: why, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true,
-      onUpdate: self => { const i = Math.round(self.progress * (panels.length - 1)); panels.forEach((p, k) => p.classList.toggle('is-active', k === i)); dots.forEach((d, k) => d.classList.toggle('on', k === i)); }
+    const tl = gsap.timeline({ scrollTrigger: {
+      trigger: why, start: 'top top', end: () => '+=' + innerHeight * (n - 1) * 1.05, pin: true, scrub: .5, invalidateOnRefresh: true,
+      snap: { snapTo: 1 / (n - 1), duration: { min: .25, max: .7 }, delay: .04, ease: 'power2.inOut' },
+      onUpdate: self => { const i = Math.round(self.progress * (n - 1)); panels.forEach((p, k) => p.classList.toggle('is-active', k === i)); dots.forEach((d, k) => d.classList.toggle('on', k === i)); }
     } });
-    return () => { why.classList.remove('why--h'); panels.forEach(p => p.classList.remove('is-active')); };
+    panels.slice(1).forEach((p, i) => {
+      tl.to(p, { yPercent: 0, ease: 'none', duration: 1 }, i);
+      tl.to(panels[i], { scale: .94, opacity: .35, ease: 'none', duration: 1 }, i);
+    });
+    return () => { why.classList.remove('why--v'); gsap.set(panels, { clearProps: 'all' }); panels.forEach(p => p.classList.remove('is-active')); };
   });
 
   /* ---- תהליך: הכרטיס הקודם מתכווץ כשהבא עולה עליו ---- */

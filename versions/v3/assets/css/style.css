@@ -788,3 +788,51 @@ a.card:hover .card__media .mock{transform:scale(1.04) rotate(-1deg)}
 @keyframes caret{50%{opacity:0}}
 .hdr>.btn{--b-bg:var(--paper);--b-fg:var(--navy);--b-ibg:var(--violet);--b-ifg:var(--paper)}
 .hdr>.btn:hover{--b-bg:var(--lime);--b-ibg:var(--navy);--b-ifg:var(--lime)}
+
+
+/* =========================================================
+   שדרוג 3 (v3): הדר ממורכז יותר, גלילת אזורים, ויזואלים עשירים
+   ========================================================= */
+.hdr{padding-inline:max(var(--sp-outer),calc((100% - 1120px) / 2))}
+
+/* גלילת אזורים בדסקטופ */
+.why--v .why__pin{position:relative;height:100svh;overflow:hidden}
+.why--v .why__track{display:block;position:absolute;inset:0}
+.why--v .panel{position:absolute;inset:0;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:var(--sp-group);width:auto;height:100%;padding-block:calc(var(--hdr) + 40px) 60px;padding-inline:max(var(--sp-outer),calc((100% - 1200px) / 2));background:var(--navy);will-change:transform}
+.why--v .panel:nth-child(2){background:radial-gradient(60% 70% at 78% 60%,rgb(30 15 63 / .9),transparent 70%),var(--navy)}
+.why--v .panel:nth-child(3){background:radial-gradient(60% 70% at 22% 60%,rgb(129 65 252 / .22),transparent 70%),#0F0620}
+.why--v .panel--good{background:radial-gradient(70% 80% at 25% 55%,rgb(129 65 252 / .42),transparent 70%),var(--navy)}
+.why--v .panel::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--paper-06) 1px,transparent 1px),linear-gradient(90deg,var(--paper-06) 1px,transparent 1px);background-size:96px 96px;-webkit-mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent);mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent)}
+.why--v .panel>*{position:relative}
+.why--v .panel__num{position:absolute;inset-block-start:calc(var(--hdr) + 8px);inset-inline-start:max(var(--sp-outer),calc((100% - 1200px) / 2))}
+.why--v .why__dots{display:flex;flex-direction:column;gap:10px;position:absolute;inset-block-start:50%;transform:translateY(-50%);inset-inline-end:clamp(10px,2vw,28px);inset-inline-start:auto;z-index:3}
+.why--v .why__dots i{width:3px;height:28px}
+.why--v .why__dots i.on{width:3px;height:52px}
+
+/* תוכן עניינים במסך הפתיחה */
+.why__toc{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:var(--sp-group) 0 0;padding:0}
+.why__toc li{display:inline-flex;align-items:center;gap:.7em;padding:.55em 1.1em;border:1px solid var(--paper-25);border-radius:999px;font-weight:500;color:var(--paper-70)}
+.why__toc b{font-family:var(--f-display);color:var(--lime);font-weight:700}
+
+/* כרטיסים וצ'יפים שצפים סביב האיורים */
+.panel__art{position:relative}
+.fx{position:absolute;left:var(--x);top:var(--y);z-index:2}
+.fx--card{display:grid;gap:4px;min-width:150px;padding:14px 18px 12px;border-radius:18px;background:rgb(255 255 255 / .07);border:1px solid var(--paper-12);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--paper);animation:fxfloat 7s ease-in-out infinite}
+.fx__lab{font-family:var(--f-display);font-weight:500;font-size:.7rem;letter-spacing:.14em;color:var(--paper-70)}
+.fx__big{font-family:var(--f-display);font-weight:700;font-size:2.6rem;line-height:1;color:var(--paper)}
+.fx__big:empty{display:none}
+.fx__spark{width:130px;height:auto;color:var(--lime)}
+.fx--dead .fx__spark{color:var(--paper-50)}
+.fx__cap{font-size:.78rem;color:var(--paper-70)}
+.fx--chip{padding:.5em 1.05em;border-radius:999px;background:var(--paper);color:var(--navy);font-size:.88rem;font-weight:500;white-space:nowrap;box-shadow:0 18px 36px -18px rgb(0 0 0 / .8);animation:fxfloat 6s ease-in-out infinite;animation-delay:var(--d,0s)}
+.fx--ghost{background:transparent;color:var(--paper);border:1px solid var(--paper-50);box-shadow:none}
+@keyframes fxfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.why--v .fx{opacity:0;transition:opacity .7s var(--ease) .35s}
+.why--v .panel.is-active .fx{opacity:1}
+@media (max-width:900px){
+  .fx--card{position:relative;left:auto;top:auto;margin-top:12px;display:inline-grid}
+  .fx--chip{position:relative;left:auto;top:auto;display:inline-block;margin:12px 8px 0 0;animation:none}
+  .why__toc{margin-top:var(--sp-inner)}
+}
+@media (prefers-reduced-motion:reduce){.fx--card,.fx--chip{animation:none}}
+@media (max-width:900px){.fx--card{width:max-content;max-width:100%}}
