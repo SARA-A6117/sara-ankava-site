@@ -19,7 +19,7 @@ const WA_TEXT = 'היי שרי, הגעתי מהאתר ואשמח לדבר על �
   $$('[data-wa]').forEach(a => { a.href = waUrl(a.dataset.wa || WA_TEXT); a.target = '_blank'; a.rel = 'noopener'; });
 
   /* ---- טקסט מתגלגל בכפתורים ובקישורים ---- */
-  $$('.btn, .nav a:not(.btn), .ftr__col a').forEach(el => {
+  $$('.btn__t, .nav a:not(.btn), .ftr__col a').forEach(el => {
     const tn = [...el.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
     if (!tn) return;
     const t = tn.textContent.trim(), r = document.createElement('span'), a = document.createElement('span'), b = document.createElement('span');
