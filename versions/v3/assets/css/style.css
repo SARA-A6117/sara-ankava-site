@@ -849,3 +849,39 @@ a.card:hover .card__media .mock{transform:scale(1.04) rotate(-1deg)}
 .hdr>.btn{--b-ibg:#1E0F3F;--b-ifg:var(--paper)}
 .hdr>.btn:hover{--b-ibg:var(--lime);--b-ifg:var(--navy)}
 .hdr>.btn .btn__i{filter:drop-shadow(0 0 1px rgb(245 244 241 / .7))}
+
+
+/* =========================================================
+   שדרוג 5 (v3): חלק האייקון הוא ה-a ממש, הדר ניגודי בצבע, אזורים רחבים יותר
+   ========================================================= */
+.btn__i{--ic:var(--b-ibg);display:inline-flex;align-items:center;width:auto;height:auto;flex:none;background:none;color:var(--ic);-webkit-mask:none;mask:none;filter:none;transition:color .4s var(--ease),transform .5s var(--ease)}
+.btn__i svg{display:block;width:auto;height:62px;margin:0;overflow:visible}
+.btn__i .arw{transition:transform .5s var(--ease)}
+.btn:hover .btn__i{transform:scale(1.05)}
+.btn:hover .btn__i svg{transform:none}
+.btn:hover .btn__i .arw{transform:translateX(-34px)}
+.btn[href="#projects"]:hover .btn__i .arw{transform:translateY(20px)}
+.btn--primary{--b-ibg:var(--paper)}
+.btn--primary:hover{--b-ibg:var(--lime)}
+.btn--ghost{--b-ibg:var(--paper)}
+.btn--ghost:hover{--b-ibg:var(--lime)}
+.btn--dark{--b-ibg:var(--lime)}
+.on-light .btn--primary{--b-ibg:var(--violet)}
+.on-light .btn--primary:hover{--b-ibg:var(--navy)}
+.on-light .btn--ghost,.on-lime .btn--ghost{--b-ibg:var(--navy)}
+.on-light .btn--ghost:hover,.on-lime .btn--ghost:hover{--b-ibg:var(--violet)}
+
+/* הכפתור בהדר: קריא על כל רקע לפי צבע בלבד, בלי מסגרות וצללים */
+.hdr>.btn .btn__t,.hdr>.btn:hover .btn__t{box-shadow:none}
+.hdr>.btn .btn__i{filter:none}
+.hdr>.btn .btn__i svg{height:50px}
+.hdr>.btn{--b-bg:var(--lime);--b-fg:var(--navy);--b-ibg:var(--paper)}
+.hdr[data-bg="light"]>.btn,.hdr[data-bg="lime"]>.btn{--b-bg:var(--navy);--b-fg:var(--paper);--b-ibg:var(--violet)}
+.hdr[data-bg="violet"]>.btn{--b-bg:var(--lime);--b-fg:var(--navy);--b-ibg:var(--paper)}
+.hdr[data-bg="dark"]>.btn{--b-bg:var(--lime);--b-fg:var(--navy);--b-ibg:var(--paper)}
+.hdr>.btn:hover,.hdr[data-bg]>.btn:hover{--b-bg:var(--paper);--b-fg:var(--navy);--b-ibg:var(--lime)}
+.hdr[data-bg="light"]>.btn:hover,.hdr[data-bg="lime"]>.btn:hover{--b-bg:var(--violet);--b-fg:var(--paper);--b-ibg:var(--navy)}
+
+/* אזורי "למה": תוכן רחב יותר */
+.why--v .panel{padding-inline:max(var(--sp-outer),calc((100vw - 1340px) / 2))}
+.why--v .panel__num,.why--v .why__dots{inset-inline-start:max(var(--sp-outer),calc((100vw - 1340px) / 2))}
