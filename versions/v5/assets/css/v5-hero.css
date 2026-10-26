@@ -1,14 +1,14 @@
 /* v5 · הירו: DarkVeil מאחור, ה-a כבועת דיבור בשמאל, הטקסט במרכז אנכי.
    האובייקט הוא האלמנט היחיד עם זוהר; כל השאר שטוח. */
-.hv{position:relative;min-height:100svh;display:flex;align-items:center;padding:96px 5vw 72px;overflow:hidden;background:radial-gradient(60% 55% at 35% 50%,#1b1d17 0%,#0E0F0D 80%)}
+.hv{position:relative;min-height:100svh;display:flex;align-items:center;padding:96px 12.5vw 0 15vw;overflow:hidden;background:radial-gradient(60% 55% at 35% 50%,#1b1d17 0%,#0E0F0D 80%)}
 .hv__veil{position:absolute;inset:0;z-index:0;pointer-events:none}
 .hv__veil .dark-veil-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hv::after{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;z-index:1;pointer-events:none;background:linear-gradient(to bottom,transparent,#0E0F0D)}
 
-.hv__text{position:relative;z-index:3;width:min(680px,46vw)}
+.hv__text{position:relative;z-index:3;width:min(860px,60vw)}
 .hv__text::before{content:"";position:absolute;inset:-70px -90px -70px -70px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse closest-side at 55% 50%,rgb(14 15 13 / .7) 0%,rgb(14 15 13 / .5) 50%,transparent 100%)}
 .hv__eyebrow{display:block;margin:0 0 26px;font-family:"Rubik",system-ui,sans-serif;font-weight:500;font-size:18px;color:var(--lime)}
-.hv__title{margin:0;font-family:"Sara Ankava",system-ui,sans-serif;font-weight:700;font-size:clamp(30px,3.1vw,46px);line-height:1.1;letter-spacing:-.01em;color:var(--paper)}
+.hv__title{margin:0;font-family:"Sara Ankava",system-ui,sans-serif;font-weight:700;font-size:clamp(36px,3.8vw,56px);line-height:1.1;letter-spacing:-.01em;color:var(--paper)}
 .hv__title .ln{display:block;white-space:nowrap;overflow:hidden;padding:.06em 0}
 .hv__title .ln>span{display:block;transform:translateX(-110%);animation:hv-from-tail 1s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.5s + var(--i)*.14s)}
 .hv__title .hl{color:var(--lime);text-shadow:none;filter:none}
@@ -20,8 +20,8 @@
 @keyframes hv-fade{to{opacity:1}}
 
 /* האובייקט: שתי שכבות מאותה תמונה. mix-blend-mode: screen מעלים את השחור */
-.hv__obj{position:absolute;z-index:2;left:-1.5vw;top:50%;width:min(52vw,104svh);aspect-ratio:1;margin-top:calc(min(52vw,104svh) / -2);perspective:1100px;mix-blend-mode:screen;opacity:0;animation:hv-fade 1.2s ease forwards .1s}
-.hv__rot{position:absolute;inset:0;transform:rotate(-10deg)}
+.hv__obj{position:absolute;z-index:2;left:11.7vw;bottom:calc(43vw * -.255 + 12px);width:43vw;aspect-ratio:1;perspective:1100px;mix-blend-mode:screen;opacity:0;animation:hv-fade 1.2s ease forwards .1s}
+.hv__rot{position:absolute;inset:0;transform-origin:25% 74%;transform:rotate(-13deg)}
 .hv__tilt{position:absolute;inset:0;will-change:transform}
 .hv__breath{position:absolute;inset:0;transform-origin:50% 55%;animation:hv-breath 4s ease-in-out infinite}
 @keyframes hv-breath{50%{transform:scale(1.02);filter:brightness(1.07)}}
@@ -49,7 +49,7 @@
   .hv{flex-direction:column;justify-content:center;gap:0;padding:84px 20px 40px;background:radial-gradient(70% 40% at 50% 22%,#1b1d17 0%,#0E0F0D 80%)}
   .hv__veil,.hv__text::before,.hv__bub{display:none}
   .hv::after{height:18%}
-  .hv__obj{position:relative;left:auto;top:auto;margin:0 auto -4%;width:min(250px,66vw);order:-1}
+  .hv__obj{position:relative;left:auto;bottom:auto;margin:0 auto -4%;width:min(250px,66vw);order:-1}
   .hv__rot{transform:none}
   .hv__text{width:100%}
   .hv__title{font-size:clamp(26px,7.7vw,34px)}
@@ -66,3 +66,15 @@
 
 /* האובייקט הוא הזוהר היחיד בהירו */
 .hv .btn,.hv .btn__t,.hv .btn:hover .btn__t{box-shadow:none}
+
+/* CTA: כפתור ראשי אחד בלי עיגול חץ, ו"לפרויקטים" כלינק טקסט */
+.hv .btn--primary .btn__i{display:none}
+.hv__link{display:inline-flex;align-items:center;gap:8px;padding:12px 6px;color:var(--paper);font-size:18px;font-weight:500;text-decoration:none;transition:color .25s}
+.hv__link svg{width:18px;height:18px;transition:transform .25s}
+.hv__link:hover{color:var(--lime)}.hv__link:hover svg{transform:translateY(3px)}
+.hv__ctas{align-items:center;gap:20px}
+/* הדר: לוגו בלי זוהר ובלי מסגרת */
+.hdr .logo::before{display:none}
+.hdr .logo__img{filter:none}
+.hdr .logo .logo__sq{box-shadow:none}
+.hdr>.btn .btn__i{display:none}
