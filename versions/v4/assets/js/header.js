@@ -2,7 +2,7 @@
 (() => {
   const nav = document.querySelector('.nav'), ind = document.querySelector('.capsule__ind'); if (!nav || !ind) return;
   const links = [...nav.querySelectorAll('a[data-sec]')];
-  const map = { why: 'process', fit: 'process', process: 'process', projects: 'projects', about: 'about', contact: 'contact' };
+  const map = { why: 'process', leak: 'process', fit: 'process', process: 'process', projects: 'projects', about: 'about', contact: 'contact' };
   const secs = Object.keys(map).map(id => [document.getElementById(id), map[id]]).filter(([e]) => e);
   let cur = null, raf = 0;
   const place = a => {
