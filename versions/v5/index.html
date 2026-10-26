@@ -18,7 +18,7 @@
 <link rel="preload" href="assets/fonts/SaraAnkava-Bold-v1.2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css?v=4">
 <link rel="stylesheet" href="assets/css/v4.css?v=2">
-<link rel="stylesheet" href="assets/css/v5-hero.css?v=6">
+<link rel="stylesheet" href="assets/css/v5-hero.css?v=11">
 <meta name="robots" content="noindex">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
 <script type="application/ld+json">
@@ -52,28 +52,29 @@
 
   <!-- 02 · הירו v5: DarkVeil מאחור, ה-a כבועת דיבור והזנב מצביע אל הטקסט -->
   <section class="hv" id="top" aria-labelledby="hero-title">
-    <div class="hv__veil" id="veil" aria-hidden="true"></div>
-    <div class="hv__text">
-      <h1 class="hv__title" id="hero-title">
-        <span class="ln" style="--i:0"><span>העסק שלכם הצליח בפה לאוזן.</span></span>
-        <span class="ln" style="--i:1"><span>הגיע הזמן לשלב <span class="hl">הבא.</span></span></span>
-      </h1>
-      <p class="hv__p">מתחילים מהבנה של העסק שלכם, ואז בונים תוכנית שיווק ונכס דיגיטלי אחד שלוקחים אותו רחוק יותר.</p>
-      <div class="hv__ctas">
-        <a class="btn btn--primary magnetic" href="#contact"><span class="btn__t">השאירו פרטים, אחזור תוך 24 שעות</span><span class="btn__i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-        <a class="hv__link" href="#projects"><span>לפרויקטים</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      </div>
-    </div>
-    <div class="hv__obj" role="img" aria-label="האות a בזכוכית ליים, בצורת בועת דיבור, והריבוע מהלוגו">
-      <div class="hv__rot">
-        <div class="hv__tilt" id="tilt">
-          <div class="hv__breath">
-            <div class="hv__float-a"><div class="hv__layer hv__layer--a" id="la"></div></div>
-            <div class="hv__float-sq"><div class="hv__layer hv__layer--sq" id="ls"></div></div>
-            <div class="hv__sweep"></div>
+    <h1 class="hv__title" id="hero-title">
+      <span class="ln" style="--i:0"><span>העסק שלכם הצליח בפה לאוזן.</span></span>
+      <span class="ln" style="--i:1"><span>הגיע הזמן לשלב <span class="hl">הבא.</span></span></span>
+    </h1>
+    <div class="hv__row">
+      <div class="hv__obj" role="img" aria-label="האות a בזכוכית ליים, בצורת בועת דיבור, והריבוע מהלוגו">
+          <div class="hv__rot">
+            <div class="hv__tilt" id="tilt">
+              <div class="hv__breath">
+                <div class="hv__float-a"><div class="hv__layer hv__layer--a" id="la"></div></div>
+                <div class="hv__float-sq"><div class="hv__layer hv__layer--sq" id="ls"></div></div>
+                <div class="hv__sweep"></div>
+              </div>
+            </div>
+            <i class="hv__bub hv__bub--1"></i><i class="hv__bub hv__bub--2"></i><i class="hv__bub hv__bub--3"></i>
           </div>
         </div>
-        <i class="hv__bub hv__bub--1"></i><i class="hv__bub hv__bub--2"></i><i class="hv__bub hv__bub--3"></i>
+      <div class="hv__side">
+        <p class="hv__p">מתחילים מהבנה של העסק שלכם, ואז בונים תוכנית שיווק ונכס דיגיטלי אחד שלוקחים אותו רחוק יותר.</p>
+        <div class="hv__ctas">
+          <a class="btn btn--primary magnetic" href="#contact"><span class="btn__t">השאירו פרטים, אחזור תוך 24 שעות</span><span class="btn__i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          <a class="hv__link" href="#projects"><span>לפרויקטים</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
       </div>
     </div>
   </section>
@@ -506,17 +507,11 @@
 <script src="assets/js/header.js?v=4" defer></script>
 <script src="assets/js/v4.js?v=2" defer></script>
 <script type="module">
-import { DarkVeil } from "./assets/js/darkveil.js";
 /* DarkVeil מ-React Bits (port ל-vanilla). במובייל וב-reduced-motion: בלי WebGL ובלי הטיה */
 const q = new URLSearchParams(location.search);
 const n = (k, d) => (q.has(k) ? parseFloat(q.get(k)) : d);
 const desktop = matchMedia("(hover:hover) and (pointer:fine) and (min-width:901px)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches;
 if (desktop) {
-  DarkVeil(document.getElementById("veil"), {
-    color: q.get("c") || "#A8E02A", brightness: n("b", 1.2), glow: n("g", 0.6), sheen: n("s", 0.45), speed: n("sp", 0.4),
-    scale: n("sc", 1), flow: 1, warp: n("w", 0.2), rotation: n("r", 0), variation: n("v", 0),
-    mouseInteraction: true, mouseStrength: 1, intro: location.hash !== "#still", fade: 0, opacity: 1
-  });
   const tilt = document.getElementById("tilt"), la = document.getElementById("la"), ls = document.getElementById("ls");
   let tx = 0, ty = 0, x = 0, y = 0;
   addEventListener("pointermove", e => { tx = e.clientX / innerWidth - .5; ty = e.clientY / innerHeight - .5; });
