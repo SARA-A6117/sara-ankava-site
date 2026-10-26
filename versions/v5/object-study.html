@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>בועת הדיבור — שלוש גרסאות חומר</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Sara Ankava";src:url("assets/fonts/SaraAnkava-Bold-v1.2.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Sara Ankava";src:url("assets/fonts/SaraAnkava-Medium-v1.2.woff2") format("woff2");font-weight:500;font-display:swap}
+:root{--char:#1F201E;--char-2:#2B2C29;--lime:#C6FF34;--page:#ECECE7;--card:#F4F4F0;--ink-70:rgb(31 32 30 / .72)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--page);color:var(--char);font-family:"Rubik",system-ui,sans-serif}
+.wrap{max-width:1360px;margin:0 auto;padding:clamp(28px,4vw,56px) clamp(16px,3vw,40px) 48px}
+h1{font-family:"Sara Ankava","Rubik",sans-serif;font-weight:700;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.1;margin:0 0 8px}
+.lead{margin:0 0 clamp(24px,3vw,40px);color:var(--ink-70);max-width:62ch;font-size:1.05rem}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,24px)}
+.opt{position:relative;background:var(--card);border-radius:28px;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto}
+.opt__stage{position:relative;aspect-ratio:1/1.02}
+.opt__stage canvas{display:block;width:100%;height:100%}
+.opt__ref{position:absolute;inset-inline-end:22px;inset-block-start:22px;display:flex;align-items:center;gap:10px;color:var(--ink-70);font-size:.86rem}
+.opt__ref svg{width:84px;height:auto}
+.opt__body{padding:4px 26px 26px}
+.opt__n{font-family:"Sara Ankava",sans-serif;font-weight:700;font-size:1rem;color:var(--ink-70)}
+.opt h2{font-family:"Sara Ankava","Rubik",sans-serif;font-weight:700;font-size:1.7rem;margin:2px 0 6px}
+.opt p{margin:0;color:var(--ink-70);line-height:1.5}
+.sw{display:flex;gap:8px;margin-top:14px}
+.sw i{width:22px;height:22px;border-radius:7px;border:1px solid rgb(31 32 30 / .15)}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body>
+<main class="wrap">
+  <h1>בועת הדיבור, בשלוש גרסאות חומר</h1>
+  <p class="lead">אותו אובייקט בדיוק: קו המתאר של ה-a מהלוגו הפך לבועת דיבור, הפינה הישרה למטה היא הזנב, והריבוע הקטן יושב לידה כמו בלוגו. הבועה שואלת שאלה, לא מצטטת המלצה. בוחרים חומר אחד, והוא יהפוך לשפה של כל האתר.</p>
+  <div class="grid">
+    <article class="opt">
+      <div class="opt__stage"><canvas data-v="glass"></canvas>
+        <div class="opt__ref"><span>ה-a מהלוגו</span><svg viewBox="0 0 900 520" aria-hidden="true"><path fill="#1F201E" d="M260 520A260 260 0 0 1 0 260A350 260 0 0 1 350 0A350 260 0 0 1 700 260L700 490Q700 520 670 520L500 520L500 275.6A160 86 0 1 0 486 299.5L486 520Z"/><rect x="740" y="380" width="140" height="140" rx="14" fill="#9BCB1F"/></svg></div>
+      </div>
+      <div class="opt__body"><span class="opt__n">01</span><h2>זכוכית מט</h2><p>זכוכית חלבית בגוון ליים, שקופה למחצה. האור עובר דרכה רך, והטקסט מודפס על הפנים כמו על משטח מזכוכית.</p><div class="sw"><i style="background:#D9F78A"></i><i style="background:#1F201E"></i></div></div>
+    </article>
+    <article class="opt">
+      <div class="opt__stage"><canvas data-v="clay"></canvas>
+        <div class="opt__ref"><span>ה-a מהלוגו</span><svg viewBox="0 0 900 520" aria-hidden="true"><path fill="#1F201E" d="M260 520A260 260 0 0 1 0 260A350 260 0 0 1 350 0A350 260 0 0 1 700 260L700 490Q700 520 670 520L500 520L500 275.6A160 86 0 1 0 486 299.5L486 520Z"/><rect x="740" y="380" width="140" height="140" rx="14" fill="#9BCB1F"/></svg></div>
+      </div>
+      <div class="opt__body"><span class="opt__n">02</span><h2>קרמיקה רכה</h2><p>חימר פחם מט עם פינות מעוגלות ועבות, והטקסט בליים. הכי שקט ומוצק מבין השלושה, מרגיש כמו חפץ שאפשר להחזיק ביד.</p><div class="sw"><i style="background:#2B2C29"></i><i style="background:#C6FF34"></i></div></div>
+    </article>
+    <article class="opt">
+      <div class="opt__stage"><canvas data-v="plastic"></canvas>
+        <div class="opt__ref"><span>ה-a מהלוגו</span><svg viewBox="0 0 900 520" aria-hidden="true"><path fill="#1F201E" d="M260 520A260 260 0 0 1 0 260A350 260 0 0 1 350 0A350 260 0 0 1 700 260L700 490Q700 520 670 520L500 520L500 275.6A160 86 0 1 0 486 299.5L486 520Z"/><rect x="740" y="380" width="140" height="140" rx="14" fill="#9BCB1F"/></svg></div>
+      </div>
+      <div class="opt__body"><span class="opt__n">03</span><h2>פלסטיק מבריק עדין</h2><p>ליים מלא עם ציפוי שקוף ומבריק, השתקפות רכה של חלון בפינה. הכי "מוצר", הכי קרוב לאייקון דיגיטלי, והטקסט בפחם.</p><div class="sw"><i style="background:#C6FF34"></i><i style="background:#1F201E"></i></div></div>
+    </article>
+  </div>
+</main>
+
+<script type="module">
+import * as THREE from 'three';
+import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+/* קו המתאר של ה-a מהלוגו, בלי החור: גוף הבועה + הפינה הישרה כזנב */
+const BUBBLE = 'M260 520A260 260 0 0 1 0 260A350 260 0 0 1 350 0A350 260 0 0 1 700 260L700 598Q700 614 688 606L584 520Z';
+const SAY = 'מי בנתה לכם את זה?';
+const S = 0.0105;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+await document.fonts.load('700 120px "Sara Ankava"');
+
+const shapes = new SVGLoader().parse(`<svg xmlns="http://www.w3.org/2000/svg"><path d="${BUBBLE}"/></svg>`).paths.flatMap(p => SVGLoader.createShapes(p));
+const DEPTH = 110, BEV = 46;
+const bubbleGeo = new THREE.ExtrudeGeometry(shapes, { depth: DEPTH, bevelEnabled: true, bevelThickness: BEV, bevelSize: 40, bevelOffset: -22, bevelSegments: 16, curveSegments: 96 });
+bubbleGeo.center();
+
+const textTex = (color) => {
+  const c = document.createElement('canvas'); c.width = 1400; c.height = 560;
+  const x = c.getContext('2d'); x.fillStyle = color; x.textAlign = 'center'; x.textBaseline = 'middle'; x.direction = 'rtl';
+  x.font = '700 150px "Sara Ankava", Rubik, sans-serif';
+  x.fillText('מי בנתה לכם', 700, 190); x.fillText('את זה?', 700, 380);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+};
+
+const V = {
+  glass: {
+    body: () => new THREE.MeshPhysicalMaterial({ color: 0xf2ffd2, transmission: 1, roughness: 0.32, thickness: 2.4, ior: 1.5, attenuationColor: new THREE.Color('#c6ff34'), attenuationDistance: 2.2, clearcoat: 0.6, clearcoatRoughness: 0.35, envMapIntensity: 1.1 }),
+    text: '#1F201E', cube: () => new THREE.MeshPhysicalMaterial({ color: 0x1f201e, roughness: 0.35, clearcoat: 0.5 })
+  },
+  clay: {
+    body: () => new THREE.MeshStandardMaterial({ color: 0x2b2c29, roughness: 0.92, metalness: 0, envMapIntensity: 0.55 }),
+    text: '#C6FF34', cube: () => new THREE.MeshStandardMaterial({ color: 0xc6ff34, roughness: 0.88, envMapIntensity: 0.6 })
+  },
+  plastic: {
+    body: () => new THREE.MeshPhysicalMaterial({ color: 0xc6ff34, roughness: 0.28, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1.0 }),
+    text: '#1F201E', cube: () => new THREE.MeshPhysicalMaterial({ color: 0x1f201e, roughness: 0.25, clearcoat: 1, clearcoatRoughness: 0.1 })
+  }
+};
+
+document.querySelectorAll('canvas[data-v]').forEach(cv => {
+  const cfg = V[cv.dataset.v];
+  const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  const scene = new THREE.Scene();
+  scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+  const cam = new THREE.PerspectiveCamera(28, 1, 0.1, 100); cam.position.set(0, 1.4, 23.5); cam.lookAt(0, -0.45, 0);
+
+  const g = new THREE.Group(); scene.add(g);
+  const body = new THREE.Mesh(bubbleGeo, cfg.body()); body.scale.set(S, -S, S); body.castShadow = true; body.receiveShadow = true; g.add(body);
+  const front = (DEPTH / 2 + BEV) * S;
+  const label = new THREE.Mesh(new THREE.PlaneGeometry(5.2, 2.08), new THREE.MeshStandardMaterial({ map: textTex(cfg.text), transparent: true, roughness: 0.6, depthWrite: false }));
+  label.position.set(-0.2, 0.95, front + 0.012); g.add(label);
+  const cube = new THREE.Mesh(new RoundedBoxGeometry(1.25, 1.25, 1.25, 8, 0.28), cfg.cube()); if (cv.dataset.v === "glass") { cube.position.set(3.3, -1.6, -1.7); cube.scale.setScalar(1.25); } else cube.position.set(4.95, -2.55, 0.1); cube.rotation.set(0.15, -0.35, 0.05); cube.castShadow = true; g.add(cube);
+
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.ShadowMaterial({ opacity: 0.16 })); floor.rotation.x = -Math.PI / 2; floor.position.y = -3.62; floor.receiveShadow = true; scene.add(floor);
+  const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(-5, 9, 7); key.castShadow = true;
+  key.shadow.mapSize.set(2048, 2048); key.shadow.camera.left = -9; key.shadow.camera.right = 9; key.shadow.camera.top = 9; key.shadow.camera.bottom = -9; key.shadow.radius = 10; key.shadow.blurSamples = 20; key.shadow.bias = -0.0004;
+  scene.add(key, new THREE.HemisphereLight(0xffffff, 0xd8d8d0, 0.6));
+
+  const size = () => { const r = cv.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); cam.aspect = r.width / r.height; cam.updateProjectionMatrix(); };
+  size(); new ResizeObserver(size).observe(cv);
+  const frame = t => {
+    const s = t / 1000;
+    g.rotation.y = -0.38 + (reduce ? 0 : Math.sin(s * 0.45) * 0.12);
+    g.rotation.x = 0.04;
+    g.position.y = reduce ? 0 : Math.sin(s * 0.9) * 0.08;
+    renderer.render(scene, cam);
+    if (!reduce) requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+});
+</script>
+</body>
+</html>
