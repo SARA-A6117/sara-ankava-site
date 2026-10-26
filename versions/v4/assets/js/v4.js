@@ -47,4 +47,15 @@
     pc.addEventListener('pointermove', e => { const r = pc.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; pc.classList.add('is-tilting'); pc.style.transform = 'perspective(900px) rotateY(' + (x * -9) + 'deg) rotateX(' + (y * 9) + 'deg)'; });
     pc.addEventListener('pointerleave', () => { pc.classList.remove('is-tilting'); pc.style.transform = ''; });
   }
+
+  /* פרויקטים: טור אחד פתוח בכל רגע. מעבר עכבר או פוקוס פותחים טור */
+  const acc = $('[data-acc-wrap]');
+  if (acc) {
+    const items = $$('[data-acc]', acc);
+    const open = it => items.forEach(x => x.classList.toggle('is-open', x === it));
+    items.forEach(it => {
+      it.addEventListener('pointerenter', () => { if (matchMedia('(min-width: 901px)').matches) open(it); });
+      it.addEventListener('focusin', () => open(it));
+    });
+  }
 })();

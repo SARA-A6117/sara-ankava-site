@@ -258,25 +258,6 @@ const WA_TEXT = 'היי שרי, הגעתי מהאתר ואשמח לדבר על �
 
   const mm = gsap.matchMedia();
 
-  /* ---- למה: גלילה צידית באזורים שלמים. כל גלילה מחליפה אזור, בלי החלקה איטית ---- */
-  const why = $('.why');
-  if (why) mm.add('(min-width: 901px)', () => {
-    why.classList.add('why--v');
-    const track = $('.why__track', why), panels = $$('.panel', track), dots = $$('.why__dots i', why), n = panels.length;
-    let cur = 0;
-    const xFor = i => i * innerWidth;
-    const mark = i => { panels.forEach((p, k) => p.classList.toggle('is-active', k === i)); dots.forEach((d, k) => d.classList.toggle('on', k === i)); };
-    gsap.set(track, { x: 0 }); mark(0);
-    const go = i => { cur = i; mark(i); gsap.to(track, { x: xFor(i), duration: .85, ease: 'power3.inOut', overwrite: true }); };
-    ScrollTrigger.create({
-      trigger: why, start: 'top top', end: () => '+=' + innerHeight * (n - 1) * .9, pin: true, invalidateOnRefresh: true,
-      snap: { snapTo: 1 / (n - 1), duration: { min: .2, max: .5 }, delay: .02, ease: 'power1.inOut' },
-      onRefreshInit: () => gsap.set(track, { x: xFor(cur) }),
-      onUpdate: self => { const i = Math.round(self.progress * (n - 1)); if (i !== cur) go(i); }
-    });
-    return () => { why.classList.remove('why--v'); gsap.set(track, { clearProps: 'all' }); panels.forEach(p => p.classList.remove('is-active')); };
-  });
-
   /* ---- תהליך: הכרטיס הקודם מתכווץ כשהבא עולה עליו ---- */
   mm.add('(min-width: 901px)', () => {
     const cards = $$('.scard');

@@ -479,3 +479,157 @@ body{background:var(--navy);color:var(--paper)}
 @media (max-width:900px){.hero__obj{width:min(100%,520px);margin-inline-end:0;justify-self:center}.hero__tag--b{display:none}.hero__tag--a{inset-inline-start:0}}
 .why .panel:nth-child(2){background:var(--paper);color:var(--navy)}.why .panel:nth-child(4){background:var(--lime);color:var(--navy)}.why .panel:nth-child(3){background:var(--navy)}
 @media (max-width:900px){.why .panel{padding-inline:var(--sp-outer)}}
+
+/* =========================================================
+   v4.1 — דיגיטלי יותר: בלי גריד, ליים שתמיד זוהר על שחור,
+   שפה אחידה לכל האלמנטים, פרויקטים בטורים, רקע אבק עדין
+   ========================================================= */
+:root{
+  --glow:0 0 0 1px rgb(198 255 52 / .35),0 0 18px rgb(198 255 52 / .45),0 0 46px rgb(198 255 52 / .18);
+  --glow-s:0 0 10px rgb(198 255 52 / .55),0 0 26px rgb(198 255 52 / .22);
+  --tglow:0 0 14px rgb(198 255 52 / .55),0 0 34px rgb(198 255 52 / .22);
+  --dglow:drop-shadow(0 0 4px rgb(198 255 52 / .7)) drop-shadow(0 0 14px rgb(198 255 52 / .35));
+}
+/* רקע דיגיטלי לאורך האתר */
+.fxbg{position:fixed;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;mix-blend-mode:screen;opacity:.9}
+/* בלי גריד, בלי פס */
+.hero::before,.hero::after,.why .panel::before{display:none!important}
+.hero__frame{inset-block-end:26px}
+.hero{min-height:100svh}
+
+/* ---------- ליים על שחור = תמיד זוהר ---------- */
+.hl,.eyebrow,.why .panel__txt .label,.pfacts dt,.pcard__nums .num,.fit__count .n,.ftr__word{text-shadow:var(--tglow)}
+.sq,.eyebrow::before,.hero__note i,.pill-st.live i,.scard__out i,.bars i.hot,.funnel .leak span,.chip i,.drip{box-shadow:var(--glow-s)}
+.why__toc b{text-shadow:var(--tglow)}
+.btn--primary .btn__t{box-shadow:var(--glow)}
+.btn--primary:hover .btn__t{box-shadow:0 0 0 1px rgb(243 243 238 / .4),0 0 24px rgb(243 243 238 / .25)}
+.capsule__ind{box-shadow:var(--glow)}
+.hdr>.btn .btn__t{box-shadow:var(--glow)}
+.hdr[data-bg="light"]>.btn .btn__t,.hdr[data-bg="lime"]>.btn .btn__t{box-shadow:none}
+.logo__img{filter:drop-shadow(0 0 8px rgb(198 255 52 / .35))}
+.logo .logo__sq{box-shadow:var(--glow-s)}
+.wa{box-shadow:0 0 0 1px rgb(243 243 238 / .3),0 0 26px rgb(198 255 52 / .35)}
+.why .ill .car,.why .ill .spark,.why .ill .q,.why .ill--lit .cab,.why .ill circle[fill]{filter:var(--dglow)}
+.why .ill .lane,.why .ill .ln:not(.dim){filter:drop-shadow(0 0 3px rgb(198 255 52 / .35))}
+.fx__spark{filter:var(--dglow)}
+/* באזורי ליים אין זוהר */
+.mz .sq,.mz .eyebrow::before,.contact .sq,.contact .eyebrow::before,.contact__promise i{box-shadow:none}
+.mz .eyebrow,.contact .eyebrow,.contact .hl,.mz .hl{text-shadow:none}
+.contact .btn--primary .btn__t,.on-lime .btn--primary .btn__t{box-shadow:none}
+
+/* ---------- הלונה פארק: גלילה רגילה, הכל על שחור ---------- */
+.why{background:var(--navy)}
+.why .panel,.why .panel:nth-child(2),.why .panel:nth-child(3),.why .panel:nth-child(4),.why .panel--good{background:transparent!important;color:var(--paper)!important}
+.why .panel{padding-block:clamp(64px,8vw,120px);padding-inline:max(var(--sp-outer),calc((100% - 1240px) / 2));border-top:1px solid var(--paper-12)}
+.why .panel--intro{border-top:0;padding-top:var(--sp-section)}
+.why .panel__num{position:absolute;inset-block-start:clamp(24px,3vw,48px);inset-inline-start:auto;inset-inline-end:max(var(--sp-outer),calc((100% - 1240px) / 2));font-size:clamp(3.2rem,5.6vw,5.5rem);color:transparent;-webkit-text-stroke:1px rgb(198 255 52 / .55);text-shadow:0 0 22px rgb(198 255 52 / .25)}
+.why .panel__txt .label{color:var(--lime)!important}
+.why .panel__txt p{color:var(--paper-70)!important}
+.why .sq{background:var(--lime)!important}
+.why .hl{color:var(--lime)!important;text-decoration:none!important}
+.why .link{color:var(--paper)!important}
+.why .ill{--il-a:var(--paper-50)!important;--il-b:var(--paper-12)!important;--il-hot:var(--lime)!important;--il-hot2:var(--paper)!important}
+.why .fx--card{background:rgb(243 243 238 / .05)!important;border-color:var(--paper-12)!important;color:var(--paper)!important}
+.why .fx__lab,.why .fx__cap{color:var(--paper-70)!important}
+.why .fx__big{color:var(--paper)!important}
+.why .fx__spark{color:var(--lime)!important}
+.why .fx--dead .fx__spark{color:var(--paper-50)!important;filter:none}
+.why .fx--chip{background:var(--lime)!important;color:var(--navy)!important;box-shadow:var(--glow)}
+.why .fx--ghost{background:transparent!important;color:var(--paper)!important;border-color:var(--paper-50)!important;box-shadow:none}
+.why .fx{opacity:1!important}
+.why__dots{display:none!important}
+
+/* ---------- תהליך: שלושה כרטיסים כהים, ויזואלים זוהרים ---------- */
+.scard--1,.scard--2,.scard--3{background:var(--navy-2)!important;color:var(--paper)!important;border:1px solid var(--paper-12);--dot:var(--lime)}
+.scard--2 p,.scard--3 p{color:var(--paper-70)!important}
+.scard__num{-webkit-text-stroke-color:rgb(198 255 52 / .5)!important;text-shadow:0 0 22px rgb(198 255 52 / .2)}
+.scard--2 .orbit__ring{border-color:rgb(198 255 52 / .3)!important}
+.scard--2 .orbit__core{background:var(--lime)!important;color:var(--navy)!important;box-shadow:var(--glow)}
+.scard--2 .chip{background:var(--navy-3)!important;color:var(--paper)!important;border:1px solid var(--paper-12)}
+.scard--3 .build{background:var(--navy-3)!important;box-shadow:0 0 0 1px var(--paper-12)}
+.scard--3 .bb{background:var(--paper-12)}
+.scard--3 .bb.n::before,.scard--3 .bb.h,.scard--3 .bb.h2{background:var(--paper-50)!important}
+.scard--3 .bb.n::after,.scard--3 .bb.c{background:var(--lime)!important;box-shadow:var(--glow-s)}
+.scard--3 .bb.g i{background:var(--paper-12)}
+.scard--3 .build__bar b{background:var(--paper-25)}
+.scard--3 .build__toast{background:var(--lime);color:var(--navy)}
+.scard--3 .build__cursor svg{fill:var(--paper)}
+.scard__glyph{color:var(--paper)}
+
+/* ---------- בדיקה עצמית: כהה ---------- */
+.fit{background:var(--navy);color:var(--paper);border-top:1px solid var(--paper-12)}
+.fit .eyebrow{color:var(--lime)}
+.fit .eyebrow::before{background:var(--lime)}
+.fit .sq{background:var(--lime)}
+.fit__main>p{color:var(--paper-70)}
+.fit__list{border-top-color:var(--paper-12)}
+.fit__item{color:var(--paper);border-bottom-color:var(--paper-12)}
+.fit__item:hover{background:rgb(198 255 52 / .06)}
+.fit__box{border-color:var(--paper-25)}
+.fit__item[aria-pressed="true"] .fit__box{background:var(--lime);border-color:var(--lime);box-shadow:var(--glow-s)}
+.fit__item[aria-pressed="true"] .fit__box svg{stroke:var(--navy)}
+.fit__card{background:var(--navy-2);border:1px solid var(--paper-12)}
+.fit :focus-visible{outline-color:var(--lime)}
+
+/* ---------- אודות: כהה, טקסט קטן יותר ושורות ארוכות ---------- */
+.about__textcol{grid-column:1/9;background:transparent;color:var(--paper);padding:0}
+.about__media{grid-column:9/13}
+.about__hi{color:var(--paper-70)}
+.about__title{color:var(--paper);margin-bottom:var(--sp-inner)}
+.about__title .sq{background:var(--lime)}
+.about__big{color:var(--paper);font-size:clamp(1.02rem,1.25vw,1.2rem);line-height:1.65;font-weight:400;font-family:var(--f-body);max-width:68ch}
+.about__big .ln{display:inline}
+.about__big .ln::after{content:"\0020"}
+.about__big p{margin:0 0 1em}
+.about__big .key{font-family:var(--f-display);font-weight:700;font-size:1.32em;line-height:1.35;border-inline-start:3px solid var(--lime);padding-inline-start:.8em;margin-block:1.2em;color:var(--paper)}
+.about__big .belief{color:var(--lime)!important;font-weight:500;text-shadow:var(--tglow)}
+.about__big em{border-bottom-color:var(--lime)}
+.motion .about [data-fill] .w{opacity:.25}
+.about .btn--primary{--b-bg:var(--lime);--b-fg:var(--navy);--b-ibg:var(--paper);--b-ifg:var(--navy);margin-top:var(--sp-inner)}
+.about :focus-visible{outline-color:var(--lime)}
+
+/* ---------- פרויקטים: טורים שנפתחים במעבר עכבר ---------- */
+.acc{display:flex;gap:clamp(10px,1.2vw,16px);height:clamp(540px,74vh,720px)}
+.acc__item{position:relative;flex:1 1 0;min-width:0;border-radius:var(--r-out);overflow:hidden;background:var(--navy-2);border:1px solid var(--paper-12);transition:flex-grow .85s var(--ease),border-color .5s var(--ease),box-shadow .5s var(--ease)}
+.acc__item.is-open{flex-grow:5.2;border-color:rgb(198 255 52 / .55);box-shadow:0 0 0 1px rgb(198 255 52 / .2),0 0 50px -10px rgb(198 255 52 / .3)}
+.acc__hit{position:absolute;inset:0;z-index:4;border-radius:inherit}
+.acc__hit:focus-visible{outline:2px solid var(--lime);outline-offset:-3px}
+.acc__rail{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:24px 0;transition:opacity .4s var(--ease)}
+.acc__item.is-open .acc__rail{opacity:0;pointer-events:none}
+.acc__n{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.14em;color:var(--lime);text-shadow:var(--tglow)}
+.acc__vt{writing-mode:vertical-rl;font-family:var(--f-display);font-weight:700;font-size:clamp(1.3rem,1.8vw,1.8rem);white-space:nowrap;color:var(--paper)}
+.acc__dot{width:9px;height:9px;border-radius:2px;background:var(--paper-50)}
+.acc__dot.live{background:var(--lime);box-shadow:var(--glow-s)}
+.acc__panel{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(18px,2.4vw,36px);align-items:center;padding:clamp(18px,2.4vw,36px);opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility 0s .35s}
+.acc__item.is-open .acc__panel{opacity:1;visibility:visible;transition:opacity .6s var(--ease) .25s,visibility 0s}
+.acc__media{position:relative;align-self:stretch;display:grid;align-items:center;border-radius:var(--r-in);padding:6% 7% 14% 5%;overflow:hidden;background:radial-gradient(80% 90% at 50% 20%,rgb(198 255 52 / .12),transparent 70%),var(--navy-3)}
+.acc__media .mk{transform:translateY(34px) scale(.94);opacity:0;transition:transform 1s var(--ease) .3s,opacity .8s var(--ease) .3s}
+.acc__item.is-open .acc__media .mk{transform:none;opacity:1}
+.acc__scan{position:absolute;inset-inline:0;top:0;height:2px;z-index:3;background:var(--lime);box-shadow:0 0 18px 4px rgb(198 255 52 / .55);opacity:0;pointer-events:none}
+.acc__item.is-open .acc__scan{animation:scan 1.3s var(--ease) .25s both}
+@keyframes scan{0%{transform:translateY(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(560px);opacity:0}}
+.acc__info{display:grid;gap:12px;align-content:center;transform:translateX(-18px);transition:transform .8s var(--ease) .35s}
+.acc__item.is-open .acc__info{transform:none}
+.acc__title{font-family:var(--f-display);font-weight:700;font-size:var(--fs-2);line-height:1.08;margin:0}
+.acc__info p{margin:0;color:var(--paper-70);max-width:42ch}
+.acc__go{color:var(--lime);font-weight:500;text-shadow:var(--tglow)}
+.acc__item--next{background:var(--lime);border-color:var(--lime)}
+.acc__item--next.is-open{box-shadow:0 0 60px -6px rgb(198 255 52 / .45)}
+.acc__item--next .acc__n,.acc__item--next .acc__vt{color:var(--navy);text-shadow:none}
+.acc__item--next .acc__dot{background:var(--navy)}
+.acc__item--next .acc__panel{grid-template-columns:1fr}
+.acc__item--next .acc__info,.acc__item--next .acc__info p,.acc__item--next .pcase__meta{color:var(--navy)}
+.acc__item--next .acc__title{font-size:var(--fs-1)}
+.acc__item--next .acc__go{color:var(--navy);text-shadow:none;font-size:1.15rem;border-bottom:2px solid currentColor;justify-self:start}
+.acc__item--next .acc__hit:focus-visible{outline-color:var(--navy)}
+@media (max-width:900px){
+  .acc{flex-direction:column;height:auto}
+  .acc__item{flex:none}
+  .acc__rail{display:none}
+  .acc__panel,.acc__item .acc__panel{position:relative;inset:auto;opacity:1;visibility:visible;grid-template-columns:1fr}
+  .acc__media .mk,.acc__info{transform:none;opacity:1}
+  .about__textcol,.about__media{grid-column:1/-1}
+}
+@media (prefers-reduced-motion:reduce){.acc__item,.acc__panel,.acc__media .mk,.acc__info{transition:none!important}.acc__scan{display:none}}
+.hero__gl{-webkit-mask-image:radial-gradient(72% 72% at 50% 50%,#000 62%,transparent 100%);mask-image:radial-gradient(72% 72% at 50% 50%,#000 62%,transparent 100%)}
+.scard__glyph use{fill:var(--paper)}.scard__glyph .o{fill:none;stroke:var(--paper)}.scard__glyph rect{filter:drop-shadow(0 0 8px rgb(198 255 52 / .6))}
