@@ -594,3 +594,38 @@ body::before,body::after{display:none!important}
 .lp__b{inset-inline-end:auto;right:6%}
 .lp__b::after{inset-inline-end:auto;right:34px;clip-path:polygon(0 0,100% 0,0 100%)}
 @media (max-width:900px){.lp__b{right:auto;left:0}}
+
+/* ===== פרויקטים · שלוש עמודות מקצה לקצה, קווים חדים בלבד, עמודה פתוחה אחת ===== */
+.pj{padding:clamp(60px,7vw,100px) 0 0}
+.pj::before{display:none}
+.pj__h{margin-bottom:clamp(30px,4vw,56px)}
+.pj3{display:flex;height:clamp(560px,82vh,760px);border-top:1px solid rgb(18 20 15 / .3);border-bottom:1px solid rgb(18 20 15 / .3)}
+.pj3__c{position:relative;flex:1 1 0;min-width:0;overflow:hidden;background:#E7E6DF;border:0;border-radius:0;outline:none;cursor:pointer;transition:flex-grow .85s var(--ease)}
+.pj3__c+.pj3__c{border-inline-start:1px solid rgb(18 20 15 / .3)}
+.pj3__c.is-open{flex-grow:5.6;cursor:default}
+.pj3__rail{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:26px 0;transition:opacity .35s}
+.pj3__c.is-open .pj3__rail{opacity:0;pointer-events:none}
+.pj3__rn{font:500 15px "Sara Ankava",system-ui,sans-serif;color:rgb(18 20 15 / .6)}
+.pj3__rv{writing-mode:vertical-rl;transform:rotate(180deg);font:700 clamp(20px,1.9vw,28px) "Sara Ankava",system-ui,sans-serif;color:#12140f;white-space:nowrap}
+.pj3__in{position:absolute;top:0;right:0;bottom:0;width:calc(100vw * .735);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr);gap:clamp(20px,3vw,48px);align-items:center;padding:clamp(28px,3.4vw,56px);opacity:0;pointer-events:none;transition:opacity .4s}
+.pj3__c.is-open .pj3__in{opacity:1;pointer-events:auto;transition-delay:.4s}
+.pj3__tx{display:grid;gap:14px;align-content:center;justify-items:start}
+.pj3__n{font:500 15px "Sara Ankava",system-ui,sans-serif;color:rgb(18 20 15 / .6)}
+.pj3__t{margin:0;font:700 clamp(28px,3.4vw,48px)/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:#12140f}
+.pj3__d{margin:0 0 8px;font:500 clamp(16px,1.3vw,19px)/1.55 "Sara Ankava",system-ui,sans-serif;color:rgb(18 20 15 / .85);max-width:36ch}
+.pj3__mk{min-width:0}
+.pj3__mk .mk{width:100%}
+.pj3 .btn,.pj3 .btn--primary{background:#12140f!important;color:#E7E6DF!important}
+.pj3__mk .mk__win{box-shadow:0 20px 44px -18px rgb(18 20 15 / .4)}
+@media (max-width:900px){
+  .pj3{flex-direction:column;height:auto}
+  .pj3__c{flex:none}
+  .pj3__c+.pj3__c{border-inline-start:0;border-top:1px solid rgb(18 20 15 / .3)}
+  .pj3__rail{position:relative;inset:auto;flex-direction:row;padding:20px var(--v6-m);gap:16px;justify-content:flex-start;height:64px}
+  .pj3__rv{writing-mode:horizontal-tb;transform:none;font-size:22px}
+  .pj3__c.is-open .pj3__rail{display:none}
+  .pj3__in{position:relative;width:auto;grid-template-columns:1fr;opacity:1;pointer-events:auto;padding:24px var(--v6-m);display:none}
+  .pj3__c.is-open .pj3__in{display:grid}
+}
+.pj3__t{padding-inline:.06em;overflow:visible}
+.pj3__tx{padding-inline-end:4px}
