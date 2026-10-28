@@ -18,7 +18,7 @@
 <link rel="preload" href="assets/fonts/SaraAnkava-Bold-v1.2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css?v=6">
 <link rel="stylesheet" href="assets/css/v4.css?v=4">
-<link rel="stylesheet" href="assets/css/v6.css?v=33">
+<link rel="stylesheet" href="assets/css/v6.css?v=38">
 <meta name="robots" content="noindex">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
 <script type="application/ld+json">
@@ -52,17 +52,21 @@
 
   <!-- 02 · הירו v6: בועת דיבור בצורת ה-a, כותרת ענקית מקצה לקצה צמודה לתחתית -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="v6rough" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
-  <section class="h6 gx" id="top" aria-labelledby="hero-title">
+  <section class="h6 hb" id="top" aria-labelledby="hero-title">
     <div class="h6__grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <a class="h6__card" href="#projects"><span>הפרויקט האחרון</span><b>אתר תפילין ומזוזות</b></a>
-    <div class="h6__info">
-      <p class="h6__p">מתחילים מהבנה של העסק שלכם, ואז בונים תוכנית שיווק ונכס דיגיטלי אחד שלוקחים אותו רחוק יותר.</p>
-      <div class="h6__ctas"><a class="cta6 cta6--main" href="#contact">השאירו פרטים, אחזור תוך 24 שעות</a><a class="h6__link" href="#projects">לפרויקטים</a></div>
-    </div>
-    <h1 class="h6__title" id="hero-title">
-      <span class="h6__small">העסק שלכם הצליח בפה לאוזן.</span>
-      <span class="h6__big" data-fit><span><span class="w w1">הגיע הזמן</span> <span class="w w2 gr-text">לשלב הבא</span></span></span>
+    <p class="hb__small">העסק שלכם הצליח בפה לאוזן.</p>
+    <h1 class="hb__title" id="hero-title">
+      <span class="hb__l" style="--i:0">הגיע הזמן</span>
+      <span class="hb__l gr-text" style="--i:1">לשלב</span>
+      <span class="hb__l gr-text" style="--i:2">הבא</span>
     </h1>
+    <svg class="hb__arrows" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path class="ar ar1" d="M1130 205C1260 150 1350 250 1250 330"/><path class="ar ar1" d="M1250 330l36-6M1250 330l-4-34"/>
+      <path class="ar ar2" d="M205 790C100 740 150 640 230 690C300 735 230 805 170 745"/><path class="ar ar2" d="M230 690C300 650 370 625 440 612"/><path class="ar ar2" d="M440 612l-34-6M440 612l-24 26"/>
+    </svg>
+    <div class="hb__badge" aria-hidden="true"><div class="gr-sq"></div><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="96" fill="none" stroke="#0c0e0d" stroke-width="3" stroke-dasharray="2 11" stroke-linecap="round"/></svg><svg class="hb__a" viewBox="0 0 700 520"><path d="M260 520A260 260 0 0 1 0 260A350 260 0 0 1 350 0A350 260 0 0 1 700 260L700 490Q700 520 670 520L500 520L500 275.6A160 86 0 1 0 486 299.5L486 520Z"/></svg></div>
+    <a class="hb__card hb__card1" href="#projects"><span>הפרויקט האחרון</span><b>אתר תפילין ומזוזות</b></a>
+    <div class="hb__card hb__card2"><span>שיחה ראשונה</span><b>להבנת העסק והשלב הבא שלו</b></div>
   </section>
 
   <!-- 03 · פרויקטים: טורים זה לצד זה. מעבר עכבר פותח טור ומציג את המוקאפ -->
@@ -492,17 +496,6 @@
 <script src="assets/js/main.js?v=4" defer></script>
 <script src="assets/js/header.js?v=4" defer></script>
 <script src="assets/js/v4.js?v=2" defer></script>
-<script>(function(){
-  var still=location.hash==="#still";
-  if(still){var s=document.createElement("style");s.textContent=".h6__big>span,.h6__info,.h6__mkwrap{animation:none!important;opacity:1!important;transform:none!important;opacity:1!important}";document.head.appendChild(s)}
-  function fit(){
-    var big=document.querySelector(".h6__big"),inner=big.firstElementChild,title=document.querySelector(".h6__title");
-    var target=title.clientWidth;
-    inner.style.display="inline-block";inner.style.fontSize="100px";
-    var w=inner.getBoundingClientRect().width;inner.style.fontSize=(100*target/w)+"px"
-  }
-  var go=function(){fit()};
-  (document.fonts&&document.fonts.load?Promise.all([document.fonts.load('300 40px "Sara Ankava"'),document.fonts.load('700 40px "Sara Ankava"')]):Promise.resolve()).then(function(){return document.fonts.ready}).then(go,go);addEventListener("resize",go);go();
-})()</script>
+<script>if(location.hash==="#still"){var s=document.createElement("style");s.textContent=".hb__l,.hb__small,.hb__card,.hb__badge{animation:none!important;transform:none!important;opacity:1!important}.hb__badge{transform:none!important}.ar{animation:none!important;stroke-dashoffset:0!important}";document.head.appendChild(s)}</script>
 </body>
 </html>
