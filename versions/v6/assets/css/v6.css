@@ -123,3 +123,43 @@ body::before{opacity:.5;mix-blend-mode:overlay;background-image:var(--v6-n);back
   .wa{inset-block-end:42vh;inset-inline-end:12px}
   .h6__big{padding-bottom:20px}
 }
+
+/* ===== v7 הירו בהשראת kinetic: מוקאפ של פרויקט חופף לכותרת הענקית, שובלי גרדיאנט מגורען, בלי גרעון ברקע ===== */
+body::before,body::after{display:none!important}
+.h6.gx{--gx-base:#0c0e0d;background-image:none;background-color:var(--gx-base)}
+.h6__grid i{border-bottom-color:rgb(217 217 210 / .07)}
+.h6__title{z-index:auto}
+.h6__small,.h6__mid{position:relative;z-index:4}
+.h6__big{position:relative;z-index:1}
+.h6__mock{position:absolute;z-index:2;left:45%;transform:translateX(-50%);bottom:13vh;width:38vw}
+.h6__mkwrap{position:relative;z-index:2;transform:rotate(-2.2deg);opacity:0;animation:h6-fade 1s ease forwards .5s}
+.h6__mkwrap .mk__win{box-shadow:0 0 0 1px rgb(255 255 255 / .08)}
+/* שובלי תנועה: גרדיאנט מנטה/ליים עם גרגר, בשוליים דהויים */
+.h6__streak.gx{position:absolute;z-index:1;--gx-base:#0c0e0d;pointer-events:none;
+  -webkit-mask-image:radial-gradient(closest-side,#000 35%,transparent 100%);mask-image:radial-gradient(closest-side,#000 35%,transparent 100%)}
+.h6__streak.s1{left:-42%;top:6%;width:100%;height:56%;
+  background-image:var(--v6-n),radial-gradient(ellipse 52% 16% at 50% 40%,rgb(107 240 196 / .95),transparent 80%),radial-gradient(ellipse 40% 10% at 62% 62%,rgb(200 255 58 / .85),transparent 80%);
+  background-size:170px auto,auto,auto;background-blend-mode:overlay,normal,normal;animation:h6-drift 9s ease-in-out infinite alternate}
+.h6__streak.s2{right:-40%;top:30%;width:96%;height:50%;
+  background-image:var(--v6-n),radial-gradient(ellipse 50% 14% at 50% 45%,rgb(200 255 58 / .9),transparent 80%),radial-gradient(ellipse 36% 9% at 40% 66%,rgb(107 240 196 / .8),transparent 80%);
+  background-size:170px auto,auto,auto;background-blend-mode:overlay,normal,normal;animation:h6-drift 11s ease-in-out infinite alternate-reverse}
+@keyframes h6-drift{to{transform:translateX(5%)}}
+/* כרטיס זכוכית שטוח */
+.h6__card{position:absolute;z-index:3;left:calc(var(--v6-m) + 1vw);top:calc(var(--hdr,76px) + 16vh);display:grid;gap:6px;padding:18px 22px;min-width:220px;text-decoration:none;color:var(--v6-paper);background:rgb(217 217 210 / .07);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgb(217 217 210 / .22);border-radius:6px;transition:border-color .25s}
+.h6__card span{font-size:14px;color:rgb(217 217 210 / .7)}
+.h6__card b{font-size:20px;font-weight:700}
+.h6__card:hover{border-color:var(--v6-lime)}
+@media (max-width:900px){
+  .h6__mock{position:relative;left:auto;transform:none;bottom:auto;width:84vw;margin:10px auto 22px}
+  .h6__streak{display:none}
+  .h6__card{display:none}
+  .h6__mkwrap{transform:rotate(-2deg)}
+}
+@media (prefers-reduced-motion:reduce){.h6__mkwrap{animation:none;opacity:1}.h6__streak{animation:none}}
+@media (min-width:901px){.h6__mock{bottom:25vh;width:40vw}}
+.h6__streak.s1{left:-60%;top:0;width:130%;height:70%;background-image:var(--v6-n),radial-gradient(ellipse 58% 20% at 50% 42%,rgb(107 240 196 / 1),transparent 82%),radial-gradient(ellipse 46% 13% at 64% 64%,rgb(200 255 58 / .95),transparent 82%)}
+.h6__streak.s2{right:-58%;top:22%;width:124%;height:66%;background-image:var(--v6-n),radial-gradient(ellipse 56% 18% at 50% 46%,rgb(200 255 58 / 1),transparent 82%),radial-gradient(ellipse 40% 12% at 38% 68%,rgb(107 240 196 / .9),transparent 82%)}
+@media (min-width:901px){.h6__mock{bottom:19vh}}
+
+@media (max-width:900px){.h6__mock{position:relative;left:auto;transform:none;bottom:auto;width:84vw;margin:6px auto 22px}.h6__streak,.h6__card{display:none}}
+@media (max-width:900px){.wa{inset-block-end:26vh}}
