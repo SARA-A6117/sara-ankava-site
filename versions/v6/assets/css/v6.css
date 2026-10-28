@@ -520,3 +520,33 @@ body::before,body::after{display:none!important}
 .dd.n1.ll{right:calc(50% + 29vw + 14px)}
 .dd.n2{inset-inline-end:auto;left:calc(50% - 29vw);bottom:3%;width:clamp(90px,9vw,130px)}
 .dd.n2{left:calc(50% + 29vw + 20px);bottom:18%}
+
+/* ===== פרויקטים · שורות שטוחות, מוקאפ קטן עוקב אחרי העכבר בהובר ===== */
+.pj{background:#121413;padding:clamp(70px,8vw,120px) 0 clamp(60px,7vw,100px)}
+.pj__h{margin:0 var(--v6-m) clamp(36px,4.5vw,64px);font:700 clamp(22px,3.15vw,46px)/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.02em;white-space:nowrap;text-align:start}
+.pj__st{color:transparent;-webkit-text-stroke:1.3px var(--v6-stone)}
+.pj__gr{display:inline-block;padding-inline:.04em}
+.pj__list{display:block}
+.pj__row{display:grid;grid-template-columns:3ch minmax(0,1.1fr) minmax(0,1.3fr) auto;align-items:center;gap:clamp(14px,2.4vw,40px);padding:clamp(18px,2vw,28px) var(--v6-m);background:transparent;border-top:1px solid rgb(217 217 210 / .14);overflow:visible;cursor:default}
+.pj__row:last-child{border-bottom:1px solid rgb(217 217 210 / .14)}
+.pj__row:hover{background:transparent}
+.pj__n{font:300 clamp(14px,1.2vw,18px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .55)}
+.pj__row .pj__t{margin:0;font:500 clamp(24px,3vw,44px)/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:var(--v6-stone)}
+.pj__d{margin:0;font:300 clamp(15px,1.25vw,18px)/1.4 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .8)}
+.pj__m{display:none}
+.pj__float{position:fixed;left:0;top:0;z-index:80;width:320px;pointer-events:none;opacity:0;transition:opacity .25s;will-change:transform}
+.pj__float.on{opacity:1}
+.pj__float .mk{width:100%}
+@media (max-width:900px){
+  .pj__h{white-space:normal;font-size:clamp(24px,7vw,34px)}
+  .pj__row{grid-template-columns:auto 1fr;grid-template-areas:"n t" "d d" "m m" "b b";gap:10px 16px}
+  .pj__n{grid-area:n}.pj__row .pj__t{grid-area:t}.pj__d{grid-area:d}.pj__row .btn{grid-area:b;justify-self:start}
+  .pj__m{display:block;grid-area:m;width:min(300px,80%)}
+}
+/* כפתורים: כולם בועת דיבור, כולל ghost */
+.btn--ghost{background:var(--v6-stone)!important;color:#0c0e0d!important;box-shadow:none!important}
+.btn--ghost::after{display:block!important}
+/* כפתורי הנעה לפעולה: הבהוב עדין מדי כמה שניות */
+@keyframes cta-blink{0%,84%,100%{transform:none;filter:none}90%{transform:scale(1.05);filter:brightness(1.12)}95%{transform:scale(1.02);filter:brightness(1.05)}}
+.cta6,.cta-blink,.contact .btn--primary,.h6__btn{animation:cta-blink 6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.cta6,.cta-blink,.contact .btn--primary,.h6__btn{animation:none}}
