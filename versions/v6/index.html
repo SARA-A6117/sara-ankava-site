@@ -18,7 +18,7 @@
 <link rel="preload" href="assets/fonts/SaraAnkava-Bold-v1.2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css?v=4">
 <link rel="stylesheet" href="assets/css/v4.css?v=2">
-<link rel="stylesheet" href="assets/css/v6.css?v=27">
+<link rel="stylesheet" href="assets/css/v6.css?v=28">
 <meta name="robots" content="noindex">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
 <script type="application/ld+json">
@@ -511,19 +511,19 @@
 <script>(function(){
   var cv=document.getElementById("orb");if(!cv)return;var ctx=cv.getContext("2d"),S=cv.width,C=S/2,R=S/2;
   var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
-  var P=[];for(var i=0;i<190;i++)P.push({a:Math.random()*6.283,r:Math.random(),s:.002+Math.random()*.006,l:.04+Math.random()*.16,al:.25+Math.random()*.75,w:.6+Math.random()*1.8,c:Math.random()<.55?"255,255,235":(Math.random()<.5?"200,255,58":"107,240,196")});
+  var P=[];for(var i=0;i<190;i++)P.push({a:Math.random()*6.283,r:Math.random(),s:.002+Math.random()*.006,l:.04+Math.random()*.16,al:.25+Math.random()*.75,w:.6+Math.random()*1.8,c:Math.random()<.55?"255,255,240":(Math.random()<.5?"255,240,138":"134,211,255")});
   var t=0;
   function draw(){
     ctx.clearRect(0,0,S,S);
     var g=ctx.createRadialGradient(C,C,0,C,C,R);
-    g.addColorStop(0,"rgba(255,255,240,1)");g.addColorStop(.10,"rgba(232,255,170,.96)");g.addColorStop(.30,"rgba(107,240,196,.78)");g.addColorStop(.62,"rgba(24,104,84,.92)");g.addColorStop(.9,"rgba(10,34,29,1)");g.addColorStop(1,"rgba(60,150,120,1)");
+    g.addColorStop(0,"rgba(255,255,244,1)");g.addColorStop(.10,"rgba(255,246,176,.96)");g.addColorStop(.30,"rgba(134,211,255,.78)");g.addColorStop(.62,"rgba(26,86,140,.92)");g.addColorStop(.9,"rgba(10,26,44,1)");g.addColorStop(1,"rgba(90,160,210,1)");
     ctx.fillStyle=g;ctx.fillRect(0,0,S,S);
     ctx.save();ctx.translate(C,C);ctx.lineCap="round";
     for(var i=0;i<P.length;i++){var p=P[i];if(!reduce){p.r+=p.s;if(p.r>1){p.r=.02;p.a=Math.random()*6.283}}
       var r0=p.r*R,r1=Math.min(R,r0+p.l*R*(.4+p.r)),ca=Math.cos(p.a),sa=Math.sin(p.a);
       ctx.strokeStyle="rgba("+p.c+","+(p.al*(1-p.r*.55))+")";ctx.lineWidth=p.w;ctx.beginPath();ctx.moveTo(ca*r0,sa*r0);ctx.lineTo(ca*r1,sa*r1);ctx.stroke()}
     ctx.restore();
-    var core=ctx.createRadialGradient(C,C,0,C,C,R*.34);core.addColorStop(0,"rgba(255,255,245,"+(.95+.05*Math.sin(t))+")");core.addColorStop(.5,"rgba(230,255,170,.35)");core.addColorStop(1,"rgba(230,255,170,0)");
+    var core=ctx.createRadialGradient(C,C,0,C,C,R*.34);core.addColorStop(0,"rgba(255,255,245,"+(.95+.05*Math.sin(t))+")");core.addColorStop(.5,"rgba(255,246,176,.35)");core.addColorStop(1,"rgba(255,246,176,0)");
     ctx.fillStyle=core;ctx.fillRect(0,0,S,S);
     t+=.03;if(!reduce)requestAnimationFrame(draw)
   }
