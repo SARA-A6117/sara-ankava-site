@@ -18,7 +18,7 @@
 <link rel="preload" href="assets/fonts/SaraAnkava-Bold-v1.2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css?v=6">
 <link rel="stylesheet" href="assets/css/v4.css?v=4">
-<link rel="stylesheet" href="assets/css/v6.css?v=30">
+<link rel="stylesheet" href="assets/css/v6.css?v=33">
 <meta name="robots" content="noindex">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
 <script type="application/ld+json">
@@ -54,7 +54,6 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="v6rough" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
   <section class="h6 gx" id="top" aria-labelledby="hero-title">
     <div class="h6__grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="h6__orb" aria-hidden="true"><i class="r r1"></i><i class="r r2"></i><i class="r r3"></i><div class="h6__disc"><canvas id="orb" width="720" height="720"></canvas></div></div>
     <a class="h6__card" href="#projects"><span>הפרויקט האחרון</span><b>אתר תפילין ומזוזות</b></a>
     <div class="h6__info">
       <p class="h6__p">מתחילים מהבנה של העסק שלכם, ואז בונים תוכנית שיווק ונכס דיגיטלי אחד שלוקחים אותו רחוק יותר.</p>
@@ -62,8 +61,7 @@
     </div>
     <h1 class="h6__title" id="hero-title">
       <span class="h6__small">העסק שלכם הצליח בפה לאוזן.</span>
-      <span class="h6__mid">הגיע הזמן</span>
-      <span class="h6__big" data-fit><span><span class="w w2 gr-text">לשלב הבא</span></span></span>
+      <span class="h6__big" data-fit><span><span class="w w1">הגיע הזמן</span> <span class="w w2 gr-text">לשלב הבא</span></span></span>
     </h1>
   </section>
 
@@ -499,35 +497,12 @@
   if(still){var s=document.createElement("style");s.textContent=".h6__big>span,.h6__info,.h6__mkwrap{animation:none!important;opacity:1!important;transform:none!important;opacity:1!important}";document.head.appendChild(s)}
   function fit(){
     var big=document.querySelector(".h6__big"),inner=big.firstElementChild,title=document.querySelector(".h6__title");
-    var target=title.clientWidth-2*(innerWidth*0.012);
-    var mob=matchMedia("(max-width:900px)").matches;
-    big.querySelectorAll(".w").forEach(function(el){el.style.fontSize=""});if(!mob){inner.style.display="inline-block";inner.style.fontSize="100px";var w=inner.getBoundingClientRect().width;inner.style.fontSize=(100*target/w)+"px";return}
-    inner.style.display="block";inner.style.fontSize="";
-    big.querySelectorAll(".w").forEach(function(el){el.style.fontSize="100px";var w=el.getBoundingClientRect().width;el.style.fontSize=(100*(innerWidth-2*20)/w)+"px"})
+    var target=title.clientWidth;
+    inner.style.display="inline-block";inner.style.fontSize="100px";
+    var w=inner.getBoundingClientRect().width;inner.style.fontSize=(100*target/w)+"px"
   }
   var go=function(){fit()};
-  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(go);addEventListener("resize",go);go();
-})()</script>
-<script>(function(){
-  var cv=document.getElementById("orb");if(!cv)return;var ctx=cv.getContext("2d"),S=cv.width,C=S/2,R=S/2;
-  var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
-  var P=[];for(var i=0;i<190;i++)P.push({a:Math.random()*6.283,r:Math.random(),s:.002+Math.random()*.006,l:.04+Math.random()*.16,al:.25+Math.random()*.75,w:.6+Math.random()*1.8,c:Math.random()<.55?"255,255,240":(Math.random()<.5?"255,240,138":"134,211,255")});
-  var t=0;
-  function draw(){
-    ctx.clearRect(0,0,S,S);
-    var g=ctx.createRadialGradient(C,C,0,C,C,R);
-    g.addColorStop(0,"rgba(255,255,244,1)");g.addColorStop(.10,"rgba(255,246,176,.96)");g.addColorStop(.30,"rgba(134,211,255,.78)");g.addColorStop(.62,"rgba(26,86,140,.92)");g.addColorStop(.9,"rgba(10,26,44,1)");g.addColorStop(1,"rgba(90,160,210,1)");
-    ctx.fillStyle=g;ctx.fillRect(0,0,S,S);
-    ctx.save();ctx.translate(C,C);ctx.lineCap="round";
-    for(var i=0;i<P.length;i++){var p=P[i];if(!reduce){p.r+=p.s;if(p.r>1){p.r=.02;p.a=Math.random()*6.283}}
-      var r0=p.r*R,r1=Math.min(R,r0+p.l*R*(.4+p.r)),ca=Math.cos(p.a),sa=Math.sin(p.a);
-      ctx.strokeStyle="rgba("+p.c+","+(p.al*(1-p.r*.55))+")";ctx.lineWidth=p.w;ctx.beginPath();ctx.moveTo(ca*r0,sa*r0);ctx.lineTo(ca*r1,sa*r1);ctx.stroke()}
-    ctx.restore();
-    var core=ctx.createRadialGradient(C,C,0,C,C,R*.34);core.addColorStop(0,"rgba(255,255,245,"+(.95+.05*Math.sin(t))+")");core.addColorStop(.5,"rgba(255,246,176,.35)");core.addColorStop(1,"rgba(255,246,176,0)");
-    ctx.fillStyle=core;ctx.fillRect(0,0,S,S);
-    t+=.03;if(!reduce)requestAnimationFrame(draw)
-  }
-  draw();
+  (document.fonts&&document.fonts.load?Promise.all([document.fonts.load('300 40px "Sara Ankava"'),document.fonts.load('700 40px "Sara Ankava"')]):Promise.resolve()).then(function(){return document.fonts.ready}).then(go,go);addEventListener("resize",go);go();
 })()</script>
 </body>
 </html>
