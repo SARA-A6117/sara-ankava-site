@@ -18,7 +18,7 @@
 <link rel="preload" href="assets/fonts/SaraAnkava-Bold-v1.2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css?v=4">
 <link rel="stylesheet" href="assets/css/v4.css?v=2">
-<link rel="stylesheet" href="assets/css/v6.css?v=7">
+<link rel="stylesheet" href="assets/css/v6.css?v=12">
 <meta name="robots" content="noindex">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
 <script type="application/ld+json">
@@ -35,37 +35,33 @@
 
 <!-- 01 · Header -->
 <header class="hdr">
-  <a class="logo" href="index.html" aria-label="Sara Ankava, לדף הבית"><img class="logo__img logo__img--light" src="assets/brand/logo-lime.png" width="1066" height="123" alt="Sara Ankava"><img class="logo__img logo__img--dark" src="assets/brand/logo-black.png" width="1066" height="123" alt="" aria-hidden="true"><i class="logo__sq" aria-hidden="true"></i></a>
+  <a class="logo" href="index.html" aria-label="Sara Ankava, לדף הבית"><img class="logo__img logo__img--light" src="assets/brand/logo-light.png" width="1066" height="123" alt="Sara Ankava"><img class="logo__img logo__img--dark" src="assets/brand/logo-black.png" width="1066" height="123" alt="" aria-hidden="true"><i class="logo__sq" aria-hidden="true"></i></a>
   <nav class="nav" id="nav" aria-label="ניווט ראשי">
     <span class="capsule__ind" aria-hidden="true"></span>
     <a href="#process" data-sec="process">איך אני עובדת</a>
     <a href="#projects" data-sec="projects">פרויקטים</a>
     <a href="#about" data-sec="about">אודות</a>
     <a href="#contact" data-sec="contact">צרו קשר</a>
-    <a class="btn btn--primary" href="#contact"><span class="btn__t">בואו נדבר</span><span class="btn__i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    <a class="cta6" href="#contact">בואו נדבר</a>
   </nav>
-  <a class="btn btn--primary magnetic" href="#contact"><span class="btn__t">בואו נדבר</span><span class="btn__i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+  <a class="cta6" href="#contact">בואו נדבר</a>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="פתיחת התפריט"><span></span><span></span></button>
 </header>
 
 <main id="main">
 
-  <!-- 02 · הירו v6: פחם מגורען, פסים דקים, כותרת צמודה לתחתית -->
-  <section class="h6" id="top" data-el="3" aria-labelledby="hero-title">
-    <div class="h6__grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="h6__art" aria-hidden="true">
-      <div class="art1 gr"></div>
-      <div class="art2"><svg viewBox="0 0 880 520"><path class="ln" d="M260 520A260 260 0 0 1 0 260A350 260 0 0 1 350 0A350 260 0 0 1 700 260L700 490Q700 520 670 520L500 520L500 275.6A160 86 0 1 0 486 299.5L486 520Z"/></svg><div class="sqg gr"></div></div>
-      <div class="art3 gr"></div>
-      <div class="art4"><svg viewBox="0 0 420 260"><defs><linearGradient id="v6g" x1="0" x2="1"><stop offset="0" stop-color="#C8FF3A"/><stop offset="1" stop-color="#6BF0C4"/></linearGradient></defs><path class="b" d="M60 20H360Q400 20 400 60V150Q400 190 360 190H150L70 245V190H60Q20 190 20 150V60Q20 20 60 20Z"/><circle class="d" cx="140" cy="105" r="16"/><circle class="d" cx="210" cy="105" r="16"/><circle class="d" cx="280" cy="105" r="16"/></svg></div>
-    </div>
+  <!-- 02 · הירו v6: בועת דיבור בצורת ה-a, כותרת ענקית מקצה לקצה צמודה לתחתית -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="v6rough" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
+  <section class="h6" id="top" aria-labelledby="hero-title">
+    <div class="h6__grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="h6__art" aria-hidden="true"><svg viewBox="0 0 880 520"><defs><linearGradient id="v6g" x1="0" x2="1"><stop offset="0" stop-color="#C8FF3A"/><stop offset="1" stop-color="#6BF0C4"/></linearGradient></defs><path class="ln" d="M260 520A260 260 0 0 1 0 260A350 260 0 0 1 350 0A350 260 0 0 1 700 260L700 490Q700 520 670 520L500 520L500 275.6A160 86 0 1 0 486 299.5L486 520Z"/><circle class="d" cx="256" cy="288" r="19"/><circle class="d" cx="326" cy="288" r="19"/><circle class="d" cx="396" cy="288" r="19"/></svg><div class="gr-sq"></div></div>
     <div class="h6__info">
       <p class="h6__p">מתחילים מהבנה של העסק שלכם, ואז בונים תוכנית שיווק ונכס דיגיטלי אחד שלוקחים אותו רחוק יותר.</p>
-      <div class="h6__ctas"><a class="h6__btn" href="#contact">השאירו פרטים, אחזור תוך 24 שעות</a><a class="h6__link" href="#projects">לפרויקטים</a></div>
+      <div class="h6__ctas"><a class="cta6" href="#contact">השאירו פרטים, אחזור תוך 24 שעות</a><a class="h6__link" href="#projects">לפרויקטים</a></div>
     </div>
     <h1 class="h6__title" id="hero-title">
-      <span class="ln" style="--i:0"><span>העסק שלכם הצליח בפה <span class="hl gr gr-text" style="--g:linear-gradient(100deg,#6BF0C4,#C8FF3A)">לאוזן.</span></span></span>
-      <span class="ln" style="--i:1"><span>הגיע הזמן לשלב <span class="hl gr gr-text" style="--g:linear-gradient(100deg,#C8FF3A,#6BF0C4)">הבא.</span></span></span>
+      <span class="h6__small">העסק שלכם הצליח בפה לאוזן.</span>
+      <span class="h6__big" data-fit><span><span class="w w1">הגיע הזמן</span> <span class="w w2 gr-text">לשלב הבא.</span></span></span>
     </h1>
   </section>
 
@@ -496,6 +492,19 @@
 <script src="assets/js/main.js?v=4" defer></script>
 <script src="assets/js/header.js?v=4" defer></script>
 <script src="assets/js/v4.js?v=2" defer></script>
-<script>(function(){var q=new URLSearchParams(location.search).get("el");if(q)document.querySelector(".h6").dataset.el=q;if(location.hash==="#still"){var s=document.createElement("style");s.textContent=".h6__title .ln>span,.h6__info{animation:none!important;transform:none!important;opacity:1!important}";document.head.appendChild(s)}})()</script>
+<script>(function(){
+  var still=location.hash==="#still";
+  if(still){var s=document.createElement("style");s.textContent=".h6__big>span,.h6__info{animation:none!important;transform:none!important;opacity:1!important}";document.head.appendChild(s)}
+  function fit(){
+    var big=document.querySelector(".h6__big"),inner=big.firstElementChild,title=document.querySelector(".h6__title");
+    var target=title.clientWidth-2*(innerWidth*0.012);
+    var mob=matchMedia("(max-width:900px)").matches;
+    big.querySelectorAll(".w").forEach(function(el){el.style.fontSize=""});if(!mob){inner.style.display="inline-block";inner.style.fontSize="100px";var w=inner.getBoundingClientRect().width;inner.style.fontSize=(100*target/w)+"px";return}
+    inner.style.display="block";inner.style.fontSize="";
+    big.querySelectorAll(".w").forEach(function(el){el.style.fontSize="100px";var w=el.getBoundingClientRect().width;el.style.fontSize=(100*(innerWidth-2*20)/w)+"px"})
+  }
+  var go=function(){fit()};
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(go);addEventListener("resize",go);go();
+})()</script>
 </body>
 </html>
