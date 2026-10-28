@@ -447,3 +447,42 @@ body::before,body::after{display:none!important}
 .cx__f:hover,.cx__f:focus-visible{border-color:transparent!important;background:linear-gradient(#101312,#101312) padding-box,linear-gradient(120deg,var(--v6-mint),var(--v6-sun)) border-box}
 .cx__cap h3,.cx__rail span{font-family:"Sara Ankava",system-ui,sans-serif!important;font-weight:500}
 .cx__rail span{font-weight:700}
+
+/* ===== פרויקטים: פסים ברוחב מלא, בלי כרטיסים ומסגרות; פס אחד פתוח עם מוקאפ גדול והערות בציורי טוש ===== */
+.dd{display:block;aspect-ratio:var(--ar);background:url("../doodles/doodles.jpg") no-repeat;background-size:var(--bs) auto;background-position:var(--bp);mix-blend-mode:screen;pointer-events:none}
+.pj{position:relative;background:#0a0b0a;color:var(--v6-stone);padding:clamp(70px,8vw,130px) 0 clamp(60px,7vw,110px)}
+.pj__head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px 40px;padding:0 var(--v6-m);margin-bottom:clamp(30px,4vw,56px)}
+.pj__eye{width:100%;font-size:16px;color:var(--v6-sun)}
+.pj__head h2{margin:0;max-width:16ch;font:700 clamp(32px,4.4vw,70px)/1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.02em}
+.pj__list{display:block}
+.pj__row{position:relative;outline:none;background:transparent;overflow:hidden;transition:background .5s}
+.pj__row:nth-child(even){background:rgb(217 217 210 / .035)}
+.pj__row.is-open{background:rgb(134 211 255 / .06)}
+.pj__bar{display:flex;align-items:center;gap:clamp(18px,3vw,48px);padding:clamp(18px,2.2vw,30px) var(--v6-m);cursor:pointer}
+.pj__n{font:300 clamp(24px,2.6vw,40px) "Sara Ankava",system-ui,sans-serif;color:var(--v6-mint);min-width:2.2ch}
+.pj__t{margin:0;flex:1;font:700 clamp(34px,5.6vw,92px)/1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.03em;color:var(--v6-stone);transition:color .4s}
+.pj__row.is-open .pj__t{color:var(--v6-sun)}
+.pj__z{width:clamp(70px,8vw,120px);opacity:.75;transition:transform .5s var(--ease),opacity .4s}
+.pj__row.is-open .pj__z{opacity:0;transform:translateX(-30px)}
+.pj__body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .8s var(--ease)}
+.pj__row.is-open .pj__body{grid-template-rows:1fr}
+.pj__body>*{min-height:0;overflow:hidden}
+.pj__body{grid-template-columns:1fr}
+.pj__stage{position:relative;display:grid;place-items:center;padding:clamp(20px,3vw,40px) var(--v6-m) 0;min-height:0}
+.pj__mk{width:min(880px,64vw);margin-inline:auto;transform:translateY(24px) scale(.96);opacity:0;transition:transform .9s var(--ease) .25s,opacity .7s .25s}
+.pj__row.is-open .pj__mk{transform:none;opacity:1}
+.pj__stage .dd{position:absolute;opacity:0;transition:opacity .6s .5s}
+.pj__row.is-open .pj__stage .dd,.pj__row.is-open .pj__note{opacity:1}
+.pj__note{position:absolute;opacity:0;font:500 clamp(15px,1.5vw,22px) "Sara Ankava",system-ui,sans-serif;color:var(--v6-sun);transition:opacity .6s .6s;white-space:nowrap}
+.d1{width:clamp(90px,10vw,160px);inset-inline-start:6%;top:8%}
+.d1.flip{transform:scaleX(-1)}.d1.sp{width:clamp(110px,14vw,230px)}
+.d2{width:clamp(80px,9vw,140px);inset-inline-end:7%;top:44%}
+.d3{width:clamp(60px,6vw,100px);inset-inline-end:14%;top:6%}
+.pn1{inset-inline-start:5%;top:30%}.pn2{inset-inline-end:6%;top:70%}.pn3{inset-inline-start:50%;top:48%;transform:translateX(50%);font-size:clamp(20px,2.2vw,32px)}
+.dd.big{position:relative!important;width:min(420px,60vw);margin:20px auto}
+.dd.bb{inset-inline-end:12%;top:50%}
+.pj__txt{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px;padding:clamp(16px,2vw,28px) var(--v6-m) clamp(26px,3vw,46px)}
+.pj__txt p{margin:0;max-width:46ch;font:300 clamp(18px,1.6vw,24px)/1.5 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .88)}
+@media (max-width:900px){.pj__mk{width:92%}.pj__stage .dd,.pj__note{display:none}.pj__body{grid-template-rows:1fr}.pj__row .pj__mk{opacity:1;transform:none}.pj__z{display:none}}
+@media (prefers-reduced-motion:reduce){.pj__body,.pj__mk,.pj__stage .dd{transition:none}}
+.pn1{top:36%}
