@@ -101,3 +101,8 @@ body::before{opacity:.5;mix-blend-mode:overlay;background-image:var(--v6-n);back
   background-size:170px auto,auto,auto,auto,auto;background-blend-mode:overlay,normal,normal,normal,normal}
 .contact .eyebrow,.contact .fine,.contact .or-wa,.contact .linkbtn,.contact label,.contact h2,.contact p{color:var(--v6-paper)}
 .contact .eyebrow::before,.contact .sq,.contact__promise i{background:var(--v6-lime)}
+
+/* הירו: רקע אפור מגורען, רק הילה עדינה סביב האלמנט */
+.h6.gx{--gx-base:#1b1d1c;
+  background-image:var(--v6-n),radial-gradient(30% 46% at 24% 40%,rgb(107 240 196 / .16),rgb(200 255 58 / .05) 55%,transparent 75%);
+  background-size:170px auto,auto;background-blend-mode:overlay,normal}
