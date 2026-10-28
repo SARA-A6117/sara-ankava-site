@@ -254,3 +254,13 @@ body::before,body::after{display:none!important}
 .btn--ghost{background:transparent;color:var(--v6-stone);box-shadow:inset 0 0 0 1px rgb(217 217 210 / .5)}
 .btn--ghost::after{display:none}
 @media (max-width:900px){.hb__p{position:relative;left:auto;transform:none;bottom:auto;width:auto;margin-top:22px;text-align:start}.hb__card1{margin-top:20px}}
+
+/* ===== עדכון: חיצים צמודים לטקסט, משפט גדול יותר, פסקה למעלה, סטיקר "לכל הפרויקטים" ===== */
+.hb__title .hb__arrows{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;z-index:3}
+.hb__small{font-size:clamp(18px,1.9vw,28px)}
+.hb__p{bottom:13vh}
+.hb__badge{animation:none;display:grid;place-items:center;text-decoration:none;transition:transform .5s}
+.hb__badge:hover{transform:rotate(-12deg) scale(1.06)}
+.hb__badge b{position:relative;font-size:clamp(14px,1.25vw,19px);line-height:1.1;color:#0c0e0d;text-align:center;font-weight:700}
+@media (max-width:900px){.hb__arrows{display:none}.hb__p{bottom:auto}}
+@media (min-width:901px){.hb__card2{top:22vh;right:4vw}.hb__p{bottom:12vh}}
