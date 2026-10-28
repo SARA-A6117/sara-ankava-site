@@ -81,3 +81,23 @@ body::after{z-index:9990;opacity:.12;background-image:var(--v6-hard);background-
   .h6__big>span,.h6__info{animation:none;transform:none;opacity:1}
   .h6__art .d{animation:none;opacity:1}
 }
+
+/* ===== גרדיאנט מגורען בטכניקה של שכבת רעש במצב overlay מעל גרדיאנטים רדיאליים (כמו באזור יצירת הקשר של saraweizman) ===== */
+:root{--v6-n:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncG type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncB type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncA type='linear' slope='0' intercept='.85'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.gx{background-color:var(--gx-base,#141716);
+  background-image:var(--v6-n),
+    radial-gradient(34% 54% at 0% 100%,var(--gx1,rgb(107 240 196 / .5)),transparent 72%),
+    radial-gradient(44% 66% at 26% -4%,var(--gx2,rgb(200 255 58 / .32)),transparent 72%),
+    radial-gradient(48% 72% at 18% 60%,var(--gx3,rgb(36 112 90 / .6)),transparent 75%),
+    radial-gradient(62% 87% at 92% 68%,var(--gx4,rgb(22 58 48 / .9)),transparent 80%);
+  background-size:170px auto,auto,auto,auto,auto;background-blend-mode:overlay,normal,normal,normal,normal}
+.h6{--gx-base:#141716;--gx1:rgb(107 240 196 / .2);--gx3:rgb(36 112 90 / .5)}
+.h6::before{display:none}
+/* גרגר חד על הכול: שכבה חדשה בכל האתר, מעל כהה ובהיר */
+body::before{opacity:.5;mix-blend-mode:overlay;background-image:var(--v6-n);background-size:170px}
+/* יצירת קשר: גרדיאנט מגורען עמוק של מנטה וליים */
+.contact{--gx-base:rgb(14 74 58);--gx1:rgb(107 240 196 / .75);--gx2:rgb(200 255 58 / .8);--gx3:rgb(24 130 100 / .85);--gx4:rgb(8 44 36);color:var(--v6-paper);
+  background-color:var(--gx-base);background-image:var(--v6-n),radial-gradient(34% 54% at 0% 100%,var(--gx1),transparent 72%),radial-gradient(44% 66% at 26% -4%,var(--gx2),transparent 72%),radial-gradient(48% 72% at 18% 60%,var(--gx3),transparent 75%),radial-gradient(62% 87% at 92% 68%,var(--gx4),transparent 80%);
+  background-size:170px auto,auto,auto,auto,auto;background-blend-mode:overlay,normal,normal,normal,normal}
+.contact .eyebrow,.contact .fine,.contact .or-wa,.contact .linkbtn,.contact label,.contact h2,.contact p{color:var(--v6-paper)}
+.contact .eyebrow::before,.contact .sq,.contact__promise i{background:var(--v6-lime)}
