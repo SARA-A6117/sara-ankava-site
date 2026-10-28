@@ -312,3 +312,23 @@ body::before,body::after{display:none!important}
 .btn__i{display:none!important}
 .btn .btn__t{background:transparent!important;box-shadow:none!important;border:0!important;padding:.9em 1.6em;color:inherit}
 .btn--primary{background:var(--v6-sun);color:#0c0e0d}
+
+/* ===== עדכון: קומיקס בגריד קווים ישר; קווי טוש אחידים; כותרת ממורכזת וקטנה ===== */
+.cx__title{text-align:center;margin-bottom:clamp(32px,4vw,56px)}
+.cx__a{font-size:clamp(36px,4.8vw,76px)}
+.cx__b{font-size:clamp(22px,2.7vw,44px);margin-top:.2em}
+.cx__title .gr-text{display:inline-block;padding-inline:.04em}
+.mkr{filter:url(#mk2);stroke-width:5.5}
+.cx__row{gap:0;border:1px solid rgb(217 217 210 / .3);border-radius:14px;overflow:hidden;align-items:stretch}
+.cx__f{gap:0;border-inline-start:1px solid rgb(217 217 210 / .3);grid-template-rows:auto 1fr;position:relative}
+.cx__f:first-child{border-inline-start:0}
+.cx__art{rotate:none!important;margin:0!important;background:transparent;padding:clamp(44px,5vw,72px) 28px 8px;aspect-ratio:auto}
+.cx__art::before{display:none}
+.cx__art svg{height:auto;aspect-ratio:400/330}
+.cx__n{right:auto;left:auto;inset-inline-end:22px;top:14px;background:transparent;color:transparent;-webkit-text-stroke:1.5px rgb(217 217 210 / .55);font-size:clamp(44px,5vw,76px);padding:0;line-height:1}
+.cx__cap{background:transparent;color:var(--v6-stone);border-radius:0;border-top:1px solid rgb(217 217 210 / .3);padding:24px 28px 30px}
+.cx__cap::after{display:none}
+.cx__lab{color:var(--v6-sun);opacity:1}
+.cx__cap p{font-weight:300;font-size:17px;color:rgb(217 217 210 / .85)}
+@media (max-width:900px){.cx__f{border-inline-start:0;border-top:1px solid rgb(217 217 210 / .3)}.cx__f:first-child{border-top:0}}
+.cx__title .gr-text{font-weight:700}
