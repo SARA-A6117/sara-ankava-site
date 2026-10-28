@@ -238,3 +238,19 @@ body::before,body::after{display:none!important}
 .hb__l{overflow:visible}
 @media (min-width:901px){.hb__card2{right:5vw;top:47vh}}
 @media (max-width:900px){.hb__badge{top:auto;bottom:6vh;right:7vw;width:72px}.hb__card1{margin-top:28px}}
+
+/* ===== עדכון: כותרת צפופה, משפט קטן בפונט המותג הדק, חיצים עבים, כפתורי בועת דיבור, פסקה ===== */
+.hb__title{line-height:.7}
+.hb__l{padding-top:0;padding-bottom:.18em;margin-bottom:-.12em}
+.hb__small{font-family:"Sara Ankava",system-ui,sans-serif;font-weight:300;font-size:clamp(15px,1.45vw,22px);letter-spacing:.01em}
+.ar{stroke-width:13}
+.hb__p{position:absolute;z-index:4;left:50%;transform:translateX(-50%);bottom:5vh;width:min(560px,60vw);margin:0;text-align:center;font-size:18px;line-height:1.5;color:rgb(217 217 210 / .8)}
+/* כפתורי בועת דיבור: קפסולה בצבע אבן עם זנב קטן בפינה, בכל האתר */
+.cta6,.btn,.h6__btn{position:relative;overflow:visible;background:var(--v6-stone);color:#0c0e0d;border:0;border-radius:999px;clip-path:none;box-shadow:none}
+.cta6::after,.btn::after,.h6__btn::after{content:"";position:absolute;left:22px;bottom:-9px;width:18px;height:14px;background:inherit;clip-path:polygon(0 0,100% 0,0 100%);pointer-events:none}
+.cta6--main::before,.btn::before{display:none}
+.cta6:hover,.btn:hover{background:var(--v6-sun);color:#0c0e0d}
+.hdr .cta6{min-height:44px;padding:0 24px;font-size:15px}
+.btn--ghost{background:transparent;color:var(--v6-stone);box-shadow:inset 0 0 0 1px rgb(217 217 210 / .5)}
+.btn--ghost::after{display:none}
+@media (max-width:900px){.hb__p{position:relative;left:auto;transform:none;bottom:auto;width:auto;margin-top:22px;text-align:start}.hb__card1{margin-top:20px}}
