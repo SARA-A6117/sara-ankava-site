@@ -284,3 +284,31 @@ body::before,body::after{display:none!important}
 .hb__title .gr-text{background-image:var(--v6-hard),linear-gradient(100deg,var(--v6-mint) 0%,var(--v6-sun) 100%);background-size:220px,auto;background-blend-mode:soft-light,normal;filter:contrast(1.35) saturate(1.45)}
 .hb__marker{transform:translate(-70px,-6px)}
 .hb__marker{transform:translate(-22px,-10px)}
+
+/* ===== עדכון: גרעון חזק במילים; קומיקס לונה פארק; כל האיורים בטוש ===== */
+.hb__title .gr-text{background-image:var(--v6-hard),linear-gradient(100deg,var(--v6-mint) 0%,var(--v6-sun) 100%);background-size:200px,auto;background-blend-mode:hard-light,normal;filter:contrast(1.6) saturate(1.2)}
+.cx{position:relative;background:#101312;color:var(--v6-stone);padding:clamp(80px,9vw,150px) var(--v6-m)}
+.cx__title{margin:0 0 clamp(36px,5vw,72px);font-family:"Sara Ankava",system-ui,sans-serif;line-height:.95;letter-spacing:-.03em}
+.cx__a{display:block;font-weight:700;font-size:clamp(44px,7.4vw,118px);color:var(--v6-stone)}
+.cx__b{display:block;font-weight:300;font-size:clamp(28px,4.2vw,68px);color:var(--v6-stone);margin-top:.15em}
+.cx__row{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.6vw,40px);align-items:start}
+.cx__f{display:grid;gap:18px}
+.cx__art{position:relative;border:0;padding:12px;aspect-ratio:400/330;background:rgb(217 217 210 / .04)}
+.cx__art::before{content:"";position:absolute;inset:0;border:5px solid var(--v6-stone);border-radius:6px;filter:url(#mk);pointer-events:none}
+.cx__f1 .cx__art{rotate:-1.2deg}.cx__f2 .cx__art{rotate:.8deg;margin-top:22px}.cx__f3 .cx__art{rotate:-.6deg}
+.cx__art svg{width:100%;height:100%;overflow:visible}
+.mkr{fill:none;stroke:var(--v6-stone);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;filter:url(#mk)}
+.mkr .y{stroke:var(--v6-sun)}.mkr .b{stroke:var(--v6-mint)}
+.mkr .y[fill]{fill:none}
+.cx__n{position:absolute;right:14px;top:-18px;padding:4px 16px;background:var(--v6-sun);color:#0c0e0d;font:700 22px "Sara Ankava",system-ui,sans-serif;border-radius:999px}
+.cx__cap{position:relative;padding:20px 24px;background:var(--v6-stone);color:#0c0e0d;border-radius:26px}
+.cx__cap::after{content:"";position:absolute;right:30px;top:-14px;width:22px;height:16px;background:var(--v6-stone);clip-path:polygon(0 100%,100% 100%,100% 0)}
+.cx__lab{display:block;font-size:14px;font-weight:500;opacity:.7}
+.cx__cap h3{margin:4px 0 8px;font-size:clamp(22px,2vw,30px);font-weight:700;line-height:1.1}
+.cx__cap p{margin:0;font-size:16px;line-height:1.45;font-weight:500}
+@media (max-width:900px){.cx__row{grid-template-columns:1fr;gap:34px}.cx__f2 .cx__art{margin-top:0}}
+/* איורים בטוש בשאר האתר */
+.fit__mark,.scard__glyph,.contact__a{filter:url(#mk)}
+.btn__i{display:none!important}
+.btn .btn__t{background:transparent!important;box-shadow:none!important;border:0!important;padding:.9em 1.6em;color:inherit}
+.btn--primary{background:var(--v6-sun);color:#0c0e0d}
