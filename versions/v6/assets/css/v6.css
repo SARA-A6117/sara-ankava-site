@@ -274,3 +274,13 @@ body::before,body::after{display:none!important}
 @keyframes hb-flow{from{background-position:0 0,0 0}to{background-position:0 0,-300% 0}}
 @media (prefers-reduced-motion:reduce){.hb__title .gr-text,.hb__doodle{animation:none}}
 .hb__doodle{translate:90px -34px}
+
+/* ===== עדכון: גרעון חזק יותר בלי תזוזה, בועת טוש, פסקה גדולה יותר ===== */
+.hb__title .gr-text{background-image:var(--v6-n),linear-gradient(100deg,var(--v6-mint) 0%,var(--v6-sun) 100%);background-size:200px,auto;background-blend-mode:hard-light,normal;filter:contrast(1.25) saturate(1.15);animation:hb-up 1s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.15s + var(--i) * .12s)}
+.hb__marker{filter:url(#mk)}
+.hb__marker .ar{stroke-width:15;stroke:#86D3FF}
+.hb__dot{fill:none;stroke:#FFF08A;stroke-width:17;stroke-linecap:round}
+.hb__p{font-size:23px;width:min(640px,64vw)}
+.hb__title .gr-text{background-image:var(--v6-hard),linear-gradient(100deg,var(--v6-mint) 0%,var(--v6-sun) 100%);background-size:220px,auto;background-blend-mode:soft-light,normal;filter:contrast(1.35) saturate(1.45)}
+.hb__marker{transform:translate(-70px,-6px)}
+.hb__marker{transform:translate(-22px,-10px)}
