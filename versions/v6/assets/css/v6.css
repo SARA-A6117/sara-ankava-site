@@ -440,3 +440,10 @@ body::before,body::after{display:none!important}
 .cx__f{border:1.5px solid transparent!important;border-radius:12px;background:linear-gradient(#101312,#101312) padding-box,linear-gradient(120deg,var(--v6-mint),var(--v6-sun)) border-box}
 .cx__f:hover,.cx__f:focus-visible,.cx__f.is-open{border-color:transparent!important}
 .cx__f{border-width:2.5px!important}
+
+/* מסגרת גרדיאנט רק בהובר; כותרת בפונט שרה אנקוה */
+.cx__f{border-width:1.5px!important;background:#101312;border-color:var(--paper-12)!important}
+.cx__f.is-open{border-color:var(--paper-12)!important}
+.cx__f:hover,.cx__f:focus-visible{border-color:transparent!important;background:linear-gradient(#101312,#101312) padding-box,linear-gradient(120deg,var(--v6-mint),var(--v6-sun)) border-box}
+.cx__cap h3,.cx__rail span{font-family:"Sara Ankava",system-ui,sans-serif!important;font-weight:500}
+.cx__rail span{font-weight:700}
