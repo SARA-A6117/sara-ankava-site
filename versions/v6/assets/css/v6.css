@@ -486,3 +486,37 @@ body::before,body::after{display:none!important}
 @media (max-width:900px){.pj__mk{width:92%}.pj__stage .dd,.pj__note{display:none}.pj__body{grid-template-rows:1fr}.pj__row .pj__mk{opacity:1;transform:none}.pj__z{display:none}}
 @media (prefers-reduced-motion:reduce){.pj__body,.pj__mk,.pj__stage .dd{transition:none}}
 .pn1{top:36%}
+
+/* ===== פרויקטים · מאופק: פחם מגורען אחיד, שמות עד 44px במשקל 500, ציורי טוש קטנים ודקים, לינקים בטקסט ===== */
+.pj{background:#121413;padding:clamp(64px,7vw,110px) 0 clamp(56px,6vw,96px)}
+.pj::before{content:"";position:absolute;inset:0;background-image:var(--v6-n);background-size:170px;mix-blend-mode:overlay;opacity:.55;pointer-events:none}
+.pj>*{position:relative}
+.pj__eye{font-size:15px;font-weight:300;color:rgb(217 217 210 / .6)}
+.pj__head h2{font:500 clamp(26px,3vw,44px)/1.15 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;max-width:22ch}
+.pj__row,.pj__row:nth-child(even),.pj__row.is-open{background:transparent}
+.pj__bar{padding:clamp(16px,1.8vw,24px) var(--v6-m);gap:clamp(14px,2vw,28px);border-top:1px solid rgb(217 217 210 / .12)}
+.pj__row:first-child .pj__bar{border-top:0}
+.pj__n{font:300 clamp(14px,1.2vw,18px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .55);min-width:2.4ch}
+.pj__t{font:500 clamp(26px,3vw,44px)/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:rgb(217 217 210 / .72)}
+.pj__row.is-open .pj__t{color:var(--v6-stone)}
+.pj__stage{padding:clamp(24px,4vw,64px) var(--v6-m) clamp(10px,2vw,28px)}
+.pj__mk{width:min(840px,58vw)}
+.pj__stage .dd{opacity:0;position:absolute}
+.pj__row.is-open .pj__stage .dd{opacity:1}
+.dd.y{filter:none}
+.dd.n1{width:clamp(70px,7vw,110px);inset-inline-start:18%;top:14%}
+.dd.n1.flipx{transform:scaleX(-1)}
+.dd.n2{width:clamp(80px,8vw,120px);inset-inline-end:16%;bottom:6%}
+.dd.n3{position:relative!important;width:clamp(90px,9vw,140px);margin-top:6px}
+/* צבע: צהוב רק בציורי הטוש (פילטר מגביל את הציור לגוון אחד), תכלת בקו אחד */
+.dd.y{filter:hue-rotate(0deg)}
+.pj__txt{padding:clamp(10px,1.4vw,20px) var(--v6-m) clamp(24px,3vw,44px);align-items:flex-end}
+.pj__txt p{font:300 clamp(16px,1.3vw,19px)/1.55 "Sara Ankava",system-ui,sans-serif;max-width:48ch}
+.pj__lnk{display:inline-flex;gap:8px;align-items:center;color:var(--v6-stone);font:500 16px "Sara Ankava",system-ui,sans-serif;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;text-decoration-color:rgb(217 217 210 / .5);transition:text-decoration-color .25s}
+.pj__lnk:hover{text-decoration-color:var(--v6-stone)}
+@media (max-width:900px){.pj__mk{width:92%}.pj__stage .dd{display:none}}
+.dd.n1{inset-inline-start:auto;width:clamp(90px,9vw,140px);top:46%}
+.dd.n1.rr{left:calc(50% + 29vw + 14px)}
+.dd.n1.ll{right:calc(50% + 29vw + 14px)}
+.dd.n2{inset-inline-end:auto;left:calc(50% - 29vw);bottom:3%;width:clamp(90px,9vw,130px)}
+.dd.n2{left:calc(50% + 29vw + 20px);bottom:18%}
