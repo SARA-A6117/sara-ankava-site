@@ -550,3 +550,21 @@ body::before,body::after{display:none!important}
 @keyframes cta-blink{0%,84%,100%{transform:none;filter:none}90%{transform:scale(1.05);filter:brightness(1.12)}95%{transform:scale(1.02);filter:brightness(1.05)}}
 .cta6,.cta-blink,.contact .btn--primary,.h6__btn{animation:cta-blink 6s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){.cta6,.cta-blink,.contact .btn--primary,.h6__btn{animation:none}}
+
+/* ===== פרויקטים · אבן בהירה גרגרית, טקסט פחם, שורות עבות, גרדיאנט חד ב"גם האתר" ===== */
+.pj{background:#E7E6DF;color:#12140f}
+.pj::before{mix-blend-mode:multiply;opacity:.2;background-size:170px}
+.pj__st{color:transparent;-webkit-text-stroke:1.4px #12140f}
+.pj__gr.gr-text{background-image:var(--v6-n),linear-gradient(100deg,#1B4FB0 0%,#2F7FD0 38%,#D19A00 100%);background-size:200px,auto;background-blend-mode:soft-light,normal;filter:none;-webkit-text-fill-color:transparent;font-weight:700}
+.pj__row{border-top:1px solid rgb(18 20 15 / .2)}
+.pj__row:last-child{border-bottom:1px solid rgb(18 20 15 / .2)}
+.pj__n{color:rgb(18 20 15 / .6);font-weight:500}
+.pj__row .pj__t{font-weight:700;font-size:clamp(28px,3.4vw,48px);color:#12140f}
+.pj__d{font-weight:500;font-size:clamp(16px,1.35vw,19px);color:rgb(18 20 15 / .85)}
+.pj .btn,.pj .btn--primary{background:#12140f!important;color:#E7E6DF!important}
+.pj .btn:hover{background:#2a2d26!important}
+.pj__float .mk__win{box-shadow:0 18px 40px -14px rgb(18 20 15 / .45)}
+.pj__gr.gr-text{background-image:var(--v6-n),linear-gradient(100deg,#123F9E 0%,#1F6FD0 40%,#E0A100 100%);background-blend-mode:soft-light,normal;background-size:240px,auto}
+.pj__st{-webkit-text-stroke-width:1.6px}
+.pj__gr.gr-text{background-blend-mode:overlay,normal}
+.pj__st{-webkit-text-stroke-width:2.1px;paint-order:stroke fill}
