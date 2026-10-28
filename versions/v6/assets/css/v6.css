@@ -382,3 +382,40 @@ body::before,body::after{display:none!important}
 .cx__cap p{color:rgb(217 217 210 / .85);max-height:0;opacity:0;margin:0;overflow:hidden;transition:max-height .7s var(--ease),opacity .5s .1s,margin .5s}
 .cx__f:hover .cx__cap p,.cx__f:focus-visible .cx__cap p{max-height:200px;opacity:1;margin-top:8px}
 @media (max-width:900px){.cx__row{flex-direction:column;height:auto}.cx__f{flex:none}.cx__cap p{max-height:none;opacity:1;margin-top:8px}.cx__art{padding-top:20px}}
+
+/* ===== עדכון: אקורדיון קומיקס כמו הפרויקטים: עמודה ראשונה פתוחה עם איור מונפש וטקסט, השאר נפתחות בהובר ===== */
+.cx__row{display:flex;gap:clamp(10px,1.2vw,16px);height:clamp(500px,70vh,640px)}
+.cx__f{position:relative;display:block;flex:1 1 0;min-width:0;transition:flex-grow .85s var(--ease),border-color .5s}
+.cx__f.is-open{flex-grow:5.4;border-color:var(--v6-sun)!important}
+.cx__f:hover:not(.is-open){flex-grow:1}
+.cx__rail{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .4s}
+.cx__rail span{writing-mode:vertical-rl;transform:rotate(180deg);font:700 clamp(22px,2.2vw,34px) "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);white-space:nowrap}
+.cx__f.is-open .cx__rail{opacity:0;pointer-events:none}
+.cx__in{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center;gap:clamp(16px,2.4vw,40px);padding:clamp(24px,3vw,48px);opacity:0;pointer-events:none;transition:opacity .45s}
+.cx__f.is-open .cx__in{opacity:1;pointer-events:auto;transition-delay:.35s}
+.cx__cap{border:0;padding:0;align-self:center}
+.cx__cap h3{font-size:clamp(28px,3vw,48px);margin:6px 0 14px}
+.cx__cap p{max-height:none;opacity:1;margin:0;font-size:clamp(16px,1.3vw,20px);line-height:1.55}
+.cx__art{padding:0;display:grid;place-items:center}
+.cx__art svg{animation:none;max-height:100%}
+/* תנועה באיורים */
+.wh{transform-box:fill-box;transform-origin:center;animation:cx-spin 26s linear infinite}
+.wh3{animation-duration:20s}
+@keyframes cx-spin{to{transform:rotate(360deg)}}
+.sun{animation:cx-sun 5s ease-in-out infinite alternate}
+@keyframes cx-sun{to{transform:translateY(-8px)}}
+.cac{transform-box:fill-box;transform-origin:50% 100%;animation:cx-sway 4s ease-in-out infinite alternate}
+@keyframes cx-sway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+.dust,.dust2{animation:cx-dust 3.4s ease-in-out infinite alternate}
+.dust2{animation-delay:-1.4s}
+@keyframes cx-dust{to{transform:translateX(14px);opacity:.4}}
+.car{animation:cx-drive 5s linear infinite}
+.c2{animation-delay:-1.7s}.c3{animation-delay:-3.2s}
+@keyframes cx-drive{0%{transform:translateY(46px);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateY(-110px);opacity:0}}
+.qm{transform-box:fill-box;transform-origin:50% 100%;animation:cx-sway 2.6s ease-in-out infinite alternate}
+.pp{transform-box:fill-box;transform-origin:50% 100%;animation:cx-hop 1.8s ease-in-out infinite}
+.p2{animation-delay:-.6s}.p3{animation-delay:-1.2s}
+@keyframes cx-hop{50%{transform:translateY(-8px)}}
+.hrt{animation:cx-dust 3s ease-in-out infinite alternate}
+@media (prefers-reduced-motion:reduce){.wh,.sun,.cac,.dust,.dust2,.car,.qm,.pp,.hrt{animation:none}}
+@media (max-width:900px){.cx__row{height:auto;flex-direction:column}.cx__f{flex:none}.cx__rail{display:none}.cx__in{position:relative;opacity:1;pointer-events:auto;grid-template-columns:1fr}}
