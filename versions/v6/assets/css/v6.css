@@ -1,63 +1,76 @@
-/* v6 · הירו טיפוגרפי על גריד גלוי. שטוח, וקטורי, בלי זוהר. ליים רק: ריבוע ה-a, "הבא", ה-CTA. */
-:root{--v6-char:#0E1110;--v6-stone:#D9D9D2;--v6-paper:#F1F2EC;--v6-lime:#C8FF3A;--v6-m:5vw}
+/* v6 · הירו: פחם מגורען, גריד פסים דקים, כותרת צמודה לתחתית בצבע אבן, מילים מודגשות במרקם גרדיאנט מגורען (ליים/מנטה).
+   שטוח לגמרי: בלי תלת-ממד, בלי זוהר. */
+:root{--v6-char:#0E1110;--v6-stone:#D9D9D2;--v6-paper:#F1F2EC;--v6-lime:#C8FF3A;--v6-mint:#6BF0C4;--v6-m:5vw;
+  --v6-noise:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' seed='5' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
 
-/* מרקם נייר/בטון לכל האתר: כתמים רחבים + גרגר עדין, מעל כהה ובהיר כאחד */
-body::after{content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='520'><filter id='c' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.011' numOctaves='3' seed='7' stitchTiles='stitch'/><feColorMatrix values='.55 0 0 0 0  .55 0 0 0 0  .55 0 0 0 0  0 0 0 0 .05'/></filter><filter id='g' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' seed='3' stitchTiles='stitch'/><feColorMatrix values='.6 0 0 0 0  .6 0 0 0 0  .6 0 0 0 0  0 0 0 0 .07'/></filter><rect width='100%' height='100%' filter='url(%23c)'/><rect width='100%' height='100%' filter='url(%23g)'/></svg>")}
+/* מרקם גרגר לכל האתר, מעל כהה ובהיר */
+body::after{content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.09;mix-blend-mode:overlay;background-image:var(--v6-noise);background-size:300px}
 
-/* הדר: לוגו בלי זוהר, כפתור בלי עיגול חץ */
-.logo__img,.logo .logo__sq{filter:none;box-shadow:none}
+/* הדר: לוגו שטוח, כפתור בלי עיגול חץ */
+.logo__img,.logo .logo__sq{filter:none!important;box-shadow:none}
 .hdr .logo::before{display:none}
 .hdr>.btn .btn__i,.hdr .nav .btn__i{display:none}
 .hdr .btn,.hdr .btn__t,.hdr .btn:hover .btn__t{box-shadow:none!important}
-.logo__img{filter:none!important}
 
-.h6{position:relative;min-height:100svh;overflow:hidden;background:var(--v6-char);color:var(--v6-paper);padding:calc(var(--hdr,76px) + 4vh) var(--v6-m) 0;display:grid;grid-template-rows:1fr auto}
-/* גריד גלוי: 12 קווי טורים */
-.h6__grid{position:absolute;inset:0 var(--v6-m);pointer-events:none;z-index:0;display:grid;grid-template-columns:repeat(12,1fr);border-inline:1px solid rgb(241 242 236 / .09)}
-.h6__grid i{border-inline-end:1px solid rgb(241 242 236 / .09)}
+/* גרדיאנט מגורען: שכבת רעש מעל גרדיאנט, עם קונטרסט */
+.gr{background-image:var(--v6-noise),var(--g,linear-gradient(135deg,var(--v6-lime),var(--v6-mint)));background-size:200px,auto;background-blend-mode:hard-light,normal;filter:contrast(1.7) saturate(1.1)}
+.gr-text{-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+.h6{position:relative;min-height:100svh;overflow:hidden;background:var(--v6-char);color:var(--v6-stone);display:grid;grid-template-rows:1fr auto;padding:0 var(--v6-m) 2.2vh}
+.h6::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(55% 60% at 22% 38%,rgb(107 240 196 / .16),transparent 70%),radial-gradient(45% 55% at 85% 90%,rgb(200 255 58 / .13),transparent 70%)}
+/* פסים דקים לרוחב המסך */
+.h6__grid{position:absolute;inset:0 var(--v6-m);pointer-events:none;z-index:0;display:grid;grid-template-columns:repeat(12,1fr);border-inline:1px solid rgb(217 217 210 / .1)}
+.h6__grid i{border-inline-end:1px solid rgb(217 217 210 / .1)}
 .h6__grid i:last-child{border:0}
 
-.h6__stage{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,1fr);align-content:center;padding-bottom:7vh}
-.h6__title{grid-column:1/-1;margin:0;position:relative;z-index:3;text-align:start;font-family:"Sara Ankava",system-ui,sans-serif;font-weight:700;font-size:clamp(46px,8.4vw,128px);line-height:.94;letter-spacing:-.015em;color:var(--v6-paper);mix-blend-mode:difference}
-.h6__title .ln{display:block;overflow:hidden;padding:.03em 0 .05em;white-space:nowrap}
-.h6__title .ln>span{display:block;transform:translateY(105%);animation:h6-up .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.15s + var(--i)*.1s)}
+/* האלמנט הוויזואלי: ארבע גרסאות, מוצגת אחת לפי data-el */
+.h6__art{position:absolute;z-index:1;left:calc(var(--v6-m) + (100% - 2 * var(--v6-m)) / 12 * 2);top:calc(var(--hdr,76px) + 7vh);width:calc((100% - 2 * var(--v6-m)) / 12 * 5);aspect-ratio:1.15}
+.h6__art>*{display:none;position:absolute}
+.h6[data-el="1"] .art1,.h6[data-el="2"] .art2,.h6[data-el="3"] .art3,.h6[data-el="4"] .art4{display:block}
+/* 1 · הריבוע מהלוגו */
+.art1{right:6%;top:8%;width:52%;aspect-ratio:1}
+.art1::after{content:"";position:absolute;inset:-9% 9% 9% -9%;border:1.5px solid rgb(217 217 210 / .45)}
+/* 2 · ה-a בקו דק + ריבוע מגורען */
+.art2{left:0;top:0;width:100%;height:100%}
+.art2 svg{width:100%;height:100%;overflow:visible}
+.art2 .ln{fill:none;stroke:rgb(217 217 210 / .7);stroke-width:2}
+.art2 .sqg{position:absolute;right:2%;bottom:8%;width:15%;aspect-ratio:1}
+/* 3 · עיגול מגורען + טבעת */
+.art3{right:4%;top:2%;width:62%;aspect-ratio:1;border-radius:50%}
+.art3::after{content:"";position:absolute;inset:-7%;border-radius:50%;border:1.5px solid rgb(217 217 210 / .4)}
+/* 4 · בועת דיבור קטנה עם נקודות הקלדה */
+.art4{left:8%;top:20%;width:78%;height:58%}
+.art4 svg{width:100%;height:100%;overflow:visible}
+.art4 .b{fill:none;stroke:var(--v6-stone);stroke-width:2.2}
+.art4 .d{fill:url(#v6g)}
+
+/* כותרת, צמודה לתחתית ההירו */
+.h6__title{grid-row:2;position:relative;z-index:3;margin:0;font-family:"Sara Ankava",system-ui,sans-serif;font-weight:500;font-size:clamp(40px,6.3vw,104px);line-height:1;letter-spacing:-.02em;color:var(--v6-stone)}
+.h6__title .ln{display:block;overflow:hidden;padding:.04em 0 .08em;white-space:nowrap}
+.h6__title .ln>span{display:block;transform:translateY(105%);animation:h6-up .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.15s + var(--i)*.12s)}
 @keyframes h6-up{to{transform:none}}
-.h6__title .hl{color:var(--v6-lime);text-shadow:none!important;filter:none!important}
+.h6__title .hl{display:inline-block;padding-inline:.02em;text-shadow:none!important}
+.h6__title{margin-inline-end:1.4vw}
 
-/* ה-a השטוח: צורה וקטורית מהלוגו, נחתכת בהיפוך צבע דרך הכותרת */
-.h6__a{position:absolute;z-index:2;left:calc(var(--v6-m) * -0.2);bottom:34px;width:50vw;max-width:780px;height:auto;pointer-events:none}
-.h6__a .h6a{fill:var(--v6-stone)}
-.h6__a .h6sq{fill:var(--v6-lime);transform-box:fill-box;transform-origin:50% 50%;animation:h6-drop .8s cubic-bezier(.3,1.4,.5,1) both .9s}
-@keyframes h6-drop{from{transform:translateY(-60px) rotate(-12deg);opacity:0}to{transform:none;opacity:1}}
-
-.h6__side{position:absolute;z-index:3;left:0;top:calc(var(--hdr,76px) + 2vh);width:min(36vw,520px);opacity:0;animation:h6-fade .8s ease forwards 1.1s}
-.h6__p{margin:0;font-size:18px;line-height:1.55;color:rgb(241 242 236 / .72)}
-.h6__ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:20px}
-.h6__btn{display:inline-block;white-space:nowrap;padding:16px 26px;background:var(--v6-lime);color:var(--v6-char);font:700 18px "Sara Ankava",system-ui,sans-serif;text-decoration:none;border-radius:4px;transition:background .25s,color .25s}
-.h6__btn:hover{background:var(--v6-paper)}
-.h6__link{color:var(--v6-paper);font-size:18px;font-weight:500;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px;text-decoration-color:rgb(241 242 236 / .45);transition:text-decoration-color .25s}
-.h6__link:hover{text-decoration-color:var(--v6-lime)}
+/* פסקה וכפתורים: בעמודה הימנית, מעל הכותרת */
+.h6__info{position:absolute;z-index:3;right:var(--v6-m);top:calc(var(--hdr,76px) + 12vh);width:calc((100% - 2 * var(--v6-m)) / 12 * 4);opacity:0;animation:h6-fade .8s ease forwards 1s}
+.h6__p{margin:0;font-size:18px;line-height:1.6;color:rgb(217 217 210 / .78)}
+.h6__ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:28px}
+.h6__btn{display:inline-block;white-space:nowrap;padding:16px 26px;background:var(--v6-lime);color:var(--v6-char);font:700 18px "Sara Ankava",system-ui,sans-serif;text-decoration:none;border-radius:4px;transition:background .25s}
+.h6__btn:hover{background:var(--v6-stone)}
+.h6__link{color:var(--v6-stone);font-size:18px;font-weight:500;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px;text-decoration-color:rgb(217 217 210 / .4);transition:text-decoration-color .25s}
+.h6__link:hover{text-decoration-color:var(--v6-mint)}
 @keyframes h6-fade{to{opacity:1}}
 
-/* פס נע: אבן עם טקסט פחם, ריבועי ליים כמפרידים */
-.h6__band{position:relative;z-index:3;margin:0 calc(var(--v6-m) * -1);background:var(--v6-stone);color:var(--v6-char);overflow:hidden;white-space:nowrap}
-.h6__track{display:inline-flex;animation:h6-run 38s linear infinite}
-.h6__band span{display:inline-flex;align-items:center;gap:28px;padding:16px 14px;font:700 clamp(20px,2.2vw,30px)/1 "Sara Ankava",system-ui,sans-serif}
-.h6__band span::after{content:"";width:.5em;height:.5em;background:var(--v6-lime);flex:none}
-@keyframes h6-run{to{transform:translateX(50%)}}
-
 @media (max-width:900px){
-  .h6{padding-top:calc(var(--hdr,76px) + 24px)}
+  .h6{padding-top:calc(var(--hdr,76px) + 16px);grid-template-rows:auto auto auto}
   .h6__grid{grid-template-columns:repeat(6,1fr)}
   .h6__grid i:nth-child(n+7){display:none}
-  .h6__stage{align-content:start;padding-bottom:28px}
-  .h6__title{font-size:clamp(34px,10.5vw,52px)}
+  .h6__art{position:relative;left:auto;top:auto;width:62vw;margin:0 auto 18px}
+  .h6__info{position:relative;right:auto;top:auto;width:auto;margin-bottom:34px}
+  .h6__title{font-size:clamp(32px,9.6vw,48px)}
   .h6__title .ln{white-space:normal}
-  .h6__a{position:relative;left:auto;bottom:auto;width:78vw;margin:18px 0 0 -3vw;grid-column:1/-1}
-  .h6__side{position:relative;left:auto;top:auto;width:auto;grid-column:1/-1;margin-top:20px}
 }
 @media (prefers-reduced-motion:reduce){
-  .h6__title .ln>span,.h6__side,.h6__a .h6sq{animation:none;transform:none;opacity:1}
-  .h6__track{animation:none}
+  .h6__title .ln>span,.h6__info{animation:none;transform:none;opacity:1}
 }
