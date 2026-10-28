@@ -163,3 +163,12 @@ body::before,body::after{display:none!important}
 
 @media (max-width:900px){.h6__mock{position:relative;left:auto;transform:none;bottom:auto;width:84vw;margin:6px auto 22px}.h6__streak,.h6__card{display:none}}
 @media (max-width:900px){.wa{inset-block-end:26vh}}
+
+/* ===== כפתורים בסגנון kinetic: הדר = קפסולה עם קו דק; ראשי = קפסולה בצבע אבן עם קפסולת גרדיאנט מגורען ===== */
+.cta6{clip-path:none;border-radius:999px;background:transparent;color:var(--v6-stone);border:1px solid rgb(217 217 210 / .5);padding:0 28px;min-height:48px;font:500 16px/1 "Sara Ankava",system-ui,sans-serif;transition:background .25s,color .25s,border-color .25s}
+.cta6:hover{background:var(--v6-stone);color:var(--v6-char);border-color:var(--v6-stone)}
+.hdr .cta6{padding:0 26px;min-height:46px;font-size:15px}
+.cta6--main{gap:18px;min-height:66px;padding:8px 30px 8px 10px;background:var(--v6-stone);color:var(--v6-char);border-color:transparent;font:700 18px/1 "Sara Ankava",system-ui,sans-serif}
+.cta6--main::before{content:"";flex:none;width:68px;height:46px;border-radius:999px;background-image:var(--v6-n),linear-gradient(110deg,var(--v6-mint),var(--v6-lime));background-size:170px auto,auto;background-blend-mode:overlay,normal;filter:contrast(1.4) saturate(1.2);transition:transform .35s}
+.cta6--main:hover{background:var(--v6-paper);color:var(--v6-char);border-color:transparent}
+.cta6--main:hover::before{transform:scaleX(1.12)}
