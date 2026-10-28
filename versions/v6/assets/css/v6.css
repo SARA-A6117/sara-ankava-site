@@ -629,3 +629,9 @@ body::before,body::after{display:none!important}
 }
 .pj3__t{padding-inline:.06em;overflow:visible}
 .pj3__tx{padding-inline-end:4px}
+
+/* ===== פרויקטים · גרעיניות ברורה ומחוספסת על האבן, ברמת ההירו ===== */
+.pj3__c{background-color:#E9E8E1;background-image:var(--v6-rough);background-size:600px;background-blend-mode:soft-light}
+.pj3__c::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:var(--v6-hard);background-size:320px;mix-blend-mode:multiply;opacity:.3}
+.pj3__rail,.pj3__in{z-index:1}
+.pj3__c::before{opacity:.24}
