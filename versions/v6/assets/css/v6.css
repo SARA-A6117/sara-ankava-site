@@ -365,3 +365,20 @@ body::before,body::after{display:none!important}
 @media (prefers-reduced-motion:reduce){.cx__art svg{animation:none}}
 @media (max-width:900px){.cx__f{border-inline-start:0;border-top:1px solid rgb(18 20 15 / .3)}.cx__f:first-child{border-top:0}}
 .hdr{background:rgb(12 14 13 / .9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+
+/* ===== עדכון: חזרה לרקע כהה; קומיקס בשלוש עמודות שנפתחות בהובר, כמו הפרויקטים; סיפור ===== */
+.cx{background:#101312;color:var(--v6-stone)}
+.cx__a,.cx__b{color:var(--v6-stone)}
+.cx .gr-text{background-image:var(--v6-hard),linear-gradient(100deg,var(--v6-mint) 0%,var(--v6-sun) 100%);background-blend-mode:soft-light,normal;filter:contrast(1.35) saturate(1.45)}
+.cx__row{display:flex;gap:clamp(10px,1.2vw,16px);height:clamp(480px,66vh,620px);border:0;border-radius:0;overflow:visible;background:transparent}
+.cx__f{flex:1 1 0;min-width:0;display:flex;flex-direction:column;border:1px solid var(--paper-12)!important;border-radius:var(--r-out);overflow:hidden;background:var(--navy-2);transition:flex-grow .85s var(--ease),border-color .4s;outline:none}
+.cx__f:hover,.cx__f:focus-visible{flex-grow:2.1;border-color:var(--v6-sun)!important}
+.cx__art{flex:1;display:grid;place-items:center;padding:28px 24px 8px}
+.cx__art svg{width:100%;max-height:100%;height:auto}
+.mkr{stroke:var(--v6-stone);stroke-width:8}
+.mkr .y{stroke:var(--v6-sun)}.mkr .b{stroke:var(--v6-mint)}
+.cx__cap{background:transparent;color:var(--v6-stone);border-top:1px solid var(--paper-12);padding:22px 26px 26px}
+.cx__lab{color:var(--v6-sun)}
+.cx__cap p{color:rgb(217 217 210 / .85);max-height:0;opacity:0;margin:0;overflow:hidden;transition:max-height .7s var(--ease),opacity .5s .1s,margin .5s}
+.cx__f:hover .cx__cap p,.cx__f:focus-visible .cx__cap p{max-height:200px;opacity:1;margin-top:8px}
+@media (max-width:900px){.cx__row{flex-direction:column;height:auto}.cx__f{flex:none}.cx__cap p{max-height:none;opacity:1;margin-top:8px}.cx__art{padding-top:20px}}
