@@ -1,6 +1,6 @@
 /* v6 · הירו: רקע אפור-פחם מגורען וחספוסי, פסים אופקיים דקים, כותרת ענקית מקצה לקצה צמודה לתחתית.
    שטוח לגמרי: בלי תלת-ממד, בלי זוהר. ליים: הנקודה בלוגו, הכפתור, הריבוע. */
-:root{--v6-char:#0B0A13;--v6-stone:#D9D9D2;--v6-paper:#F1F2EC;--v6-lime:#C3AEFF;--v6-mint:#8B74F0;--v6-sun:#D9C9FF;--v6-m:5vw;
+:root{--v6-char:#141716;--v6-stone:#D9D9D2;--v6-paper:#F1F2EC;--v6-lime:#FFF08A;--v6-mint:#86D3FF;--v6-sun:#FFF08A;--v6-m:5vw;
   /* רעש חד: שחור/לבן בקונטרסט גבוה */
   --v6-hard:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' seed='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncR type='linear' slope='6' intercept='-2.5'/><feFuncG type='linear' slope='6' intercept='-2.5'/><feFuncB type='linear' slope='6' intercept='-2.5'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   /* כתמי חספוס רחבים */
@@ -31,7 +31,7 @@ body::after{z-index:9990;opacity:.12;background-image:var(--v6-hard);background-
 .hdr .cta6{min-height:46px;padding:0 22px 9px;font-size:15px}
 
 .h6{position:relative;min-height:100svh;overflow:hidden;background:var(--v6-char);color:var(--v6-stone);display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--v6-m) 0}
-.h6::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(55% 60% at 24% 40%,rgb(120 96 230 / .09),transparent 70%),radial-gradient(45% 50% at 88% 30%,rgb(205 185 255 / .07),transparent 70%)}
+.h6::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(55% 60% at 24% 40%,rgb(134 211 255 / .09),transparent 70%),radial-gradient(45% 50% at 88% 30%,rgb(255 240 138 / .07),transparent 70%)}
 /* פסים אופקיים דקים לרוחב המסך */
 .h6__grid{position:absolute;inset:0;pointer-events:none;z-index:0;display:grid;grid-template-rows:repeat(8,1fr)}
 .h6__grid i{border-bottom:1px solid rgb(217 217 210 / .1)}
@@ -84,49 +84,49 @@ body::after{z-index:9990;opacity:.12;background-image:var(--v6-hard);background-
 
 /* ===== גרדיאנט מגורען בטכניקה של שכבת רעש במצב overlay מעל גרדיאנטים רדיאליים (כמו באזור יצירת הקשר של saraweizman) ===== */
 :root{--v6-n:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncG type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncB type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncA type='linear' slope='0' intercept='.85'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.gx{background-color:var(--gx-base,#0B0A13);
+.gx{background-color:var(--gx-base,#141716);
   background-image:var(--v6-n),
-    radial-gradient(34% 54% at 0% 100%,var(--gx1,rgb(120 96 230 / .5)),transparent 72%),
-    radial-gradient(44% 66% at 26% -4%,var(--gx2,rgb(205 185 255 / .32)),transparent 72%),
-    radial-gradient(48% 72% at 18% 60%,var(--gx3,rgb(70 50 150 / .6)),transparent 75%),
-    radial-gradient(62% 87% at 92% 68%,var(--gx4,rgb(20 16 48 / .9)),transparent 80%);
+    radial-gradient(34% 54% at 0% 100%,var(--gx1,rgb(134 211 255 / .5)),transparent 72%),
+    radial-gradient(44% 66% at 26% -4%,var(--gx2,rgb(255 240 138 / .32)),transparent 72%),
+    radial-gradient(48% 72% at 18% 60%,var(--gx3,rgb(40 100 150 / .6)),transparent 75%),
+    radial-gradient(62% 87% at 92% 68%,var(--gx4,rgb(20 44 70 / .9)),transparent 80%);
   background-size:170px auto,auto,auto,auto,auto;background-blend-mode:overlay,normal,normal,normal,normal}
-.h6{--gx-base:#0B0A13;--gx1:rgb(120 96 230 / .2);--gx3:rgb(70 50 150 / .5)}
+.h6{--gx-base:#141716;--gx1:rgb(134 211 255 / .2);--gx3:rgb(40 100 150 / .5)}
 .h6::before{display:none}
 /* גרגר חד על הכול: שכבה חדשה בכל האתר, מעל כהה ובהיר */
 body::before{opacity:.5;mix-blend-mode:overlay;background-image:var(--v6-n);background-size:170px}
 /* יצירת קשר: גרדיאנט מגורען עמוק של מנטה וליים */
-.contact{--gx-base:rgb(30 20 70);--gx1:rgb(120 96 230 / .75);--gx2:rgb(205 185 255 / .8);--gx3:rgb(76 54 160 / .85);--gx4:rgb(10 8 30);color:var(--v6-paper);
+.contact{--gx-base:rgb(16 58 96);--gx1:rgb(134 211 255 / .75);--gx2:rgb(255 240 138 / .8);--gx3:rgb(36 104 170 / .85);--gx4:rgb(8 30 54);color:var(--v6-paper);
   background-color:var(--gx-base);background-image:var(--v6-n),radial-gradient(34% 54% at 0% 100%,var(--gx1),transparent 72%),radial-gradient(44% 66% at 26% -4%,var(--gx2),transparent 72%),radial-gradient(48% 72% at 18% 60%,var(--gx3),transparent 75%),radial-gradient(62% 87% at 92% 68%,var(--gx4),transparent 80%);
   background-size:170px auto,auto,auto,auto,auto;background-blend-mode:overlay,normal,normal,normal,normal}
 .contact .eyebrow,.contact .fine,.contact .or-wa,.contact .linkbtn,.contact label,.contact h2,.contact p{color:var(--v6-paper)}
 .contact .eyebrow::before,.contact .sq,.contact__promise i{background:var(--v6-sun)}
 
 /* הירו: רקע אפור מגורען, רק הילה עדינה סביב האלמנט */
-.h6.gx{--gx-base:#12101C;
-  background-image:var(--v6-n),radial-gradient(30% 46% at 24% 40%,rgb(120 96 230 / .16),rgb(205 185 255 / .05) 55%,transparent 75%);
+.h6.gx{--gx-base:#1b1d1c;
+  background-image:var(--v6-n),radial-gradient(30% 46% at 24% 40%,rgb(134 211 255 / .16),rgb(255 240 138 / .05) 55%,transparent 75%);
   background-size:170px auto,auto;background-blend-mode:overlay,normal}
 
 /* עדכון: "לשלב הבא" מקצה לקצה בלי נקודה, רקע כהה יותר, האלמנט במרכז */
-.h6.gx{--gx-base:#0B0A13;
-  background-image:var(--v6-n),radial-gradient(26% 40% at 50% 30%,rgb(120 96 230 / .15),rgb(205 185 255 / .05) 55%,transparent 75%)}
+.h6.gx{--gx-base:#0f1110;
+  background-image:var(--v6-n),radial-gradient(26% 40% at 50% 30%,rgb(134 211 255 / .15),rgb(255 240 138 / .05) 55%,transparent 75%)}
 .h6__mid{display:block;padding:0 calc(var(--v6-m) - 1.2vw) .6vw;font-weight:300;font-size:clamp(34px,5vw,80px);line-height:1;letter-spacing:-.01em}
 .h6__art{left:50%;transform:translateX(-50%);width:30vw;top:calc(var(--hdr,76px) + 5vh)}
 @media (max-width:900px){
   .h6__art{left:auto;transform:none;width:62vw;top:auto}
   .h6__mid{font-size:clamp(30px,9vw,44px);padding-bottom:6px}
 }
-.h6.gx{--gx-base:#0B0A13}
+.h6.gx{--gx-base:#090b0a}
 @media (min-width:901px){.h6__art{top:calc(var(--hdr,76px) + 9vh)}.wa{inset-block-end:44vh}}
 @media (max-width:900px){
-  .h6.gx{background-image:var(--v6-n),radial-gradient(70vw 70vw at 50% 24%,rgb(120 96 230 / .14),rgb(205 185 255 / .04) 55%,transparent 75%)}
+  .h6.gx{background-image:var(--v6-n),radial-gradient(70vw 70vw at 50% 24%,rgb(134 211 255 / .14),rgb(255 240 138 / .04) 55%,transparent 75%)}
   .wa{inset-block-end:42vh;inset-inline-end:12px}
   .h6__big{padding-bottom:20px}
 }
 
 /* ===== v7 הירו בהשראת kinetic: מוקאפ של פרויקט חופף לכותרת הענקית, שובלי גרדיאנט מגורען, בלי גרעון ברקע ===== */
 body::before,body::after{display:none!important}
-.h6.gx{--gx-base:#0B0A13;background-image:none;background-color:var(--gx-base)}
+.h6.gx{--gx-base:#0c0e0d;background-image:none;background-color:var(--gx-base)}
 .h6__grid i{border-bottom-color:rgb(217 217 210 / .07)}
 .h6__title{z-index:auto}
 .h6__small,.h6__mid{position:relative;z-index:4}
@@ -135,13 +135,13 @@ body::before,body::after{display:none!important}
 .h6__mkwrap{position:relative;z-index:2;transform:rotate(-2.2deg);opacity:0;animation:h6-fade 1s ease forwards .5s}
 .h6__mkwrap .mk__win{box-shadow:0 0 0 1px rgb(255 255 255 / .08)}
 /* שובלי תנועה: גרדיאנט מנטה/ליים עם גרגר, בשוליים דהויים */
-.h6__streak.gx{position:absolute;z-index:1;--gx-base:#0B0A13;pointer-events:none;
+.h6__streak.gx{position:absolute;z-index:1;--gx-base:#0c0e0d;pointer-events:none;
   -webkit-mask-image:radial-gradient(closest-side,#000 35%,transparent 100%);mask-image:radial-gradient(closest-side,#000 35%,transparent 100%)}
 .h6__streak.s1{left:-42%;top:6%;width:100%;height:56%;
-  background-image:var(--v6-n),radial-gradient(ellipse 52% 16% at 50% 40%,rgb(120 96 230 / .95),transparent 80%),radial-gradient(ellipse 40% 10% at 62% 62%,rgb(205 185 255 / .85),transparent 80%);
+  background-image:var(--v6-n),radial-gradient(ellipse 52% 16% at 50% 40%,rgb(134 211 255 / .95),transparent 80%),radial-gradient(ellipse 40% 10% at 62% 62%,rgb(255 240 138 / .85),transparent 80%);
   background-size:170px auto,auto,auto;background-blend-mode:overlay,normal,normal;animation:h6-drift 9s ease-in-out infinite alternate}
 .h6__streak.s2{right:-40%;top:30%;width:96%;height:50%;
-  background-image:var(--v6-n),radial-gradient(ellipse 50% 14% at 50% 45%,rgb(205 185 255 / .9),transparent 80%),radial-gradient(ellipse 36% 9% at 40% 66%,rgb(120 96 230 / .8),transparent 80%);
+  background-image:var(--v6-n),radial-gradient(ellipse 50% 14% at 50% 45%,rgb(255 240 138 / .9),transparent 80%),radial-gradient(ellipse 36% 9% at 40% 66%,rgb(134 211 255 / .8),transparent 80%);
   background-size:170px auto,auto,auto;background-blend-mode:overlay,normal,normal;animation:h6-drift 11s ease-in-out infinite alternate-reverse}
 @keyframes h6-drift{to{transform:translateX(5%)}}
 /* כרטיס זכוכית שטוח */
@@ -157,8 +157,8 @@ body::before,body::after{display:none!important}
 }
 @media (prefers-reduced-motion:reduce){.h6__mkwrap{animation:none;opacity:1}.h6__streak{animation:none}}
 @media (min-width:901px){.h6__mock{bottom:25vh;width:40vw}}
-.h6__streak.s1{left:-60%;top:0;width:130%;height:70%;background-image:var(--v6-n),radial-gradient(ellipse 58% 20% at 50% 42%,rgb(120 96 230 / 1),transparent 82%),radial-gradient(ellipse 46% 13% at 64% 64%,rgb(205 185 255 / .95),transparent 82%)}
-.h6__streak.s2{right:-58%;top:22%;width:124%;height:66%;background-image:var(--v6-n),radial-gradient(ellipse 56% 18% at 50% 46%,rgb(205 185 255 / 1),transparent 82%),radial-gradient(ellipse 40% 12% at 38% 68%,rgb(120 96 230 / .9),transparent 82%)}
+.h6__streak.s1{left:-60%;top:0;width:130%;height:70%;background-image:var(--v6-n),radial-gradient(ellipse 58% 20% at 50% 42%,rgb(134 211 255 / 1),transparent 82%),radial-gradient(ellipse 46% 13% at 64% 64%,rgb(255 240 138 / .95),transparent 82%)}
+.h6__streak.s2{right:-58%;top:22%;width:124%;height:66%;background-image:var(--v6-n),radial-gradient(ellipse 56% 18% at 50% 46%,rgb(255 240 138 / 1),transparent 82%),radial-gradient(ellipse 40% 12% at 38% 68%,rgb(134 211 255 / .9),transparent 82%)}
 @media (min-width:901px){.h6__mock{bottom:19vh}}
 
 @media (max-width:900px){.h6__mock{position:relative;left:auto;transform:none;bottom:auto;width:84vw;margin:6px auto 22px}.h6__streak,.h6__card{display:none}}
@@ -175,10 +175,10 @@ body::before,body::after{display:none!important}
 
 /* ===== אורב "קול שמתפשט": ליבה זוהרת, ניצוצות רדיאליים וטבעות שמתפשטות החוצה = פה לאוזן. האלמנט היחיד עם זוהר ===== */
 .h6__orb{position:absolute;z-index:2;left:50%;transform:translateX(-50%);bottom:19vh;width:min(34vw,500px);aspect-ratio:1;pointer-events:none}
-.h6__disc{position:absolute;inset:0;border-radius:50%;overflow:hidden;isolation:isolate;box-shadow:inset 0 0 0 2px rgb(236 228 255 / .9),inset 0 0 34px rgb(205 185 255 / .5),0 0 46px rgb(205 185 255 / .35),0 0 130px rgb(120 96 230 / .3)}
+.h6__disc{position:absolute;inset:0;border-radius:50%;overflow:hidden;isolation:isolate;box-shadow:inset 0 0 0 2px rgb(255 250 214 / .9),inset 0 0 34px rgb(255 240 138 / .5),0 0 46px rgb(255 240 138 / .35),0 0 130px rgb(134 211 255 / .3)}
 .h6__disc canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .h6__disc::after{content:"";position:absolute;inset:0;background-image:var(--v6-n);background-size:170px;mix-blend-mode:overlay;opacity:.9}
-.h6__orb .r{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgb(205 185 255 / .55);opacity:0;animation:h6-ripple 7.5s linear infinite}
+.h6__orb .r{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgb(255 240 138 / .55);opacity:0;animation:h6-ripple 7.5s linear infinite}
 .h6__orb .r2{animation-delay:2.5s}.h6__orb .r3{animation-delay:5s}
 @keyframes h6-ripple{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.15);opacity:0}}
 @media (max-width:900px){
