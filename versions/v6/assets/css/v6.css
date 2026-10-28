@@ -264,3 +264,13 @@ body::before,body::after{display:none!important}
 .hb__badge b{position:relative;font-size:clamp(14px,1.25vw,19px);line-height:1.1;color:#0c0e0d;text-align:center;font-weight:700}
 @media (max-width:900px){.hb__arrows{display:none}.hb__p{bottom:auto}}
 @media (min-width:901px){.hb__card2{top:22vh;right:4vw}.hb__p{bottom:12vh}}
+
+/* ===== עדכון: פסקה בפונט המותג הדק; גרעון עדין וגרדיאנט חי במילים; דודל בועה ===== */
+.hb__p{font-family:"Sara Ankava",system-ui,sans-serif;font-weight:300;font-size:19px;color:rgb(217 217 210 / .85)}
+.hb__doodle{transform-box:fill-box;transform-origin:50% 100%;animation:hb-doodle 3.2s ease-in-out infinite}
+@keyframes hb-doodle{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(3deg) translateY(-8px)}}
+/* גרדיאנט חי וגרעון רך יותר */
+.hb__title .gr-text{background-image:var(--v6-n),linear-gradient(100deg,var(--v6-mint),var(--v6-sun),var(--v6-mint),var(--v6-sun));background-size:240px,300% 100%;background-blend-mode:soft-light,normal;filter:contrast(1.08) saturate(1.1);animation:hb-up 1s cubic-bezier(.2,.8,.2,1) both,hb-flow 7s linear infinite;animation-delay:calc(.15s + var(--i) * .12s),0s}
+@keyframes hb-flow{from{background-position:0 0,0 0}to{background-position:0 0,-300% 0}}
+@media (prefers-reduced-motion:reduce){.hb__title .gr-text,.hb__doodle{animation:none}}
+.hb__doodle{translate:90px -34px}
