@@ -635,3 +635,30 @@ body::before,body::after{display:none!important}
 .pj3__c::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:var(--v6-hard);background-size:320px;mix-blend-mode:multiply;opacity:.3}
 .pj3__rail,.pj3__in{z-index:1}
 .pj3__c::before{opacity:.24}
+
+/* ===== אתר בלי תנועה · שורות, איור מופיע ליד העכבר בהובר ===== */
+.lw{position:relative;background:#101312;color:var(--v6-stone);padding:clamp(70px,8vw,120px) 0 clamp(60px,7vw,100px)}
+.lw::before{content:"";position:absolute;inset:0;background-image:var(--v6-n);background-size:170px;mix-blend-mode:overlay;opacity:.55;pointer-events:none}
+.lw>*{position:relative}
+.lw__h{margin:0 var(--v6-m) clamp(30px,4vw,56px);display:flex;justify-content:space-between;align-items:baseline;gap:24px}
+.lw__h span:first-child{font:700 clamp(24px,2.6vw,38px) "Sara Ankava",system-ui,sans-serif}
+.lw__h span:last-child{font:300 clamp(18px,1.8vw,26px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .8)}
+.lw__row{display:grid;grid-template-columns:3ch minmax(0,1.1fr) minmax(0,1.5fr);align-items:center;gap:clamp(14px,2.4vw,40px);padding:clamp(20px,2.2vw,32px) var(--v6-m);border-top:1px solid rgb(217 217 210 / .16)}
+.lw__row:last-child{border-bottom:1px solid rgb(217 217 210 / .16)}
+.lw__n{font:300 clamp(14px,1.2vw,18px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .55)}
+.lw__t{margin:0;font:500 clamp(26px,3vw,44px)/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:var(--v6-stone)}
+.lw__d{margin:0;font:300 clamp(15px,1.3vw,19px)/1.4 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .82)}
+.lw__m{display:none}
+.lw__m svg,.lw__m img,.lw__float svg,.lw__float img{display:block;width:100%;height:auto}
+.lw__m svg,.lw__float svg{fill:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;background:#000}
+.lw__m svg .y,.lw__float svg .y{stroke:#FFE066}.lw__m svg .b,.lw__float svg .b{stroke:#86D3FF}
+.lw__float{position:fixed;left:0;top:0;z-index:80;width:380px;pointer-events:none;opacity:0;transition:opacity .25s;mix-blend-mode:screen;will-change:transform}
+.lw__float.on{opacity:1}
+@media (max-width:900px){
+  .lw__h{flex-direction:column;gap:2px}
+  .lw__row{grid-template-columns:auto 1fr;grid-template-areas:"n t" "d d" "m m";gap:8px 14px}
+  .lw__n{grid-area:n}.lw__t{grid-area:t}.lw__d{grid-area:d}
+  .lw__m{display:block;grid-area:m;width:min(340px,86%);margin-top:6px;mix-blend-mode:screen}
+}
+.lw__float{width:460px}
+.lw__float{filter:brightness(1.25) saturate(1.1)}
