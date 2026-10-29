@@ -1024,3 +1024,16 @@ body::before,body::after{display:none!important}
 }
 .lp2--lp .lp2__ill{height:100%;min-height:0}
 .lp2--lp .lp2__ill svg{height:100%!important;min-height:0}
+
+/* סבב 9: בלי בועת התקדמות, בועת דיבור רכה ממקומות שונים, ציור קטן ועדין, קווים עד קצה המסך */
+.lp2__pb{display:none!important}
+.lp2--lp .lp2__list{margin-left:calc(var(--v6-m) * -1)}
+.lp2--lp .lp2__in{padding-left:var(--v6-m)!important}
+.lp2--lp .lp2__ill svg{stroke-width:5;width:78%;height:78%!important;margin:auto}
+.lp2--lp .lp2__say{left:4%;right:auto;top:0}
+.lp2--lp .lp2__say.p2{left:auto;right:4%;top:6%}
+.lp2--lp .lp2__say.p2::after{left:auto;right:22px;clip-path:polygon(0 0,100% 0,100% 100%)}
+.lp2--lp .lp2__say.p3{left:8%;top:40%}
+.lp2--lp .lp2__row.is-open .lp2__say{animation:lp-in .9s ease .5s both,lp-soft 7s ease-in-out 2s infinite}
+@keyframes lp-in{from{opacity:0}to{opacity:1}}
+@keyframes lp-soft{0%,60%,100%{opacity:1}80%{opacity:.5}}
