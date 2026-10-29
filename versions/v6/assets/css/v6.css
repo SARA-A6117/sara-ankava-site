@@ -977,3 +977,50 @@ body::before,body::after{display:none!important}
 
 .ct,.ct__panel{overflow:hidden!important}
 @media (max-width:900px){.lp2__ill{flex-direction:column;align-items:stretch}.lp2__say{position:relative;left:auto;top:auto;align-self:flex-start;margin:0 0 14px;order:-1}}
+
+/* ==========================================================================
+   v6 · סבב 8: לונה פארק בקומפוזיציית "לפני שבונים" (כותרת מימין, שלבים משמאל), תהליך בשורות נעוצות, ציור שירבוט, בלי גריד בנעוצים
+   ========================================================================== */
+.lp2,.lp2__stick{background-image:none!important}
+.lp2--pr{height:360vh}
+.lp2--pr .lp2__in{grid-template-columns:1fr!important}
+.lp2--pr .lp2__p{max-width:60ch;font-size:clamp(18px,1.7vw,26px)}
+
+/* לונה פארק: כותרת מימין, גלילה משמאל */
+.lp2--lp .lp2__stick{display:grid!important;grid-template-columns:minmax(0,.85fr) minmax(0,1.25fr);grid-template-rows:minmax(0,1fr);column-gap:clamp(32px,5vw,96px);align-items:center;padding-inline:var(--v6-m);padding-bottom:20px}
+.lp2--lp .lp2__h{margin:0!important;white-space:normal!important;font-size:clamp(32px,4.4vw,68px)!important;line-height:1.1;align-self:center}
+.lp2--lp .lp2__h span{display:inline}
+.lp2--lp .lp2__list{align-self:stretch;min-width:0}
+.lp2--lp .lp2__bar{padding:0}
+.lp2--lp .lp2__in{padding:0!important;grid-template-columns:1fr!important;grid-template-rows:auto minmax(0,1fr)}
+.lp2--lp .lp2__p{padding-inline-start:calc(36px + clamp(16px,2.4vw,40px));font-size:clamp(17px,1.4vw,21px)}
+.lp2--lp .lp2__vl,.lp2--lp .lp2__pb{right:18px}
+.lp2--lp .lp2__ill{margin-top:8px}
+.lp2--lp .lp2__ill svg{height:calc(100svh - 520px);min-height:200px;transform:scale(.9)}
+.lp2--lp .lp2__row.is-open .lp2__ill svg{transform:scale(1)}
+.lp2--lp .lp2__say{left:4%;top:0;opacity:0;transform:none;transition:none}
+.lp2--lp .lp2__row.is-open .lp2__say{animation:lp-flick 1s steps(1,end) .6s both}
+@keyframes lp-flick{0%{opacity:0}12%{opacity:1}24%{opacity:0}36%{opacity:1}48%{opacity:0}60%,100%{opacity:1}}
+
+/* ציור שירבוט: מרקר, בלי רעידות */
+.lp2__ill svg{overflow:visible}
+.sc-wheel{transform-box:view-box;transform-origin:400px 160px;animation:sc-spin 50s linear infinite}
+.sc-rays{transform-box:view-box;transform-origin:120px 100px;animation:sc-pulse 4s ease-in-out infinite}
+@keyframes sc-spin{to{transform:rotate(360deg)}}
+@keyframes sc-pulse{50%{transform:scale(1.1)}}
+.sc-car{transform-box:fill-box;transform-origin:center;opacity:0}
+.sc-car.c1{transform:translate(386px,300px) scale(.45)}
+.sc-car.c2{transform:translate(416px,308px) scale(.45)}
+.lp2__row.is-open .sc-car.c1{animation:sc-drive 5s ease-in infinite}
+.lp2__row.is-open .sc-car.c2{animation:sc-drive 5s ease-in 2.5s infinite}
+@keyframes sc-drive{0%{opacity:0;transform:translate(396px,306px) scale(.35)}12%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translate(430px,425px) scale(1.35)}}
+@media (prefers-reduced-motion:reduce){.sc-wheel,.sc-rays,.sc-car{animation:none!important}.sc-car.c1{opacity:1}.lp2--lp .lp2__say{opacity:1;animation:none!important}}
+@media (max-width:900px){
+  .lp2--lp .lp2__stick{display:block!important;padding-inline:var(--v6-m)}
+  .lp2--lp .lp2__h{margin-bottom:24px!important}
+  .lp2--lp .lp2__p{padding-inline-start:0}
+  .lp2--lp .lp2__ill svg{height:auto}
+  .lp2--lp .lp2__say{position:relative;left:auto;top:auto;margin:0 0 12px}
+}
+.lp2--lp .lp2__ill{height:100%;min-height:0}
+.lp2--lp .lp2__ill svg{height:100%!important;min-height:0}
