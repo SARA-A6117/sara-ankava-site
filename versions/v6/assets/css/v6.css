@@ -662,3 +662,9 @@ body::before,body::after{display:none!important}
 }
 .lw__float{width:460px}
 .lw__float{filter:brightness(1.25) saturate(1.1)}
+
+/* ===== גרעיניות אחידה ודקה בלבד (רעש דק, בלי כתמים) ===== */
+:root{--v6-fine:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='1' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E")}
+.pj3__c{background-color:#E9E8E1;background-image:none;background-blend-mode:normal}
+.pj3__c::before{background-image:var(--v6-fine);background-size:200px;mix-blend-mode:overlay;opacity:.22}
+.lw::before,.lp::before,.pj::before{background-image:var(--v6-fine);background-size:200px;mix-blend-mode:overlay;opacity:.22}
