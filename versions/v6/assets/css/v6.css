@@ -668,3 +668,34 @@ body::before,body::after{display:none!important}
 .pj3__c{background-color:#E9E8E1;background-image:none;background-blend-mode:normal}
 .pj3__c::before{background-image:var(--v6-fine);background-size:200px;mix-blend-mode:overlay;opacity:.22}
 .lw::before,.lp::before,.pj::before{background-image:var(--v6-fine);background-size:200px;mix-blend-mode:overlay;opacity:.22}
+
+/* ===== אתר בלי תנועה · אקורדיון שורות; האיור מצטייר בפתיחה ורועד עדין ===== */
+.lw__float{display:none}
+.lw__row{display:block;padding:0;cursor:pointer;outline:none}
+.lw__row+.lw__row{border-top:1px solid rgb(217 217 210 / .18)}
+.lw__row:first-child{border-top:1px solid rgb(217 217 210 / .18)}
+.lw__row:last-child{border-bottom:1px solid rgb(217 217 210 / .18)}
+.lw__bar{display:flex;align-items:center;gap:clamp(16px,2.4vw,40px);padding:clamp(18px,2vw,28px) var(--v6-m)}
+.lw__n{font:300 clamp(14px,1.2vw,18px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .55);min-width:3ch}
+.lw__t{margin:0;font:500 clamp(24px,3vw,44px)/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:rgb(217 217 210 / .75);transition:color .4s}
+.lw__row.is-open .lw__t{color:var(--v6-stone)}
+.lw__body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .8s var(--ease)}
+.lw__row.is-open .lw__body{grid-template-rows:1fr}
+.lw__body>.lw__in{min-height:0;overflow:hidden}
+.lw__in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);align-items:center;gap:clamp(20px,3vw,56px);padding:0 var(--v6-m)}
+.lw__row.is-open .lw__in{padding-bottom:clamp(24px,3vw,44px)}
+.lw__p{margin:0;font:300 clamp(17px,1.5vw,22px)/1.55 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .88);max-width:34ch}
+.lw__ill{mix-blend-mode:screen;opacity:0;transition:opacity .4s}
+.lw__row.is-open .lw__ill{opacity:1;transition-delay:.3s}
+.lw__wob{filter:url(#lw-wob)}
+.lw__ill svg,.lw__ill img{display:block;width:100%;height:auto;max-height:min(46vh,420px);object-fit:contain}
+.lw__ill svg{fill:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;background:#000}
+.lw__ill svg .y{stroke:#FFE066}.lw__ill svg .b{stroke:#86D3FF}
+/* חשיפה משמאל לימין בפתיחה, כ-1.2 שניות */
+.lw__row.is-open .lw__ill .lw__wob{animation:lw-reveal 1.2s cubic-bezier(.4,.1,.2,1) .3s both}
+@keyframes lw-reveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@media (max-width:900px){.lw__in{grid-template-columns:1fr;gap:16px}.lw__ill{order:2}}
+@media (prefers-reduced-motion:reduce){.lw__wob{filter:none}.lw__row.is-open .lw__ill .lw__wob{animation:none}.lw__body{transition:none}}
+.lw__wob{filter:none}
+.lw__ill svg,.lw__ill img{filter:url(#lw-wob)}
+@media (prefers-reduced-motion:reduce){.lw__ill svg,.lw__ill img{filter:none}}
