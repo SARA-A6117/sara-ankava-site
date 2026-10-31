@@ -18,7 +18,7 @@
 <link rel="preload" href="assets/fonts/SaraAnkava-Bold-v1.2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css?v=6">
 <link rel="stylesheet" href="assets/css/v4.css?v=4">
-<link rel="stylesheet" href="assets/css/v6.css?v=232">
+<link rel="stylesheet" href="assets/css/v6.css?v=241">
 <meta name="robots" content="noindex">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
 <script type="application/ld+json">
@@ -171,11 +171,15 @@
   
   <!-- 09 · אודות: פאנל נייר לטקסט, וכרטיס תיק עבודות עם הבועה והמספרים -->
   <section class="ab" id="about" aria-labelledby="about-title">
-    <div class="ab__top">
-      <img class="ab__ph" src="assets/img/sara-cut.png" alt="שרי אנקווה" width="760" height="824">
+    <div class="ab__frame">
+      <div class="ab__side">
+        <div class="ab__top">
+          <img class="ab__ph" src="assets/img/sara-cut.png" alt="שרי אנקווה" width="760" height="824">
+        </div>
+        <h2 class="ab__h" id="about-title"><span>לא מתחילים מאתר,</span> <span>מתחילים מהעסק</span></h2>
+      </div>
+      <p class="ab__p" data-rv>בניתם עסק אמיתי, עם לקוחות מרוצים ושם טוב. אבל ההזמנות מתפזרות בין אקסל לוואטסאפ, האתר לא מציג אתכם כמו שצריך וככה לקוחות וכסף דולפים בדרך. היי, אני שרי, ואני בונה לעסקים את הנוכחות הדיגיטלית שלהם. את הבלגן הזה אני מכירה מבפנים, כאחת שעבדה בניהול דיגיטל לרשת. ולכן היום אני מתחילה קודם כל בלהבין איפה העסק דולף, ואז בונה תוכנית שיווק ונכס דיגיטלי אחד שעובדים יחד, ואתם רואים הכול במסך אחד, והעסק רץ גם כשאתם לא שם.</p>
     </div>
-    <h2 class="ab__h" id="about-title">לא מתחילים מאתר, מתחילים מהעסק</h2>
-    <p class="ab__p" data-rv>בניתם עסק אמיתי, עם לקוחות מרוצים ושם טוב. אבל ההזמנות מתפזרות בין אקסל לוואטסאפ, האתר לא מציג אתכם כמו שצריך וככה לקוחות וכסף דולפים בדרך. היי, אני שרי, ואני בונה לעסקים את הנוכחות הדיגיטלית שלהם. את הבלגן הזה אני מכירה מבפנים, כאחת שעבדה בניהול דיגיטל לרשת. ולכן היום אני מתחילה קודם כל בלהבין איפה העסק דולף, ואז בונה תוכנית שיווק ונכס דיגיטלי אחד שעובדים יחד, ואתם רואים הכול במסך אחד, והעסק רץ גם כשאתם לא שם.</p>
   </section>
 
   
@@ -266,6 +270,5 @@ function upd(){if(reduce){set(5);return}var r=s.getBoundingClientRect(),p;if(mob
 addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);upd()})()</script>
 <script>(function(){var c=document.querySelector(".pr3__cols");if(!c)return;var mq=matchMedia("(min-width:901px)");function fit(){c.style.height="";if(!mq.matches)return;var P=innerHeight/8;c.style.height=Math.ceil(c.scrollHeight/P)*P+"px"}addEventListener("load",fit);addEventListener("resize",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);fit()})()</script>
 <script>(function(){var t=document.querySelector(".lp2--lp .lp2__h"),st=document.querySelector(".lp2--lp .lp2__stick");if(!t)return;var mq=matchMedia("(min-width:901px)");function fit(){var sp=[].slice.call(t.querySelectorAll("span"));sp.forEach(function(x){x.style.transform=""});if(!mq.matches)return;var P=innerHeight/8,top=st.getBoundingClientRect().top,i=document.createElement("i");i.style.cssText="display:inline-block;width:0;height:0";sp.forEach(function(x,k){x.appendChild(i);var b=i.getBoundingClientRect().bottom-top;i.remove();x.style.transform="translateY("+(((3+k)*P-3)-b)+"px)"})}addEventListener("load",fit);addEventListener("resize",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);fit()})()</script>
-<script>(function(){var t=document.querySelector(".ab__h"),s=document.querySelector(".ab");if(!t)return;var mq=matchMedia("(min-width:901px)");function fit(){t.style.transform="";if(!mq.matches)return;var P=innerHeight/8,top=s.getBoundingClientRect().top,i=document.createElement("i");i.style.cssText="display:inline-block;width:0;height:0";t.appendChild(i);var b=i.getBoundingClientRect().bottom-top;i.remove();t.style.transform="translateY("+((6*P-3)-b)+"px)"}addEventListener("load",fit);addEventListener("resize",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);fit()})()</script>
 </body>
 </html>

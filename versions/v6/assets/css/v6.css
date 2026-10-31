@@ -1427,3 +1427,15 @@ body::before,body::after{display:none!important}
 .ab__p{column-count:1!important;max-width:min(100% - 2 * var(--v6-m),1180px)}
 @media (min-width:901px){.ab__top{height:calc(var(--P) * 4)}}
 @media (max-width:900px){.ab__ph{width:min(64vw,320px)}}
+
+/* אודות: מסגרת בקו הגריד. בתוכה בלי גריד: התמונה והכותרת מימין, הפסקה משמאל */
+.ab__frame{position:relative;z-index:1;box-sizing:border-box;margin:-1px var(--v6-m) 0;border:1px solid rgb(217 217 210 / .1);background:#141716;overflow:hidden;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center}
+.ab__side{display:flex;flex-direction:column;align-items:flex-start;min-width:0;padding-inline:clamp(24px,3vw,56px)}
+.ab__frame .ab__top{width:fit-content;height:calc(var(--P) * 4);margin:0;justify-content:flex-start}
+.ab__frame .ab__h{margin:0!important;text-align:start;white-space:nowrap;line-height:var(--P)!important;font-size:clamp(24px,3.4vw,50px)!important;transform:none!important}
+.ab__frame .ab__h span{display:block}
+.ab__frame .ab__p{margin:0;padding:var(--P) clamp(24px,3vw,56px);max-width:none;column-count:1!important;font:300 clamp(16px,1.3vw,19px)/1.85 "Sara Ankava",system-ui,sans-serif}
+@media (min-width:901px){.ab__frame{height:calc(var(--P) * 6 + 1px)}}
+@media (max-width:900px){.ab__frame{display:block;margin-top:0;border-inline:0}.ab__side{align-items:center;padding:24px 0 0}.ab__frame .ab__top{height:auto}.ab__frame .ab__h{white-space:normal;text-align:center}.ab__frame .ab__p{padding:24px var(--v6-m) 40px}}
+.ab__frame .ab__h span{font-weight:700!important;color:var(--v6-stone)}
+.ab__frame .ab__top::before{width:125%;height:108%;filter:blur(28px)}
