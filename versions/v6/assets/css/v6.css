@@ -1331,3 +1331,12 @@ body::before,body::after{display:none!important}
   .ab__top{height:calc(var(--P) * 5);align-items:center;margin-bottom:0}
   .ab__h{line-height:var(--P)!important;margin-bottom:0!important}
 }
+
+/* לונה פארק: קבוצת קישוט (כרטיסים חופפים, כוכב, בועה, חץ אחד) */
+.sc__o{opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s}
+.lp2__row.is-open .sc__o{opacity:1;transform:none;transition:opacity .7s var(--d,0s),transform .7s var(--d,0s)}
+.sc__star{transform-box:fill-box;transform-origin:center;opacity:0}
+.lp2__row.is-open .sc__star{animation:sc-star 3.2s ease-in-out 1s infinite;opacity:1}
+@keyframes sc-star{50%{transform:translate(500px,52px) scale(1.18) rotate(8deg)}}
+@media (prefers-reduced-motion:reduce){.sc__o{opacity:1;transform:none;transition:none}.sc__star{opacity:1;animation:none!important}}
+@media (max-width:900px){.sc__o{opacity:1;transform:none;transition:none}.sc__star{opacity:1;animation:none}}
