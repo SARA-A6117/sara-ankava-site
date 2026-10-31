@@ -1439,3 +1439,10 @@ body::before,body::after{display:none!important}
 @media (max-width:900px){.ab__frame{display:block;margin-top:0;border-inline:0}.ab__side{align-items:center;padding:24px 0 0}.ab__frame .ab__top{height:auto}.ab__frame .ab__h{white-space:normal;text-align:center}.ab__frame .ab__p{padding:24px var(--v6-m) 40px}}
 .ab__frame .ab__h span{font-weight:700!important;color:var(--v6-stone)}
 .ab__frame .ab__top::before{width:125%;height:108%;filter:blur(28px)}
+
+/* אודות: התוכן מכווץ למרכז המסגרת, הפסקה בשורות שנקבעו */
+@media (min-width:901px){
+  .ab__frame{grid-template-columns:auto minmax(0,640px);justify-content:center;column-gap:clamp(48px,7vw,130px)}
+  .ab__side{padding-inline:0}
+  .ab__frame .ab__p{padding:var(--P) 0;white-space:nowrap;font-size:clamp(15px,1.2vw,18px);line-height:1.9}
+}
