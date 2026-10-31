@@ -1421,3 +1421,9 @@ body::before,body::after{display:none!important}
 .ab__p{position:relative;z-index:1;margin:calc(var(--P) * .5) var(--v6-m) 0;column-count:2;column-gap:clamp(32px,5vw,96px);font:300 clamp(16px,1.25vw,19px)/1.75 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .95)}
 @media (min-width:901px){.ab__top{height:calc(var(--P) * 6)}}
 @media (max-width:900px){.ab__top{height:auto}.ab__ph{width:min(82vw,420px);height:auto}.ab__h{white-space:normal;line-height:1.2!important;font-size:clamp(26px,7.5vw,40px)!important}.ab__p{column-count:1}}
+/* אודות: תמונה קטנה יותר, הילה בגווני הגרדיאנט מאחוריה, פסקה אחת רצופה */
+.ab__top::before{content:"";position:absolute;left:50%;top:58%;width:min(78vw,820px);height:112%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgb(255 230 109 / .36),rgb(142 216 255 / .25) 52%,transparent 100%);filter:blur(34px);pointer-events:none;z-index:0}
+.ab__ph{position:relative;z-index:1}
+.ab__p{column-count:1!important;max-width:min(100% - 2 * var(--v6-m),1180px)}
+@media (min-width:901px){.ab__top{height:calc(var(--P) * 4)}}
+@media (max-width:900px){.ab__ph{width:min(64vw,320px)}}
