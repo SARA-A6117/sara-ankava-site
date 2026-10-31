@@ -86,7 +86,7 @@
     this.seed = Math.random() * 100;
     this.m = { x: .5, y: .5, tx: .5, ty: .5 };
     this.vis = false; this.hot = false;
-    if (mobile) this.ribs = Math.max(8, Math.round(this.ribs * .5));
+    if (mobile) this.ribs = Math.max(24, Math.round(this.ribs * .5));
     if (reduce || weak || !init()) { this.still(); return; }
     this.cv = document.createElement('canvas'); this.cv.className = 'rg__cv'; this.cv.setAttribute('aria-hidden', 'true');
     this.ctx = this.cv.getContext('2d');
@@ -149,7 +149,7 @@
         if (h.querySelector(':scope>.rg')) return;
         var i = document.createElement('i');
         i.className = 'rg rg--fill'; i.setAttribute('aria-hidden', 'true');
-        i.dataset.rg = ''; i.dataset.hover = '1'; i.dataset.ribs = h.matches('.ftr2__ic a') ? '8' : '12'; i.dataset.img = 'assets/gradients/ribbed-fill.jpg';
+        i.dataset.rg = ''; i.dataset.hover = '1'; i.dataset.ribs = '36'; i.dataset.img = 'assets/gradients/ribbed-fill.jpg';
         h.insertBefore(i, h.firstChild);
       });
     }
