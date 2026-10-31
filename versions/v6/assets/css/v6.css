@@ -1209,3 +1209,18 @@ body::before,body::after{display:none!important}
 .ab__lines p{font-size:clamp(17px,1.5vw,22px);line-height:1.6}
 @media (max-width:900px){.ab__lines{grid-template-columns:1fr}}
 .pr3__ob{height:clamp(140px,19vh,180px)}
+
+/* צור קשר: אזור נמוך, כותרת מימין וטופס קטן ב-Light משמאל, בלי גרעיניות */
+.ct__panel::after{display:none!important}
+.ct__panel{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:0 clamp(32px,5vw,96px);padding:clamp(36px,4vw,56px) var(--v6-m)!important}
+.ct__panel>.ct__h{margin:0;max-width:16ch;font-size:clamp(28px,3.3vw,50px);line-height:1.15}
+.ct__panel>[data-contact]{min-width:0}
+.ct__panel>.ct__steps{grid-column:1/-1;margin-top:clamp(20px,2.4vw,32px);padding-top:16px}
+.ct .madlib{font:300 clamp(17px,1.5vw,22px)/1.9 "Sara Ankava",system-ui,sans-serif}
+.ct .madlib input{font-weight:300;border-bottom-width:1px;min-width:6ch}
+.ct .madlib input[name="phone"]{min-width:9.5ch}
+.ct .contact__actions{margin-top:14px;gap:14px 20px}
+.ct .fine{font-size:12px;margin-top:10px!important}
+.ct__steps li{font-weight:300;font-size:clamp(13px,1.1vw,15px)}
+@media (max-width:900px){.ct__panel{grid-template-columns:1fr!important;gap:24px}.ct__panel>.ct__h{max-width:none}}
+.ct .madlib input[name="phone"]{min-width:11ch}
