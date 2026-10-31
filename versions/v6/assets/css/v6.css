@@ -1080,12 +1080,7 @@ body::before,body::after{display:none!important}
 /* ==========================================================================
    v6 · שפת הגרדיאנט: זכוכית מחורצת (assets/js/ribbed-gradient.js)
    ========================================================================== */
-.rg__cv{position:absolute!important;left:0;top:0;width:100%;height:100%;z-index:-2!important;display:block;pointer-events:none}
-.rg--static{background-image:var(--rg-img)!important;background-size:cover;background-position:center}
-.rg--fill{position:absolute;inset:0;z-index:-1;border-radius:inherit;overflow:hidden;opacity:0;transition:opacity .35s;pointer-events:none}
-.rg--fill .rg__cv{z-index:0!important}
 .btn,.cta6,.ftr2__ic a{isolation:isolate}
-.btn:hover .rg--fill,.btn:focus-visible .rg--fill,.cta6:hover .rg--fill,.cta6:focus-visible .rg--fill,.ftr2__ic a:hover .rg--fill,.ftr2__ic a:focus-visible .rg--fill{opacity:1}
 .ftr2__ic a:hover,.ftr2__ic a:focus-visible{background:transparent!important}
 .pr3__c{position:relative}
 .pr3__rb{position:absolute;left:0;right:0;top:0;height:12px;z-index:3;overflow:hidden;opacity:0;transition:opacity .6s;pointer-events:none}
@@ -1268,10 +1263,7 @@ body::before,body::after{display:none!important}
 }
 
 /* גרדיאנט אחיד בכל האתר: זכוכית מחורצת עדינה (פסים רכים, לא צפופים) כמו ברקע צור קשר. ההירו לא משתנה */
-.gr-text:not(.hb__l){background-image:url("../gradients/ribbed-text.jpg");background-size:900px auto;background-position:0 50%;background-blend-mode:normal;filter:none;animation:rt-drift 40s ease-in-out infinite alternate}
 @keyframes rt-drift{to{background-position:100% 50%}}
-.pr3__c.is-act .pr3__bb{background-image:url("../gradients/ribbed-text.jpg");background-size:560px auto;background-blend-mode:normal}
-.ab__stk{background-image:url("../gradients/ribbed-text.jpg");background-size:cover}
 @media (prefers-reduced-motion:reduce){.gr-text:not(.hb__l){animation:none}}
 
 /* לונה פארק: אובייקט ממשק מפורט (כמו בתהליך), בועה חופפת, חצים דקים */
@@ -1301,7 +1293,6 @@ body::before,body::after{display:none!important}
 .h6,.lp2,.pr3,.pr3__stick,.ab,.ftr2{background-color:#141716}
 
 /* גרדיאנט: אותו מנגנון כמו בצור קשר, צבוע כרקע של טקסט/אלמנט */
-[data-asbg]{background-size:100% 100%!important;background-repeat:no-repeat!important;background-position:0 0!important;background-blend-mode:normal!important;filter:none!important}
 .gr-text:not(.hb__l){animation:none!important}
 
 /* לונה פארק: בלי גריד ובלי מילויים, הפרדה בין שורות על מקצב הגריד */
@@ -1367,7 +1358,6 @@ body::before,body::after{display:none!important}
 .ab__stk{background-image:none!important;background-color:#FFE66D}
 .hb__badge .gr-sq{background-image:none!important;background:#FFE66D!important;filter:none!important}
 .ftr2__ic a:hover,.ftr2__ic a:focus-visible{background:#FFE66D!important;border-color:transparent;color:#141716}
-.rg--fill{display:none!important}
 /* הירו: "לשלב הבא": גרדיאנט חלק צהוב-תכלת, בלי גרעיניות, קצוות נמסים, תזוזה איטית עם העכבר */
 .hb__title .hb__l.gr-text{width:fit-content;background-image:repeating-linear-gradient(90deg,rgb(255 255 255 / .06) 0,rgb(255 255 255 / .06) 1px,transparent 1px,transparent 11px),linear-gradient(100deg,#FFE66D 0%,#8ED8FF 50%,#FFE66D 100%);background-size:auto,240% 100%;background-position:0 0,var(--gx,50%) 0;background-repeat:repeat,no-repeat;background-blend-mode:normal;filter:none;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%)}
 @media (prefers-reduced-motion:reduce){.hb__title .hb__l.gr-text{background:none!important;-webkit-text-fill-color:#FFE66D;color:#FFE66D;-webkit-mask-image:none;mask-image:none}}
@@ -1401,17 +1391,7 @@ body::before,body::after{display:none!important}
 /* ==========================================================================
    v6 · Grainient (React Bits): מילוי למילים נבחרות בכותרות ולכפתורי הנעה לפעולה. שאר הטקסטים והכפתורים צבע חלק. צור קשר ללא שינוי
    ========================================================================== */
-.gr-text[data-gn]:not(.gn--flat){background-image:linear-gradient(100deg,#FFE66D,#8ED8FF,#FFE66D);background-size:100% 100%!important;background-position:0 0!important;background-repeat:no-repeat!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;color:transparent!important;filter:none!important;-webkit-mask-image:none;mask-image:none}
-.hb__title .hb__l.gr-text[data-gn]{width:fit-content}
-.gr-text[data-gn].gn--flat{background-image:none!important;-webkit-text-fill-color:#FFE66D!important;color:#FFE66D!important}
 /* כפתורי הנעה לפעולה: קנבס Grainient מאחורי תווית כהה */
-.gn__cv{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:inherit;z-index:-1;pointer-events:none;display:block}
-[data-gn="btn"]{isolation:isolate;position:relative;background:#FFE66D!important;color:#0c0e0d!important}
-[data-gn="btn"] .btn__t{color:#0c0e0d!important}
-[data-gn="btn"]::after{background:#FFE66D!important}
-[data-gn="btn"]:hover{background:#FFE66D!important;color:#0c0e0d!important}
-.pj .btn[data-gn]:hover{background:#FFE66D!important}
-[data-gn="btn"].gn--flat{background:#FFE66D!important}
 @media (prefers-reduced-motion:reduce){.gr-text[data-gn]{background-image:none!important;-webkit-text-fill-color:#FFE66D!important;color:#FFE66D!important;-webkit-mask-image:none!important;mask-image:none!important}}
 
 /* אודות: התמונה של שרי (רקע הוסר) מתמזגת בתחתית ובצדדים, כותרת קטנה בשורת גריד אחת, פסקה אחת קטנה */
