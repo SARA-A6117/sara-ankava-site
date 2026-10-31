@@ -1266,3 +1266,10 @@ body::before,body::after{display:none!important}
   .pr3__cols{position:relative}
   .pr3__cols::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:rgb(217 217 210 / .07);pointer-events:none}
 }
+
+/* גרדיאנט אחיד בכל האתר: זכוכית מחורצת עדינה (פסים רכים, לא צפופים) כמו ברקע צור קשר. ההירו לא משתנה */
+.gr-text:not(.hb__l){background-image:url("../gradients/ribbed-text.jpg");background-size:900px auto;background-position:0 50%;background-blend-mode:normal;filter:none;animation:rt-drift 40s ease-in-out infinite alternate}
+@keyframes rt-drift{to{background-position:100% 50%}}
+.pr3__c.is-act .pr3__bb{background-image:url("../gradients/ribbed-text.jpg");background-size:560px auto;background-blend-mode:normal}
+.ab__stk{background-image:url("../gradients/ribbed-text.jpg");background-size:cover}
+@media (prefers-reduced-motion:reduce){.gr-text:not(.hb__l){animation:none}}
