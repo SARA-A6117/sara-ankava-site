@@ -1413,3 +1413,11 @@ body::before,body::after{display:none!important}
 .pj .btn[data-gn]:hover{background:#FFE66D!important}
 [data-gn="btn"].gn--flat{background:#FFE66D!important}
 @media (prefers-reduced-motion:reduce){.gr-text[data-gn]{background-image:none!important;-webkit-text-fill-color:#FFE66D!important;color:#FFE66D!important;-webkit-mask-image:none!important;mask-image:none!important}}
+
+/* אודות: התמונה של שרי (רקע הוסר) מתמזגת בתחתית ובצדדים, כותרת קטנה בשורת גריד אחת, פסקה אחת קטנה */
+.ab__top{position:relative;z-index:1;display:flex;justify-content:center;align-items:flex-end;margin-bottom:0}
+.ab__ph{display:block;height:100%;width:auto;max-width:100%;object-fit:contain;object-position:bottom;-webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent 100%),linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom,#000 70%,transparent 100%),linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%);mask-composite:intersect}
+.ab__h{margin:0 var(--v6-m)!important;white-space:nowrap;font-size:clamp(24px,3.6vw,52px)!important;line-height:var(--P)!important;letter-spacing:-.01em}
+.ab__p{position:relative;z-index:1;margin:calc(var(--P) * .5) var(--v6-m) 0;column-count:2;column-gap:clamp(32px,5vw,96px);font:300 clamp(16px,1.25vw,19px)/1.75 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .95)}
+@media (min-width:901px){.ab__top{height:calc(var(--P) * 6)}}
+@media (max-width:900px){.ab__top{height:auto}.ab__ph{width:min(82vw,420px);height:auto}.ab__h{white-space:normal;line-height:1.2!important;font-size:clamp(26px,7.5vw,40px)!important}.ab__p{column-count:1}}
