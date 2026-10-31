@@ -1076,3 +1076,35 @@ body::before,body::after{display:none!important}
 }
 @media (prefers-reduced-motion:reduce){.pr3{height:auto}.pr3__stick{position:static;height:auto;display:block}.pr3__ar path{transition:none;stroke-dashoffset:0}.pr3__c{opacity:1}}
 .pr3__h .pj__st{-webkit-text-stroke:1px var(--v6-stone)!important}
+
+/* ==========================================================================
+   v6 · שפת הגרדיאנט: זכוכית מחורצת (assets/js/ribbed-gradient.js)
+   ========================================================================== */
+.rg__cv{position:absolute!important;left:0;top:0;width:100%;height:100%;z-index:-2!important;display:block;pointer-events:none}
+.rg--static{background-image:var(--rg-img)!important;background-size:cover;background-position:center}
+.rg--fill{position:absolute;inset:0;z-index:-1;border-radius:inherit;overflow:hidden;opacity:0;transition:opacity .35s;pointer-events:none}
+.rg--fill .rg__cv{z-index:0!important}
+.btn,.cta6,.ftr2__ic a{isolation:isolate}
+.btn:hover .rg--fill,.btn:focus-visible .rg--fill,.cta6:hover .rg--fill,.cta6:focus-visible .rg--fill,.ftr2__ic a:hover .rg--fill,.ftr2__ic a:focus-visible .rg--fill{opacity:1}
+.ftr2__ic a:hover,.ftr2__ic a:focus-visible{background:transparent!important}
+.pr3__c{position:relative}
+.pr3__rb{position:absolute;left:0;right:0;top:0;height:12px;z-index:3;overflow:hidden;opacity:0;transition:opacity .6s;pointer-events:none}
+.pr3__rb .rg__cv{z-index:0!important}
+.pr3__c.is-act .pr3__rb{opacity:1}
+
+/* צור קשר: טקסט לבן, הכתם הבהיר בפינה השמאלית העליונה */
+.ct__panel::before{display:none!important}
+.ct__panel::after{opacity:.5}
+.ct,.ct__h,.ct .madlib,.ct .madlib input,.ct .or-wa,.ct .link,.ct .fine,.ct .fine a,.ct__steps li,.ct .done,.ct .done *{color:#fff}
+.ct .madlib input{border-bottom-color:#fff}
+.ct .madlib input::placeholder{color:rgb(255 255 255 / .78)}
+.ct .madlib input:focus{background:rgb(255 255 255 / .14)}
+.ct .contact__err{color:#FFB4BF}
+.ct__steps{border-top-color:rgb(255 255 255 / .35)}
+.ct__steps li::before{background:#fff;color:#12140f}
+.ct .btn--primary{box-shadow:inset 0 0 0 1px rgb(255 255 255 / .55)}
+.ct .btn--primary:hover,.ct .done .btn:hover{color:#0c0e0d!important}
+.ct .done .btn{background:#12140f!important}
+.ct__panel{animation:none!important;transform:none!important}
+.ct__panel::after{opacity:.2}
+.ftr2__ic a{position:relative;overflow:hidden}
