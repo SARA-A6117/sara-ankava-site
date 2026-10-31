@@ -1108,3 +1108,55 @@ body::before,body::after{display:none!important}
 .ct__panel{animation:none!important;transform:none!important}
 .ct__panel::after{opacity:.2}
 .ftr2__ic a{position:relative;overflow:hidden}
+
+/* ==========================================================================
+   v6 · תהליך: אובייקטי ממשק מדגימים (מותר עגול ורך) עם בועה חופפת, בלי גרדיאנט ווב-ג'י-אל
+   ========================================================================== */
+.pr3__rb,.pr3__ul,.pr3__q{display:none!important}
+.pr3__cols{height:auto;min-height:min(52vh,470px)}
+.pr3__ob{position:relative;flex:none;width:min(100%,300px);height:120px;margin-top:auto}
+.pr3__bb{position:absolute;z-index:2;padding:7px 14px;border:1px solid rgb(217 217 210 / .6);border-radius:16px;background:#101312;font:300 14px/1.25 "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);white-space:nowrap;opacity:0;transform:scale(.4);transform-origin:20% 100%}
+.pr3__bb::after{content:"";position:absolute;bottom:-5px;right:18px;width:9px;height:9px;background:#101312;border:1px solid rgb(217 217 210 / .6);border-top:0;border-left:0;transform:rotate(45deg)}
+.pr3__c.is-lit .pr3__bb{animation:pr3-pop .55s cubic-bezier(.3,1.6,.5,1) .7s both}
+@keyframes pr3-pop{0%{opacity:0;transform:scale(.4)}100%{opacity:1;transform:scale(1)}}
+.pr3__c.is-act .pr3__bb{border-color:transparent;color:#12140f;background-image:var(--v6-hard),linear-gradient(135deg,var(--v6-sun),var(--v6-mint));background-size:200px,auto;background-blend-mode:hard-light,normal}
+.pr3__c.is-act .pr3__bb::after{border:0;width:14px;height:10px;bottom:-9px;transform:none;background:var(--v6-mint);clip-path:polygon(0 0,100% 0,100% 100%)}
+
+/* 1: משפך */
+.pr3__ob--f{display:flex;flex-direction:column;gap:8px}
+.fb{display:block;width:var(--w);height:24px;border-radius:12px;background:rgb(217 217 210 / .16);border:1px solid rgb(217 217 210 / .35);transform:scaleX(.15);transform-origin:right center;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.fb:nth-child(2){transition-delay:.15s}.fb:nth-child(3){transition-delay:.3s}
+.fb b{display:block;padding:0 12px;font:300 12px/22px "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);white-space:nowrap}
+.pr3__c.is-lit .fb{transform:none}
+.pr3__ob--f .pr3__bb{left:4%;top:50px}
+
+/* 2: שלוש שורות עם תגיות */
+.pr3__ob--t{display:flex;flex-direction:column;gap:10px}
+.tr{display:flex;align-items:center;gap:12px;height:28px}
+.tr em{font:300 14px "Sara Ankava",system-ui,sans-serif;font-style:normal;min-width:3.2em;color:rgb(217 217 210 / .85)}
+.tr u{text-decoration:none;padding:3px 14px;border-radius:14px;border:1px solid rgb(217 217 210 / .45);font:300 13px/1.4 "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);transition:background-color .3s,color .3s}
+.pr3__c.is-lit .tr:nth-child(1) u{animation:pr3-t1 1.5s steps(1,end) both}
+.pr3__c.is-lit .tr:nth-child(2) u{animation:pr3-t2 1.5s steps(1,end) both}
+.pr3__c.is-lit .tr:nth-child(3) u{animation:pr3-t3 1.5s steps(1,end) both}
+@keyframes pr3-t1{0%{background:#FFE66D;color:#12140f;border-color:#FFE66D}35%,100%{background:transparent}}
+@keyframes pr3-t2{0%{background:transparent}30%{background:#FFE66D;color:#12140f;border-color:#FFE66D}65%,100%{background:transparent}}
+@keyframes pr3-t3{0%,65%{background:transparent}66%,100%{background:#FFE66D;color:#12140f;border-color:#FFE66D}}
+.pr3__ob--t .pr3__bb{left:0;bottom:-4px}
+
+/* 3: לוח הזמנות */
+.pr3__ob--b{display:flex;flex-direction:column;gap:8px}
+.br{display:flex;align-items:center;gap:10px;height:32px;padding:0 10px;border-radius:16px;border:1px solid rgb(217 217 210 / .3);background:rgb(217 217 210 / .06)}
+.br .av{flex:none;width:18px;height:18px;border-radius:50%;background:rgb(217 217 210 / .35)}
+.br .ln{display:block;height:5px;width:54%;border-radius:3px;background:rgb(217 217 210 / .3)}
+.br .ln.s{width:18%}
+.br.nw{border-color:#FFE66D;transform-origin:top center;transform:scaleY(.2);opacity:.3;transition:transform .6s cubic-bezier(.3,1.5,.5,1) .3s,opacity .4s .3s}
+.pr3__c.is-lit .br.nw{transform:none;opacity:1}
+.pr3__ob--b .pr3__bb{left:2%;top:-10px}
+
+@media (prefers-reduced-motion:reduce){
+  .fb{transform:none;transition:none}
+  .br.nw{transform:none;opacity:1;transition:none}
+  .pr3__bb,.pr3__c.is-lit .pr3__bb{opacity:1;transform:none;animation:none}
+  .pr3__c .tr:nth-child(3) u{background:#FFE66D;color:#12140f;border-color:#FFE66D}
+  .pr3__c.is-lit .tr u{animation:none!important}
+}
