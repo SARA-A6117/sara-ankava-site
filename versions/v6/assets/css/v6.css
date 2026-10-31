@@ -1201,3 +1201,11 @@ body::before,body::after{display:none!important}
 .stk text{direction:ltr;unicode-bidi:embed}
 .cmp__t{z-index:3}
 .ui{-webkit-backdrop-filter:none;backdrop-filter:none}
+
+/* קופי חדש: שורת "מקבלים" בתהליך, שלוש פסקאות באודות */
+.pr3__g{margin-top:2px;font-size:clamp(14px,1.1vw,16px);color:rgb(217 217 210 / .8)}
+.pr3__g b{font-weight:500;color:var(--v6-stone)}
+.ab__lines{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ab__lines p{font-size:clamp(17px,1.5vw,22px);line-height:1.6}
+@media (max-width:900px){.ab__lines{grid-template-columns:1fr}}
+.pr3__ob{height:clamp(140px,19vh,180px)}
