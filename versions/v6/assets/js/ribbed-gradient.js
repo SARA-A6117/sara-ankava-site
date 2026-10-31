@@ -150,15 +150,6 @@
   window.RibbedGradient = RibbedGradient;
 
   function boot() {
-    if (!matchMedia('(hover:none)').matches) {
-      [].slice.call(document.querySelectorAll('.btn,.cta6,.ftr2__ic a')).forEach(function (h) {
-        if (h.querySelector(':scope>.rg')) return;
-        var i = document.createElement('i');
-        i.className = 'rg rg--fill'; i.setAttribute('aria-hidden', 'true');
-        i.dataset.rg = ''; i.dataset.hover = '1'; i.dataset.ribs = '36'; i.dataset.img = 'assets/gradients/ribbed-fill.jpg';
-        h.insertBefore(i, h.firstChild);
-      });
-    }
     [].slice.call(document.querySelectorAll('[data-rg]')).forEach(function (el) { if (!el.__rg && !el.classList.contains('rg--static')) new RibbedGradient(el); });
     kick();
   }
