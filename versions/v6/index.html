@@ -18,7 +18,7 @@
 <link rel="preload" href="assets/fonts/SaraAnkava-Bold-v1.2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css?v=6">
 <link rel="stylesheet" href="assets/css/v4.css?v=4">
-<link rel="stylesheet" href="assets/css/v6.css?v=130">
+<link rel="stylesheet" href="assets/css/v6.css?v=131">
 <meta name="robots" content="noindex">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
 <script type="application/ld+json">
@@ -248,7 +248,7 @@
 <script src="assets/js/main.js?v=4" defer></script>
 <script src="assets/js/header.js?v=4" defer></script>
 <script src="assets/js/v4.js?v=2" defer></script>
-<script src="assets/js/ribbed-gradient.js?v=6" defer></script>
+<script src="assets/js/ribbed-gradient.js?v=7" defer></script>
 <script>if(location.hash==="#still"){var s=document.createElement("style");s.textContent=".hb__l,.hb__small,.hb__card,.hb__badge{animation:none!important;transform:none!important;opacity:1!important}.hb__badge{transform:none!important}.ar{animation:none!important;stroke-dashoffset:0!important}";document.head.appendChild(s)}</script>
 <script>(function(){var r=document.querySelector(".cx__row");if(!r)return;var it=[].slice.call(r.querySelectorAll(".cx__f"));function open(x){it.forEach(function(y){y.classList.toggle("is-open",y===x)})}it.forEach(function(x){x.addEventListener("pointerenter",function(){if(matchMedia("(min-width:901px)").matches)open(x)});x.addEventListener("focusin",function(){open(x)});x.addEventListener("click",function(){open(x)})})})()</script>
 <script>(function(){var l=document.querySelector("[data-pj3]");if(!l)return;var it=[].slice.call(l.querySelectorAll(".pj3__c"));function open(x){it.forEach(function(y){y.classList.toggle("is-open",y===x)})}it.forEach(function(x){x.addEventListener("pointerenter",function(e){if(e.pointerType==="mouse"&&matchMedia("(min-width:901px)").matches)open(x)});x.addEventListener("focusin",function(){open(x)});x.addEventListener("click",function(){open(x)})})})()</script>
@@ -273,6 +273,6 @@ var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches,mob=matchMedia(
 function set(t){var act=null;items.forEach(function(el,k){var on=t>=k;if(el.classList.contains("pr3__ar"))el.classList.toggle("is-on",on);else{el.classList.toggle("is-lit",on);if(on)act=el}});cols.forEach(function(c){c.classList.toggle("is-act",c===act)})}
 function upd(){if(reduce){set(5);return}var r=s.getBoundingClientRect(),p;if(mob.matches)p=(innerHeight*.85-r.top)/(r.height*.85);else p=-r.top/(s.offsetHeight-innerHeight);p=Math.max(0,Math.min(1,p));set(.3+p*5.3)}
 addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);upd()})()</script>
-<script>(function(){var c=document.querySelector(".pr3__cols");if(!c)return;var mq=matchMedia("(min-width:901px)");function snap(){c.style.height="";if(!mq.matches)return;var h=c.scrollHeight;c.style.height=Math.ceil(h/56)*56+"px"}addEventListener("load",snap);addEventListener("resize",snap);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(snap);snap()})()</script>
+<script>(function(){var c=document.querySelector(".pr3__cols"),t=document.querySelector(".pr3__h"),s=document.querySelector(".pr3__stick");if(!c)return;var mq=matchMedia("(min-width:901px)");function fit(){c.style.height="";if(t)t.style.transform="";if(!mq.matches)return;var P=innerHeight/8;c.style.height=Math.ceil(c.scrollHeight/P)*P+"px";if(t){var st=s.getBoundingClientRect().top,i=document.createElement("i");i.style.cssText="display:inline-block;width:0;height:0";t.appendChild(i);var bl=i.getBoundingClientRect().bottom-st;i.remove();t.style.transform="translateY("+(2*P-.5-bl)+"px)"}}addEventListener("load",fit);addEventListener("resize",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);fit()})()</script>
 </body>
 </html>
