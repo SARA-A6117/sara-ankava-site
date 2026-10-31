@@ -18,7 +18,7 @@
 <link rel="preload" href="assets/fonts/SaraAnkava-Bold-v1.2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css?v=6">
 <link rel="stylesheet" href="assets/css/v4.css?v=4">
-<link rel="stylesheet" href="assets/css/v6.css?v=126">
+<link rel="stylesheet" href="assets/css/v6.css?v=128">
 <meta name="robots" content="noindex">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
 <script type="application/ld+json">
@@ -273,5 +273,6 @@ var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches,mob=matchMedia(
 function set(t){var act=null;items.forEach(function(el,k){var on=t>=k;if(el.classList.contains("pr3__ar"))el.classList.toggle("is-on",on);else{el.classList.toggle("is-lit",on);if(on)act=el}});cols.forEach(function(c){c.classList.toggle("is-act",c===act)})}
 function upd(){if(reduce){set(5);return}var r=s.getBoundingClientRect(),p;if(mob.matches)p=(innerHeight*.85-r.top)/(r.height*.85);else p=-r.top/(s.offsetHeight-innerHeight);p=Math.max(0,Math.min(1,p));set(.3+p*5.3)}
 addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);upd()})()</script>
+<script>(function(){var c=document.querySelector(".pr3__cols");if(!c)return;var mq=matchMedia("(min-width:901px)");function snap(){c.style.height="";if(!mq.matches)return;var h=c.scrollHeight;c.style.height=Math.ceil(h/56)*56+"px"}addEventListener("load",snap);addEventListener("resize",snap);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(snap);snap()})()</script>
 </body>
 </html>

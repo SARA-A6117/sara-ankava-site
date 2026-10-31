@@ -1257,3 +1257,12 @@ body::before,body::after{display:none!important}
   .sc .ar{stroke-dashoffset:0;transition:none}
   .sc__bub{opacity:1;transform:none}.sc__new{opacity:1}
 }
+
+/* תהליך: יישור לגריד (שורה = 56px). הכותרת יושבת על הקווים, והקווים האנכיים נפגשים בקווי הגריד */
+@media (min-width:901px){
+  .pr3__stick{justify-content:flex-start;padding:112px 0 0;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 55px,rgb(217 217 210 / .07) 55px,rgb(217 217 210 / .07) 56px);background-position:0 0}
+  .pr3__h{margin:0 clamp(48px,6vw,88px)!important;max-width:none;font-size:clamp(28px,3.2vw,46px)!important;line-height:56px!important;transform:translateY(var(--pr3-dy,13px))}
+  .pr3__h span{display:block}
+  .pr3__cols{position:relative}
+  .pr3__cols::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:rgb(217 217 210 / .07);pointer-events:none}
+}
