@@ -1037,3 +1037,38 @@ body::before,body::after{display:none!important}
 .lp2--lp .lp2__row.is-open .lp2__say{animation:lp-in .9s ease .5s both,lp-soft 7s ease-in-out 2s infinite}
 @keyframes lp-in{from{opacity:0}to{opacity:1}}
 @keyframes lp-soft{0%,60%,100%{opacity:1}80%{opacity:.5}}
+
+/* ==========================================================================
+   v6 · סבב 9: תהליך בשלוש עמודות מקצה לקצה, חצי טוש מצטיירים, בלי פינות מעוגלות (חוץ מבועות)
+   ========================================================================== */
+.pr3{position:relative;height:300vh;background:#101312;color:var(--v6-stone)}
+.pr3__stick{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding-top:calc(var(--hdr,76px) + 14px);z-index:1;overflow:hidden;background-color:#101312;background-image:var(--hl)}
+.pr3__h{margin:0 var(--v6-m) 22px!important;white-space:nowrap}
+.pr3__cols{position:relative;flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgb(217 217 210 / .2);border-bottom:1px solid rgb(217 217 210 / .2)}
+.pr3__c{display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:clamp(24px,3vw,56px) clamp(24px,3vw,48px);opacity:.3;transition:opacity .7s var(--ease)}
+.pr3__c:nth-of-type(n+2){border-inline-start:1px solid rgb(217 217 210 / .2)}
+.pr3__c.is-lit{opacity:1}
+.pr3__n{font:700 clamp(64px,8vw,130px)/1 "Sara Ankava",system-ui,sans-serif;color:transparent;-webkit-text-stroke:1px rgb(217 217 210 / .85)}
+.pr3__t{margin:0 0 14px;font:700 clamp(26px,2.6vw,40px)/1.15 "Sara Ankava",system-ui,sans-serif}
+.pr3__p{margin:0;max-width:30ch;font:300 clamp(17px,1.4vw,21px)/1.5 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .92)}
+.pr3__q{position:relative;align-self:flex-start;margin:0;padding:10px 20px;border:1px solid rgb(217 217 210 / .6);border-radius:22px;background:#101312;font:300 clamp(15px,1.2vw,18px) "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);transition:background-color .5s,color .5s}
+.pr3__q::after{content:"";position:absolute;bottom:-6px;right:22px;width:10px;height:10px;background:#101312;border:1px solid rgb(217 217 210 / .6);border-top:0;border-left:0;transform:rotate(45deg)}
+.pr3__c.is-act .pr3__q{border-color:transparent;color:#12140f;background-image:var(--v6-hard),linear-gradient(135deg,var(--v6-sun),var(--v6-mint));background-size:200px,auto;background-blend-mode:hard-light,normal}
+.pr3__c.is-act .pr3__q::after{border:0;width:16px;height:11px;bottom:-10px;transform:none;background:var(--v6-mint);clip-path:polygon(0 0,100% 0,100% 100%)}
+.pr3__ar{position:absolute;top:26%;z-index:2;mix-blend-mode:screen;pointer-events:none;background:url("../doodles/doodles.jpg") no-repeat;filter:contrast(1.3)}
+.pr3__ar--b{width:120px;height:98px;background-size:511px auto;background-position:-204px -15px;right:33.333%;transform:translateX(50%);-webkit-mask-image:linear-gradient(to left,#000 calc(var(--r,0) * 110%),transparent calc(var(--r,0) * 110% + 6%));mask-image:linear-gradient(to left,#000 calc(var(--r,0) * 110%),transparent calc(var(--r,0) * 110% + 6%))}
+.pr3__ar--y{width:150px;height:64px;background-size:444px auto;background-position:-19px -28px;right:66.667%;transform:translateX(50%) scaleX(-1);-webkit-mask-image:linear-gradient(to right,#000 calc(var(--r,0) * 110%),transparent calc(var(--r,0) * 110% + 6%));mask-image:linear-gradient(to right,#000 calc(var(--r,0) * 110%),transparent calc(var(--r,0) * 110% + 6%))}
+@media (max-width:900px){
+  .pr3{height:auto;padding-bottom:40px}
+  .pr3__stick{position:static;height:auto;overflow:visible}
+  .pr3__h{white-space:normal!important}
+  .pr3__cols{grid-template-columns:1fr;border-bottom:0}
+  .pr3__c{border-top:1px solid rgb(217 217 210 / .2);border-inline-start:0!important;gap:20px}
+  .pr3__ar{position:relative;top:auto;right:auto;justify-self:center;margin:8px 0}
+  .pr3__ar--b{transform:rotate(-45deg)}
+  .pr3__ar--y{transform:scaleX(-1) rotate(135deg)}
+}
+@media (prefers-reduced-motion:reduce){.pr3{height:auto}.pr3__stick{position:static;height:auto}.pr3__ar{-webkit-mask-image:none;mask-image:none}.pr3__c{opacity:1}}
+
+/* אפס פינות מעוגלות (חוץ מבועות/קפסולות, אייקוני פוטר, מדבקת אודות, וואטסאפ צף, ההירו, ומוקאפים) */
+.lp2__n,.ct__steps li::before{border-radius:0!important}

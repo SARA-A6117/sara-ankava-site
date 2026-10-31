@@ -18,7 +18,7 @@
 <link rel="preload" href="assets/fonts/SaraAnkava-Bold-v1.2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css?v=6">
 <link rel="stylesheet" href="assets/css/v4.css?v=4">
-<link rel="stylesheet" href="assets/css/v6.css?v=101">
+<link rel="stylesheet" href="assets/css/v6.css?v=102">
 <meta name="robots" content="noindex">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
 <script type="application/ld+json">
@@ -156,24 +156,16 @@
 
   
   <!-- 03 · איך עובדים יחד: כרטיסים נערמים -->
-  <section class="lp2 lp2--pr" id="process" aria-labelledby="process-title" data-lp2>
+  <section class="pr3" id="process" aria-labelledby="process-title" data-pr3>
     <i class="gn gn--d" aria-hidden="true"></i>
-    <div class="lp2__stick">
-      <h2 class="pj__h lp2__h" id="process-title"><span class="pj__st">לפני שבונים משהו,</span> <span class="pj__gr gr gr-text">מבינים מה באמת צריך</span></h2>
-      <div class="lp2__list">
-        <i class="lp2__vl" aria-hidden="true"></i><i class="lp2__pb" aria-hidden="true"></i>
-        <article class="lp2__row is-open" tabindex="0" data-i="0">
-          <header class="lp2__bar"><span class="lp2__n">01</span><h3 class="lp2__t">מבינים את העסק לעומק</h3></header>
-          <div class="lp2__body"><div class="lp2__in"><p class="lp2__p">בודקים נתוני כניסות, הזמנות והמרות. מבינים איך לקוחות מגיעים, ואיפה העסק מאבד אותם בדרך.</p></div></div>
-        </article>
-        <article class="lp2__row" tabindex="0" data-i="1">
-          <header class="lp2__bar"><span class="lp2__n">02</span><h3 class="lp2__t">בונים תוכנית שיווק</h3></header>
-          <div class="lp2__body"><div class="lp2__in"><p class="lp2__p">מגדירים את קהלי היעד, מחדדים מסרים ובוחרים ערוצים שדרכם נכון להגיע ללקוחות של העסק.</p></div></div>
-        </article>
-        <article class="lp2__row" tabindex="0" data-i="2">
-          <header class="lp2__bar"><span class="lp2__n">03</span><h3 class="lp2__t">בונים נכס דיגיטלי אחד</h3></header>
-          <div class="lp2__body"><div class="lp2__in"><p class="lp2__p">אתר, חנות או מערכת שמבוססים על ההבנה ועל התוכנית, ולא על עיצוב יפה בלבד.</p></div></div>
-        </article>
+    <div class="pr3__stick">
+      <h2 class="pj__h pr3__h" id="process-title"><span class="pj__st">לפני שבונים משהו,</span> <span class="pj__gr gr gr-text">מבינים מה באמת צריך</span></h2>
+      <div class="pr3__cols">
+        <article class="pr3__c"><span class="pr3__n" aria-hidden="true">01</span><div class="pr3__tx"><h3 class="pr3__t">מבינים את העסק לעומק</h3><p class="pr3__p">בודקים כניסות, הזמנות והמרות, ומבינים איפה העסק מאבד לקוחות.</p></div><p class="pr3__q">איפה הלקוחות נופלים?</p></article>
+        <i class="pr3__ar pr3__ar--b" aria-hidden="true"></i>
+        <article class="pr3__c"><span class="pr3__n" aria-hidden="true">02</span><div class="pr3__tx"><h3 class="pr3__t">בונים תוכנית שיווק</h3><p class="pr3__p">מגדירים קהלים, מחדדים מסרים ובוחרים את הערוצים הנכונים.</p></div><p class="pr3__q">מי, איפה ובאיזה ערוץ?</p></article>
+        <i class="pr3__ar pr3__ar--y" aria-hidden="true"></i>
+        <article class="pr3__c"><span class="pr3__n" aria-hidden="true">03</span><div class="pr3__tx"><h3 class="pr3__t">בונים נכס דיגיטלי אחד</h3><p class="pr3__p">אתר, חנות או מערכת שנבנים על ההבנה ועל התוכנית, לא על עיצוב בלבד.</p></div><p class="pr3__q">אתר שעובד עם התוכנית</p></article>
       </div>
     </div>
   </section>
@@ -276,5 +268,11 @@
   var rv=[].slice.call(document.querySelectorAll("[data-rv]"));
   if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.2});rv.forEach(function(x){io.observe(x)})}else rv.forEach(function(x){x.classList.add("in")});
 })()</script>
+<script>(function(){var s=document.querySelector("[data-pr3]");if(!s)return;
+var cols=[].slice.call(s.querySelectorAll(".pr3__c")),ars=[].slice.call(s.querySelectorAll(".pr3__ar")),items=[cols[0],ars[0],cols[1],ars[1],cols[2]];
+var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches,mob=matchMedia("(max-width:900px)");
+function set(t){var act=null;items.forEach(function(el,k){var r=Math.max(0,Math.min(1,t-k));if(el.classList.contains("pr3__ar"))el.style.setProperty("--r",r);else{el.classList.toggle("is-lit",r>0);if(r>0)act=el}});cols.forEach(function(c){c.classList.toggle("is-act",c===act)})}
+function upd(){if(reduce){set(5);return}var r=s.getBoundingClientRect(),p;if(mob.matches)p=(innerHeight*.85-r.top)/(r.height*.85);else p=-r.top/(s.offsetHeight-innerHeight);p=Math.max(0,Math.min(1,p));set(Math.min(5,.3+p*5.3))}
+addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);upd()})()</script>
 </body>
 </html>
