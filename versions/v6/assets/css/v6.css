@@ -1273,3 +1273,13 @@ body::before,body::after{display:none!important}
 .pr3__c.is-act .pr3__bb{background-image:url("../gradients/ribbed-text.jpg");background-size:560px auto;background-blend-mode:normal}
 .ab__stk{background-image:url("../gradients/ribbed-text.jpg");background-size:cover}
 @media (prefers-reduced-motion:reduce){.gr-text:not(.hb__l){animation:none}}
+
+/* לונה פארק: אובייקט ממשק מפורט (כמו בתהליך), בועה חופפת, חצים דקים */
+.lp2--lp .lp2__cmp{height:auto;align-self:start}
+.sc{width:100%;max-width:520px;height:auto;aspect-ratio:520/240;min-height:0;margin-inline-end:auto}
+.sc .ar{stroke-width:5}
+.sc .sc__wall{stroke-width:7}
+.sc__tg{font:500 11px "Sara Ankava",system-ui,sans-serif}
+.sc__bt{font:500 14px "Sara Ankava",system-ui,sans-serif}
+.sc__bub{transform-origin:50% 100%;transform-box:fill-box}
+@media (max-width:900px){.sc{max-width:100%}}
