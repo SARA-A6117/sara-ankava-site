@@ -1380,3 +1380,12 @@ body::before,body::after{display:none!important}
   .lp2--lp .lp2__stick{align-items:center}
   .lp2--lp .lp2__h{font-size:clamp(45px,6.2vw,95px)!important;line-height:1.18!important;height:auto!important;margin-top:0!important;align-content:center;transform:none!important}
 }
+
+/* לונה פארק: גריד כמו בהירו רק בצד הכותרת (ימין), בלי גריד בכרטיסים (שמאל). קווי ההפרדה בין השורות ממשיכים את הגריד. הכותרת בשלוש שורות, כל אחת על קו */
+:root{--lg:clamp(32px,5vw,96px)}
+@media (min-width:901px){
+  .lp2--lp .lp2__stick{column-gap:var(--lg)}
+  .lp2--lp .lp2__h{grid-row:1/-1;align-self:stretch;align-content:start;display:grid!important;grid-auto-rows:var(--P);height:auto!important;margin:calc(var(--P) * -1) calc(var(--v6-m) * -1) 0 calc(var(--lg) * -1)!important;padding:calc(var(--P) * 3) var(--v6-m) 0 var(--lg);background-image:var(--hl);font-size:clamp(34px,3.8vw,56px)!important;line-height:var(--P)!important;white-space:nowrap!important;letter-spacing:-.01em;transform:none!important}
+  .lp2--lp .lp2__h span{display:block;line-height:var(--P)}
+  .lp2--lp .lp2__h .lp2__h3{font-size:.9em;letter-spacing:-.025em}
+}
