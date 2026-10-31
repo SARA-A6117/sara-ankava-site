@@ -1,8 +1,8 @@
 /* ==========================================================================
-   Mesh gradient + grain (our own build, studied from how an animated mesh works):
-   four soft radial colour fields whose centres drift slowly (registered @property
-   coordinates animated by keyframes) over a base ramp, with an SVG-noise layer
-   blended on top. Palette: yellow #FFE66D, light blue #8ED8FF, and #141716 to melt into the dark.
+   Mesh gradient + grain (our own build). Four soft colour fields whose centres drift slowly
+   (registered @property coordinates animated by keyframes) over a base ramp. The noise layer
+   only varies the colour (soft-light, no alpha, no dark dots), so letter edges stay crisp.
+   Palette: yellow #FFE66D and light blue #8ED8FF, kept vivid. On buttons, hover swaps the stops (--sw).
    Used for: contact panel, chosen heading words, CTA buttons. Plain colour everywhere else.
    ========================================================================== */
 @property --c1x{syntax:"<percentage>";inherits:true;initial-value:15%}
@@ -13,67 +13,71 @@
 @property --c3y{syntax:"<percentage>";inherits:true;initial-value:85%}
 @property --c4x{syntax:"<percentage>";inherits:true;initial-value:20%}
 @property --c4y{syntax:"<percentage>";inherits:true;initial-value:80%}
+@property --sw{syntax:"<number>";inherits:false;initial-value:0}
 @keyframes mshA{0%{--c1x:10%;--c1y:20%}35%{--c1x:70%;--c1y:30%}65%{--c1x:45%;--c1y:85%}100%{--c1x:88%;--c1y:55%}}
 @keyframes mshB{0%{--c2x:88%;--c2y:25%}40%{--c2x:30%;--c2y:60%}70%{--c2x:62%;--c2y:12%}100%{--c2x:14%;--c2y:85%}}
 @keyframes mshC{0%{--c3x:50%;--c3y:92%}50%{--c3x:18%;--c3y:30%}100%{--c3x:82%;--c3y:62%}}
 @keyframes mshD{0%{--c4x:22%;--c4y:78%}50%{--c4x:78%;--c4y:70%}100%{--c4x:55%;--c4y:18%}}
 :root{
   --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.1' intercept='-.55'/%3E%3CfeFuncG type='linear' slope='2.1' intercept='-.55'/%3E%3CfeFuncB type='linear' slope='2.1' intercept='-.55'/%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  --noise-fine:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='1.15' intercept='-.07'/%3E%3CfeFuncG type='linear' slope='1.15' intercept='-.07'/%3E%3CfeFuncB type='linear' slope='1.15' intercept='-.07'/%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
   --noise-hard:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='3.2' intercept='-1.05'/%3E%3CfeFuncG type='linear' slope='3.2' intercept='-1.05'/%3E%3CfeFuncB type='linear' slope='3.2' intercept='-1.05'/%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* אחידות: שכבת רעש דקה (כ-10%) מעל כל הרקעים */
-html body::after{display:block!important;content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;background-image:var(--noise);background-size:200px;opacity:.1;mix-blend-mode:overlay}
+/* אחידות: שכבת רעש דקה מעל הרקעים */
+html body::after{display:block!important;content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;background-image:var(--noise);background-size:200px;opacity:.06;mix-blend-mode:overlay}
 
 /* מנועי התנועה: הקואורדינטות מונפשות על עטיפה, והצאצאים יורשים */
 .hb__title,.pj__h,.lp2__h,.pr3__h{animation:mshA 24s ease-in-out infinite alternate,mshB 29s ease-in-out infinite alternate,mshC 33s ease-in-out infinite alternate,mshD 27s ease-in-out infinite alternate}
 
-/* מילים נבחרות בכותרות */
+/* מילים נבחרות בכותרות: צבעים חיים, רעש עדין שמשפיע רק על הגוון, קצוות חדים */
 [data-gn="text"]{
-  background-image:var(--noise),
-    radial-gradient(70% 150% at var(--c1x) var(--c1y),#FFE66D,transparent 72%),
-    radial-gradient(70% 150% at var(--c2x) var(--c2y),#8ED8FF,transparent 72%),
-    radial-gradient(45% 110% at var(--c3x) var(--c3y),rgb(20 23 22 / .12),transparent 72%),
-    radial-gradient(60% 140% at var(--c4x) var(--c4y),#8ED8FF,transparent 72%),
-    linear-gradient(100deg,#FFE66D,#B9E6C6 50%,#8ED8FF)!important;
-  background-size:160px auto,auto,auto,auto,auto,auto!important;
+  background-image:var(--noise-fine),
+    radial-gradient(70% 150% at var(--c1x) var(--c1y),#FFE66D 0,#FFE66D 38%,transparent 74%),
+    radial-gradient(70% 150% at var(--c2x) var(--c2y),#8ED8FF 0,#8ED8FF 38%,transparent 74%),
+    radial-gradient(60% 140% at var(--c3x) var(--c3y),#FFE66D 0,#FFE66D 30%,transparent 72%),
+    radial-gradient(60% 140% at var(--c4x) var(--c4y),#8ED8FF 0,#8ED8FF 30%,transparent 72%),
+    linear-gradient(100deg,#FFE66D 0%,#FFE66D 30%,#8ED8FF 70%,#8ED8FF 100%)!important;
+  background-size:180px auto,auto,auto,auto,auto,auto!important;
   background-position:0 0!important;
   background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
-  background-blend-mode:overlay,normal,normal,normal,normal,normal!important;
+  background-blend-mode:soft-light,normal,normal,normal,normal,normal!important;
   -webkit-background-clip:text!important;background-clip:text!important;
   -webkit-text-fill-color:transparent!important;color:transparent!important;
-  filter:none!important;width:fit-content;-webkit-mask-image:none;mask-image:none
+  filter:saturate(1.35) brightness(1.04)!important;width:fit-content;-webkit-mask-image:none;mask-image:none
 }
 .hb__title .hb__l[data-gn="text"]{background-position:0 0!important}
 
-/* כפתורי הנעה לפעולה: מילוי מש מעל תווית כהה (הבהוב עדין נשמר) */
+/* כפתורי הנעה לפעולה: צבעים חיים, בהובר העצירות מתחלפות בהדרגה והגרדיאנט זז */
 [data-gn="btn"]{
   position:relative;color:#0c0e0d!important;
-  background-image:var(--noise),
-    radial-gradient(70% 160% at var(--c1x) var(--c1y),#FFE66D,transparent 72%),
-    radial-gradient(70% 160% at var(--c2x) var(--c2y),#8ED8FF,transparent 72%),
-    radial-gradient(45% 120% at var(--c3x) var(--c3y),rgb(20 23 22 / .1),transparent 72%),
-    radial-gradient(60% 150% at var(--c4x) var(--c4y),#8ED8FF,transparent 72%),
-    linear-gradient(100deg,#FFE66D,#B9E6C6 50%,#8ED8FF)!important;
-  background-size:140px auto,auto,auto,auto,auto,auto!important;
+  transition:--sw .9s ease,box-shadow .3s,transform .25s;
+  background-image:var(--noise-fine),
+    radial-gradient(70% 160% at var(--c1x) var(--c1y),color-mix(in srgb,#FFE66D calc((1 - var(--sw)) * 100%),#8ED8FF) 0,color-mix(in srgb,#FFE66D calc((1 - var(--sw)) * 100%),#8ED8FF) 38%,transparent 74%),
+    radial-gradient(70% 160% at var(--c2x) var(--c2y),color-mix(in srgb,#8ED8FF calc((1 - var(--sw)) * 100%),#FFE66D) 0,color-mix(in srgb,#8ED8FF calc((1 - var(--sw)) * 100%),#FFE66D) 38%,transparent 74%),
+    radial-gradient(60% 150% at var(--c3x) var(--c3y),color-mix(in srgb,#FFE66D calc((1 - var(--sw)) * 100%),#8ED8FF) 0,color-mix(in srgb,#FFE66D calc((1 - var(--sw)) * 100%),#8ED8FF) 30%,transparent 72%),
+    radial-gradient(60% 150% at var(--c4x) var(--c4y),color-mix(in srgb,#8ED8FF calc((1 - var(--sw)) * 100%),#FFE66D) 0,color-mix(in srgb,#8ED8FF calc((1 - var(--sw)) * 100%),#FFE66D) 30%,transparent 72%),
+    linear-gradient(100deg,color-mix(in srgb,#FFE66D calc((1 - var(--sw)) * 100%),#8ED8FF) 0%,color-mix(in srgb,#FFE66D calc((1 - var(--sw)) * 100%),#8ED8FF) 30%,color-mix(in srgb,#8ED8FF calc((1 - var(--sw)) * 100%),#FFE66D) 70%,color-mix(in srgb,#8ED8FF calc((1 - var(--sw)) * 100%),#FFE66D) 100%)!important;
+  background-size:150px auto,auto,auto,auto,auto,auto!important;
   background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
-  background-blend-mode:overlay,normal,normal,normal,normal,normal!important;
+  background-blend-mode:soft-light,normal,normal,normal,normal,normal!important;
   background-color:#FFE66D!important;
+  filter:saturate(1.25);
   animation:cta-blink 6s ease-in-out infinite,mshA 22s ease-in-out infinite alternate,mshB 27s ease-in-out infinite alternate,mshC 31s ease-in-out infinite alternate,mshD 25s ease-in-out infinite alternate!important
 }
+[data-gn="btn"]:hover,[data-gn="btn"]:focus-visible{--sw:1;color:#0c0e0d!important}
 [data-gn="btn"] .btn__t{color:#0c0e0d!important}
 [data-gn="btn"]::after{background:#FFE66D!important}
-[data-gn="btn"]:hover{color:#0c0e0d!important}
 .pj .btn[data-gn]:hover{background-color:#FFE66D!important}
 
-/* צור קשר: רקע מש כהה עם גרעיניות ברורה, הכתמים הבהירים באמצע, הצדדים מוחשכים לטקסט לבן */
+/* צור קשר: צבע עז יותר, גרעיניות ברורה, הצדדים מוחשכים לטקסט לבן */
 .ct .ct__panel{
   background-color:#141716!important;
   background-image:var(--noise-hard),
-    radial-gradient(34% 80% at var(--c1x) var(--c1y),rgb(255 230 109 / .85),transparent 72%),
-    radial-gradient(38% 90% at var(--c2x) var(--c2y),rgb(142 216 255 / .8),transparent 72%),
-    radial-gradient(30% 70% at var(--c3x) var(--c3y),rgb(20 23 22 / .6),transparent 72%),
-    radial-gradient(36% 86% at var(--c4x) var(--c4y),rgb(142 216 255 / .65),transparent 72%),
+    radial-gradient(38% 90% at var(--c1x) var(--c1y),#FFE66D 0,rgb(255 230 109 / .95) 30%,transparent 72%),
+    radial-gradient(42% 96% at var(--c2x) var(--c2y),#8ED8FF 0,rgb(142 216 255 / .95) 30%,transparent 72%),
+    radial-gradient(34% 80% at var(--c3x) var(--c3y),rgb(255 230 109 / .9) 0,transparent 72%),
+    radial-gradient(40% 92% at var(--c4x) var(--c4y),rgb(142 216 255 / .9) 0,transparent 72%),
     linear-gradient(#141716,#141716)!important;
   background-size:160px auto,auto,auto,auto,auto,auto!important;
   background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
@@ -82,10 +86,14 @@ html body::after{display:block!important;content:"";position:fixed;inset:0;z-ind
   isolation:isolate
 }
 .ct .ct__panel::before{display:none!important}
-.ct .ct__panel::after{display:block!important;content:"";position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:normal!important;opacity:1!important;background:linear-gradient(90deg,rgb(20 23 22 / .72) 0,rgb(20 23 22 / .72) 34%,rgb(20 23 22 / 0) 46%,rgb(20 23 22 / 0) 56%,rgb(20 23 22 / .72) 68%,rgb(20 23 22 / .72) 100%)}
+.ct .ct__panel::after{display:block!important;content:"";position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:normal!important;opacity:1!important;background:linear-gradient(90deg,rgb(20 23 22 / .66) 0,rgb(20 23 22 / .66) 32%,rgb(20 23 22 / 0) 44%,rgb(20 23 22 / 0) 58%,rgb(20 23 22 / .66) 70%,rgb(20 23 22 / .66) 100%)}
+@media (max-width:900px){.ct .ct__panel::after{background:rgb(20 23 22 / .58)!important}}
 
+/* prefers-reduced-motion: בלי אנימציה, צבע חלק */
 @media (prefers-reduced-motion:reduce){
-  .hb__title,.pj__h,.lp2__h,.pr3__h,.ct .ct__panel{animation:none!important}
-  [data-gn="btn"]{animation:none!important}
+  .hb__title,.pj__h,.lp2__h,.pr3__h{animation:none!important}
+  [data-gn="text"]{background:none!important;-webkit-text-fill-color:#FFE66D!important;color:#FFE66D!important;filter:none!important}
+  [data-gn="btn"]{animation:none!important;transition:none!important;background-image:none!important;background-color:#FFE66D!important;filter:none!important}
+  .ct .ct__panel{animation:none!important;background-image:none!important;background-color:#141716!important}
+  .ct .ct__panel::after{display:none!important}
 }
-@media (max-width:900px){.ct .ct__panel::after{background:rgb(20 23 22 / .62)!important}}
