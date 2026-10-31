@@ -1167,3 +1167,37 @@ body::before,body::after{display:none!important}
   .pr3__c .tr:nth-child(3) u{background:#FFE66D;color:#12140f}
   .pr3__c.is-lit .tr u{animation:none!important}
 }
+
+/* ==========================================================================
+   v6 · לונה פארק: שורה פתוחה בסגנון BaseClub (קווי SVG עבים, אובייקטי ממשק צפים, טקסט עבה, מדבקה)
+   ========================================================================== */
+.lp2--lp .lp2__cmp{position:relative;height:100%;min-height:0;opacity:0;transition:opacity .6s .2s}
+.lp2--lp .lp2__row.is-open .lp2__cmp{opacity:1}
+.cmp__t{position:absolute;right:0;top:2%;margin:0;max-width:100%;font:700 clamp(40px,4.6vw,72px)/1.05 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.02em;color:var(--v6-stone)}
+.dr{position:absolute;height:auto;overflow:visible;z-index:1}
+.dr path{fill:none;stroke:currentColor;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .25s}
+.lp2__row.is-open .dr path{stroke-dashoffset:0;transition:stroke-dashoffset 1s ease-out var(--d,0s)}
+.ui{position:absolute;z-index:2;color:var(--v6-stone);background:rgb(217 217 210 / .12);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgb(217 217 210 / .3);animation:cmp-fl 7s ease-in-out infinite alternate}
+.ui--card{width:clamp(150px,13vw,190px);padding:12px 14px 16px;border-radius:20px;display:grid;gap:9px}
+.ui--card .dots{display:flex;gap:5px}
+.ui--card .dots b{width:8px;height:8px;border-radius:50%;background:rgb(217 217 210 / .6)}
+.ui--card span{font:500 15px/1.2 "Sara Ankava",system-ui,sans-serif}
+.ui--card .sk{display:block;height:6px;border-radius:3px;background:rgb(217 217 210 / .35)}
+.ui--card .sk.s{width:55%}
+.ui--pill{display:flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;font:500 15px/1 "Sara Ankava",system-ui,sans-serif;animation-delay:-3s}
+.ui--pill .pd{width:9px;height:9px;border-radius:50%;background:#FFE66D}
+.ui--ghost{width:clamp(130px,11vw,170px);height:84px;border-radius:20px;border:2px dashed rgb(217 217 210 / .35);background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+@keyframes cmp-fl{from{transform:translateY(0)}to{transform:translateY(-9px)}}
+.stk{position:absolute;z-index:3;width:clamp(100px,9vw,128px);aspect-ratio:1;border-radius:50%;background:#FFE66D;animation:stk-spin 16s linear infinite}
+.stk svg{display:block;width:100%;height:100%}
+.stk text{font:700 12.5px "Sara Ankava",system-ui,sans-serif;fill:#12140f;letter-spacing:.04em}
+.stk__a{fill:none;stroke:#12140f;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+@keyframes stk-spin{to{transform:rotate(360deg)}}
+@media (max-width:900px){
+  .lp2--lp .lp2__cmp{height:360px}
+  .cmp__t{font-size:clamp(34px,10vw,48px)}
+}
+@media (prefers-reduced-motion:reduce){.ui,.stk{animation:none}.dr path{stroke-dashoffset:0;transition:none}}
+.stk text{direction:ltr;unicode-bidi:embed}
+.cmp__t{z-index:3}
+.ui{-webkit-backdrop-filter:none;backdrop-filter:none}
