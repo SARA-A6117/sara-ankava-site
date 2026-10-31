@@ -1444,3 +1444,15 @@ body::before,body::after{display:none!important}
   .ab__frame .ab__p{padding:0 30px 0 0;line-height:1.85}
 }
 @media (min-width:901px){.ab__frame .ab__top{height:calc(var(--P) * 3.8)}.ab__frame .ab__p{padding-right:40px}}
+
+/* לונה פארק: שלוש שורות הכותרת ממלאות את הרוחב המסומן (כל שורה בגודל משלה) */
+@media (min-width:901px){
+  .lp2--lp .lp2__h span:nth-child(1){font-size:clamp(40px,5vw,72px)!important}
+  .lp2--lp .lp2__h span:nth-child(2){font-size:clamp(36px,4.45vw,64px)!important}
+  .lp2--lp .lp2__h .lp2__h3{font-size:clamp(36px,4.5vw,65px)!important}
+}
+@media (min-width:901px){
+  .lp2--lp .lp2__h span:nth-child(1){font-size:clamp(30px,3.75vw,72px)!important}
+  .lp2--lp .lp2__h span:nth-child(2){font-size:clamp(27px,3.34vw,64px)!important}
+  .lp2--lp .lp2__h .lp2__h3{font-size:clamp(27px,3.38vw,65px)!important}
+}
