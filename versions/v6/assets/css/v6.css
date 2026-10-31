@@ -1340,3 +1340,18 @@ body::before,body::after{display:none!important}
 @keyframes sc-star{50%{transform:translate(500px,52px) scale(1.18) rotate(8deg)}}
 @media (prefers-reduced-motion:reduce){.sc__o{opacity:1;transform:none;transition:none}.sc__star{opacity:1;animation:none!important}}
 @media (max-width:900px){.sc__o{opacity:1;transform:none;transition:none}.sc__star{opacity:1;animation:none}}
+
+/* לונה פארק: גריד לכל האזור (כולל צד הכותרת), כותרת על הקווים, איורי הגיליון עם screen */
+.lp2__stick{background-image:var(--hl)!important}
+.sc{aspect-ratio:740/274}
+.sc__dd{mix-blend-mode:screen;filter:contrast(1.25);overflow:hidden}
+@media (min-width:901px){
+  .lp2--lp .lp2__list{margin-top:-1px;height:calc(var(--P) * 7 + 1px)}
+  .lp2--lp .lp2__h{line-height:var(--P)!important;align-content:start!important}
+}
+.lp2--lp .lp2__cmp{opacity:1!important;transition:none!important}
+.lp2--lp .lp2__cmp{position:relative}
+.dd2{position:absolute;display:block;overflow:hidden;mix-blend-mode:screen;filter:contrast(1.25);pointer-events:none}
+.dd2 img{position:absolute;max-width:none;display:block}
+.lp2__stick{background-color:#141716}
+.lp2--lp .lp2__h{gap:0!important;row-gap:0!important}
