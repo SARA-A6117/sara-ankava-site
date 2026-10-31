@@ -1389,3 +1389,10 @@ body::before,body::after{display:none!important}
   .lp2--lp .lp2__h span{display:block;line-height:var(--P)}
   .lp2--lp .lp2__h .lp2__h3{font-size:.9em;letter-spacing:-.025em}
 }
+
+/* לונה פארק: הקו האנכי לכל גובה הרשימה, הגריד מתחיל מהקו האנכי, הכותרת גדולה יותר ושורה אחת למעלה */
+@media (min-width:901px){
+  .lp2--lp .lp2__vl{top:0!important;height:100%!important}
+  .lp2--lp .lp2__h{margin-left:calc(var(--lg) * -1 - 18px)!important;padding-left:calc(var(--lg) + 18px);padding-top:calc(var(--P) * 2);font-size:clamp(36px,4.4vw,64px)!important}
+}
+@media (min-width:901px){.lp2--lp .lp2__h{font-size:clamp(35px,4.1vw,59px)!important}}
