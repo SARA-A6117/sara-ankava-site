@@ -1436,3 +1436,11 @@ body::before,body::after{display:none!important}
 }
 .ab__frame .ab__h span{font-size:inherit!important;font-weight:700!important;letter-spacing:inherit!important;line-height:var(--P)!important}
 @media (min-width:901px){.ab__frame{margin-inline:9vw;grid-template-columns:auto minmax(0,630px)}}
+
+/* אודות: ריווח צמוד בכותרת (גובה המסגרת 5 שורות גריד), הפסקה זזה שמאלה */
+@media (min-width:901px){
+  .ab__frame{height:calc(var(--P) * 5 + 1px)}
+  .ab__frame .ab__h,.ab__frame .ab__h span{line-height:1.15!important}
+  .ab__frame .ab__p{padding:0 30px 0 0;line-height:1.85}
+}
+@media (min-width:901px){.ab__frame .ab__top{height:calc(var(--P) * 3.8)}.ab__frame .ab__p{padding-right:40px}}
