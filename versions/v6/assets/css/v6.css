@@ -1224,3 +1224,8 @@ body::before,body::after{display:none!important}
 .ct__steps li{font-weight:300;font-size:clamp(13px,1.1vw,15px)}
 @media (max-width:900px){.ct__panel{grid-template-columns:1fr!important;gap:24px}.ct__panel>.ct__h{max-width:none}}
 .ct .madlib input[name="phone"]{min-width:11ch}
+
+/* פרויקטים: פס הכותרת כהה כמו ההירו */
+.pj{padding-top:0}
+.pj .pj__h{margin:0 0 clamp(30px,4vw,56px);padding:clamp(56px,6vw,96px) var(--v6-m) clamp(36px,4.5vw,64px);background:#141716}
+.pj .pj__h .pj__st{-webkit-text-stroke:1px var(--v6-stone)!important}
