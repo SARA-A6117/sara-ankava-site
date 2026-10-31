@@ -1229,3 +1229,31 @@ body::before,body::after{display:none!important}
 .pj{padding-top:0}
 .pj .pj__h{margin:0 0 clamp(30px,4vw,56px);padding:clamp(56px,6vw,96px) var(--v6-m) clamp(36px,4.5vw,64px);background:#141716}
 .pj .pj__h .pj__st{-webkit-text-stroke:1px var(--v6-stone)!important}
+
+/* ==========================================================================
+   v6 · לונה פארק: תרשים אחד לכל שורה (luna-park.md): כרטיסון האתר, חצים נשרטים, קיר, בועה
+   ========================================================================== */
+.lp2__stick{background-image:var(--hl)!important}
+.lp2--lp .lp2__cmp{height:100%;min-height:0}
+.sc{display:block;width:100%;height:100%;min-height:200px;overflow:visible}
+.sc__t{font:500 15px "Sara Ankava",system-ui,sans-serif;fill:#D9D9D2}
+.sc__bt{font:500 16px "Sara Ankava",system-ui,sans-serif;fill:#141716}
+.sc__road{fill:none;stroke:rgb(217 217 210 / .28);stroke-width:4;stroke-linecap:round;stroke-dasharray:3 14}
+.sc__ghost{fill:none;stroke:rgb(217 217 210 / .35);stroke-width:2;stroke-dasharray:8 8}
+.sc .ar{fill:none;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .2s}
+.sc .sc__wall{stroke:rgb(217 217 210 / .85)}
+.lp2__row.is-open .sc .ar{stroke-dashoffset:0;transition:stroke-dashoffset .9s ease-out var(--d,0s)}
+.sc__bub{transform-box:fill-box;transform-origin:30% 100%;opacity:0;transform:scale(.5)}
+.lp2__row.is-open .sc__bub{animation:sc-pop .5s cubic-bezier(.3,1.6,.5,1) 1.1s both}
+@keyframes sc-pop{to{opacity:1;transform:scale(1)}}
+.sc__new{opacity:.4;transition:opacity .5s 1.1s}
+.lp2__row.is-open .sc__new{opacity:1}
+@media (prefers-reduced-motion:reduce){.sc .ar{stroke-dashoffset:0;transition:none}.sc__bub{opacity:1;transform:none;animation:none!important}.sc__new{opacity:1}}
+@media (max-width:900px){.lp2--lp .lp2__cmp{height:auto}.sc{height:auto}}
+@media (max-width:900px){
+  .lp2--lp .lp2__body{grid-template-rows:1fr!important}
+  .lp2--lp .lp2__row .lp2__in{padding-bottom:20px!important}
+  .lp2--lp .lp2__cmp{opacity:1}
+  .sc .ar{stroke-dashoffset:0;transition:none}
+  .sc__bub{opacity:1;transform:none}.sc__new{opacity:1}
+}
