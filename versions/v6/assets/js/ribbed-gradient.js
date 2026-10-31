@@ -70,7 +70,7 @@
     o = o || {};
     this.el = el;
     this.colors = (o.colors || (d.colors ? d.colors.split(',') : ['#FFE66D', '#8ED8FF'])).map(rgb);
-    this.bg = rgb(o.bg || d.bg || '#101312');
+    this.bg = rgb(o.bg || d.bg || '#141716');
     this.ribs = o.ribs || +d.ribs || 120;
     this.speed = o.speed != null ? o.speed : (d.speed != null ? +d.speed : .12);
     this.intensity = o.intensity != null ? o.intensity : (d.intensity != null ? +d.intensity : 1);
