@@ -1283,3 +1283,10 @@ body::before,body::after{display:none!important}
 .sc__bt{font:500 14px "Sara Ankava",system-ui,sans-serif}
 .sc__bub{transform-origin:50% 100%;transform-box:fill-box}
 @media (max-width:900px){.sc{max-width:100%}}
+
+/* לונה פארק: ויזואל במרכז השורה, בלי גריד בשורה הפתוחה, מספרים בעיגול */
+.lp2--lp .lp2__cmp{align-self:center;width:100%}
+.sc{max-width:100%;aspect-ratio:740/240;margin-inline:auto}
+.lp2--lp .lp2__row.is-open{background:#141716}
+.lp2--lp .lp2__n{border-radius:50%!important;border:1px solid rgb(217 217 210 / .45)}
+.lp2--lp .lp2__row.is-open .lp2__n{border-color:#FFE66D;color:#FFE66D}
