@@ -1290,3 +1290,44 @@ body::before,body::after{display:none!important}
 .lp2--lp .lp2__row.is-open{background:#141716}
 .lp2--lp .lp2__n{border-radius:50%!important;border:1px solid rgb(217 217 210 / .45)}
 .lp2--lp .lp2__row.is-open .lp2__n{border-color:#FFE66D;color:#FFE66D}
+
+
+/* ==========================================================================
+   v6 · תיקונים גלובליים: גוון אחד #141716, בלי גרעיניות ברקע, גריד אחיד (P = 12.5svh), כותרות על הגריד, גרדיאנט אחד (RibbedGradient)
+   ========================================================================== */
+:root{--P:12.5svh;--hl:repeating-linear-gradient(to bottom,transparent 0,transparent calc(12.5svh - 1px),rgb(217 217 210 / .1) calc(12.5svh - 1px),rgb(217 217 210 / .1) 12.5svh)}
+.gn{display:none!important}
+.h6::before,.h6::after{display:none!important}
+.h6,.lp2,.pr3,.pr3__stick,.ab,.ftr2{background-color:#141716}
+
+/* גרדיאנט: אותו מנגנון כמו בצור קשר, צבוע כרקע של טקסט/אלמנט */
+[data-asbg]{background-size:100% 100%!important;background-repeat:no-repeat!important;background-position:0 0!important;background-blend-mode:normal!important;filter:none!important}
+.gr-text:not(.hb__l){animation:none!important}
+
+/* לונה פארק: בלי גריד ובלי מילויים, הפרדה בין שורות על מקצב הגריד */
+.lp2__stick{background-image:none!important}
+.lp2--lp .lp2__row.is-open{background:none}
+.lp2__row{box-sizing:border-box;border-top:1px solid rgb(217 217 210 / .1)!important}
+.lp2__row:last-child{border-bottom:1px solid rgb(217 217 210 / .1)!important}
+@media (min-width:901px){
+  .lp2--lp .lp2__stick{padding-top:var(--P);padding-bottom:0;align-items:start}
+  .lp2--lp .lp2__list{height:calc(var(--P) * 7);align-self:start;flex:none}
+  .lp2--lp .lp2__row,.lp2--lp .lp2__bar{min-height:var(--P)}
+  .lp2--lp .lp2__h{height:calc(var(--P) * 4);display:grid!important;align-content:center;margin-top:var(--P)!important}
+}
+
+/* תהליך: כותרת בשורת גריד אחת, העמודות מתחילות על קו */
+.pr3__stick{background-image:var(--hl)}
+.pr3__cols::after{background:rgb(217 217 210 / .1)}
+@media (min-width:901px){
+  .pr3__stick{padding:var(--P) 0 0}
+  .pr3__h{height:var(--P);display:flex!important;align-items:center;gap:.28em;font-size:clamp(28px,3.2vw,46px)!important;line-height:1!important;white-space:nowrap!important;margin:0 clamp(48px,6vw,88px)!important;transform:none!important}
+  .pr3__h span{display:inline}
+}
+
+/* אודות: הכותרת ממורכזת בין שני קווי גריד */
+@media (min-width:901px){
+  .ab{padding-top:var(--P)}
+  .ab__top{height:calc(var(--P) * 5);align-items:center;margin-bottom:0}
+  .ab__h{line-height:var(--P)!important;margin-bottom:0!important}
+}

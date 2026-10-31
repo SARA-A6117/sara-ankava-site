@@ -8,7 +8,7 @@
   var VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
   var FS = [
     'precision highp float;',
-    'uniform vec2 R,M,FO;uniform float T,N,I,KA,MS;uniform vec3 B,C1,C2;uniform vec4 K0,K1;',
+    'uniform vec2 R,M,FO;uniform float T,N,I,KA,MS,FL;uniform vec3 B,C1,C2;uniform vec4 K0,K1;',
     'float bl(vec2 p,vec2 c,vec2 s){vec2 d=(p-c)/s;return exp(-dot(d,d));}',
     'vec2 fld(vec2 u,float a){',
     ' vec2 p=vec2(u.x*a,u.y);vec2 m=(M-.5)*vec2(MS*a,MS);',
@@ -24,7 +24,7 @@
     ' float dx=(f-.5)*I*3.2/N*smoothstep(.04,.4,t0);',
     ' vec2 u2=vec2(u.x+dx,u.y);',
     ' vec2 q=fld(u2-FO,a);float tt=q.x+q.y;',
-    ' float amt=smoothstep(0.,.7,tt)*lim(u2);',
+    ' float amt=max(smoothstep(0.,.7,tt)*lim(u2),FL);',
     ' vec2 w=q*q;vec3 tc=(C1*w.x+C2*w.y)/max(w.x+w.y,1e-4);',
     ' vec3 col=mix(B,tc,amt);',
     ' float l=amt*min(I,1.5);',
@@ -53,7 +53,7 @@
       var b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       var a = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
-      'R M FO T N I KA MS B C1 C2 K0 K1'.split(' ').forEach(function (n) { loc[n] = gl.getUniformLocation(pr, n); });
+      'R M FO T N I KA MS FL B C1 C2 K0 K1'.split(' ').forEach(function (n) { loc[n] = gl.getUniformLocation(pr, n); });
       ready = true;
     } catch (e) { ready = false; }
     return ready;
@@ -80,6 +80,9 @@
     var fc = (o.focus || d.focus || '.5,.5').toString().split(',').map(Number);
     this.fo = [fc[0] - .5, fc[1] - .5];
     this.ms = o.mouse != null ? o.mouse : (d.mouse != null ? +d.mouse : .14);
+    this.asbg = !!(o.asbg || d.asbg);
+    this.floor = o.floor != null ? o.floor : (d.floor != null ? +d.floor : 0);
+    this.last = 0;
     this.hover = !!(o.hover || d.hover);
     this.when = o.when || d.when || '';
     this.host = el.parentElement;
@@ -90,7 +93,7 @@
     if (reduce || weak || !init()) { this.still(); return; }
     this.cv = document.createElement('canvas'); this.cv.className = 'rg__cv'; this.cv.setAttribute('aria-hidden', 'true');
     this.ctx = this.cv.getContext('2d');
-    el.insertBefore(this.cv, el.firstChild);
+    if (!this.asbg) el.insertBefore(this.cv, el.firstChild);
     insts.push(this);
     var self = this, h = this.host;
     if (this.hover) {
@@ -109,6 +112,7 @@
   RibbedGradient.prototype.still = function () {
     this.el.classList.add('rg--static');
     if (this.img) this.el.style.setProperty('--rg-img', 'url("' + this.img + '")');
+    if (this.asbg && this.img) this.el.style.setProperty('background-image', 'url("' + this.img + '")', 'important');
   };
   RibbedGradient.prototype.live = function () {
     if (!this.vis) return false;
@@ -126,18 +130,20 @@
     this.m.x += (this.m.tx - this.m.x) * .04; this.m.y += (this.m.ty - this.m.y) * .04;
     gl.uniform2f(loc.FO, this.fo[0], this.fo[1]); gl.uniform2f(loc.R, pw, ph); gl.uniform2f(loc.M, this.m.x, this.m.y);
     gl.uniform1f(loc.T, (now / 1000 + this.seed) * this.speed * 4);
-    gl.uniform1f(loc.N, this.ribs); gl.uniform1f(loc.I, this.intensity); gl.uniform1f(loc.KA, this.amt); gl.uniform1f(loc.MS, this.ms);
+    gl.uniform1f(loc.N, this.ribs); gl.uniform1f(loc.I, this.intensity); gl.uniform1f(loc.KA, this.amt); gl.uniform1f(loc.MS, this.ms); gl.uniform1f(loc.FL, this.floor);
     gl.uniform3fv(loc.B, this.bg); gl.uniform3fv(loc.C1, this.colors[0]); gl.uniform3fv(loc.C2, this.colors[1] || this.colors[0]);
     gl.uniform4fv(loc.K0, this.boxes[0]); gl.uniform4fv(loc.K1, this.boxes[1]);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     this.ctx.drawImage(glc, 0, 0);
+    if (this.asbg) el.style.setProperty('background-image', 'url("' + this.cv.toDataURL('image/jpeg', .86) + '")', 'important');
   };
   function frame(now) {
     raf = 0; var any = false;
-    for (var i = 0; i < insts.length; i++) if (insts[i].live()) { insts[i].draw(now); any = true; }
+    for (var i = 0; i < insts.length; i++) if (insts[i].live()) { any = true; if (insts[i].asbg && now - insts[i].last < 66) continue; insts[i].last = now; insts[i].draw(now); }
     if (any) raf = requestAnimationFrame(frame);
   }
   function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+  addEventListener('pointermove', function (e) { var x = e.clientX / innerWidth, y = 1 - e.clientY / innerHeight; for (var i = 0; i < insts.length; i++) if (insts[i].asbg) { insts[i].m.tx = x; insts[i].m.ty = y; } }, { passive: true });
   document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
   addEventListener('scroll', kick, { passive: true });
   RibbedGradient.kick = kick;
