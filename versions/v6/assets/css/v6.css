@@ -1110,53 +1110,60 @@ body::before,body::after{display:none!important}
 .ftr2__ic a{position:relative;overflow:hidden}
 
 /* ==========================================================================
-   v6 · תהליך: אובייקטי ממשק מדגימים (מותר עגול ורך) עם בועה חופפת, בלי גרדיאנט ווב-ג'י-אל
+   v6 · תהליך: אובייקטים אייקוניים מלאים (כמו BaseClub), בועה חופפת לפינה
    ========================================================================== */
 .pr3__rb,.pr3__ul,.pr3__q{display:none!important}
-.pr3__cols{height:auto;min-height:min(52vh,470px)}
-.pr3__ob{position:relative;flex:none;width:min(100%,300px);height:120px;margin-top:auto}
-.pr3__bb{position:absolute;z-index:2;padding:7px 14px;border:1px solid rgb(217 217 210 / .6);border-radius:16px;background:#101312;font:300 14px/1.25 "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);white-space:nowrap;opacity:0;transform:scale(.4);transform-origin:20% 100%}
-.pr3__bb::after{content:"";position:absolute;bottom:-5px;right:18px;width:9px;height:9px;background:#101312;border:1px solid rgb(217 217 210 / .6);border-top:0;border-left:0;transform:rotate(45deg)}
+.pr3__stick{padding-bottom:28px}
+.pr3__cols{height:auto;min-height:0}
+.pr3__c{gap:26px;padding-top:32px;padding-bottom:36px}
+.pr3__ob{position:relative;flex:none;width:min(100%,340px);height:clamp(150px,22vh,200px);margin-top:auto}
+.oc{position:absolute;inset:0;border-radius:22px;background:#2c2f2e;padding:14px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.pr3__bb{position:absolute;z-index:2;padding:8px 16px;border:1px solid rgb(217 217 210 / .7);border-radius:18px;background:#101312;font:300 15px/1.25 "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);white-space:nowrap;opacity:0;transform:scale(.4);transform-origin:50% 100%}
+.pos-tl{left:-10px;top:-20px}.pos-tr{right:-10px;top:-20px}
+.pr3__bb::after{content:"";position:absolute;bottom:-5px;right:18px;width:9px;height:9px;background:#101312;border:1px solid rgb(217 217 210 / .7);border-top:0;border-left:0;transform:rotate(45deg)}
 .pr3__c.is-lit .pr3__bb{animation:pr3-pop .55s cubic-bezier(.3,1.6,.5,1) .7s both}
 @keyframes pr3-pop{0%{opacity:0;transform:scale(.4)}100%{opacity:1;transform:scale(1)}}
 .pr3__c.is-act .pr3__bb{border-color:transparent;color:#12140f;background-image:var(--v6-hard),linear-gradient(135deg,var(--v6-sun),var(--v6-mint));background-size:200px,auto;background-blend-mode:hard-light,normal}
 .pr3__c.is-act .pr3__bb::after{border:0;width:14px;height:10px;bottom:-9px;transform:none;background:var(--v6-mint);clip-path:polygon(0 0,100% 0,100% 100%)}
 
 /* 1: משפך */
-.pr3__ob--f{display:flex;flex-direction:column;gap:8px}
-.fb{display:block;width:var(--w);height:24px;border-radius:12px;background:rgb(217 217 210 / .16);border:1px solid rgb(217 217 210 / .35);transform:scaleX(.15);transform-origin:right center;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
-.fb:nth-child(2){transition-delay:.15s}.fb:nth-child(3){transition-delay:.3s}
-.fb b{display:block;padding:0 12px;font:300 12px/22px "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);white-space:nowrap}
+.fb{display:flex;align-items:center;gap:8px;width:var(--w);height:36px;padding:0 10px;border-radius:18px;background:#434745;transform:scaleX(.2);transform-origin:right center;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.fb:nth-child(2){background:#393d3b;transition-delay:.15s}.fb:nth-child(3){transition-delay:.3s}
+.fb s{flex:none;width:16px;height:16px;border-radius:50%;background:#6a6f6c}
+.fb b{font:500 13px/1 "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);white-space:nowrap}
+.fb.y{background:#FFE66D}.fb.y s{background:#12140f}.fb.y b{color:#12140f}
 .pr3__c.is-lit .fb{transform:none}
-.pr3__ob--f .pr3__bb{left:4%;top:50px}
 
 /* 2: שלוש שורות עם תגיות */
-.pr3__ob--t{display:flex;flex-direction:column;gap:10px}
-.tr{display:flex;align-items:center;gap:12px;height:28px}
-.tr em{font:300 14px "Sara Ankava",system-ui,sans-serif;font-style:normal;min-width:3.2em;color:rgb(217 217 210 / .85)}
-.tr u{text-decoration:none;padding:3px 14px;border-radius:14px;border:1px solid rgb(217 217 210 / .45);font:300 13px/1.4 "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);transition:background-color .3s,color .3s}
-.pr3__c.is-lit .tr:nth-child(1) u{animation:pr3-t1 1.5s steps(1,end) both}
-.pr3__c.is-lit .tr:nth-child(2) u{animation:pr3-t2 1.5s steps(1,end) both}
-.pr3__c.is-lit .tr:nth-child(3) u{animation:pr3-t3 1.5s steps(1,end) both}
-@keyframes pr3-t1{0%{background:#FFE66D;color:#12140f;border-color:#FFE66D}35%,100%{background:transparent}}
-@keyframes pr3-t2{0%{background:transparent}30%{background:#FFE66D;color:#12140f;border-color:#FFE66D}65%,100%{background:transparent}}
-@keyframes pr3-t3{0%,65%{background:transparent}66%,100%{background:#FFE66D;color:#12140f;border-color:#FFE66D}}
-.pr3__ob--t .pr3__bb{left:0;bottom:-4px}
+.tr{display:flex;align-items:center;gap:10px;height:40px;padding:0 10px;border-radius:20px;background:#393d3b}
+.tr .ic{flex:none;width:20px;height:20px;border-radius:50%;background:#6a6f6c}
+.tr em{font:500 14px "Sara Ankava",system-ui,sans-serif;font-style:normal;min-width:2.6em;color:var(--v6-stone)}
+.tr u{text-decoration:none;margin-inline-start:auto;padding:4px 14px;border-radius:14px;background:#4f5451;font:300 13px/1.3 "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone)}
+.pr3__c.is-lit .tr:nth-child(1) u{animation:pr3-t1 1.6s steps(1,end) both}
+.pr3__c.is-lit .tr:nth-child(2) u{animation:pr3-t2 1.6s steps(1,end) both}
+.pr3__c.is-lit .tr:nth-child(3) u{animation:pr3-t3 1.6s steps(1,end) both}
+@keyframes pr3-t1{0%{background:#FFE66D;color:#12140f}35%,100%{background:#4f5451;color:#D9D9D2}}
+@keyframes pr3-t2{0%{background:#4f5451}30%{background:#FFE66D;color:#12140f}65%,100%{background:#4f5451;color:#D9D9D2}}
+@keyframes pr3-t3{0%,65%{background:#4f5451;color:#D9D9D2}66%,100%{background:#FFE66D;color:#12140f}}
 
 /* 3: לוח הזמנות */
-.pr3__ob--b{display:flex;flex-direction:column;gap:8px}
-.br{display:flex;align-items:center;gap:10px;height:32px;padding:0 10px;border-radius:16px;border:1px solid rgb(217 217 210 / .3);background:rgb(217 217 210 / .06)}
-.br .av{flex:none;width:18px;height:18px;border-radius:50%;background:rgb(217 217 210 / .35)}
-.br .ln{display:block;height:5px;width:54%;border-radius:3px;background:rgb(217 217 210 / .3)}
-.br .ln.s{width:18%}
-.br.nw{border-color:#FFE66D;transform-origin:top center;transform:scaleY(.2);opacity:.3;transition:transform .6s cubic-bezier(.3,1.5,.5,1) .3s,opacity .4s .3s}
+.hd{display:flex;gap:8px}
+.hd i{display:block;height:14px;width:36px;border-radius:7px;background:#4f5451}
+.hd i:first-child{width:52px;background:#6a6f6c}
+.br{display:flex;align-items:center;gap:10px;height:38px;padding:0 12px;border-radius:19px;background:#393d3b}
+.br .av{flex:none;width:22px;height:22px;border-radius:50%;background:#6a6f6c}
+.br span{flex:1;display:grid;gap:5px}
+.br .ln{display:block;height:6px;width:70%;border-radius:3px;background:#6a6f6c}
+.br .ln.s{width:34%}
+.br .ck{flex:none;width:14px;height:14px;border-radius:50%;background:#4f5451}
+.br.nw{background:#8ED8FF;transform-origin:top center;transform:scaleY(.2);opacity:.3;transition:transform .6s cubic-bezier(.3,1.5,.5,1) .3s,opacity .4s .3s}
+.br.nw .av{background:rgb(18 20 15 / .45)}.br.nw .ln{background:rgb(18 20 15 / .5)}.br.nw .ck{background:#12140f}
 .pr3__c.is-lit .br.nw{transform:none;opacity:1}
-.pr3__ob--b .pr3__bb{left:2%;top:-10px}
 
 @media (prefers-reduced-motion:reduce){
   .fb{transform:none;transition:none}
   .br.nw{transform:none;opacity:1;transition:none}
   .pr3__bb,.pr3__c.is-lit .pr3__bb{opacity:1;transform:none;animation:none}
-  .pr3__c .tr:nth-child(3) u{background:#FFE66D;color:#12140f;border-color:#FFE66D}
+  .pr3__c .tr:nth-child(3) u{background:#FFE66D;color:#12140f}
   .pr3__c.is-lit .tr u{animation:none!important}
 }
