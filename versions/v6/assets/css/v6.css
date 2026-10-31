@@ -1426,3 +1426,13 @@ body::before,body::after{display:none!important}
   .ab__side{padding-inline:0}
   .ab__frame .ab__p{padding:var(--P) 0;white-space:nowrap;font-size:clamp(15px,1.2vw,18px);line-height:1.9}
 }
+
+/* אודות: מסגרת צרה יותר, כותרת בשתי שורות באותו גודל ומיושרת למרכז התמונה, פסקה גדולה יותר */
+@media (min-width:901px){
+  .ab__frame{margin-inline:12vw;grid-template-columns:auto minmax(0,570px);column-gap:44px}
+  .ab__side{align-items:center}
+  .ab__frame .ab__h{text-align:center}
+  .ab__frame .ab__p{font-size:clamp(16px,1.25vw,18px)}
+}
+.ab__frame .ab__h span{font-size:inherit!important;font-weight:700!important;letter-spacing:inherit!important;line-height:var(--P)!important}
+@media (min-width:901px){.ab__frame{margin-inline:9vw;grid-template-columns:auto minmax(0,630px)}}
