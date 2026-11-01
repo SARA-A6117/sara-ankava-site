@@ -87,3 +87,8 @@
 .ct a.or-wa:hover,.ct a.or-wa:focus-visible{background:#141716!important;background-image:none!important;box-shadow:none!important;color:#fff!important;animation:none!important}
 .ct a.or-wa:hover::after,.ct a.or-wa:focus-visible::after{background:#141716!important}
 @media (min-width:901px){.hb__badge{right:8.5vw!important}}
+
+/* כפתור וואטסאפ בצור קשר: סטרוק אפור דק, גם בזנב */
+.ct a.or-wa{box-shadow:inset 0 0 0 1px #9b9b95!important}
+.ct a.or-wa::after{height:12px!important;bottom:-10.5px!important;background:linear-gradient(to right,#9b9b95 1px,transparent 1px),linear-gradient(to bottom right,#fff calc(50% - 1px),#9b9b95 calc(50% - 1px))!important}
+.ct a.or-wa:hover::after,.ct a.or-wa:focus-visible::after{background:#141716!important}
