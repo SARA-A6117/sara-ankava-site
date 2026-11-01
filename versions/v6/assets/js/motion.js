@@ -59,17 +59,4 @@
     setTimeout(function () { heads.forEach(function (h) { var r = h.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0) h.classList.add('is-in'); }); }, 4000);
   }
 
-  /* ---- מספרים: ספירה כשנכנסים לתצוגה ---- */
-  var nums = $$('.ab__n b[data-to]');
-  if (nums.length && !reduce && 'IntersectionObserver' in window) {
-    nums.forEach(function (b) { b.textContent = '0'; });
-    var io2 = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (!e.isIntersecting) return; io2.unobserve(e.target);
-        var b = e.target, to = +b.getAttribute('data-to'), t0 = performance.now(), D = 1100;
-        (function tick(t) { var k = Math.min(1, (t - t0) / D), v = Math.round(to * (1 - Math.pow(1 - k, 3))); b.textContent = v; if (k < 1) requestAnimationFrame(tick); else b.textContent = to; })(t0);
-      });
-    }, { threshold: 0.6 });
-    nums.forEach(function (b) { io2.observe(b); });
-  }
-})();
+  })();

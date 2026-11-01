@@ -6,25 +6,14 @@
 .stk__ring{position:absolute;left:50%;top:50%;width:160%;height:160%;translate:-50% -50%;overflow:visible;animation:hb-ring 34s linear infinite}
 .stk__ring text{direction:ltr;unicode-bidi:bidi-override;font:300 14px "Sara Ankava",system-ui,sans-serif;fill:#F1ECE0}
 .stk__star{position:absolute;left:50%;top:50%;width:24%;height:24%;translate:-50% -50%;overflow:visible}
-.stk--ab{left:calc(9vw - 54px);top:calc(var(--P) - 60px)}
+.stk--ab{left:-30px;top:26px}
 .stk--pr{left:calc(var(--v6-m) + 14px);top:calc(var(--P) * .95)}
 @media (max-width:900px){
   .ab,.pr3{position:relative;overflow-x:clip}
   .stk{width:64px}
-  .stk--ab{left:auto;right:34px;top:-30px}
+  .stk--ab{left:auto;right:10px;top:6px}
   .stk--pr{left:34px;right:auto;top:-30px;bottom:auto}
 }
-
-/* שורת מספרים באודות: שלוש עובדות אמיתיות */
-.ab__nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0 var(--v6-m);border:1px solid rgb(217 217 210 / .1);border-top:0;color:var(--tx1,#F1ECE0)}
-@media (min-width:901px){.ab__nums{margin-inline:9vw;height:calc(var(--P) * 2)}}
-.ab__nm{display:grid;align-content:center;gap:4px;padding:0 clamp(14px,2.6vw,44px)}
-.ab__nm+.ab__nm{border-inline-start:1px solid rgb(217 217 210 / .1)}
-.ab__n{display:flex;align-items:baseline;gap:.4em}
-.ab__n b{font:700 clamp(46px,6.2vw,104px)/1 "Sara Ankava",system-ui,sans-serif;padding-inline:.04em}
-.ab__n span{font:400 clamp(15px,1.3vw,20px)/1.2 var(--f-body,system-ui);color:#B9B4A8}
-.ab__nm small{font:400 clamp(14px,1.1vw,17px)/1.4 var(--f-body,system-ui);color:#B9B4A8}
-@media (max-width:900px){.ab__nums{margin-top:0;padding-block:18px}.ab__n b{font-size:clamp(34px,10vw,52px)}}
 
 /* אובייקט ממשק קטן באודות, מתחת לפסקה */
 .ab__chip{position:absolute;left:clamp(18px,2.4vw,40px);bottom:clamp(18px,2.4vw,34px);z-index:2;display:flex;align-items:center;gap:12px;padding:12px 18px;rotate:-4deg;background:rgb(241 236 224 / .07);border:1px solid rgb(241 236 224 / .22);border-radius:16px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);pointer-events:none}
@@ -47,3 +36,11 @@ html.wb-on [data-wb].is-in wd-w,html.wb-on [data-wb].is-in [data-wbu]{opacity:1;
 /* מנצח כללי svg גלובליים (max-width / width) */
 .stk .stk__ring{max-width:none!important;width:160%!important;height:160%!important}
 .stk .stk__star{max-width:none!important;width:24%!important;height:24%!important}
+
+/* אודות: שלוש פסקאות רציפות, 20px, שורה נוחה, רווח קטן בין הפסקאות בלבד */
+.ab__top{position:relative}
+.ab__frame .ab__txt{margin:0;padding:var(--P) clamp(24px,3vw,56px);max-width:none}
+.ab__txt p{margin:0 0 16px;max-width:34em;font:400 20px/1.7 var(--f-body,system-ui)!important;color:#F1ECE0!important;white-space:normal!important}
+.ab__txt p:last-child{margin-bottom:0}
+@media (min-width:901px){.ab__frame .ab__txt{padding-block:0;align-self:center}}
+@media (max-width:900px){.ab__frame .ab__txt{padding:24px var(--v6-m) 40px}}
