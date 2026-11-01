@@ -26,3 +26,17 @@ body.pgp{background:#141716}
   .pp-row,.pp-row:nth-child(even){grid-template-columns:1fr}
   .pp-row:nth-child(even) .pj3__tx{order:0}
 }
+
+/* הקטנה: הכל קטן יותר ונושם */
+.pp-hero{min-height:calc(var(--P) * 4.6);padding-top:calc(var(--P) * 1.2)}
+.pp-h{font-size:clamp(40px,6vw,110px)}
+.pp-lead{font-size:clamp(15px,1.15vw,18px);max-width:48ch}
+.pp-eyebrow{font-size:14px}
+.pp-row{padding-block:clamp(36px,4.2vw,68px);grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+.pp-row:nth-child(even){grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+.pp-row .pj3__t{font-size:clamp(28px,2.9vw,44px)}
+.pp-row .pj3__d{font-size:clamp(15px,1.1vw,17px)}
+.pp-row .pj3__mk{max-width:600px;justify-self:center;width:100%}
+.pp-nh{font-size:clamp(32px,4.4vw,80px)}
+.pp-next{padding-block:calc(var(--P) * .8) calc(var(--P) * 1)}
+@media (max-width:900px){.pp-h{font-size:clamp(38px,11vw,64px)}.pp-nh{font-size:clamp(30px,9vw,48px)}.pp-row .pj3__mk{max-width:none}}
