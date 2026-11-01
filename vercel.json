@@ -1,8 +1,14 @@
 {
+  "framework": null,
+  "buildCommand": null,
+  "installCommand": null,
+  "outputDirectory": "versions/v6",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
-    { "source": "/", "destination": "/versions/v3/index.html", "permanent": false }
-  ],
-  "headers": [
-    { "source": "/(.*)", "headers": [ { "key": "X-Robots-Tag", "value": "noindex, nofollow" } ] }
+    { "source": "/wp-admin/:path*", "destination": "/", "permanent": false },
+    { "source": "/wp-login.php", "destination": "/", "permanent": false },
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/projects.html", "destination": "/projects", "permanent": true }
   ]
 }
