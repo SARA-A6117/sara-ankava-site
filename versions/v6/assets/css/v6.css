@@ -1,6 +1,6 @@
 /* v6 · הירו: רקע אפור-פחם מגורען וחספוסי, פסים אופקיים דקים, כותרת ענקית מקצה לקצה צמודה לתחתית.
    שטוח לגמרי: בלי תלת-ממד, בלי זוהר. ליים: הנקודה בלוגו, הכפתור, הריבוע. */
-:root{--v6-char:#141716;--v6-stone:#D9D9D2;--v6-paper:#F1F2EC;--v6-lime:#FFF08A;--v6-mint:#86D3FF;--v6-sun:#FFF08A;--v6-m:5vw;
+:root{--v6-char:#16262C;--v6-stone:#F1ECE0;--v6-paper:#F1ECE0;--v6-lime:#FFF08A;--v6-mint:#86D3FF;--v6-sun:#FFF08A;--v6-m:5vw;
   /* רעש חד: שחור/לבן בקונטרסט גבוה */
   --v6-hard:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' seed='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncR type='linear' slope='6' intercept='-2.5'/><feFuncG type='linear' slope='6' intercept='-2.5'/><feFuncB type='linear' slope='6' intercept='-2.5'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   /* כתמי חספוס רחבים */
@@ -48,7 +48,7 @@ body::after{z-index:9990;opacity:.12;background-image:var(--v6-hard);background-
 
 /* פסקה וכפתורים: בעמודה הימנית */
 .h6__info{position:absolute;z-index:3;right:var(--v6-m);top:calc(var(--hdr,76px) + 15vh);width:calc((100% - 2 * var(--v6-m)) / 3);opacity:0;animation:h6-fade .8s ease forwards 1s}
-.h6__p{margin:0;font-size:18px;line-height:1.6;color:rgb(217 217 210 / .8)}
+.h6__p{margin:0;font-size:18px;line-height:1.6;color:#B9B4A8}
 .h6__ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:28px}
 .h6__link{color:var(--v6-stone);font-size:17px;font-weight:500;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px;text-decoration-color:rgb(217 217 210 / .4);transition:text-decoration-color .25s}
 .h6__link:hover{text-decoration-color:var(--v6-mint)}
@@ -84,14 +84,14 @@ body::after{z-index:9990;opacity:.12;background-image:var(--v6-hard);background-
 
 /* ===== גרדיאנט מגורען בטכניקה של שכבת רעש במצב overlay מעל גרדיאנטים רדיאליים (כמו באזור יצירת הקשר של saraweizman) ===== */
 :root{--v6-n:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncG type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncB type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncA type='linear' slope='0' intercept='.85'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.gx{background-color:var(--gx-base,#141716);
+.gx{background-color:var(--gx-base,#16262C);
   background-image:var(--v6-n),
     radial-gradient(34% 54% at 0% 100%,var(--gx1,rgb(134 211 255 / .5)),transparent 72%),
     radial-gradient(44% 66% at 26% -4%,var(--gx2,rgb(255 240 138 / .32)),transparent 72%),
     radial-gradient(48% 72% at 18% 60%,var(--gx3,rgb(40 100 150 / .6)),transparent 75%),
     radial-gradient(62% 87% at 92% 68%,var(--gx4,rgb(20 44 70 / .9)),transparent 80%);
   background-size:170px auto,auto,auto,auto,auto;background-blend-mode:overlay,normal,normal,normal,normal}
-.h6{--gx-base:#141716;--gx1:rgb(134 211 255 / .2);--gx3:rgb(40 100 150 / .5)}
+.h6{--gx-base:#16262C;--gx1:rgb(134 211 255 / .2);--gx3:rgb(40 100 150 / .5)}
 .h6::before{display:none}
 /* גרגר חד על הכול: שכבה חדשה בכל האתר, מעל כהה ובהיר */
 body::before{opacity:.5;mix-blend-mode:overlay;background-image:var(--v6-n);background-size:170px}
@@ -146,7 +146,7 @@ body::before,body::after{display:none!important}
 @keyframes h6-drift{to{transform:translateX(5%)}}
 /* כרטיס זכוכית שטוח */
 .h6__card{position:absolute;z-index:3;left:calc(var(--v6-m) + 1vw);top:calc(var(--hdr,76px) + 16vh);display:grid;gap:6px;padding:18px 22px;min-width:220px;text-decoration:none;color:var(--v6-paper);background:rgb(217 217 210 / .07);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgb(217 217 210 / .22);border-radius:6px;transition:border-color .25s}
-.h6__card span{font-size:14px;color:rgb(217 217 210 / .7)}
+.h6__card span{font-size:14px;color:#B9B4A8}
 .h6__card b{font-size:20px;font-weight:700}
 .h6__card:hover{border-color:var(--v6-sun)}
 @media (max-width:900px){
@@ -218,7 +218,7 @@ body::before,body::after{display:none!important}
 .hb__a{position:absolute;left:50%;top:50%;width:34%;transform:translate(-50%,-50%);fill:#0c0e0d}
 @keyframes hb-spin{to{transform:rotate(360deg)}}
 .hb__card{position:absolute;z-index:4;display:grid;gap:6px;padding:20px 26px;text-align:start;color:var(--v6-paper);text-decoration:none;background:rgb(217 217 210 / .09);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgb(255 255 255 / .26);border-radius:20px;animation:hb-float 6s ease-in-out infinite alternate}
-.hb__card span{font-size:14px;color:rgb(217 217 210 / .75)}
+.hb__card span{font-size:14px;color:#B9B4A8}
 .hb__card b{font-size:20px;font-weight:700;line-height:1.25;max-width:14ch}
 .hb__card1{left:9vw;top:34vh;rotate:-6deg}
 .hb__card2{right:12vw;top:30vh;rotate:5deg;animation-delay:-3s}
@@ -244,7 +244,7 @@ body::before,body::after{display:none!important}
 .hb__l{padding-top:0;padding-bottom:.18em;margin-bottom:-.12em}
 .hb__small{font-family:"Sara Ankava",system-ui,sans-serif;font-weight:300;font-size:clamp(15px,1.45vw,22px);letter-spacing:.01em}
 .ar{stroke-width:13}
-.hb__p{position:absolute;z-index:4;left:50%;transform:translateX(-50%);bottom:5vh;width:min(560px,60vw);margin:0;text-align:center;font-size:18px;line-height:1.5;color:rgb(217 217 210 / .8)}
+.hb__p{position:absolute;z-index:4;left:50%;transform:translateX(-50%);bottom:5vh;width:min(560px,60vw);margin:0;text-align:center;font-size:18px;line-height:1.5;color:#B9B4A8}
 /* כפתורי בועת דיבור: קפסולה בצבע אבן עם זנב קטן בפינה, בכל האתר */
 .cta6,.btn,.h6__btn{position:relative;overflow:visible;background:var(--v6-stone);color:#0c0e0d;border:0;border-radius:999px;clip-path:none;box-shadow:none}
 .cta6::after,.btn::after,.h6__btn::after{content:"";position:absolute;left:22px;bottom:-9px;width:18px;height:14px;background:inherit;clip-path:polygon(0 0,100% 0,0 100%);pointer-events:none}
@@ -266,7 +266,7 @@ body::before,body::after{display:none!important}
 @media (min-width:901px){.hb__card2{top:22vh;right:4vw}.hb__p{bottom:12vh}}
 
 /* ===== עדכון: פסקה בפונט המותג הדק; גרעון עדין וגרדיאנט חי במילים; דודל בועה ===== */
-.hb__p{font-family:"Sara Ankava",system-ui,sans-serif;font-weight:300;font-size:19px;color:rgb(217 217 210 / .85)}
+.hb__p{font-family:"Sara Ankava",system-ui,sans-serif;font-weight:300;font-size:19px;color:#B9B4A8}
 .hb__doodle{transform-box:fill-box;transform-origin:50% 100%;animation:hb-doodle 3.2s ease-in-out infinite}
 @keyframes hb-doodle{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(3deg) translateY(-8px)}}
 /* גרדיאנט חי וגרעון רך יותר */
@@ -287,7 +287,7 @@ body::before,body::after{display:none!important}
 
 /* ===== עדכון: גרעון חזק במילים; קומיקס לונה פארק; כל האיורים בטוש ===== */
 .hb__title .gr-text{background-image:var(--v6-hard),linear-gradient(100deg,var(--v6-mint) 0%,var(--v6-sun) 100%);background-size:200px,auto;background-blend-mode:hard-light,normal;filter:contrast(1.6) saturate(1.2)}
-.cx{position:relative;background:#141716;color:var(--v6-stone);padding:clamp(80px,9vw,150px) var(--v6-m)}
+.cx{position:relative;background:#16262C;color:var(--v6-stone);padding:clamp(80px,9vw,150px) var(--v6-m)}
 .cx__title{margin:0 0 clamp(36px,5vw,72px);font-family:"Sara Ankava",system-ui,sans-serif;line-height:.95;letter-spacing:-.03em}
 .cx__a{display:block;font-weight:700;font-size:clamp(44px,7.4vw,118px);color:var(--v6-stone)}
 .cx__b{display:block;font-weight:300;font-size:clamp(28px,4.2vw,68px);color:var(--v6-stone);margin-top:.15em}
@@ -329,7 +329,7 @@ body::before,body::after{display:none!important}
 .cx__cap{background:transparent;color:var(--v6-stone);border-radius:0;border-top:1px solid rgb(217 217 210 / .3);padding:24px 28px 30px}
 .cx__cap::after{display:none}
 .cx__lab{color:var(--v6-sun);opacity:1}
-.cx__cap p{font-weight:300;font-size:17px;color:rgb(217 217 210 / .85)}
+.cx__cap p{font-weight:300;font-size:17px;color:#B9B4A8}
 @media (max-width:900px){.cx__f{border-inline-start:0;border-top:1px solid rgb(217 217 210 / .3)}.cx__f:first-child{border-top:0}}
 .cx__title .gr-text{font-weight:700}
 
@@ -367,7 +367,7 @@ body::before,body::after{display:none!important}
 .hdr{background:rgb(12 14 13 / .9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 
 /* ===== עדכון: חזרה לרקע כהה; קומיקס בשלוש עמודות שנפתחות בהובר, כמו הפרויקטים; סיפור ===== */
-.cx{background:#141716;color:var(--v6-stone)}
+.cx{background:#16262C;color:var(--v6-stone)}
 .cx__a,.cx__b{color:var(--v6-stone)}
 .cx .gr-text{background-image:var(--v6-hard),linear-gradient(100deg,var(--v6-mint) 0%,var(--v6-sun) 100%);background-blend-mode:soft-light,normal;filter:contrast(1.35) saturate(1.45)}
 .cx__row{display:flex;gap:clamp(10px,1.2vw,16px);height:clamp(480px,66vh,620px);border:0;border-radius:0;overflow:visible;background:transparent}
@@ -379,7 +379,7 @@ body::before,body::after{display:none!important}
 .mkr .y{stroke:var(--v6-sun)}.mkr .b{stroke:var(--v6-mint)}
 .cx__cap{background:transparent;color:var(--v6-stone);border-top:1px solid var(--paper-12);padding:22px 26px 26px}
 .cx__lab{color:var(--v6-sun)}
-.cx__cap p{color:rgb(217 217 210 / .85);max-height:0;opacity:0;margin:0;overflow:hidden;transition:max-height .7s var(--ease),opacity .5s .1s,margin .5s}
+.cx__cap p{color:#B9B4A8;max-height:0;opacity:0;margin:0;overflow:hidden;transition:max-height .7s var(--ease),opacity .5s .1s,margin .5s}
 .cx__f:hover .cx__cap p,.cx__f:focus-visible .cx__cap p{max-height:200px;opacity:1;margin-top:8px}
 @media (max-width:900px){.cx__row{flex-direction:column;height:auto}.cx__f{flex:none}.cx__cap p{max-height:none;opacity:1;margin-top:8px}.cx__art{padding-top:20px}}
 
@@ -432,19 +432,19 @@ body::before,body::after{display:none!important}
 .projects .acc .acc__title,.projects .acc h3{color:var(--v6-paper)}
 .projects .acc .acc__n,.projects .acc .acc__go{color:var(--v6-sun)}
 .projects .acc .acc__item--next .acc__rail,.projects .acc .acc__item--next .acc__vt,.projects .acc .acc__item--next .acc__n{color:#0c0e0d}
-.hdr{background:#141716!important}
+.hdr{background:#16262C!important}
 
 /* ===== קומיקס: כותרות במשקל מדיום, רדיוס נמוך, מסגרת גרדיאנט, גריד עדין ברקע ===== */
 .cx{background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 111px,rgb(217 217 210 / .045) 111px,rgb(217 217 210 / .045) 112px)}
 .cx__cap h3{font-weight:500}
-.cx__f{border:1.5px solid transparent!important;border-radius:12px;background:linear-gradient(#141716,#141716) padding-box,linear-gradient(120deg,var(--v6-mint),var(--v6-sun)) border-box}
+.cx__f{border:1.5px solid transparent!important;border-radius:12px;background:linear-gradient(#16262C,#16262C) padding-box,linear-gradient(120deg,var(--v6-mint),var(--v6-sun)) border-box}
 .cx__f:hover,.cx__f:focus-visible,.cx__f.is-open{border-color:transparent!important}
 .cx__f{border-width:2.5px!important}
 
 /* מסגרת גרדיאנט רק בהובר; כותרת בפונט שרה אנקוה */
-.cx__f{border-width:1.5px!important;background:#141716;border-color:var(--paper-12)!important}
+.cx__f{border-width:1.5px!important;background:#16262C;border-color:var(--paper-12)!important}
 .cx__f.is-open{border-color:var(--paper-12)!important}
-.cx__f:hover,.cx__f:focus-visible{border-color:transparent!important;background:linear-gradient(#141716,#141716) padding-box,linear-gradient(120deg,var(--v6-mint),var(--v6-sun)) border-box}
+.cx__f:hover,.cx__f:focus-visible{border-color:transparent!important;background:linear-gradient(#16262C,#16262C) padding-box,linear-gradient(120deg,var(--v6-mint),var(--v6-sun)) border-box}
 .cx__cap h3,.cx__rail span{font-family:"Sara Ankava",system-ui,sans-serif!important;font-weight:500}
 .cx__rail span{font-weight:700}
 
@@ -482,7 +482,7 @@ body::before,body::after{display:none!important}
 .dd.big{position:relative!important;width:min(420px,60vw);margin:20px auto}
 .dd.bb{inset-inline-end:12%;top:50%}
 .pj__txt{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px;padding:clamp(16px,2vw,28px) var(--v6-m) clamp(26px,3vw,46px)}
-.pj__txt p{margin:0;max-width:46ch;font:300 clamp(18px,1.6vw,24px)/1.5 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .88)}
+.pj__txt p{margin:0;max-width:46ch;font:300 clamp(18px,1.6vw,24px)/1.5 "Sara Ankava",system-ui,sans-serif;color:#B9B4A8}
 @media (max-width:900px){.pj__mk{width:92%}.pj__stage .dd,.pj__note{display:none}.pj__body{grid-template-rows:1fr}.pj__row .pj__mk{opacity:1;transform:none}.pj__z{display:none}}
 @media (prefers-reduced-motion:reduce){.pj__body,.pj__mk,.pj__stage .dd{transition:none}}
 .pn1{top:36%}
@@ -491,13 +491,13 @@ body::before,body::after{display:none!important}
 .pj{background:#121413;padding:clamp(64px,7vw,110px) 0 clamp(56px,6vw,96px)}
 .pj::before{content:"";position:absolute;inset:0;background-image:var(--v6-n);background-size:170px;mix-blend-mode:overlay;opacity:.55;pointer-events:none}
 .pj>*{position:relative}
-.pj__eye{font-size:15px;font-weight:300;color:rgb(217 217 210 / .6)}
+.pj__eye{font-size:15px;font-weight:300;color:#B9B4A8}
 .pj__head h2{font:500 clamp(26px,3vw,44px)/1.15 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;max-width:22ch}
 .pj__row,.pj__row:nth-child(even),.pj__row.is-open{background:transparent}
 .pj__bar{padding:clamp(16px,1.8vw,24px) var(--v6-m);gap:clamp(14px,2vw,28px);border-top:1px solid rgb(217 217 210 / .12)}
 .pj__row:first-child .pj__bar{border-top:0}
 .pj__n{font:300 clamp(14px,1.2vw,18px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .55);min-width:2.4ch}
-.pj__t{font:500 clamp(26px,3vw,44px)/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:rgb(217 217 210 / .72)}
+.pj__t{font:500 clamp(26px,3vw,44px)/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:#B9B4A8}
 .pj__row.is-open .pj__t{color:var(--v6-stone)}
 .pj__stage{padding:clamp(24px,4vw,64px) var(--v6-m) clamp(10px,2vw,28px)}
 .pj__mk{width:min(840px,58vw)}
@@ -532,7 +532,7 @@ body::before,body::after{display:none!important}
 .pj__row:hover{background:transparent}
 .pj__n{font:300 clamp(14px,1.2vw,18px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .55)}
 .pj__row .pj__t{margin:0;font:500 clamp(24px,3vw,44px)/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:var(--v6-stone)}
-.pj__d{margin:0;font:300 clamp(15px,1.25vw,18px)/1.4 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .8)}
+.pj__d{margin:0;font:300 clamp(15px,1.25vw,18px)/1.4 "Sara Ankava",system-ui,sans-serif;color:#B9B4A8}
 .pj__m{display:none}
 .pj__float{position:fixed;left:0;top:0;z-index:80;width:320px;pointer-events:none;opacity:0;transition:opacity .25s;will-change:transform}
 .pj__float.on{opacity:1}
@@ -570,12 +570,12 @@ body::before,body::after{display:none!important}
 .pj__st{-webkit-text-stroke-width:2.1px;paint-order:stroke fill}
 
 /* ===== אתר בלי תנועה · סצנה נעוצה בגלילה, הציור מצטייר בטוש ===== */
-.lp{position:relative;height:360vh;background:#141716;color:var(--v6-stone)}
+.lp{position:relative;height:360vh;background:#16262C;color:var(--v6-stone)}
 .lp::before{content:"";position:absolute;inset:0;background-image:var(--v6-n);background-size:170px;mix-blend-mode:overlay;opacity:.5;pointer-events:none}
 .lp__stick{position:sticky;top:0;height:100vh;display:grid;grid-template-rows:auto 1fr;padding:calc(var(--hdr,76px) + 18px) var(--v6-m) 24px;overflow:hidden}
 .lp__h{margin:0;display:flex;justify-content:space-between;align-items:baseline;gap:24px;font-family:"Sara Ankava",system-ui,sans-serif}
 .lp__h span:first-child{font:700 clamp(24px,2.6vw,38px) "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone)}
-.lp__h span:last-child{font:300 clamp(18px,1.8vw,26px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .8)}
+.lp__h span:last-child{font:300 clamp(18px,1.8vw,26px) "Sara Ankava",system-ui,sans-serif;color:#B9B4A8}
 .lp__scene{position:relative;display:grid;place-items:center;min-height:0}
 .lp__svg{width:min(1000px,100%);max-height:100%;height:auto;overflow:visible}
 .lp__svg .L{fill:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
@@ -637,17 +637,17 @@ body::before,body::after{display:none!important}
 .pj3__c::before{opacity:.24}
 
 /* ===== אתר בלי תנועה · שורות, איור מופיע ליד העכבר בהובר ===== */
-.lw{position:relative;background:#141716;color:var(--v6-stone);padding:clamp(70px,8vw,120px) 0 clamp(60px,7vw,100px)}
+.lw{position:relative;background:#16262C;color:var(--v6-stone);padding:clamp(70px,8vw,120px) 0 clamp(60px,7vw,100px)}
 .lw::before{content:"";position:absolute;inset:0;background-image:var(--v6-n);background-size:170px;mix-blend-mode:overlay;opacity:.55;pointer-events:none}
 .lw>*{position:relative}
 .lw__h{margin:0 var(--v6-m) clamp(30px,4vw,56px);display:flex;justify-content:space-between;align-items:baseline;gap:24px}
 .lw__h span:first-child{font:700 clamp(24px,2.6vw,38px) "Sara Ankava",system-ui,sans-serif}
-.lw__h span:last-child{font:300 clamp(18px,1.8vw,26px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .8)}
+.lw__h span:last-child{font:300 clamp(18px,1.8vw,26px) "Sara Ankava",system-ui,sans-serif;color:#B9B4A8}
 .lw__row{display:grid;grid-template-columns:3ch minmax(0,1.1fr) minmax(0,1.5fr);align-items:center;gap:clamp(14px,2.4vw,40px);padding:clamp(20px,2.2vw,32px) var(--v6-m);border-top:1px solid rgb(217 217 210 / .16)}
 .lw__row:last-child{border-bottom:1px solid rgb(217 217 210 / .16)}
 .lw__n{font:300 clamp(14px,1.2vw,18px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .55)}
 .lw__t{margin:0;font:500 clamp(26px,3vw,44px)/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:var(--v6-stone)}
-.lw__d{margin:0;font:300 clamp(15px,1.3vw,19px)/1.4 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .82)}
+.lw__d{margin:0;font:300 clamp(15px,1.3vw,19px)/1.4 "Sara Ankava",system-ui,sans-serif;color:#B9B4A8}
 .lw__m{display:none}
 .lw__m svg,.lw__m img,.lw__float svg,.lw__float img{display:block;width:100%;height:auto}
 .lw__m svg,.lw__float svg{fill:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;background:#000}
@@ -677,14 +677,14 @@ body::before,body::after{display:none!important}
 .lw__row:last-child{border-bottom:1px solid rgb(217 217 210 / .18)}
 .lw__bar{display:flex;align-items:center;gap:clamp(16px,2.4vw,40px);padding:clamp(18px,2vw,28px) var(--v6-m)}
 .lw__n{font:300 clamp(14px,1.2vw,18px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .55);min-width:3ch}
-.lw__t{margin:0;font:500 clamp(24px,3vw,44px)/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:rgb(217 217 210 / .75);transition:color .4s}
+.lw__t{margin:0;font:500 clamp(24px,3vw,44px)/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:#B9B4A8;transition:color .4s}
 .lw__row.is-open .lw__t{color:var(--v6-stone)}
 .lw__body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .8s var(--ease)}
 .lw__row.is-open .lw__body{grid-template-rows:1fr}
 .lw__body>.lw__in{min-height:0;overflow:hidden}
 .lw__in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);align-items:center;gap:clamp(20px,3vw,56px);padding:0 var(--v6-m)}
 .lw__row.is-open .lw__in{padding-bottom:clamp(24px,3vw,44px)}
-.lw__p{margin:0;font:300 clamp(17px,1.5vw,22px)/1.55 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .88);max-width:34ch}
+.lw__p{margin:0;font:300 clamp(17px,1.5vw,22px)/1.55 "Sara Ankava",system-ui,sans-serif;color:#B9B4A8;max-width:34ch}
 .lw__ill{mix-blend-mode:screen;opacity:0;transition:opacity .4s}
 .lw__row.is-open .lw__ill{opacity:1;transition-delay:.3s}
 .lw__wob{filter:url(#lw-wob)}
@@ -725,24 +725,24 @@ body::before,body::after{display:none!important}
 .pj3__n,.pj3__rn{color:rgb(18 20 15 / .78)!important}
 
 /* ---- לונה פארק נעוץ ---- */
-.lp2{position:relative;height:430vh;background:#141716;color:var(--v6-stone)}
+.lp2{position:relative;height:430vh;background:#16262C;color:var(--v6-stone)}
 .lp2__stick{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding-top:calc(var(--hdr,76px) + 14px);z-index:1;overflow:hidden}
 .lp2__h{margin:0 0 14px;padding-inline:var(--v6-m);display:flex;justify-content:space-between;align-items:baseline;gap:20px}
 .lp2__h span:first-child{font:700 clamp(22px,2.4vw,34px) "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone)}
-.lp2__h span:last-child{font:300 clamp(16px,1.6vw,22px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .9)}
+.lp2__h span:last-child{font:300 clamp(16px,1.6vw,22px) "Sara Ankava",system-ui,sans-serif;color:#B9B4A8}
 .lp2__list{flex:1;min-height:0;display:flex;flex-direction:column}
 .lp2__row{display:flex;flex-direction:column;border-top:2px solid rgb(217 217 210 / .38);cursor:pointer;outline:none;min-height:112px}
 .lp2__row:last-child{border-bottom:2px solid rgb(217 217 210 / .38)}
 .lp2__row.is-open{flex:1;min-height:0}
 .lp2__bar{display:flex;align-items:center;gap:clamp(16px,2.4vw,40px);min-height:112px;padding:0 var(--v6-m)}
-.lp2__n{font:500 clamp(15px,1.3vw,19px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .78);min-width:3ch}
-.lp2__t{margin:0;font:700 48px/1.05 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:rgb(217 217 210 / .86);transition:color .4s}
+.lp2__n{font:500 clamp(15px,1.3vw,19px) "Sara Ankava",system-ui,sans-serif;color:#B9B4A8;min-width:3ch}
+.lp2__t{margin:0;font:700 48px/1.05 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:#B9B4A8;transition:color .4s}
 .lp2__row.is-open .lp2__t{color:#fff}
 .lp2__body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .8s var(--ease);flex:0 0 auto;min-height:0}
 .lp2__row.is-open .lp2__body{grid-template-rows:1fr;flex:1}
 .lp2__body>.lp2__in{min-height:0;overflow:hidden}
 .lp2__in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.25fr);align-items:center;gap:clamp(20px,3vw,56px);padding:0 var(--v6-m) 14px}
-.lp2__p{margin:0;font:300 clamp(17px,1.5vw,22px)/1.55 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .94);max-width:34ch}
+.lp2__p{margin:0;font:300 clamp(17px,1.5vw,22px)/1.55 "Sara Ankava",system-ui,sans-serif;color:#B9B4A8;max-width:34ch}
 .lp2__ill{mix-blend-mode:screen;opacity:0;transition:opacity .5s .25s;display:flex;justify-content:center}
 .lp2__row.is-open .lp2__ill{opacity:1}
 .lp2__ill svg{display:block;width:100%;height:auto;max-height:max(200px,calc(100vh - 610px));background:#000}
@@ -772,22 +772,22 @@ body::before,body::after{display:none!important}
 }
 
 /* ---- תהליך ---- */
-.pr{position:relative;background:#141716;color:var(--v6-stone);padding:clamp(120px,10vw,160px) 0}
+.pr{position:relative;background:#16262C;color:var(--v6-stone);padding:clamp(120px,10vw,160px) 0}
 .pr__h{margin:0 0 clamp(40px,5vw,72px);display:grid;gap:4px}
 .pr__h span:first-child{font:700 clamp(26px,3vw,44px)/1.1 "Sara Ankava",system-ui,sans-serif}
-.pr__h span:last-child{font:300 clamp(20px,2.2vw,32px)/1.15 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .92)}
+.pr__h span:last-child{font:300 clamp(20px,2.2vw,32px)/1.15 "Sara Ankava",system-ui,sans-serif;color:#B9B4A8}
 .pr__row{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);align-items:center;gap:clamp(20px,4vw,64px);min-height:112px;padding:clamp(24px,3vw,40px) 0;border-top:2px solid rgb(217 217 210 / .38);opacity:0;transform:translateY(26px);transition:opacity .8s,transform .9s var(--ease)}
 .pr__row:last-child{border-bottom:2px solid rgb(217 217 210 / .38)}
 .pr__row.in{opacity:1;transform:none}
 .pr__n{font:700 clamp(72px,9vw,128px)/.9 "Sara Ankava",system-ui,sans-serif;color:transparent;-webkit-text-stroke:2px rgb(217 217 210 / .9);min-width:2ch}
 .pr__tx{display:grid;gap:10px}
 .pr__t{margin:0;font:700 48px/1.1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:#fff}
-.pr__p{margin:0;font:300 clamp(17px,1.5vw,21px)/1.55 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .94);max-width:52ch}
+.pr__p{margin:0;font:300 clamp(17px,1.5vw,21px)/1.55 "Sara Ankava",system-ui,sans-serif;color:#B9B4A8;max-width:52ch}
 @media (max-width:900px){.pr__row{grid-template-columns:1fr;gap:8px}.pr__t{font-size:34px}.pr__n{font-size:72px}}
 @media (prefers-reduced-motion:reduce){.pr__row{opacity:1;transform:none;transition:none}}
 
 /* ---- אודות ---- */
-.ab{position:relative;background:#141716;color:var(--v6-stone);padding:clamp(120px,10vw,160px) 0}
+.ab{position:relative;background:#16262C;color:var(--v6-stone);padding:clamp(120px,10vw,160px) 0}
 .ab__hi{display:block;font:500 clamp(16px,1.4vw,20px) "Sara Ankava",system-ui,sans-serif;color:var(--v6-sun);margin-bottom:12px}
 .ab__h{margin:0 0 clamp(36px,4vw,60px);display:grid;gap:2px}
 .ab__h span:first-child{font:300 clamp(26px,3vw,44px)/1.1 "Sara Ankava",system-ui,sans-serif}
@@ -809,12 +809,12 @@ body::before,body::after{display:none!important}
 .ab__nums{list-style:none;margin:clamp(40px,5vw,72px) 0 0;padding:20px 0 0;border-top:2px solid rgb(217 217 210 / .38);display:flex;flex-wrap:nowrap;justify-content:space-between;gap:16px}
 .ab__nums li{display:flex;align-items:baseline;gap:12px}
 .ab__nums b{font:700 clamp(40px,5vw,72px)/1 "Sara Ankava",system-ui,sans-serif;color:#fff}
-.ab__nums span{font:500 clamp(15px,1.4vw,19px) "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .94)}
+.ab__nums span{font:500 clamp(15px,1.4vw,19px) "Sara Ankava",system-ui,sans-serif;color:#B9B4A8}
 @media (max-width:900px){.ab__grid{grid-template-columns:1fr}.polaroid{order:-1}.ab__nums{flex-wrap:wrap}}
 @media (prefers-reduced-motion:reduce){.bub,.polaroid{opacity:1;transform:none;transition:none}.polaroid{transform:rotate(-5deg)}}
 
 /* ---- יצירת קשר ---- */
-.ct{background:#141716;padding:clamp(120px,10vw,160px) var(--v6-m);color:#12140f}
+.ct{background:#16262C;padding:clamp(120px,10vw,160px) var(--v6-m);color:#12140f}
 .ct__panel{position:relative;max-width:1200px;margin-inline:auto;border-radius:32px;padding:clamp(32px,5vw,72px);overflow:hidden;background:linear-gradient(115deg,#FFE066 0%,#BFE3FF 35%,#FFF2A8 65%,#9ED4FF 100%);background-size:300% 300%;animation:ct-flow 18s ease-in-out infinite alternate}
 @keyframes ct-flow{from{background-position:0% 50%}to{background-position:100% 50%}}
 .ct__panel>*{position:relative;z-index:1}
@@ -843,20 +843,20 @@ body::before,body::after{display:none!important}
 @media (prefers-reduced-motion:reduce){.ct__panel{animation:none}}
 
 /* ---- פוטר ---- */
-.ftr2{position:relative;background:#141716;color:var(--v6-stone);padding:clamp(100px,8vw,140px) 0 36px}
+.ftr2{position:relative;background:#16262C;color:var(--v6-stone);padding:clamp(100px,8vw,140px) 0 36px}
 .ftr2__h{margin:0 0 clamp(24px,3vw,40px);font:500 clamp(22px,2.4vw,34px)/1.3 "Sara Ankava",system-ui,sans-serif;color:#fff;max-width:30ch}
 .ftr2__form{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 24px;margin-bottom:28px}
-.ftr2__form label{width:100%;font-size:15px;color:rgb(217 217 210 / .94)}
+.ftr2__form label{width:100%;font-size:15px;color:#B9B4A8}
 .ftr2__form input{font:500 22px "Sara Ankava",system-ui,sans-serif;color:#fff;background:transparent;border:0;border-bottom:2px solid rgb(217 217 210 / .8);padding:8px 4px;min-width:min(260px,100%)}
 .ftr2__form input:focus{outline:none;border-bottom-color:var(--v6-sun)}
-.ftr2__form input::placeholder{color:rgb(217 217 210 / .7)}
+.ftr2__form input::placeholder{color:#B9B4A8}
 .ftr2__soc{list-style:none;margin:0 0 clamp(36px,4vw,56px);padding:0;display:flex;gap:28px}
 .ftr2 a{color:var(--v6-stone);text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgb(217 217 210 / .5)}
 .ftr2 a:hover{text-decoration-color:var(--v6-stone)}
 .ftr2__cols{display:flex;flex-wrap:wrap;gap:24px 80px;padding-top:28px;border-top:2px solid rgb(217 217 210 / .3)}
 .ftr2__cols ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:16px}
 .ftr2__cols .motion-toggle{background:transparent;border:0;color:var(--v6-stone);font:inherit;text-decoration:underline;text-underline-offset:5px;cursor:pointer;padding:0}
-.ftr2__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:36px;font-size:14px;color:rgb(217 217 210 / .86)}
+.ftr2__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:36px;font-size:14px;color:#B9B4A8}
 .ftr2 .btn--primary{background:var(--v6-stone)!important;color:#12140f!important}
 .lp2__ill{mix-blend-mode:normal}
 .lp2__ill svg{background:transparent!important}
@@ -886,7 +886,7 @@ body::before,body::after{display:none!important}
 .lp2__row{border-top:1px solid rgb(217 217 210 / .14)!important;min-height:96px}
 .lp2__row:last-child{border-bottom:1px solid rgb(217 217 210 / .14)!important}
 .lp2__bar{position:relative;min-height:96px;gap:clamp(16px,2.4vw,40px)}
-.lp2__n{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;min-width:0;border-radius:50%;border:1px solid rgb(217 217 210 / .45);background:#141716;font:300 14px "Sara Ankava",system-ui,sans-serif;position:relative;z-index:2}
+.lp2__n{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;min-width:0;border-radius:50%;border:1px solid rgb(217 217 210 / .45);background:#16262C;font:300 14px "Sara Ankava",system-ui,sans-serif;position:relative;z-index:2}
 .lp2__row.is-open .lp2__n{border-color:var(--v6-sun)}
 .lp2__t{font-size:clamp(26px,3.2vw,48px)}
 .lp2__ln{flex:1;height:1px;background:linear-gradient(to left,rgb(217 217 210 / .55),rgb(217 217 210 / .08));transform:scaleX(0);transform-origin:right center;transition:transform .9s var(--ease) .1s}
@@ -923,17 +923,17 @@ body::before,body::after{display:none!important}
 .pr__side{position:sticky;top:calc(var(--hdr,76px) + 8vh)}
 .pr .pr__h{margin:0 0 28px;white-space:normal;font-size:clamp(30px,4.4vw,68px);line-height:1.08}
 .pr .pr__h span{display:inline}
-.pr__lead{margin:0;font:300 clamp(17px,1.5vw,22px)/1.6 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .9);max-width:36ch}
+.pr__lead{margin:0;font:300 clamp(17px,1.5vw,22px)/1.6 "Sara Ankava",system-ui,sans-serif;color:#B9B4A8;max-width:36ch}
 .pr__tl{list-style:none;margin:0;padding:0;position:relative}
 .pr__tl::before{content:"";position:absolute;top:0;bottom:0;right:7px;width:1px;background:rgb(217 217 210 / .22)}
 .pr__st{position:relative;display:grid;grid-template-columns:auto 1fr;gap:0 clamp(20px,3vw,48px);align-items:start;min-height:56vh;padding-inline-start:44px;opacity:.38;transition:opacity .5s}
 .pr__st.is-on{opacity:1}
-.pr__dot{position:absolute;right:0;top:calc(clamp(60px,8vw,118px) / 2 - 8px);width:15px;height:15px;border-radius:50%;border:1px solid rgb(217 217 210 / .5);background:#141716;transition:background .4s,border-color .4s,transform .4s}
+.pr__dot{position:absolute;right:0;top:calc(clamp(60px,8vw,118px) / 2 - 8px);width:15px;height:15px;border-radius:50%;border:1px solid rgb(217 217 210 / .5);background:#16262C;transition:background .4s,border-color .4s,transform .4s}
 .pr__st.is-on .pr__dot{border-color:transparent;transform:scale(1.15);background-image:var(--v6-hard),linear-gradient(135deg,var(--v6-sun),var(--v6-mint));background-size:160px,auto;background-blend-mode:hard-light,normal}
 .pr__n{font:700 clamp(60px,8vw,118px)/1 "Sara Ankava",system-ui,sans-serif;color:transparent;-webkit-text-stroke:1px rgb(217 217 210 / .8);min-width:2ch}
 .pr__tx{padding-top:clamp(8px,1.2vw,18px)}
 .pr__t{margin:0 0 14px;font:700 clamp(24px,2.5vw,38px)/1.15 "Sara Ankava",system-ui,sans-serif}
-.pr__p{margin:0;font-size:clamp(17px,1.4vw,21px);line-height:1.6;max-width:38ch;color:rgb(217 217 210 / .92)}
+.pr__p{margin:0;font-size:clamp(17px,1.4vw,21px);line-height:1.6;max-width:38ch;color:#B9B4A8}
 @media (max-width:900px){
   .pr__wrap{grid-template-columns:1fr}
   .pr__side{position:static;margin-bottom:36px}
@@ -949,12 +949,12 @@ body::before,body::after{display:none!important}
 .ab__stk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ab__h{position:relative;z-index:1;margin:0 var(--v6-m) clamp(36px,4vw,64px);text-align:center;font:700 clamp(36px,6vw,104px)/1.02 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.02em;color:var(--v6-stone)}
 .ab__lines{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(32px,5vw,96px);margin:0 var(--v6-m)}
-.ab__lines p{margin:0;padding:22px 0;border-top:1px solid rgb(217 217 210 / .14);font:300 clamp(18px,1.8vw,28px)/1.5 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .95)}
+.ab__lines p{margin:0;padding:22px 0;border-top:1px solid rgb(217 217 210 / .14);font:300 clamp(18px,1.8vw,28px)/1.5 "Sara Ankava",system-ui,sans-serif;color:#B9B4A8}
 @media (max-width:900px){.ab__lines{grid-template-columns:1fr}.ab__a{width:78vw}.ab__stk{left:calc(50% - 39vw)}}
 
 /* יצירת קשר */
 .ct{padding:0!important;background:transparent}
-.ct__panel{max-width:none!important;margin:0!important;border-radius:0!important;padding:clamp(80px,8vw,130px) var(--v6-m)!important;background:#141716!important;isolation:isolate}
+.ct__panel{max-width:none!important;margin:0!important;border-radius:0!important;padding:clamp(80px,8vw,130px) var(--v6-m)!important;background:#16262C!important;isolation:isolate}
 .ct__panel::before{content:"";position:absolute;inset:-20%;z-index:-2;background:radial-gradient(38% 46% at 24% 30%,#FFE066,transparent 72%),radial-gradient(40% 50% at 78% 28%,#8ED6FF,transparent 72%),radial-gradient(42% 52% at 56% 82%,#FFF08A,transparent 72%),radial-gradient(36% 46% at 12% 86%,#86D3FF,transparent 72%),#BFE3FF;animation:ct-flow 26s ease-in-out infinite alternate}
 .ct__panel::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--v6-hard);background-size:240px;mix-blend-mode:hard-light;opacity:.85;pointer-events:none}
 .ct__panel>.gn{display:none}
@@ -1044,17 +1044,17 @@ body::before,body::after{display:none!important}
 /* ==========================================================================
    v6 · תהליך: שלוש עמודות מקצה לקצה (גרסה נקייה)
    ========================================================================== */
-.pr3{position:relative;height:300vh;background:#141716;color:var(--v6-stone)}
-.pr3__stick{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--hdr,76px) + 40px) 0 40px;z-index:1;overflow:hidden;background-color:#141716;background-image:var(--hl)}
+.pr3{position:relative;height:300vh;background:#16262C;color:var(--v6-stone)}
+.pr3__stick{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--hdr,76px) + 40px) 0 40px;z-index:1;overflow:hidden;background-color:#16262C;background-image:var(--hl)}
 .pr3__h{display:block;margin:0 clamp(48px,6vw,88px) 40px!important;max-width:min(100% - 48px,820px);white-space:normal!important;text-align:right}
-.pr3__cols{position:relative;flex:none;height:min(52vh,470px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:#141716}
+.pr3__cols{position:relative;flex:none;height:min(52vh,470px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:#16262C}
 .pr3__c{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:34px;padding:40px clamp(48px,6vw,88px) 40px clamp(24px,3vw,48px);opacity:.3;transition:opacity .7s var(--ease)}
 .pr3__c:nth-of-type(n+2){border-inline-start:1px solid rgb(217 217 210 / .2)}
 .pr3__c.is-lit{opacity:1}
-.pr3__n{display:block;font:700 clamp(56px,6vw,96px)/1 "Sara Ankava",system-ui,sans-serif;color:#141716;-webkit-text-stroke:2px rgb(217 217 210 / .9);paint-order:stroke fill}
+.pr3__n{display:block;font:700 clamp(56px,6vw,96px)/1 "Sara Ankava",system-ui,sans-serif;color:#16262C;-webkit-text-stroke:2px rgb(217 217 210 / .9);paint-order:stroke fill}
 .pr3__tx{display:grid;gap:12px}
 .pr3__t{margin:0;font:700 clamp(24px,2.4vw,36px)/1.15 "Sara Ankava",system-ui,sans-serif}
-.pr3__p{margin:0;max-width:30ch;font:300 clamp(16px,1.3vw,20px)/1.5 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .92)}
+.pr3__p{margin:0;max-width:30ch;font:300 clamp(16px,1.3vw,20px)/1.5 "Sara Ankava",system-ui,sans-serif;color:#B9B4A8}
 .pr3__q{position:relative;margin:0;padding:0 0 12px;font:300 clamp(15px,1.2vw,18px)/1.3 "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);white-space:nowrap;cursor:default}
 .pr3__ul{position:absolute;left:0;bottom:0;width:100%;height:8px;overflow:visible}
 .pr3__ul path{fill:none;stroke:#FFE066;stroke-width:2.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
@@ -1113,9 +1113,9 @@ body::before,body::after{display:none!important}
 .pr3__c{gap:26px;padding-top:32px;padding-bottom:36px}
 .pr3__ob{position:relative;flex:none;width:min(100%,340px);height:clamp(150px,22vh,200px);margin-top:auto}
 .oc{position:absolute;inset:0;border-radius:22px;background:#2c2f2e;padding:14px;display:flex;flex-direction:column;justify-content:center;gap:10px}
-.pr3__bb{position:absolute;z-index:2;padding:8px 16px;border:1px solid rgb(217 217 210 / .7);border-radius:18px;background:#141716;font:300 15px/1.25 "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);white-space:nowrap;opacity:0;transform:scale(.4);transform-origin:50% 100%}
+.pr3__bb{position:absolute;z-index:2;padding:8px 16px;border:1px solid rgb(217 217 210 / .7);border-radius:18px;background:#16262C;font:300 15px/1.25 "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone);white-space:nowrap;opacity:0;transform:scale(.4);transform-origin:50% 100%}
 .pos-tl{left:-10px;top:-20px}.pos-tr{right:-10px;top:-20px}
-.pr3__bb::after{content:"";position:absolute;bottom:-5px;right:18px;width:9px;height:9px;background:#141716;border:1px solid rgb(217 217 210 / .7);border-top:0;border-left:0;transform:rotate(45deg)}
+.pr3__bb::after{content:"";position:absolute;bottom:-5px;right:18px;width:9px;height:9px;background:#16262C;border:1px solid rgb(217 217 210 / .7);border-top:0;border-left:0;transform:rotate(45deg)}
 .pr3__c.is-lit .pr3__bb{animation:pr3-pop .55s cubic-bezier(.3,1.6,.5,1) .7s both}
 @keyframes pr3-pop{0%{opacity:0;transform:scale(.4)}100%{opacity:1;transform:scale(1)}}
 .pr3__c.is-act .pr3__bb{border-color:transparent;color:#12140f;background-image:var(--v6-hard),linear-gradient(135deg,var(--v6-sun),var(--v6-mint));background-size:200px,auto;background-blend-mode:hard-light,normal}
@@ -1198,7 +1198,7 @@ body::before,body::after{display:none!important}
 .ui{-webkit-backdrop-filter:none;backdrop-filter:none}
 
 /* קופי חדש: שורת "מקבלים" בתהליך, שלוש פסקאות באודות */
-.pr3__g{margin-top:2px;font-size:clamp(14px,1.1vw,16px);color:rgb(217 217 210 / .8)}
+.pr3__g{margin-top:2px;font-size:clamp(14px,1.1vw,16px);color:#B9B4A8}
 .pr3__g b{font-weight:500;color:var(--v6-stone)}
 .ab__lines{grid-template-columns:repeat(3,minmax(0,1fr))}
 .ab__lines p{font-size:clamp(17px,1.5vw,22px);line-height:1.6}
@@ -1222,7 +1222,7 @@ body::before,body::after{display:none!important}
 
 /* פרויקטים: פס הכותרת כהה כמו ההירו */
 .pj{padding-top:0}
-.pj .pj__h{margin:0 0 clamp(30px,4vw,56px);padding:clamp(56px,6vw,96px) var(--v6-m) clamp(36px,4.5vw,64px);background:#141716}
+.pj .pj__h{margin:0 0 clamp(30px,4vw,56px);padding:clamp(56px,6vw,96px) var(--v6-m) clamp(36px,4.5vw,64px);background:#16262C}
 .pj .pj__h .pj__st{-webkit-text-stroke:1px var(--v6-stone)!important}
 
 /* ==========================================================================
@@ -1232,7 +1232,7 @@ body::before,body::after{display:none!important}
 .lp2--lp .lp2__cmp{height:100%;min-height:0}
 .sc{display:block;width:100%;height:100%;min-height:200px;overflow:visible}
 .sc__t{font:500 15px "Sara Ankava",system-ui,sans-serif;fill:#D9D9D2}
-.sc__bt{font:500 16px "Sara Ankava",system-ui,sans-serif;fill:#141716}
+.sc__bt{font:500 16px "Sara Ankava",system-ui,sans-serif;fill:#16262C}
 .sc__road{fill:none;stroke:rgb(217 217 210 / .28);stroke-width:4;stroke-linecap:round;stroke-dasharray:3 14}
 .sc__ghost{fill:none;stroke:rgb(217 217 210 / .35);stroke-width:2;stroke-dasharray:8 8}
 .sc .ar{fill:none;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .2s}
@@ -1279,18 +1279,18 @@ body::before,body::after{display:none!important}
 /* לונה פארק: ויזואל במרכז השורה, בלי גריד בשורה הפתוחה, מספרים בעיגול */
 .lp2--lp .lp2__cmp{align-self:center;width:100%}
 .sc{max-width:100%;aspect-ratio:740/240;margin-inline:auto}
-.lp2--lp .lp2__row.is-open{background:#141716}
+.lp2--lp .lp2__row.is-open{background:#16262C}
 .lp2--lp .lp2__n{border-radius:50%!important;border:1px solid rgb(217 217 210 / .45)}
 .lp2--lp .lp2__row.is-open .lp2__n{border-color:#FFE66D;color:#FFE66D}
 
 
 /* ==========================================================================
-   v6 · תיקונים גלובליים: גוון אחד #141716, בלי גרעיניות ברקע, גריד אחיד (P = 12.5svh), כותרות על הגריד, גרדיאנט אחד (RibbedGradient)
+   v6 · תיקונים גלובליים: גוון אחד #16262C, בלי גרעיניות ברקע, גריד אחיד (P = 12.5svh), כותרות על הגריד, גרדיאנט אחד (RibbedGradient)
    ========================================================================== */
 :root{--P:12.5svh;--hl:repeating-linear-gradient(to bottom,transparent 0,transparent calc(12.5svh - 1px),rgb(217 217 210 / .1) calc(12.5svh - 1px),rgb(217 217 210 / .1) 12.5svh)}
 .gn{display:none!important}
 .h6::before,.h6::after{display:none!important}
-.h6,.lp2,.pr3,.pr3__stick,.ab,.ftr2{background-color:#141716}
+.h6,.lp2,.pr3,.pr3__stick,.ab,.ftr2{background-color:#16262C}
 
 /* גרדיאנט: אותו מנגנון כמו בצור קשר, צבוע כרקע של טקסט/אלמנט */
 .gr-text:not(.hb__l){animation:none!important}
@@ -1344,7 +1344,7 @@ body::before,body::after{display:none!important}
 .lp2--lp .lp2__cmp{position:relative}
 .dd2{position:absolute;display:block;overflow:hidden;mix-blend-mode:screen;filter:contrast(1.25);pointer-events:none}
 .dd2 img{position:absolute;max-width:none;display:block}
-.lp2__stick{background-color:#141716}
+.lp2__stick{background-color:#16262C}
 .lp2--lp .lp2__h{gap:0!important;row-gap:0!important}
 
 /* ==========================================================================
@@ -1353,11 +1353,11 @@ body::before,body::after{display:none!important}
 /* כותרות בינוניות: בלי גרדיאנט, מילת ההדגשה בצהוב */
 .gr-text:not(.hb__l){background-image:none!important;background:none!important;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#FFE66D!important;color:#FFE66D!important;filter:none!important;animation:none!important}
 /* בועות ומדבקות: מילוי חלק צהוב */
-.pr3__c.is-act .pr3__bb{background-image:none!important;background-color:#FFE66D;color:#141716}
+.pr3__c.is-act .pr3__bb{background-image:none!important;background-color:#FFE66D;color:#16262C}
 .pr3__c.is-act .pr3__bb::after{background:#FFE66D}
 .ab__stk{background-image:none!important;background-color:#FFE66D}
 .hb__badge .gr-sq{background-image:none!important;background:#FFE66D!important;filter:none!important}
-.ftr2__ic a:hover,.ftr2__ic a:focus-visible{background:#FFE66D!important;border-color:transparent;color:#141716}
+.ftr2__ic a:hover,.ftr2__ic a:focus-visible{background:#FFE66D!important;border-color:transparent;color:#16262C}
 /* הירו: "לשלב הבא": גרדיאנט חלק צהוב-תכלת, בלי גרעיניות, קצוות נמסים, תזוזה איטית עם העכבר */
 .hb__title .hb__l.gr-text{width:fit-content;background-image:repeating-linear-gradient(90deg,rgb(255 255 255 / .06) 0,rgb(255 255 255 / .06) 1px,transparent 1px,transparent 11px),linear-gradient(100deg,#FFE66D 0%,#8ED8FF 50%,#FFE66D 100%);background-size:auto,240% 100%;background-position:0 0,var(--gx,50%) 0;background-repeat:repeat,no-repeat;background-blend-mode:normal;filter:none;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%)}
 @media (prefers-reduced-motion:reduce){.hb__title .hb__l.gr-text{background:none!important;-webkit-text-fill-color:#FFE66D;color:#FFE66D;-webkit-mask-image:none;mask-image:none}}
@@ -1398,7 +1398,7 @@ body::before,body::after{display:none!important}
 .ab__top{position:relative;z-index:1;display:flex;justify-content:center;align-items:flex-end;margin-bottom:0}
 .ab__ph{display:block;height:100%;width:auto;max-width:100%;object-fit:contain;object-position:bottom;-webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent 100%),linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom,#000 70%,transparent 100%),linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%);mask-composite:intersect}
 .ab__h{margin:0 var(--v6-m)!important;white-space:nowrap;font-size:clamp(24px,3.6vw,52px)!important;line-height:var(--P)!important;letter-spacing:-.01em}
-.ab__p{position:relative;z-index:1;margin:calc(var(--P) * .5) var(--v6-m) 0;column-count:2;column-gap:clamp(32px,5vw,96px);font:300 clamp(16px,1.25vw,19px)/1.75 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .95)}
+.ab__p{position:relative;z-index:1;margin:calc(var(--P) * .5) var(--v6-m) 0;column-count:2;column-gap:clamp(32px,5vw,96px);font:300 clamp(16px,1.25vw,19px)/1.75 "Sara Ankava",system-ui,sans-serif;color:#B9B4A8}
 @media (min-width:901px){.ab__top{height:calc(var(--P) * 6)}}
 @media (max-width:900px){.ab__top{height:auto}.ab__ph{width:min(82vw,420px);height:auto}.ab__h{white-space:normal;line-height:1.2!important;font-size:clamp(26px,7.5vw,40px)!important}.ab__p{column-count:1}}
 /* אודות: תמונה קטנה יותר, הילה בגווני הגרדיאנט מאחוריה, פסקה אחת רצופה */
@@ -1409,7 +1409,7 @@ body::before,body::after{display:none!important}
 @media (max-width:900px){.ab__ph{width:min(64vw,320px)}}
 
 /* אודות: מסגרת בקו הגריד. בתוכה בלי גריד: התמונה והכותרת מימין, הפסקה משמאל */
-.ab__frame{position:relative;z-index:1;box-sizing:border-box;margin:-1px var(--v6-m) 0;border:1px solid rgb(217 217 210 / .1);background:#141716;overflow:hidden;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center}
+.ab__frame{position:relative;z-index:1;box-sizing:border-box;margin:-1px var(--v6-m) 0;border:1px solid rgb(217 217 210 / .1);background:#16262C;overflow:hidden;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center}
 .ab__side{display:flex;flex-direction:column;align-items:flex-start;min-width:0;padding-inline:clamp(24px,3vw,56px)}
 .ab__frame .ab__top{width:fit-content;height:calc(var(--P) * 4);margin:0;justify-content:flex-start}
 .ab__frame .ab__h{margin:0!important;text-align:start;white-space:nowrap;line-height:var(--P)!important;font-size:clamp(24px,3.4vw,50px)!important;transform:none!important}
