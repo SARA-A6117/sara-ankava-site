@@ -3,7 +3,7 @@
    four radial colour fields whose centres are registered @property coordinates, animated fast
    (4-7s, alternate) on the element itself, over a base ramp, with an SVG-grain layer on top
    blended with `overlay`. Text uses the same stack through background-clip:text.
-   Palette: yellow #FFE66D, light blue #8ED8FF. Buttons swap the two on hover (--ga/--gb, transitioned).
+   Palette: yellow #FFE24A, light blue #6FD0FF. Buttons swap the two on hover (--ga/--gb, transitioned).
    ========================================================================== */
 @property --c1x{syntax:"<percentage>";inherits:false;initial-value:15%}
 @property --c1y{syntax:"<percentage>";inherits:false;initial-value:20%}
@@ -17,8 +17,8 @@
 @property --s2{syntax:"<percentage>";inherits:false;initial-value:55%}
 @property --s3{syntax:"<percentage>";inherits:false;initial-value:60%}
 @property --s4{syntax:"<percentage>";inherits:false;initial-value:70%}
-@property --ga{syntax:"<color>";inherits:false;initial-value:#FFE66D}
-@property --gb{syntax:"<color>";inherits:false;initial-value:#8ED8FF}
+@property --ga{syntax:"<color>";inherits:false;initial-value:#FFE24A}
+@property --gb{syntax:"<color>";inherits:false;initial-value:#6FD0FF}
 @keyframes liveC1{0%{--c1x:10%;--c1y:15%}30%{--c1x:75%;--c1y:30%}55%{--c1x:40%;--c1y:90%}80%{--c1x:90%;--c1y:70%}to{--c1x:25%;--c1y:45%}}
 @keyframes liveC2{0%{--c2x:90%;--c2y:20%}25%{--c2x:30%;--c2y:10%}60%{--c2x:15%;--c2y:65%}to{--c2x:70%;--c2y:95%}}
 @keyframes liveC3{0%{--c3x:70%;--c3y:90%}35%{--c3x:95%;--c3y:40%}65%{--c3x:50%;--c3y:5%}to{--c3x:5%;--c3y:55%}}
@@ -31,7 +31,7 @@
 @keyframes ctaS2{0%{--s2:44%}to{--s2:66%}}
 @keyframes ctaS3{0%{--s3:48%}to{--s3:72%}}
 @keyframes ctaS4{0%{--s4:62%}to{--s4:80%}}
-@keyframes liveGlow{0%{box-shadow:-12px 8px 26px -8px #FFE66D99,12px 10px 30px -10px #8ED8FF99}35%{box-shadow:10px -6px 28px -8px #8ED8FF99,-6px 12px 26px -10px #FFE66D80}70%{box-shadow:-4px 14px 32px -8px #FFE66D99,14px 2px 28px -10px #8ED8FF80}to{box-shadow:12px 10px 30px -8px #8ED8FF99,-12px -4px 30px -8px #FFE66D80}}
+@keyframes liveGlow{0%{box-shadow:-12px 8px 26px -8px #FFE24A99,12px 10px 30px -10px #6FD0FF99}35%{box-shadow:10px -6px 28px -8px #6FD0FF99,-6px 12px 26px -10px #FFE24A80}70%{box-shadow:-4px 14px 32px -8px #FFE24A99,14px 2px 28px -10px #6FD0FF80}to{box-shadow:12px 10px 30px -8px #6FD0FF99,-12px -4px 30px -8px #FFE24A80}}
 :root{
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncG type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncB type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncA type='linear' slope='0' intercept='.85'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --mesh-anim:liveC1 5.3s ease-in-out infinite alternate,liveC2 7.1s ease-in-out infinite alternate,liveC3 4.3s ease-in-out infinite alternate,liveC4 6.7s ease-in-out infinite alternate;
@@ -43,7 +43,7 @@ html body::after{display:block!important;content:"";position:fixed;inset:0;z-ind
 
 /* מילים נבחרות בכותרות: גרעיניות + מש חי, כמו ב-.ab-eyebrow באתר ההשראה */
 [data-gn="text"]{
-  --mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#FFE66D,#FFE66D 34%,transparent 68%),radial-gradient(circle at var(--c2x) var(--c2y),#8ED8FF,#8ED8FF 34%,transparent 68%),radial-gradient(circle at var(--c3x) var(--c3y),#FFE66D,#FFE66D 34%,transparent 68%),radial-gradient(circle at var(--c4x) var(--c4y),#8ED8FF,#8ED8FF 34%,transparent 68%),linear-gradient(135deg,#FFE66D,#8ED8FF);
+  --mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#FFE24A,#FFE24A 34%,transparent 68%),radial-gradient(circle at var(--c2x) var(--c2y),#6FD0FF,#6FD0FF 34%,transparent 68%),radial-gradient(circle at var(--c3x) var(--c3y),#FFC21F,#FFC21F 30%,transparent 66%),radial-gradient(circle at var(--c4x) var(--c4y),#2E9BFF,#2E9BFF 30%,transparent 66%),linear-gradient(135deg,#FFE24A,#6FD0FF);
   background-image:var(--grain),var(--mesh-live)!important;
   background-size:120px,auto,auto,auto,auto,auto!important;
   background-position:0 0!important;
@@ -65,11 +65,11 @@ html body::after{display:block!important;content:"";position:fixed;inset:0;z-ind
   background-size:150px,auto,auto,auto,auto,auto!important;
   background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
   background-blend-mode:overlay,normal,normal,normal,normal,normal!important;
-  background-origin:border-box;background-color:#FFE66D!important;
+  background-origin:border-box;background-color:#FFE24A!important;
   animation:var(--mesh-anim),cta-blink 6s ease-in-out infinite!important
 }
 [data-gn="btn"]:hover,[data-gn="btn"]:focus-visible{
-  --ga:#8ED8FF;--gb:#FFE66D;color:#0c0e0d!important;
+  --ga:#6FD0FF;--gb:#FFE24A;color:#0c0e0d!important;
   background-image:var(--grain),radial-gradient(circle at var(--mx,30%) var(--my,50%),rgb(255 255 255 / .55),transparent 60%),var(--mesh-live)!important;
   background-size:150px,auto,auto,auto,auto,auto,auto!important;
   background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
@@ -77,32 +77,32 @@ html body::after{display:block!important;content:"";position:fixed;inset:0;z-ind
   animation:var(--mesh-anim),liveGlow 3.1s ease-in-out infinite alternate!important
 }
 [data-gn="btn"] .btn__t{color:#0c0e0d!important}
-[data-gn="btn"]::after{background:#FFE66D!important}
-.pj .btn[data-gn]:hover{background-color:#FFE66D!important}
+[data-gn="btn"]::after{background:#FFE24A!important}
+.pj .btn[data-gn]:hover{background-color:#FFE24A!important}
 
-/* צור קשר: כמו .f-cta, אבל על בסיס כהה עם צהוב ותכלת עזים; הצדדים מוחשכים לטקסט לבן (AA) */
+/* צור קשר: רקע מש חי מלא, צבעים עזים וגרעיניות ברורה (כמו ההשראה), טקסט כהה */
 .ct .ct__panel{
-  background-color:#141716!important;
+  background-color:#3AA6FF!important;
   background-image:var(--grain),
-    radial-gradient(var(--s1) calc(var(--s1) * 1.6) at var(--c1x) var(--c1y),#FFE66D,transparent 72%),
-    radial-gradient(var(--s2) calc(var(--s2) * 1.5) at var(--c2x) var(--c2y),#8ED8FF,transparent 72%),
-    radial-gradient(var(--s3) calc(var(--s3) * 1.5) at var(--c3x) var(--c3y),#FFE66D,transparent 75%),
-    radial-gradient(var(--s4) calc(var(--s4) * 1.4) at var(--c4x) var(--c4y),#8ED8FF,transparent 80%),
-    linear-gradient(#141716,#141716)!important;
+    radial-gradient(var(--s1) calc(var(--s1) * 1.6) at var(--c1x) var(--c1y),#FFE24A,#FFE24A 28%,transparent 74%),
+    radial-gradient(var(--s2) calc(var(--s2) * 1.5) at var(--c2x) var(--c2y),#7FD8FF,#7FD8FF 26%,transparent 74%),
+    radial-gradient(var(--s3) calc(var(--s3) * 1.5) at var(--c3x) var(--c3y),#FFC21F,transparent 72%),
+    radial-gradient(var(--s4) calc(var(--s4) * 1.4) at var(--c4x) var(--c4y),#1F7BFF,transparent 78%),
+    linear-gradient(#3AA6FF,#3AA6FF)!important;
   background-size:170px,auto,auto,auto,auto,auto!important;
   background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
   background-blend-mode:overlay,normal,normal,normal,normal,normal!important;
   animation:ctaC1 9.7s ease-in-out infinite alternate,ctaC2 7.3s ease-in-out infinite alternate,ctaC3 8.9s ease-in-out infinite alternate,ctaC4 11.3s ease-in-out infinite alternate,ctaS1 6.1s ease-in-out infinite alternate,ctaS2 5.3s ease-in-out infinite alternate,ctaS3 7.7s ease-in-out infinite alternate,ctaS4 6.7s ease-in-out infinite alternate!important;
   isolation:isolate
 }
-.ct .ct__panel::before{display:block!important;content:"";position:absolute;inset:0;z-index:1;pointer-events:none;animation:none!important;transform:none!important;rotate:none!important;translate:none!important;scale:none!important;filter:none!important;background:linear-gradient(rgb(255 255 255 / .22),rgb(255 255 255 / .22)) 0 calc(var(--U) - 1px) / 100% 1px no-repeat,linear-gradient(rgb(255 255 255 / .22),rgb(255 255 255 / .22)) 0 calc(var(--U) * 3.5 - 1px) / 100% 1px no-repeat}
-.ct .ct__panel::after{display:block!important;content:"";position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:normal!important;opacity:1!important;background:linear-gradient(to top,rgb(20 23 22 / .78) 0,rgb(20 23 22 / .78) var(--U),rgb(20 23 22 / 0) var(--U)),linear-gradient(90deg,rgb(20 23 22 / .82) 0,rgb(20 23 22 / .82) 36%,rgb(20 23 22 / .12) 48%,rgb(20 23 22 / .12) 54%,rgb(20 23 22 / .82) 66%,rgb(20 23 22 / .82) 100%)}
-@media (max-width:900px){.ct .ct__panel::after{background:rgb(20 23 22 / .72)!important}.ct .ct__panel::before{display:none!important}}
+.ct .ct__panel::before{display:block!important;content:"";position:absolute;inset:0;z-index:1;pointer-events:none;animation:none!important;transform:none!important;rotate:none!important;translate:none!important;scale:none!important;filter:none!important;background:linear-gradient(rgb(20 23 22 / .28),rgb(20 23 22 / .28)) 0 calc(var(--U) - 1px) / 100% 1px no-repeat,linear-gradient(rgb(20 23 22 / .28),rgb(20 23 22 / .28)) 0 calc(var(--U) * 3.5 - 1px) / 100% 1px no-repeat}
+.ct .ct__panel::after{display:none!important}
+@media (max-width:900px){.ct .ct__panel::before{display:none!important}}
 
 /* prefers-reduced-motion: בלי אנימציה, צבע חלק */
 @media (prefers-reduced-motion:reduce){
-  [data-gn="text"]{background:none!important;animation:none!important;-webkit-text-fill-color:#FFE66D!important;color:#FFE66D!important}
-  [data-gn="btn"],[data-gn="btn"]:hover,[data-gn="btn"]:focus-visible{animation:none!important;transition:none!important;background-image:none!important;background-color:#FFE66D!important}
-  .ct .ct__panel{animation:none!important;background-image:none!important;background-color:#141716!important}
+  [data-gn="text"]{background:none!important;animation:none!important;-webkit-text-fill-color:#FFE24A!important;color:#FFE24A!important}
+  [data-gn="btn"],[data-gn="btn"]:hover,[data-gn="btn"]:focus-visible{animation:none!important;transition:none!important;background-image:none!important;background-color:#FFE24A!important}
+  .ct .ct__panel{animation:none!important;background-image:none!important;background-color:#3AA6FF!important}
   .ct .ct__panel::after{display:none!important}
 }
