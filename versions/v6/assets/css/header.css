@@ -77,3 +77,4 @@
 .hb__ck svg{flex:none}
 @media (prefers-reduced-motion:reduce){.hb__ring{animation:none}}
 @media (max-width:900px){.hb__badge{right:15vw;bottom:11vh}}
+@media (max-width:900px){.hb__card1{margin:20px auto 0 3vw!important;width:max-content}}
