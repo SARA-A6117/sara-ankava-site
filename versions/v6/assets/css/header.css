@@ -4,3 +4,11 @@
 .hdr.is-scrolled .logo::before{opacity:1;transform:none}
 .hdr.is-open .logo::before{opacity:0}
 .nav a:not(.btn):not(.cta6){font-family:"Sara Ankava",sans-serif!important;font-weight:300!important}
+
+/* פרויקטים: הקו העליון חלש כמו שאר הגריד, והחלק הכהה נמשך עד תחילת הפרויקטים (האפור מתחיל בפרויקטים עצמם) */
+.pj{border-top:0!important}
+.pj .pj__h{margin-bottom:0!important;padding-bottom:120px!important}
+/* כפתור פרויקט 03: צהוב-תכלת עם טקסט כהה, קריא */
+.pj .btn[data-gn],.pj3 .btn[data-gn]{background-color:#FFE66D!important;background-image:var(--grain),var(--mesh-live)!important;color:#0c0e0d!important}
+.pj .btn[data-gn]:hover,.pj3 .btn[data-gn]:hover{background-color:#FFE66D!important;background-image:var(--grain),radial-gradient(circle at var(--mx,30%) var(--my,50%),rgb(255 255 255 / .55),transparent 60%),var(--mesh-live)!important}
+.pj .btn[data-gn] .btn__t,.pj3 .btn[data-gn] .btn__t{color:#0c0e0d!important}
