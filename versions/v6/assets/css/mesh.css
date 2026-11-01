@@ -1,88 +1,98 @@
 /* ==========================================================================
-   Mesh gradient + grain (our own build). Four soft colour fields whose centres drift slowly
-   (registered @property coordinates animated by keyframes) over a base ramp. The noise layer
-   only varies the colour (soft-light, no alpha, no dark dots), so letter edges stay crisp.
-   Palette: yellow #FFE66D and light blue #8ED8FF, kept vivid. On buttons, hover swaps the stops (--sw).
-   Used for: contact panel, chosen heading words, CTA buttons. Plain colour everywhere else.
+   Mesh gradient + grain, built the same way as saraweizman.co.il (our palette):
+   four radial colour fields whose centres are registered @property coordinates, animated fast
+   (4-7s, alternate) on the element itself, over a base ramp, with an SVG-grain layer on top
+   blended with `overlay`. Text uses the same stack through background-clip:text.
+   Palette: yellow #FFE66D, light blue #8ED8FF. Buttons swap the two on hover (--ga/--gb, transitioned).
    ========================================================================== */
-@property --c1x{syntax:"<percentage>";inherits:true;initial-value:15%}
-@property --c1y{syntax:"<percentage>";inherits:true;initial-value:20%}
-@property --c2x{syntax:"<percentage>";inherits:true;initial-value:85%}
-@property --c2y{syntax:"<percentage>";inherits:true;initial-value:25%}
-@property --c3x{syntax:"<percentage>";inherits:true;initial-value:55%}
-@property --c3y{syntax:"<percentage>";inherits:true;initial-value:85%}
-@property --c4x{syntax:"<percentage>";inherits:true;initial-value:20%}
-@property --c4y{syntax:"<percentage>";inherits:true;initial-value:80%}
-@property --sw{syntax:"<number>";inherits:false;initial-value:0}
-@keyframes mshA{0%{--c1x:10%;--c1y:20%}35%{--c1x:70%;--c1y:30%}65%{--c1x:45%;--c1y:85%}100%{--c1x:88%;--c1y:55%}}
-@keyframes mshB{0%{--c2x:88%;--c2y:25%}40%{--c2x:30%;--c2y:60%}70%{--c2x:62%;--c2y:12%}100%{--c2x:14%;--c2y:85%}}
-@keyframes mshC{0%{--c3x:50%;--c3y:92%}50%{--c3x:18%;--c3y:30%}100%{--c3x:82%;--c3y:62%}}
-@keyframes mshD{0%{--c4x:22%;--c4y:78%}50%{--c4x:78%;--c4y:70%}100%{--c4x:55%;--c4y:18%}}
+@property --c1x{syntax:"<percentage>";inherits:false;initial-value:15%}
+@property --c1y{syntax:"<percentage>";inherits:false;initial-value:20%}
+@property --c2x{syntax:"<percentage>";inherits:false;initial-value:85%}
+@property --c2y{syntax:"<percentage>";inherits:false;initial-value:25%}
+@property --c3x{syntax:"<percentage>";inherits:false;initial-value:70%}
+@property --c3y{syntax:"<percentage>";inherits:false;initial-value:85%}
+@property --c4x{syntax:"<percentage>";inherits:false;initial-value:20%}
+@property --c4y{syntax:"<percentage>";inherits:false;initial-value:80%}
+@property --s1{syntax:"<percentage>";inherits:false;initial-value:45%}
+@property --s2{syntax:"<percentage>";inherits:false;initial-value:55%}
+@property --s3{syntax:"<percentage>";inherits:false;initial-value:60%}
+@property --s4{syntax:"<percentage>";inherits:false;initial-value:70%}
+@property --ga{syntax:"<color>";inherits:false;initial-value:#FFE66D}
+@property --gb{syntax:"<color>";inherits:false;initial-value:#8ED8FF}
+@keyframes liveC1{0%{--c1x:10%;--c1y:15%}30%{--c1x:75%;--c1y:30%}55%{--c1x:40%;--c1y:90%}80%{--c1x:90%;--c1y:70%}to{--c1x:25%;--c1y:45%}}
+@keyframes liveC2{0%{--c2x:90%;--c2y:20%}25%{--c2x:30%;--c2y:10%}60%{--c2x:15%;--c2y:65%}to{--c2x:70%;--c2y:95%}}
+@keyframes liveC3{0%{--c3x:70%;--c3y:90%}35%{--c3x:95%;--c3y:40%}65%{--c3x:50%;--c3y:5%}to{--c3x:5%;--c3y:55%}}
+@keyframes liveC4{0%{--c4x:15%;--c4y:85%}40%{--c4x:60%;--c4y:55%}70%{--c4x:85%;--c4y:95%}to{--c4x:45%;--c4y:20%}}
+@keyframes ctaC1{0%{--c1x:0%;--c1y:100%}30%{--c1x:10%;--c1y:88%}65%{--c1x:3%;--c1y:94%}to{--c1x:14%;--c1y:100%}}
+@keyframes ctaC2{0%{--c2x:26%;--c2y:-4%}25%{--c2x:44%;--c2y:10%}55%{--c2x:33%;--c2y:2%}80%{--c2x:50%;--c2y:-2%}to{--c2x:30%;--c2y:14%}}
+@keyframes ctaC3{0%{--c3x:18%;--c3y:60%}35%{--c3x:38%;--c3y:38%}60%{--c3x:26%;--c3y:75%}to{--c3x:44%;--c3y:55%}}
+@keyframes ctaC4{0%{--c4x:92%;--c4y:68%}40%{--c4x:80%;--c4y:45%}70%{--c4x:96%;--c4y:85%}to{--c4x:85%;--c4y:60%}}
+@keyframes ctaS1{0%{--s1:34%}to{--s1:52%}}
+@keyframes ctaS2{0%{--s2:44%}to{--s2:66%}}
+@keyframes ctaS3{0%{--s3:48%}to{--s3:72%}}
+@keyframes ctaS4{0%{--s4:62%}to{--s4:80%}}
+@keyframes liveGlow{0%{box-shadow:-12px 8px 26px -8px #FFE66D99,12px 10px 30px -10px #8ED8FF99}35%{box-shadow:10px -6px 28px -8px #8ED8FF99,-6px 12px 26px -10px #FFE66D80}70%{box-shadow:-4px 14px 32px -8px #FFE66D99,14px 2px 28px -10px #8ED8FF80}to{box-shadow:12px 10px 30px -8px #8ED8FF99,-12px -4px 30px -8px #FFE66D80}}
 :root{
-  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.1' intercept='-.55'/%3E%3CfeFuncG type='linear' slope='2.1' intercept='-.55'/%3E%3CfeFuncB type='linear' slope='2.1' intercept='-.55'/%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-  --noise-fine:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='1.15' intercept='-.07'/%3E%3CfeFuncG type='linear' slope='1.15' intercept='-.07'/%3E%3CfeFuncB type='linear' slope='1.15' intercept='-.07'/%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
-  --noise-hard:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='3.2' intercept='-1.05'/%3E%3CfeFuncG type='linear' slope='3.2' intercept='-1.05'/%3E%3CfeFuncB type='linear' slope='3.2' intercept='-1.05'/%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncG type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncB type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncA type='linear' slope='0' intercept='.85'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --mesh-anim:liveC1 5.3s ease-in-out infinite alternate,liveC2 7.1s ease-in-out infinite alternate,liveC3 4.3s ease-in-out infinite alternate,liveC4 6.7s ease-in-out infinite alternate;
+  --mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),var(--ga),var(--ga) 34%,transparent 68%),radial-gradient(circle at var(--c2x) var(--c2y),var(--gb),var(--gb) 34%,transparent 68%),radial-gradient(circle at var(--c3x) var(--c3y),var(--ga),var(--ga) 34%,transparent 68%),radial-gradient(circle at var(--c4x) var(--c4y),var(--gb),var(--gb) 34%,transparent 68%),linear-gradient(135deg,var(--ga),var(--gb));
 }
 
-/* אחידות: שכבת רעש דקה מעל הרקעים */
-html body::after{display:block!important;content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;background-image:var(--noise);background-size:200px;opacity:.06;mix-blend-mode:overlay}
+/* רעש דק מעל הרקעים */
+html body::after{display:block!important;content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;background-image:var(--grain);background-size:200px;opacity:.06;mix-blend-mode:overlay}
 
-/* מנועי התנועה: הקואורדינטות מונפשות על עטיפה, והצאצאים יורשים */
-.hb__title,.pj__h,.lp2__h,.pr3__h{animation:mshA 24s ease-in-out infinite alternate,mshB 29s ease-in-out infinite alternate,mshC 33s ease-in-out infinite alternate,mshD 27s ease-in-out infinite alternate}
-
-/* מילים נבחרות בכותרות: צבעים חיים, רעש עדין שמשפיע רק על הגוון, קצוות חדים */
+/* מילים נבחרות בכותרות: גרעיניות + מש חי, כמו ב-.ab-eyebrow באתר ההשראה */
 [data-gn="text"]{
-  background-image:var(--noise-fine),
-    radial-gradient(70% 150% at var(--c1x) var(--c1y),#FFE66D 0,#FFE66D 38%,transparent 74%),
-    radial-gradient(70% 150% at var(--c2x) var(--c2y),#8ED8FF 0,#8ED8FF 38%,transparent 74%),
-    radial-gradient(60% 140% at var(--c3x) var(--c3y),#FFE66D 0,#FFE66D 30%,transparent 72%),
-    radial-gradient(60% 140% at var(--c4x) var(--c4y),#8ED8FF 0,#8ED8FF 30%,transparent 72%),
-    linear-gradient(100deg,#FFE66D 0%,#FFE66D 30%,#8ED8FF 70%,#8ED8FF 100%)!important;
-  background-size:180px auto,auto,auto,auto,auto,auto!important;
+  --mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#FFE66D,#FFE66D 34%,transparent 68%),radial-gradient(circle at var(--c2x) var(--c2y),#8ED8FF,#8ED8FF 34%,transparent 68%),radial-gradient(circle at var(--c3x) var(--c3y),#FFE66D,#FFE66D 34%,transparent 68%),radial-gradient(circle at var(--c4x) var(--c4y),#8ED8FF,#8ED8FF 34%,transparent 68%),linear-gradient(135deg,#FFE66D,#8ED8FF);
+  background-image:var(--grain),var(--mesh-live)!important;
+  background-size:120px,auto,auto,auto,auto,auto!important;
   background-position:0 0!important;
   background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
-  background-blend-mode:soft-light,normal,normal,normal,normal,normal!important;
+  background-blend-mode:overlay,normal,normal,normal,normal,normal!important;
   -webkit-background-clip:text!important;background-clip:text!important;
   -webkit-text-fill-color:transparent!important;color:transparent!important;
-  filter:saturate(1.35) brightness(1.04)!important;width:fit-content;-webkit-mask-image:none;mask-image:none
+  -webkit-text-stroke:0!important;text-shadow:none!important;
+  filter:saturate(1.3)!important;-webkit-mask-image:none;mask-image:none;width:fit-content;
+  animation:var(--mesh-anim)!important
 }
 .hb__title .hb__l[data-gn="text"]{background-position:0 0!important}
 
-/* כפתורי הנעה לפעולה: צבעים חיים, בהובר העצירות מתחלפות בהדרגה והגרדיאנט זז */
+/* כפתורי הנעה לפעולה: מש חי תמיד, בהובר הצבעים מתחלפים בהדרגה + הילה שעוקבת אחרי העכבר */
 [data-gn="btn"]{
   position:relative;color:#0c0e0d!important;
-  transition:--sw .9s ease,box-shadow .3s,transform .25s;
-  background-image:var(--noise-fine),
-    radial-gradient(70% 160% at var(--c1x) var(--c1y),color-mix(in srgb,#FFE66D calc((1 - var(--sw)) * 100%),#8ED8FF) 0,color-mix(in srgb,#FFE66D calc((1 - var(--sw)) * 100%),#8ED8FF) 38%,transparent 74%),
-    radial-gradient(70% 160% at var(--c2x) var(--c2y),color-mix(in srgb,#8ED8FF calc((1 - var(--sw)) * 100%),#FFE66D) 0,color-mix(in srgb,#8ED8FF calc((1 - var(--sw)) * 100%),#FFE66D) 38%,transparent 74%),
-    radial-gradient(60% 150% at var(--c3x) var(--c3y),color-mix(in srgb,#FFE66D calc((1 - var(--sw)) * 100%),#8ED8FF) 0,color-mix(in srgb,#FFE66D calc((1 - var(--sw)) * 100%),#8ED8FF) 30%,transparent 72%),
-    radial-gradient(60% 150% at var(--c4x) var(--c4y),color-mix(in srgb,#8ED8FF calc((1 - var(--sw)) * 100%),#FFE66D) 0,color-mix(in srgb,#8ED8FF calc((1 - var(--sw)) * 100%),#FFE66D) 30%,transparent 72%),
-    linear-gradient(100deg,color-mix(in srgb,#FFE66D calc((1 - var(--sw)) * 100%),#8ED8FF) 0%,color-mix(in srgb,#FFE66D calc((1 - var(--sw)) * 100%),#8ED8FF) 30%,color-mix(in srgb,#8ED8FF calc((1 - var(--sw)) * 100%),#FFE66D) 70%,color-mix(in srgb,#8ED8FF calc((1 - var(--sw)) * 100%),#FFE66D) 100%)!important;
-  background-size:150px auto,auto,auto,auto,auto,auto!important;
+  transition:--ga .7s ease,--gb .7s ease,transform .25s;
+  background-image:var(--grain),var(--mesh-live)!important;
+  background-size:150px,auto,auto,auto,auto,auto!important;
   background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
-  background-blend-mode:soft-light,normal,normal,normal,normal,normal!important;
-  background-color:#FFE66D!important;
-  filter:saturate(1.25);
-  animation:cta-blink 6s ease-in-out infinite,mshA 22s ease-in-out infinite alternate,mshB 27s ease-in-out infinite alternate,mshC 31s ease-in-out infinite alternate,mshD 25s ease-in-out infinite alternate!important
+  background-blend-mode:overlay,normal,normal,normal,normal,normal!important;
+  background-origin:border-box;background-color:#FFE66D!important;
+  animation:var(--mesh-anim),cta-blink 6s ease-in-out infinite!important
 }
-[data-gn="btn"]:hover,[data-gn="btn"]:focus-visible{--sw:1;color:#0c0e0d!important}
+[data-gn="btn"]:hover,[data-gn="btn"]:focus-visible{
+  --ga:#8ED8FF;--gb:#FFE66D;color:#0c0e0d!important;
+  background-image:var(--grain),radial-gradient(circle at var(--mx,30%) var(--my,50%),rgb(255 255 255 / .55),transparent 60%),var(--mesh-live)!important;
+  background-size:150px,auto,auto,auto,auto,auto,auto!important;
+  background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
+  background-blend-mode:overlay,soft-light,normal,normal,normal,normal,normal!important;
+  animation:var(--mesh-anim),liveGlow 3.1s ease-in-out infinite alternate!important
+}
 [data-gn="btn"] .btn__t{color:#0c0e0d!important}
 [data-gn="btn"]::after{background:#FFE66D!important}
 .pj .btn[data-gn]:hover{background-color:#FFE66D!important}
 
-/* צור קשר: צבע עז יותר, גרעיניות ברורה, הצדדים מוחשכים לטקסט לבן */
+/* צור קשר: כמו .f-cta, אבל על בסיס כהה עם צהוב ותכלת עזים; הצדדים מוחשכים לטקסט לבן (AA) */
 .ct .ct__panel{
   background-color:#141716!important;
-  background-image:var(--noise-hard),
-    radial-gradient(38% 90% at var(--c1x) var(--c1y),#FFE66D 0,rgb(255 230 109 / .95) 30%,transparent 72%),
-    radial-gradient(42% 96% at var(--c2x) var(--c2y),#8ED8FF 0,rgb(142 216 255 / .95) 30%,transparent 72%),
-    radial-gradient(34% 80% at var(--c3x) var(--c3y),rgb(255 230 109 / .9) 0,transparent 72%),
-    radial-gradient(40% 92% at var(--c4x) var(--c4y),rgb(142 216 255 / .9) 0,transparent 72%),
+  background-image:var(--grain),
+    radial-gradient(var(--s1) calc(var(--s1) * 1.6) at var(--c1x) var(--c1y),#FFE66D,transparent 72%),
+    radial-gradient(var(--s2) calc(var(--s2) * 1.5) at var(--c2x) var(--c2y),#8ED8FF,transparent 72%),
+    radial-gradient(var(--s3) calc(var(--s3) * 1.5) at var(--c3x) var(--c3y),#FFE66D,transparent 75%),
+    radial-gradient(var(--s4) calc(var(--s4) * 1.4) at var(--c4x) var(--c4y),#8ED8FF,transparent 80%),
     linear-gradient(#141716,#141716)!important;
-  background-size:160px auto,auto,auto,auto,auto,auto!important;
+  background-size:170px,auto,auto,auto,auto,auto!important;
   background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
   background-blend-mode:overlay,normal,normal,normal,normal,normal!important;
-  animation:mshA 26s ease-in-out infinite alternate,mshB 31s ease-in-out infinite alternate,mshC 35s ease-in-out infinite alternate,mshD 29s ease-in-out infinite alternate!important;
+  animation:ctaC1 9.7s ease-in-out infinite alternate,ctaC2 7.3s ease-in-out infinite alternate,ctaC3 8.9s ease-in-out infinite alternate,ctaC4 11.3s ease-in-out infinite alternate,ctaS1 6.1s ease-in-out infinite alternate,ctaS2 5.3s ease-in-out infinite alternate,ctaS3 7.7s ease-in-out infinite alternate,ctaS4 6.7s ease-in-out infinite alternate!important;
   isolation:isolate
 }
 .ct .ct__panel::before{display:none!important}
@@ -91,9 +101,8 @@ html body::after{display:block!important;content:"";position:fixed;inset:0;z-ind
 
 /* prefers-reduced-motion: בלי אנימציה, צבע חלק */
 @media (prefers-reduced-motion:reduce){
-  .hb__title,.pj__h,.lp2__h,.pr3__h{animation:none!important}
-  [data-gn="text"]{background:none!important;-webkit-text-fill-color:#FFE66D!important;color:#FFE66D!important;filter:none!important}
-  [data-gn="btn"]{animation:none!important;transition:none!important;background-image:none!important;background-color:#FFE66D!important;filter:none!important}
+  [data-gn="text"]{background:none!important;animation:none!important;-webkit-text-fill-color:#FFE66D!important;color:#FFE66D!important}
+  [data-gn="btn"],[data-gn="btn"]:hover,[data-gn="btn"]:focus-visible{animation:none!important;transition:none!important;background-image:none!important;background-color:#FFE66D!important}
   .ct .ct__panel{animation:none!important;background-image:none!important;background-color:#141716!important}
   .ct .ct__panel::after{display:none!important}
 }

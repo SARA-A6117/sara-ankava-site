@@ -19,7 +19,8 @@
 <link rel="stylesheet" href="assets/css/style.css?v=6">
 <link rel="stylesheet" href="assets/css/v4.css?v=4">
 <link rel="stylesheet" href="assets/css/v6.css?v=313">
-<link rel="stylesheet" href="assets/css/mesh.css?v=4">
+<link rel="stylesheet" href="assets/css/mesh.css?v=6">
+<link rel="stylesheet" href="assets/css/header.css?v=1">
 <meta name="robots" content="noindex">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
 <script type="application/ld+json">
@@ -39,8 +40,8 @@
   <a class="logo" href="index.html" aria-label="Sara Ankava, לדף הבית"><img class="logo__img logo__img--light" src="assets/brand/logo-light.png" width="1066" height="123" alt="Sara Ankava"><img class="logo__img logo__img--dark" src="assets/brand/logo-black.png" width="1066" height="123" alt="" aria-hidden="true"><i class="logo__sq" aria-hidden="true"></i></a>
   <nav class="nav" id="nav" aria-label="ניווט ראשי">
     <span class="capsule__ind" aria-hidden="true"></span>
-    <a href="#process" data-sec="process">איך אני עובדת</a>
     <a href="#projects" data-sec="projects">פרויקטים</a>
+    <a href="#process" data-sec="process">איך אני עובדת</a>
     <a href="#about" data-sec="about">אודות</a>
     <a href="#contact" data-sec="contact">צרו קשר</a>
     <a class="cta6" href="#contact" data-gn="btn">בואו נדבר</a>
@@ -269,5 +270,6 @@ function upd(){if(reduce){set(5);return}var r=s.getBoundingClientRect(),p;if(mob
 addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);upd()})()</script>
 <script>(function(){var c=document.querySelector(".pr3__cols");if(!c)return;var mq=matchMedia("(min-width:901px)");function fit(){c.style.height="";if(!mq.matches)return;var P=innerHeight/8;c.style.height=Math.ceil(c.scrollHeight/P)*P+"px"}addEventListener("load",fit);addEventListener("resize",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);fit()})()</script>
 <script>(function(){var t=document.querySelector(".lp2--lp .lp2__h"),st=document.querySelector(".lp2--lp .lp2__stick");if(!t)return;var mq=matchMedia("(min-width:901px)");function fit(){var sp=[].slice.call(t.querySelectorAll("span"));sp.forEach(function(x){x.style.transform=""});if(!mq.matches)return;var P=innerHeight/8,top=st.getBoundingClientRect().top,i=document.createElement("i");i.style.cssText="display:inline-block;width:0;height:0";sp.forEach(function(x,k){x.appendChild(i);var b=i.getBoundingClientRect().bottom-top;i.remove();x.style.transform="translateY("+(((3+k)*P-3)-b)+"px)"})}addEventListener("load",fit);addEventListener("resize",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);fit()})()</script>
+<script>(function(){if(!matchMedia("(hover:hover) and (pointer:fine)").matches)return;document.addEventListener("pointermove",function(e){var el=e.target.closest&&e.target.closest("[data-gn=btn]");if(!el)return;var r=el.getBoundingClientRect();el.style.setProperty("--mx",((e.clientX-r.left)/r.width*100).toFixed(1)+"%");el.style.setProperty("--my",((e.clientY-r.top)/r.height*100).toFixed(1)+"%")},{passive:true})})();</script>
 </body>
 </html>
