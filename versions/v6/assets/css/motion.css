@@ -1,0 +1,49 @@
+/* ויזואל ואנימציה: מדבקות עם טבעת טקסט, שורת מספרים, בניית כותרות מילה אחר מילה, אובייקט ממשק באודות */
+
+/* מדבקה עגולה בגרדיאנט, טבעת טקסט מסתובבת, כוכב קטן במרכז */
+.stk{position:absolute;z-index:4;width:clamp(96px,8.6vw,128px);aspect-ratio:1;pointer-events:none}
+.stk__c{position:absolute;inset:0;border-radius:50%;display:block}
+.stk__ring{position:absolute;left:50%;top:50%;width:160%;height:160%;translate:-50% -50%;overflow:visible;animation:hb-ring 34s linear infinite}
+.stk__ring text{direction:ltr;unicode-bidi:bidi-override;font:300 14px "Sara Ankava",system-ui,sans-serif;fill:#F1ECE0}
+.stk__star{position:absolute;left:50%;top:50%;width:24%;height:24%;translate:-50% -50%;overflow:visible}
+.stk--ab{left:calc(9vw - 54px);top:calc(var(--P) - 60px)}
+.stk--pr{left:calc(var(--v6-m) + 14px);top:calc(var(--P) * .95)}
+@media (max-width:900px){
+  .ab,.pr3{position:relative;overflow-x:clip}
+  .stk{width:64px}
+  .stk--ab{left:auto;right:34px;top:-30px}
+  .stk--pr{left:34px;right:auto;top:-30px;bottom:auto}
+}
+
+/* שורת מספרים באודות: שלוש עובדות אמיתיות */
+.ab__nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0 var(--v6-m);border:1px solid rgb(217 217 210 / .1);border-top:0;color:var(--tx1,#F1ECE0)}
+@media (min-width:901px){.ab__nums{margin-inline:9vw;height:calc(var(--P) * 2)}}
+.ab__nm{display:grid;align-content:center;gap:4px;padding:0 clamp(14px,2.6vw,44px)}
+.ab__nm+.ab__nm{border-inline-start:1px solid rgb(217 217 210 / .1)}
+.ab__n{display:flex;align-items:baseline;gap:.4em}
+.ab__n b{font:700 clamp(46px,6.2vw,104px)/1 "Sara Ankava",system-ui,sans-serif;padding-inline:.04em}
+.ab__n span{font:400 clamp(15px,1.3vw,20px)/1.2 var(--f-body,system-ui);color:#B9B4A8}
+.ab__nm small{font:400 clamp(14px,1.1vw,17px)/1.4 var(--f-body,system-ui);color:#B9B4A8}
+@media (max-width:900px){.ab__nums{margin-top:0;padding-block:18px}.ab__n b{font-size:clamp(34px,10vw,52px)}}
+
+/* אובייקט ממשק קטן באודות, מתחת לפסקה */
+.ab__chip{position:absolute;left:clamp(18px,2.4vw,40px);bottom:clamp(18px,2.4vw,34px);z-index:2;display:flex;align-items:center;gap:12px;padding:12px 18px;rotate:-4deg;background:rgb(241 236 224 / .07);border:1px solid rgb(241 236 224 / .22);border-radius:16px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);pointer-events:none}
+.ab__chip div{display:grid;gap:1px}
+.ab__chip b{font:700 17px/1.2 "Sara Ankava",system-ui,sans-serif;color:#F1ECE0}
+.ab__chip span{font:400 14px/1.3 var(--f-body,system-ui);color:#B9B4A8}
+.ab__dot{flex:none;width:10px;height:10px;border-radius:50%;background:#3DDC84;box-shadow:0 0 0 5px rgb(61 220 132 / .18)}
+@media (max-width:900px){.ab__chip{display:none}}
+
+/* כותרות אזורים: מילה אחרי מילה, כל מילה נופלת ונכנסת למקום */
+wd-w{display:inline-block}
+html.wb-on [data-wb] wd-w,html.wb-on [data-wb] [data-wbu]{opacity:0;transform:translateY(-.85em) rotate(-3deg);transition:opacity .45s ease,transform .8s cubic-bezier(.2,1.15,.3,1);transition-delay:calc(var(--i, 0) * 70ms)}
+html.wb-on [data-wb].is-in wd-w,html.wb-on [data-wb].is-in [data-wbu]{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  .stk__ring{animation:none}
+  html.wb-on [data-wb] wd-w,html.wb-on [data-wb] [data-wbu]{opacity:1;transform:none;transition:none}
+}
+
+/* מנצח כללי svg גלובליים (max-width / width) */
+.stk .stk__ring{max-width:none!important;width:160%!important;height:160%!important}
+.stk .stk__star{max-width:none!important;width:24%!important;height:24%!important}
