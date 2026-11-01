@@ -55,5 +55,9 @@
 /* צור קשר: בלי קווי גריד */
 .ct .ct__panel::before{display:none!important}
 
-/* פרויקט 01: מוקאפ כתמונה, בלי הרקע הלבן */
-.pj3__mk .pj3__img{display:block;width:100%;height:auto;mix-blend-mode:multiply}
+
+/* מוקאפ פרויקט 01: צילומי האתר בתוך חלון הדפדפן והטלפון */
+.mk__page--shot{padding:0!important;display:block!important}
+.mk__shot{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.mk__page--shot .mk__shot{height:auto;aspect-ratio:8/5}
+.mk__scr--shot{padding:0!important;display:block!important}
