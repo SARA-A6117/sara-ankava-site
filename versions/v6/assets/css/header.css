@@ -54,3 +54,6 @@
 .hb__badge:hover .gr-sq[data-gn="btn"]{--ga:#6FD0FF;--gb:#FFE24A}
 /* צור קשר: בלי קווי גריד */
 .ct .ct__panel::before{display:none!important}
+
+/* פרויקט 01: מוקאפ כתמונה, בלי הרקע הלבן */
+.pj3__mk .pj3__img{display:block;width:100%;height:auto;mix-blend-mode:multiply}
