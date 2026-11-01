@@ -6,7 +6,8 @@
 .nav a:not(.btn):not(.cta6){font-family:"Sara Ankava",sans-serif!important;font-weight:300!important}
 
 /* פרויקטים: הקו העליון חלש כמו שאר הגריד, והחלק הכהה נמשך עד תחילת הפרויקטים (האפור מתחיל בפרויקטים עצמם) */
-.pj{border-top:1px solid rgb(217 217 210 / .1)!important}
+.pj{border-top:0!important}
+.pj .pj__h{box-shadow:inset 0 1px 0 rgb(217 217 210 / .1)}
 .pj .pj__h{margin-bottom:0!important;padding-bottom:120px!important}
 /* כפתור פרויקט 03: צהוב-תכלת עם טקסט כהה, קריא */
 .pj .btn[data-gn],.pj3 .btn[data-gn]{background-color:#FFE66D!important;background-image:var(--grain),var(--mesh-live)!important;color:#0c0e0d!important}
@@ -45,3 +46,11 @@
 .ct a.or-wa{background-image:none!important;background-color:#fff!important;animation:none!important;color:#141716!important}
 .ct a.or-wa::after{background:#fff!important}
 .ct a.or-wa:hover{background-image:var(--grain),radial-gradient(circle at var(--mx,30%) var(--my,50%),rgb(255 255 255 / .55),transparent 60%),var(--mesh-live)!important;animation:var(--mesh-anim)!important}
+
+/* הירו: שתי הגוונים תמיד נראים (בסיס דו-גווני, והכתמים הזזים קטנים) */
+.hb__title .hb__l[data-gn="text"]{--mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#FFE24A,#FFE24A 20%,transparent 52%),radial-gradient(circle at var(--c2x) var(--c2y),#6FD0FF,#6FD0FF 20%,transparent 52%),radial-gradient(circle at var(--c3x) var(--c3y),#FFE24A,#FFE24A 14%,transparent 44%),radial-gradient(circle at var(--c4x) var(--c4y),#6FD0FF,#6FD0FF 14%,transparent 44%),linear-gradient(100deg,#FFE24A 0%,#FFE24A 32%,#6FD0FF 68%,#6FD0FF 100%)}
+/* עיגול "כל הפרויקטים" בגרדיאנט */
+.hb__badge .gr-sq[data-gn="btn"]{background:none!important;background-image:var(--grain),var(--mesh-live)!important;background-color:#FFE24A!important;background-size:150px,auto,auto,auto,auto,auto!important;filter:none!important}
+.hb__badge:hover .gr-sq[data-gn="btn"]{--ga:#6FD0FF;--gb:#FFE24A}
+/* צור קשר: בלי קווי גריד */
+.ct .ct__panel::before{display:none!important}

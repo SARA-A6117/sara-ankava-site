@@ -59,7 +59,7 @@ html body::after{display:block!important;content:"";position:fixed;inset:0;z-ind
 
 /* כפתורי הנעה לפעולה: מש חי תמיד, בהובר הצבעים מתחלפים בהדרגה + הילה שעוקבת אחרי העכבר */
 [data-gn="btn"]{
-  position:relative;color:#0c0e0d!important;
+  color:#0c0e0d!important;
   transition:--ga .7s ease,--gb .7s ease,transform .25s;
   background-image:var(--grain),var(--mesh-live)!important;
   background-size:150px,auto,auto,auto,auto,auto!important;
