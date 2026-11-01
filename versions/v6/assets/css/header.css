@@ -61,3 +61,19 @@
 .mk__shot{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
 .mk__page--shot .mk__shot{height:auto;aspect-ratio:8/5}
 .mk__scr--shot{padding:0!important;display:block!important}
+
+/* הירו: טבעת טקסט מסתובבת סביב "כל הפרויקטים" + שני כרטיסי ממשק */
+.hb__badge b{display:none}
+.hb__badge>svg.hb__ring{position:absolute;inset:auto!important;left:50%!important;top:50%!important;translate:-50% -50%;z-index:3;width:160%!important;height:160%!important;max-width:none!important;pointer-events:none;overflow:visible;animation:hb-ring 34s linear infinite}
+.hb__ring text{direction:ltr!important;unicode-bidi:bidi-override!important;font:500 15.2px "Sara Ankava",system-ui,sans-serif;fill:#d9d9d2}
+.hb__arr{position:relative;z-index:4;width:34%;height:34%;z-index:1}
+@keyframes hb-ring{to{transform:rotate(360deg)}}
+.hb__card{cursor:default}
+.hb__card .hb__ct{display:flex;align-items:center;gap:9px;font-size:18px;max-width:none;color:var(--v6-paper)}
+.hb__card .hb__dot{flex:none;width:9px;height:9px;border-radius:50%;background:#3DDC84;box-shadow:0 0 0 4px rgb(61 220 132 / .18)}
+.hb__card2 span{max-width:22ch;line-height:1.4}
+.hb__ck{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.hb__ck li{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:var(--v6-paper);white-space:nowrap}
+.hb__ck svg{flex:none}
+@media (prefers-reduced-motion:reduce){.hb__ring{animation:none}}
+@media (max-width:900px){.hb__badge{right:15vw;bottom:11vh}}
