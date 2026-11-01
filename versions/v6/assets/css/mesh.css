@@ -95,9 +95,9 @@ html body::after{display:block!important;content:"";position:fixed;inset:0;z-ind
   animation:ctaC1 9.7s ease-in-out infinite alternate,ctaC2 7.3s ease-in-out infinite alternate,ctaC3 8.9s ease-in-out infinite alternate,ctaC4 11.3s ease-in-out infinite alternate,ctaS1 6.1s ease-in-out infinite alternate,ctaS2 5.3s ease-in-out infinite alternate,ctaS3 7.7s ease-in-out infinite alternate,ctaS4 6.7s ease-in-out infinite alternate!important;
   isolation:isolate
 }
-.ct .ct__panel::before{display:none!important}
-.ct .ct__panel::after{display:block!important;content:"";position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:normal!important;opacity:1!important;background:linear-gradient(90deg,rgb(20 23 22 / .66) 0,rgb(20 23 22 / .66) 32%,rgb(20 23 22 / 0) 44%,rgb(20 23 22 / 0) 58%,rgb(20 23 22 / .66) 70%,rgb(20 23 22 / .66) 100%)}
-@media (max-width:900px){.ct .ct__panel::after{background:rgb(20 23 22 / .58)!important}}
+.ct .ct__panel::before{display:block!important;content:"";position:absolute;inset:0;z-index:1;pointer-events:none;animation:none!important;transform:none!important;rotate:none!important;translate:none!important;scale:none!important;filter:none!important;background:linear-gradient(rgb(255 255 255 / .22),rgb(255 255 255 / .22)) 0 calc(var(--U) - 1px) / 100% 1px no-repeat,linear-gradient(rgb(255 255 255 / .22),rgb(255 255 255 / .22)) 0 calc(var(--U) * 3.5 - 1px) / 100% 1px no-repeat}
+.ct .ct__panel::after{display:block!important;content:"";position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:normal!important;opacity:1!important;background:linear-gradient(to top,rgb(20 23 22 / .78) 0,rgb(20 23 22 / .78) var(--U),rgb(20 23 22 / 0) var(--U)),linear-gradient(90deg,rgb(20 23 22 / .82) 0,rgb(20 23 22 / .82) 36%,rgb(20 23 22 / .12) 48%,rgb(20 23 22 / .12) 54%,rgb(20 23 22 / .82) 66%,rgb(20 23 22 / .82) 100%)}
+@media (max-width:900px){.ct .ct__panel::after{background:rgb(20 23 22 / .72)!important}.ct .ct__panel::before{display:none!important}}
 
 /* prefers-reduced-motion: בלי אנימציה, צבע חלק */
 @media (prefers-reduced-motion:reduce){
