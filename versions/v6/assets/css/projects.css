@@ -1,0 +1,28 @@
+/* עמוד פרויקטים בשפת האתר: פחם #141716, גריד על P, אזור אבן לפרויקטים, גרדיאנט במילים נבחרות */
+body.pgp{background:#141716}
+.pp-hero{position:relative;display:grid;align-content:end;gap:18px;min-height:calc(var(--P) * 6);padding:calc(var(--P) * 1.4) var(--v6-m) calc(var(--P) * .6);background-color:#141716;background-image:var(--hl);color:var(--v6-stone)}
+.pp-eyebrow{margin:0;font:300 16px "Sara Ankava",system-ui,sans-serif;letter-spacing:.02em;color:rgb(217 217 210 / .78);display:flex;align-items:center;gap:10px}
+.pp-eyebrow::before{content:"";width:9px;height:9px;background:#FFE24A}
+.pp-h{margin:0;font:700 clamp(54px,9vw,170px)/1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:var(--v6-stone);padding-inline:.04em}
+.pp-gr{display:inline-block;padding-inline:.06em}
+.pp-lead{margin:0;max-width:52ch;font:300 clamp(17px,1.5vw,22px)/1.6 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .88)}
+.pp-list{background-color:#E7E6DF;color:#12140f}
+.pp-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr);gap:clamp(28px,4vw,72px);align-items:center;padding:clamp(48px,6vw,104px) var(--v6-m);border-top:1px solid rgb(18 20 15 / .3)}
+.pp-row:first-child{border-top:0}
+.pp-row:nth-child(even){grid-template-columns:minmax(0,1.5fr) minmax(0,.9fr)}
+.pp-row:nth-child(even) .pj3__tx{order:2}
+.pp-row .pj3__mk{min-width:0}
+.pp-row .pj3__mk .mk{width:100%}
+.pp-row .pj3__mk .mk__win{box-shadow:0 20px 44px -18px rgb(18 20 15 / .4)}
+.pp-row .pj3__t{font-size:clamp(34px,4.2vw,64px)}
+.pp-tags{list-style:none;margin:0 0 6px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pp-tags li{font:500 12px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;padding:5px 9px;border:1px solid rgb(18 20 15 / .35);border-radius:0}
+.pp-next{position:relative;display:grid;justify-items:start;gap:18px;padding:calc(var(--P) * 1) var(--v6-m) calc(var(--P) * 1.2);background-color:#141716;background-image:var(--hl);color:var(--v6-stone)}
+.pp-nn{color:rgb(217 217 210 / .7)!important}
+.pp-nh{margin:0;font:700 clamp(40px,6.4vw,120px)/1.05 "Sara Ankava",system-ui,sans-serif;color:var(--v6-stone)}
+@media (max-width:900px){
+  .pp-hero{min-height:0;padding-top:calc(var(--hdr,76px) + 56px);background-image:none}
+  .pp-next{background-image:none}
+  .pp-row,.pp-row:nth-child(even){grid-template-columns:1fr}
+  .pp-row:nth-child(even) .pj3__tx{order:0}
+}
