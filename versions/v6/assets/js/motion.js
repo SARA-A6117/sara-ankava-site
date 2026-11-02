@@ -41,7 +41,7 @@
           });
           node.replaceChild(frag, c);
         } else if (c.nodeType === 1 && c.tagName !== 'BR' && c.tagName !== 'SVG') {
-          if (c.hasAttribute('data-gn') || c.classList.contains('gr')) { c.style.display = c.style.display || 'inline-block'; c.style.setProperty('--i', i++); /* יחידה אחת: הגרדיאנט נשאר על האלמנט */ c.classList.add('wdu'); c.setAttribute('data-wbu', ''); }
+          if (c.hasAttribute('data-gn') || c.classList.contains('gr')) { if (getComputedStyle(c).display === 'inline') c.style.display = 'inline-block'; c.style.setProperty('--i', i++); /* יחידה אחת: הגרדיאנט נשאר על האלמנט */ c.classList.add('wdu'); c.setAttribute('data-wbu', ''); }
           else walk(c);
         }
       });
@@ -74,6 +74,28 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
   }
   plusMarks('.ab', '.ab__frame');
+
+  /* סימני "+" בצמתי הגריד: פינות האזור ושולי העמודות */
+  function plusGrid(hostSel, targetSel, childSel) {
+    var host = document.querySelector(hostSel), t = document.querySelector(targetSel);
+    if (!host || !t) return;
+    var marks = [];
+    function place() {
+      var h = host.getBoundingClientRect(), r = t.getBoundingClientRect(), xs = [r.left, r.right], kids = childSel ? $$(childSel, t) : [];
+      kids.forEach(function (k) { var q = k.getBoundingClientRect(); xs.push(q.left, q.right); });
+      var seen = {}, pts = [];
+      xs.forEach(function (x) { var rx = Math.round(x - h.left); if (rx < 10 || rx > h.width - 10 || seen[rx]) return; seen[rx] = 1; [r.top, r.bottom].forEach(function (y) { pts.push([rx, Math.round(y - h.top)]); }); });
+      while (marks.length < pts.length) { var i = document.createElement('i'); i.className = 'plus'; i.setAttribute('aria-hidden', 'true'); host.appendChild(i); marks.push(i); }
+      marks.forEach(function (m, k) { if (pts[k]) { m.style.display = ''; m.style.left = pts[k][0] + 'px'; m.style.top = pts[k][1] + 'px'; } else m.style.display = 'none'; });
+    }
+    place(); addEventListener('resize', place); addEventListener('load', place);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+    t.addEventListener('click', function () { var n = 0, id = setInterval(function () { place(); if (++n > 24) clearInterval(id); }, 50); });
+  }
+  plusGrid('.pj', '.pj3', '.pj3__c');
+  plusGrid('.pr3__stick', '.pr3__cols', '.pr3__c');
+  plusGrid('.lp2__stick', '.lp2__list', '.lp2__vl');
+
 
   if (!reduce && 'IntersectionObserver' in window && document.documentElement.animate) {
     var SHARP = $$('.ab__txt p,.pj3__d,.lp2__p,.pr3__p,.ct .madlib');
@@ -123,4 +145,22 @@
     function tick() { if (!busy) busy = requestAnimationFrame(upd); }
     addEventListener('scroll', tick, { passive: true }); addEventListener('resize', tick); upd();
   })();
+  
+  /* ---- כותרות יושבות בדיוק על קו הגריד (קו הבסיס על הקו, לא באמצע השורה) ---- */
+  function snapHeads() {
+    if (innerWidth < 901) { [".pr3__h"].forEach(function (s) { var e = document.querySelector(s); if (e) e.style.translate = ""; }); return; }
+    var P = innerHeight / 8;
+    [[".pr3__h", ".pr3__stick"]].forEach(function (pair) {
+      var el = document.querySelector(pair[0]), top = document.querySelector(pair[1]);
+      if (!el || !top) return;
+      el.style.translate = "";
+      var spans = el.querySelectorAll(":scope > span"), last = spans.length ? spans[spans.length - 1] : el;
+      var pr = document.createElement("i"); pr.style.cssText = "display:inline-block;width:0;height:0"; last.appendChild(pr);
+      var b = pr.getBoundingClientRect().bottom; pr.remove();
+      var rel = (b - top.getBoundingClientRect().top) / P, line = Math.round(rel), d = (line * P - 3) - (b - top.getBoundingClientRect().top);
+      if (Math.abs(d) < P * .6) el.style.translate = "0 " + d.toFixed(1) + "px";
+    });
+  }
+  snapHeads(); addEventListener("resize", snapHeads); addEventListener("load", snapHeads);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(snapHeads);
   })();

@@ -86,3 +86,5 @@ html[data-theme="light"] .pr3__bar i{background:linear-gradient(90deg,#1B33C9,#2
   .pr3__c.is-lit .pr3__ob .oc>*:nth-child(5){transition-delay:.48s}
   .pr3__ob>.pr3__bb{transition-delay:.5s}
 }
+
+.pj{position:relative}

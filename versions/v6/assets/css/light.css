@@ -43,8 +43,6 @@ html[data-theme="light"] .ftr2__bottom{border-top-color:rgb(30 32 31 / .14)}
 /* גרדיאנט קריא על רקע בהיר: גוונים עמוקים יותר בטקסט, כפתורים עם טקסט כהה ושפה עדינה */
 html[data-theme="light"] [data-gn="text"]{--mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#F0AE00,#F0AE00 34%,transparent 68%),radial-gradient(circle at var(--c2x) var(--c2y),#1E86E5,#1E86E5 34%,transparent 68%),radial-gradient(circle at var(--c3x) var(--c3y),#D68A00,#D68A00 30%,transparent 66%),radial-gradient(circle at var(--c4x) var(--c4y),#0F6FC4,#0F6FC4 30%,transparent 66%),linear-gradient(135deg,#F0AE00,#1E86E5)}
 html[data-theme="light"] .hb__title .hb__l[data-gn="text"]{--mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#F0AE00,#F0AE00 20%,transparent 52%),radial-gradient(circle at var(--c2x) var(--c2y),#1E86E5,#1E86E5 20%,transparent 52%),radial-gradient(circle at var(--c3x) var(--c3y),#F0AE00,#F0AE00 14%,transparent 44%),radial-gradient(circle at var(--c4x) var(--c4y),#1E86E5,#1E86E5 14%,transparent 44%),linear-gradient(100deg,#F0AE00 0%,#F0AE00 32%,#1E86E5 68%,#1E86E5 100%)}
-html[data-theme="light"] [data-gn="btn"]{box-shadow:inset 0 0 0 1px rgb(30 32 31 / .22)}
-html[data-theme="light"] .hb__badge .gr-sq[data-gn="btn"],html[data-theme="light"] .stk__c{box-shadow:0 0 0 1px rgb(30 32 31 / .2)}
 
 /* תיקונים: מילים בגרדיאנט בכותרות, מספרים, קווים */
 html[data-theme="light"] .pj__gr[data-gn]{-webkit-text-fill-color:transparent!important;color:transparent!important;background-image:var(--grain),var(--mesh-live)!important;-webkit-background-clip:text!important;background-clip:text!important}
@@ -69,19 +67,37 @@ html[data-theme="light"] .ab__txt p{font-size:17px!important;line-height:1.65!im
 html[data-theme="light"] .ct .madlib,html[data-theme="light"] .ct .madlib input{font-size:18px!important}
 html[data-theme="light"] :is(.ct .fine,.ct .fine a,.ct__steps li){font-size:16px!important}
 
-/* צור קשר: קובלט מקצה לקצה, גרדיאנט וגרעיניות, טקסט שמנת */
-html[data-theme="light"] .ct .ct__panel{background-color:#1B33C9!important;background-image:var(--grain),
-  radial-gradient(var(--s1) calc(var(--s1) * 1.6) at var(--c1x) var(--c1y),#2F56F0,#2F56F0 28%,transparent 74%),
-  radial-gradient(var(--s2) calc(var(--s2) * 1.5) at var(--c2x) var(--c2y),#4B86FF,#4B86FF 26%,transparent 74%),
-  radial-gradient(var(--s3) calc(var(--s3) * 1.5) at var(--c3x) var(--c3y),#0F1F99,transparent 72%),
-  radial-gradient(var(--s4) calc(var(--s4) * 1.4) at var(--c4x) var(--c4y),rgb(255 226 74 / .55),transparent 70%),
-  linear-gradient(#1B33C9,#1B33C9)!important}
-html[data-theme="light"] .ct :is(.ct__h,.madlib,.madlib input,.fine,.fine a,.ct__steps li,.done,.done *){color:#F4F0E6!important}
-html[data-theme="light"] .ct .madlib input{border-bottom-color:#F4F0E6!important}
-html[data-theme="light"] .ct .madlib input::placeholder{color:rgb(244 240 230 / .72)!important}
-html[data-theme="light"] .ct .madlib input:focus{background:rgb(244 240 230 / .14)!important}
-html[data-theme="light"] .ct .contact__err{color:#FFD7A8!important}
-html[data-theme="light"] .ct__steps li::before{background:#F4F0E6!important;color:#1B33C9!important}
-html[data-theme="light"] .ct .btn--primary,html[data-theme="light"] .ct .btn--primary .btn__t{background:#F4F0E6!important;color:#14161A!important;box-shadow:none!important}
-html[data-theme="light"] .ct .btn--primary:hover,html[data-theme="light"] .ct .btn--primary:hover .btn__t{background:#FFE66D!important;color:#14161A!important}
-html[data-theme="light"] .ct a.or-wa{box-shadow:none!important}
+
+
+
+/* ===== שלב 1.5: איורים בהירים, חיצי דוב קובלט, בלי סטרוק על מילויי גרדיאנט ===== */
+/* תהליך: כרטיסי ממשק בהירים עם קו מתאר דק ואלמנטים קובלט */
+html[data-theme="light"] .oc{background:#FBF8F0!important;box-shadow:inset 0 0 0 1px rgb(30 32 31 / .32)}
+html[data-theme="light"] :is(.tr,.br,.fb){background:#ECE5D3!important}
+html[data-theme="light"] .fb:nth-child(2){background:#E4DCC6!important}
+html[data-theme="light"] :is(.fb s,.tr .ic,.br .av,.br .ln){background:rgb(30 32 31 / .42)!important}
+html[data-theme="light"] .br .ck{background:rgb(30 32 31 / .3)!important}
+html[data-theme="light"] .hd i{background:rgb(30 32 31 / .2)!important}
+html[data-theme="light"] .hd i:first-child{background:rgb(30 32 31 / .42)!important}
+html[data-theme="light"] :is(.fb b,.tr em){color:#1E201F!important}
+html[data-theme="light"] .tr u{background:rgb(30 32 31 / .1)!important;color:#1E201F}
+html[data-theme="light"] .pr3__bb{background:#FBF8F0;border-color:rgb(30 32 31 / .45);color:#1E201F}
+html[data-theme="light"] .pr3__bb::after{background:#FBF8F0;border-color:rgb(30 32 31 / .45)}
+html[data-theme="light"] .fb.y{background-color:#1B33C9!important}
+/* לונה פארק: כרטיסי SVG בהירים */
+html[data-theme="light"] .lp2__cmp svg [fill="#2c2f2e"]{fill:#FBF8F0;stroke:#1E201F;stroke-opacity:.38;stroke-width:1}
+html[data-theme="light"] .lp2__cmp svg [fill="#393d3b"]{fill:#ECE5D3}
+html[data-theme="light"] .lp2__cmp svg [fill="#6a6f6c"]{fill:rgb(30 32 31 / .4)}
+html[data-theme="light"] .lp2__cmp svg [fill="#4f5451"]{fill:rgb(30 32 31 / .2)}
+html[data-theme="light"] .lp2__cmp svg text[fill="#D9D9D2"]{fill:#1E201F}
+html[data-theme="light"] .lp2__cmp svg text.sc__t{fill:#1E201F}
+/* ציורי יד (PNG): גוון קובלט */
+html[data-theme="light"] img.dd2[src*="circle"],html[data-theme="light"] img.dd2[src*="arrow-yellow"],html[data-theme="light"] img.dd2[src*="burst"]{filter:hue-rotate(178deg) saturate(2.2) brightness(.62)}
+html[data-theme="light"] img.dd2[src*="curl-blue"]{filter:hue-rotate(28deg) saturate(2.2) brightness(.62)}
+/* מדבקה ועיגול הירו: מילוי בלבד */
+html[data-theme="light"] .stk__ring text,html[data-theme="light"] .hb__ring text{fill:#1E201F}
+
+/* תיקונים: ספרות בעיגולי לונה פארק, וציורי היד בגוון קובלט (גוברים על filter:none) */
+html[data-theme="light"] .lp2--lp .lp2__row .lp2__n{background:#1E201F!important;color:#F4F0E6!important}
+html[data-theme="light"] img.dd2[src*="circle"],html[data-theme="light"] img.dd2[src*="arrow-yellow"],html[data-theme="light"] img.dd2[src*="burst"]{filter:hue-rotate(178deg) saturate(2.2) brightness(.62)!important}
+html[data-theme="light"] img.dd2[src*="curl-blue"]{filter:hue-rotate(28deg) saturate(2.2) brightness(.62)!important}

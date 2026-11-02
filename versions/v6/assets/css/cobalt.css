@@ -1,0 +1,50 @@
+/* גרדיאנט קובלט בכל מקום (כמו רקע צור קשר), איורים, חיצים, ספרות ויישור. משותף לגרסה הכהה והבהירה. */
+:root{--cream:#F4F0E6;--tu:#4f5451;--tuc:#D9D9D2}
+html[data-theme="light"]{--tu:rgb(30 32 31 / .12);--tuc:#1E201F}
+
+/* עצירות הגרדיאנט של הציורים (חיצים, קווים, מילויים ב-SVG) */
+#pr3g stop:first-child{stop-color:#4F73F5}
+#pr3g stop:last-child{stop-color:#8AB4FF}
+html[data-theme="light"] #pr3g stop:first-child{stop-color:#1B33C9}
+html[data-theme="light"] #pr3g stop:last-child{stop-color:#2F63F0}
+
+/* חיצים בהירו ובתהליך: גרדיאנט */
+.hb__arrows .ar,.hb__marker .ar,.pr3__ar path,.pr3__ar--y path,.pr3__ar--b path,.pr3__ul path,.pr3__c:nth-of-type(2) .pr3__ul path{stroke:url(#pr3g)!important}
+.hb__dot{stroke:#6FA0FF!important}
+html[data-theme="light"] .hb__dot{stroke:#1B33C9!important}
+.hb__ck svg circle{fill:url(#pr3g)!important}
+.hb__ck svg path{stroke:#F4F0E6!important}
+.stk__star path{fill:#F4F0E6!important}
+.hb__arr path{stroke:#F4F0E6!important}
+
+/* מילוי גרדיאנט (בלי סטרוק) באלמנטי ממשק במקום צהוב/תכלת */
+:is(.fb.y,.br.nw,.ftr2__ic a:hover,.ftr2__ic a:focus-visible,.nav .capsule__ind,.pr3__c.is-act .pr3__bb){
+  background-color:#1B33C9!important;background-image:var(--grain),var(--mesh-live)!important;
+  background-size:150px,auto,auto,auto,auto,auto!important;background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
+  background-blend-mode:overlay,normal,normal,normal,normal,normal!important;color:#F4F0E6!important;border-color:transparent!important}
+:is(.fb.y,.br.nw,.ftr2__ic a:hover,.ftr2__ic a:focus-visible,.nav .capsule__ind){animation:var(--mesh-anim)!important}
+.pr3__c.is-act .pr3__bb::after{background:#2A45D8!important}
+.fb.y s{background:#F4F0E6}.fb.y b{color:#F4F0E6!important}
+.br.nw .av,.br.nw .ln{background:rgb(244 240 230 / .55)}.br.nw .ck{background:#F4F0E6}
+.nav a.is-active:not(.btn):not(.cta6),.nav a.is-active:not(.btn):not(.cta6):hover{color:#F4F0E6!important}
+.ftr2__ic a:hover svg,.ftr2__ic a:focus-visible svg{color:#F4F0E6}
+@keyframes pr3-t1{0%{background:#1B33C9;color:#F4F0E6}35%,100%{background:var(--tu);color:var(--tuc)}}
+@keyframes pr3-t2{0%{background:var(--tu)}30%{background:#1B33C9;color:#F4F0E6}65%,100%{background:var(--tu);color:var(--tuc)}}
+@keyframes pr3-t3{0%,65%{background:var(--tu);color:var(--tuc)}66%,100%{background:#1B33C9;color:#F4F0E6}}
+@media (prefers-reduced-motion:reduce){.pr3__c .tr:nth-child(3) u{background:#1B33C9!important;color:#F4F0E6!important}}
+
+/* מילים בכותרות: גרדיאנט (ולא צהוב שטוח) */
+.pj__gr[data-gn]{-webkit-text-fill-color:transparent!important;color:transparent!important;background-image:var(--grain),var(--mesh-live)!important;background-size:120px,auto,auto,auto,auto,auto!important;background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;background-blend-mode:overlay,normal,normal,normal,normal,normal!important;-webkit-background-clip:text!important;background-clip:text!important;animation:var(--mesh-anim)!important}
+.lp2--lp .lp2__row.is-open .lp2__n{border-color:#8AB4FF;color:#8AB4FF}
+html[data-theme="light"] .lp2--lp .lp2__row.is-open .lp2__n{background:#1B33C9!important;border-color:#1B33C9;color:#F4F0E6!important}
+
+/* איורי לונה פארק: מילויים בגרדיאנט והטקסט עליהם שמנת */
+.lp2__cmp svg [fill="#FFE66D"],.lp2__cmp svg [fill="#8ED8FF"]{fill:url(#pr3g)}
+.lp2__cmp svg [fill="rgba(20,23,22,.5)"],.lp2__cmp svg [fill="rgba(20,23,22,.35)"],.lp2__cmp svg [fill="rgba(30,32,31,.5)"],.lp2__cmp svg [fill="rgba(30,32,31,.35)"]{fill:rgb(244 240 230 / .75)}
+.lp2__cmp svg text[fill="rgba(20,23,22,.5)"],.lp2__cmp svg text[fill="rgba(30,32,31,.5)"]{fill:#F4F0E6}
+
+/* יישור: אזור האודות בדיוק 7 שורות, וצור קשר ממלא מקו לקו (5 שורות) */
+@media (min-width:901px){
+  .ab{height:calc(var(--P) * 7);box-sizing:border-box}
+  .ct .ct__panel{grid-template-rows:var(--P) minmax(calc(var(--P) * 3),auto) var(--P)!important;min-height:calc(var(--P) * 5)!important}
+}
