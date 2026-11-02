@@ -374,3 +374,12 @@ html body .pr3__bb{transition:color .4s ease}
 html body .pr3__c:not(.is-act) .pr3__bb{color:#1E201F!important}
 html body .pr3__c.is-act .pr3__bb{color:#FFE66D!important}
 @media (max-width:900px){html body .pr3__c .pr3__bb{color:#FFE66D!important}}
+
+/* ===== פס כלים: נמוך ומיושר. אייקון לצד הטקסט, גובה יחידת גריד אחת, חשיפה בשקיפות בלבד (בלי תזוזה אנכית) ===== */
+html body .tl .tl__c{flex-direction:row;align-items:center;justify-content:flex-start;gap:20px}
+html body .tl .tl__c>.tl__ic{flex:none;margin:0;align-self:center}
+html body .tl .tl__n{margin:0 0 4px}
+html body .tl .tl__c>.tl__n,html body .tl .tl__c>.tl__d{display:block}
+html.js .tl .rv.pre{transform:none}
+@media (min-width:901px){html body .tl{height:var(--P)}}
+@media (max-width:900px){html body .tl{padding-block:0}html body .tl .tl__c{padding-block:22px}}
