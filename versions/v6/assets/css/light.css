@@ -54,3 +54,4 @@ html[data-theme="light"] .pr3__n{-webkit-text-stroke-color:rgb(30 32 31 / .55)!i
 html[data-theme="light"] :is(.lp2__row,.lp2__bar,.pr3__c,.pr3__cols,.pr3__stick){border-color:rgb(30 32 31 / .16)!important}
 html[data-theme="light"] .pr3__c{border-inline-color:rgb(30 32 31 / .14)!important}
 html[data-theme="light"] .pr3__cols{background-color:#F3EEE2!important}
+html[data-theme="light"] .hdr .menu-btn span{background:#1E201F!important}
