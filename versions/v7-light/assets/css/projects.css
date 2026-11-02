@@ -90,3 +90,8 @@ html body .pp-next .btn .btn__t{color:#0A2BB5!important;font:800 21px/1 "Sara An
   :is(html,html[data-theme="light"]) body .nav a[aria-current="page"]{color:#1B33C9!important}
 }
 :is(html,html[data-theme="light"]) body .pp-next .btn.btn.btn .btn__t.btn__t{line-height:56px!important;height:56px!important}
+
+/* כפתור "לפרויקט המלא" בעמוד פרויקטים: אותו גרדיאנט קובלט כמו בדף הבית, גם בהובר */
+:is(html,html[data-theme="light"]) body .pp-row .btn[data-gn]{background-color:#1B33C9!important;background-image:var(--grain),var(--mesh-live)!important;background-blend-mode:overlay,normal!important;color:#F4F0E6!important}
+:is(html,html[data-theme="light"]) body .pp-row .btn[data-gn]:hover{background-color:#1B33C9!important;background-image:var(--grain),radial-gradient(circle at var(--mx,30%) var(--my,50%),rgb(255 255 255 / .45),transparent 60%),var(--mesh-live)!important}
+:is(html,html[data-theme="light"]) body .pp-row .btn[data-gn] .btn__t{color:#F4F0E6!important}
