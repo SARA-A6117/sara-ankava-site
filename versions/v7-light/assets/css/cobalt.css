@@ -383,3 +383,16 @@ html body .tl .tl__c>.tl__n,html body .tl .tl__c>.tl__d{display:block}
 html.js .tl .rv.pre{transform:none}
 @media (min-width:901px){html body .tl{height:var(--P)}}
 @media (max-width:900px){html body .tl{padding-block:0}html body .tl .tl__c{padding-block:22px}}
+
+/* ===== אישור שליחה קטן וקריא, מלכודת בוטים, ומילוי הובר בפס הכלים עד קצה המסך ===== */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+html body .ct .done{max-width:52ch}
+html body .ct .done .done__h{margin:0 0 10px;font:700 clamp(24px,2.2vw,32px)/1.2 "Sara Ankava",system-ui,sans-serif;color:#F4F0E6!important}
+html body .ct .done .done__lead{margin:0 0 14px;font:300 17px/1.6 "Google Sans","Heebo",system-ui,sans-serif;color:#F4F0E6!important}
+html body .ct .done .done__ol{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:12px;counter-reset:s;max-width:none}
+html body .ct .done .done__ol li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;counter-increment:s;font:300 17px/1.6 "Google Sans","Heebo",system-ui,sans-serif;color:#F4F0E6!important}
+html body .ct .done .done__ol li::before{content:counter(s);width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:#FFE66D;color:#1E201F!important;font:900 14px/1 "Google Sans","Heebo",system-ui,sans-serif}
+html body .tl{padding-inline:0}
+html body .tl .tl__c:first-child{padding-inline-start:4vw}
+html body .tl .tl__c:last-child{padding-inline-end:4vw}
+@media (max-width:699px){html body .tl .tl__c{padding-inline:4vw!important}}

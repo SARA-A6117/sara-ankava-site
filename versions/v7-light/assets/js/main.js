@@ -122,21 +122,29 @@ const WA_TEXT = 'היי שרי, הגעתי מהאתר ואשמח לדבר על �
     };
     const mark = k => { const ok = valid[k](f[k].value); f[k].setAttribute('aria-invalid', !ok); return ok; };
     ['name', 'phone'].forEach(k => f[k].addEventListener('input', () => { if (f[k].getAttribute('aria-invalid') === 'true') mark(k); }));
-    form.addEventListener('submit', e => {
+    const started = Date.now();
+    form.addEventListener('submit', async e => {
       e.preventDefault();
       const okN = mark('name'), okP = mark('phone');
       if (!okN || !okP) {
-        err.textContent = !okN && !okP ? 'חסרים לי השם ומספר הטלפון.' : !okN ? 'רק תגידו לי איך קוראים לכם.' : 'נראה שחסרה ספרה במספר. פורמט: 050-0000000.';
+        err.textContent = !okN && !okP ? 'חסרים לי השם ומספר הטלפון.' : !okN ? 'רק תגידו לי איך קוראים לכם.' : 'נראה שחסרה ספרה במספר. פורמט: 050-1234567';
         (!okN ? f.name : f.phone).focus(); return;
       }
       if (f.consent && !f.consent.checked) { f.consent.setAttribute('aria-invalid', 'true'); err.textContent = 'כדי לשלוח צריך לאשר את מדיניות הפרטיות.'; f.consent.focus(); return; }
       err.textContent = '';
-      const about = f.about.value.trim(), pains = f.pains ? f.pains.value : '';
-      const msg = `היי שרי, אני ${f.name.value.trim()}.` + (about ? `\nיש לי עסק של ${about}.` : '') +
-        `\nאפשר לחזור אליי: ${f.phone.value.trim()}` + (pains ? `\nמה שמוכר לי: ${pains}` : '') + '\n(נשלח מהאתר)';
-      const send = $('[data-send]', box); send.href = waUrl(msg); send.target = '_blank'; send.rel = 'noopener';
-      $('[data-who]', box).textContent = f.name.value.trim().split(' ')[0];
-      box.classList.add('is-done'); $('.done', box).focus();
+      const btn = $('button[type="submit"]', form), lbl = btn && $('.btn__t', btn), old = lbl ? lbl.innerHTML : '';
+      if (btn) { btn.disabled = true; if (lbl) lbl.textContent = 'שולחת...'; }
+      try {
+        const r = await fetch('/api/contact', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name.value.trim(), about: f.about.value.trim(), phone: f.phone.value.trim(), pains: f.pains ? f.pains.value : '', consent: true, website: f.website ? f.website.value : '', t: Date.now() - started })
+        });
+        if (!r.ok) throw new Error(String(r.status));
+        $('[data-who]', box).textContent = f.name.value.trim().split(' ')[0];
+        box.classList.add('is-done'); $('.done', box).focus();
+      } catch (x) {
+        err.textContent = 'לא הצלחתי לשלוח כרגע. אפשר לנסות שוב, או לכתוב לי בוואטסאפ.';
+      } finally { if (btn) { btn.disabled = false; if (lbl) lbl.innerHTML = old; } }
     });
     f.consent?.addEventListener('change', () => { f.consent.setAttribute('aria-invalid', !f.consent.checked); if (f.consent.checked) err.textContent = ''; });
     $('[data-edit]', box)?.addEventListener('click', () => { box.classList.remove('is-done'); f.name.focus(); });

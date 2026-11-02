@@ -84,3 +84,8 @@
 
 ## פס כלים (`.tl`, `#tools`)
 - בין התהליך לאודות ב-`versions/v7-light/index.html`: שלוש עמודות (Meta, Google Ads, Google Analytics), בגובה 2P בדסקטופ, עמודה אחת מתחת ל-700px. לוגואים: נתיבי SVG של Simple Icons (CC0) בתוך הקוד, מלאים ב-`#tlg` (קובלט ל-`#6FD0FF`). חשיפה בגלילה דרך `.rv` הקיים. הסגנון בסוף `cobalt.css`.
+
+## טופס צור קשר שולח מייל (`api/contact.js`)
+- הטופס ב-`versions/v7-light` שולח POST ל-`/api/contact` (פונקציית Vercel, בלי תלויות, דרך Resend). אין יותר פתיחת וואטסאפ מהטופס; כפתורי הוואטסאפ באתר נשארו. הגרסה הכהה (`/dark`, v6) עדיין עם הזרימה הישנה.
+- משתני סביבה ב-Vercel (Settings, Environment Variables): `RESEND_API_KEY`, `CONTACT_TO`, ואופציונלי `CONTACT_FROM`. בלעדיהם הפונקציה מחזירה 503 והטופס מציג "לא הצלחתי לשלוח כרגע".
+- הגנות: מלכודת בוטים (`website`), מינימום זמן מילוי, הגבלת קצב לפי IP (בזיכרון), בדיקת Origin, ניקוי והבריחה של התוכן.
