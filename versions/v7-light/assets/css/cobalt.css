@@ -316,3 +316,12 @@ html,body{overflow-x:clip}
   html body .ct .madlib input{box-sizing:content-box;padding-top:11px;margin-top:-11px}
   html body .nav a:not(.cta6)::after{content:"";position:absolute;inset:-3px 0;z-index:1}
 }
+
+/* ===== עוד נגיעות צהוב #FFE66D (עדינות): טקסט בכפתורי הוויזואלים, ספרות צור קשר ולונה פארק, וי בצ'קליסט, קו בפוקוס, סימון טקסט ===== */
+html body .pr3__bb,html body .pr3__ob .pr3__bb *,html body .lp2__ob .pr3__bb{color:#FFE66D!important}
+html body .fb.y,html body .fb.y *{color:#FFE66D!important}
+html body .ct__steps li::before{background:#FFE66D!important;color:#1E201F!important}
+html body .lp2 .lp2__n,html[data-theme="light"] body .lp2--lp .lp2__row .lp2__n,html[data-theme="light"] .lp2--lp .lp2__row.is-open .lp2__n{color:#FFE66D!important}
+html body .hb__card .hb__ck svg path{stroke:#FFE66D!important}
+html body .ct .madlib input:focus{border-bottom-color:#FFE66D!important}
+::selection{background:#FFE66D;color:#1E201F}

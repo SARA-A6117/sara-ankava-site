@@ -31,8 +31,16 @@
         if (fs <= 17) break;
       }
       txt.style.fontSize = Math.min(fs, 17).toFixed(2) + 'px';
-      tp.setAttribute('textLength', (circ - 2).toFixed(1));
+      /* הטקסט זורם סביב קו הבועה בלולאה: פעמיים היקף, והיסט שמתקדם בהיקף אחד */
+      tp.textContent = rev(new Array(2 * r + 1).join(unit));
+      tp.setAttribute('textLength', (2 * (circ - 2)).toFixed(1));
       tp.setAttribute('lengthAdjust', 'spacing');
+      if (!reduce) {
+        var an = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+        an.setAttribute('attributeName', 'startOffset'); an.setAttribute('from', '0'); an.setAttribute('to', String(-(circ - 2) / 1.14));
+        an.setAttribute('dur', '48s'); an.setAttribute('repeatCount', 'indefinite');
+        tp.appendChild(an);
+      }
     }
     fit();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
