@@ -30,7 +30,7 @@
   "rewrites": [
     {
       "source": "/light",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ]
 }
