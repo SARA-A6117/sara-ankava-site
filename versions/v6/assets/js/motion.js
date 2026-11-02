@@ -28,9 +28,9 @@
         tp.textContent = rev(new Array(r + 1).join(unit));
         len = txt.getComputedTextLength();
         fs = len > 0 ? 9 * (circ - 2) / len : 9;
-        if (fs <= 11) break;
+        if (fs <= 17) break;
       }
-      txt.style.fontSize = Math.min(fs, 11).toFixed(2) + 'px';
+      txt.style.fontSize = Math.min(fs, 17).toFixed(2) + 'px';
       tp.setAttribute('textLength', (circ - 2).toFixed(1));
       tp.setAttribute('lengthAdjust', 'spacing');
     }
