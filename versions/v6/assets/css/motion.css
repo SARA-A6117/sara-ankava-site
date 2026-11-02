@@ -44,3 +44,16 @@ html.wb-on [data-wb].is-in wd-w,html.wb-on [data-wb].is-in [data-wbu]{opacity:1;
 .ab__txt p:last-child{margin-bottom:0}
 @media (min-width:901px){.ab__frame .ab__txt{padding-block:0;align-self:center}}
 @media (max-width:900px){.ab__frame .ab__txt{padding:24px var(--v6-m) 40px}}
+
+/* סימני "+" (כמו קווי חיתוך) בפינות המסגרת */
+.ab{position:relative}
+.plus{position:absolute;z-index:3;width:15px;height:15px;translate:-50% -50%;pointer-events:none;color:rgb(241 236 224 / .7)}
+.plus::before,.plus::after{content:"";position:absolute;background:currentColor}
+.plus::before{left:0;right:0;top:50%;height:1px;translate:0 -50%}
+.plus::after{top:0;bottom:0;left:50%;width:1px;translate:-50% 0}
+html[data-theme="light"] .plus{color:rgb(30 32 31 / .6)}
+@media (max-width:900px){.plus{display:none}}
+
+/* טקסט שמתחדד: מוסתר רק עד שנכנס לתצוגה */
+.sh{opacity:.01}
+@media (prefers-reduced-motion:reduce){.sh{opacity:1}}

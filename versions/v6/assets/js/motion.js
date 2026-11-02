@@ -59,4 +59,43 @@
     setTimeout(function () { heads.forEach(function (h) { var r = h.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0) h.classList.add('is-in'); }); }, 4000);
   }
 
+  
+  /* ---- שלב 2: סימני "+" בפינות מסגרת האודות, טקסט שמתחדד, כפתורים מגנטיים ---- */
+  function plusMarks(hostSel, targetSel) {
+    var host = document.querySelector(hostSel), t = document.querySelector(targetSel);
+    if (!host || !t) return;
+    var els = [0, 1, 2, 3].map(function () { var i = document.createElement('i'); i.className = 'plus'; i.setAttribute('aria-hidden', 'true'); host.appendChild(i); return i; });
+    function place() {
+      var h = host.getBoundingClientRect(), r = t.getBoundingClientRect();
+      var xs = [r.left - h.left, r.right - h.left], ys = [r.top - h.top, r.bottom - h.top];
+      els.forEach(function (el, k) { el.style.left = xs[k % 2] + 'px'; el.style.top = ys[k >> 1] + 'px'; });
+    }
+    place(); addEventListener('resize', place); addEventListener('load', place);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+  }
+  plusMarks('.ab', '.ab__frame');
+
+  if (!reduce && 'IntersectionObserver' in window && document.documentElement.animate) {
+    var SHARP = $$('.ab__txt p,.pj3__d,.lp2__p,.pr3__p,.ct .madlib');
+    SHARP.forEach(function (e) { e.classList.add('sh'); });
+    var ioS = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (!en.isIntersecting) return; ioS.unobserve(en.target);
+        var el = en.target; el.classList.remove('sh');
+        el.animate([{ filter: 'blur(12px)', opacity: .15, transform: 'translateY(14px)' }, { filter: 'blur(0px)', opacity: 1, transform: 'none' }], { duration: 900, easing: 'cubic-bezier(.16,1,.3,1)' });
+      });
+    }, { threshold: 0.2 });
+    SHARP.forEach(function (e, i) { ioS.observe(e); });
+    setTimeout(function () { SHARP.forEach(function (e) { e.classList.remove('sh'); }); }, 6000);
+  }
+
+  if (!reduce && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    $$('.cta6[data-gn], .btn[data-gn], .or-wa').forEach(function (b) {
+      var tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+      function step() { x += (tx - x) * .18; y += (ty - y) * .18; b.style.translate = (Math.abs(x) < .05 && Math.abs(y) < .05 && !tx && !ty) ? '' : x.toFixed(2) + 'px ' + y.toFixed(2) + 'px'; raf = (Math.abs(tx - x) > .05 || Math.abs(ty - y) > .05) ? requestAnimationFrame(step) : 0; }
+      function kick() { if (!raf) raf = requestAnimationFrame(step); }
+      b.addEventListener('pointermove', function (e) { var r = b.getBoundingClientRect(); tx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2) * 7; ty = (e.clientY - (r.top + r.height / 2)) / (r.height / 2) * 4; kick(); });
+      b.addEventListener('pointerleave', function () { tx = ty = 0; kick(); });
+    });
+  }
   })();
