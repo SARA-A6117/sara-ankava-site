@@ -23,3 +23,6 @@
   .pj3__c+.pj3__c{border-inline-start:0!important;border-top:1px solid rgb(18 20 15 / .3)!important}
   .pj3__c .pj3__tx{padding:0}
 }
+
+/* רקע בסיס של הדף: פחם חם (לא שחור מוחלט) */
+html,body{background-color:#1E201F}
