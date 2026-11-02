@@ -80,3 +80,13 @@ html body .pp-next .btn .btn__t{color:#0A2BB5!important;font:800 21px/1 "Sara An
   html body .pp-hero{height:auto;padding-bottom:40px}
   html body .pp-next{height:auto;padding-block:56px}
 }
+
+/* ===== תיקונים: כפתור "בואו נדבר" בבועה, וקישור "פרויקטים" הפעיל בתפריט ===== */
+:is(html,html[data-theme="light"]) body .pp-next .btn.btn.btn .btn__t.btn__t{display:block!important;height:auto!important;line-height:1!important;margin:0!important;padding:0!important}
+@media (min-width:901px){
+  :is(html,html[data-theme="light"]) body .nav a[aria-current="page"]{background-color:#1B33C9;background-image:var(--grain),var(--mesh-live);background-blend-mode:overlay,normal;color:#F4F0E6!important;border-radius:999px}
+}
+@media (max-width:900px){
+  :is(html,html[data-theme="light"]) body .nav a[aria-current="page"]{color:#1B33C9!important}
+}
+:is(html,html[data-theme="light"]) body .pp-next .btn.btn.btn .btn__t.btn__t{line-height:56px!important;height:56px!important}
