@@ -69,3 +69,14 @@ html body .pp-next .btn .btn__t{color:#0A2BB5!important;font:800 21px/1 "Sara An
 :is(html,html[data-theme="light"]) body .pp-next .btn.btn.btn{animation:none!important;overflow:visible;transform:none}
 :is(html,html[data-theme="light"]) body .pp-next .btn.btn.btn .btn__t{display:inline!important;height:auto!important;overflow:visible!important;transform:none!important}
 :is(html,html[data-theme="light"]) body .pp-next .btn.btn.btn{background-size:100% 100%!important;background-repeat:no-repeat!important;background-position:0 0!important;background-blend-mode:normal!important}
+/* ===== רספונסיביות ===== */
+@media (max-width:900px){
+  html body .pp-row,html body .pp-row:nth-child(even){display:flex;flex-direction:column;align-items:stretch;gap:28px;height:auto;padding:48px var(--v6-m)}
+  html body .pp-row .pj3__mk{order:-1;max-width:none;width:100%}
+  html body .pp-row .pj3__tx{width:100%;max-width:none;order:0}
+  html body .pp-row .pj3__t{font-size:clamp(30px,8.5vw,44px)}
+  html body .pp-row .btn{white-space:nowrap;width:auto;min-width:0;align-self:flex-start}
+  html body .pp-row .btn .btn__t{white-space:nowrap}
+  html body .pp-hero{height:auto;padding-bottom:40px}
+  html body .pp-next{height:auto;padding-block:56px}
+}

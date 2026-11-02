@@ -269,3 +269,15 @@ html body .lp2 .lp2__ob .pr3__bb{animation:none;opacity:1;transform:none}
 
 html body .lp2 .lp2__ob img.dd2{position:absolute;scale:1;height:auto;max-width:none;pointer-events:none}
 html[data-theme="light"] body .hb .hb__p.hb__p{color:#1E201F!important}
+/* ===== רספונסיביות ===== */
+@media (max-width:900px){
+  html body .ab__frame .ab__h{display:block;line-height:1.2!important;font-size:clamp(28px,7.2vw,46px)!important;white-space:normal!important;width:auto;max-width:none;margin:8px var(--v6-m) 0!important;text-align:center}
+  html body .ab__h>span{display:block}
+  html body .ab__h .pj__gr{display:inline-block}
+}
+@media (max-width:900px){html body .ab__frame .ab__h span{line-height:1.2!important}}
+/* מובייל וטאבלט: כל העמודות פעילות, גם הבועות בגרדיאנט עם טקסט שמנת */
+@media (max-width:900px){
+  html body .pr3__c .pr3__bb{background-color:#1B33C9!important;background-image:var(--grain),var(--mesh-live)!important;background-blend-mode:overlay,normal!important;color:#F4F0E6!important;border-color:transparent!important}
+  html body .pr3__c .pr3__bb::after{background:#1B33C9!important;border-color:transparent!important}
+}
