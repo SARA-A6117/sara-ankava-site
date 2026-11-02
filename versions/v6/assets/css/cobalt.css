@@ -165,3 +165,45 @@ html body .stk{background:none!important;border-radius:0!important;box-shadow:no
   html[data-theme="light"] .lp2--lp .lp2__h{background-color:#F3EEE2!important}
 }
 @media (min-width:901px){html body .lp2.lp2--lp .lp2__row.lp2__row{border-width:0!important}}
+
+/* ===== סבב 3 ===== */
+/* כפתורי טופס: כמו הרפרנס, פס ארוך עם קו וזנב קוצני למעלה, ובועה לבנה עם זנב למטה-ימין */
+html body .ct .contact__actions{display:flex;flex-wrap:wrap;align-items:flex-start;gap:16px 14px}
+html body .ct .contact__actions .btn--primary.btn--primary{width:200px!important;height:72px!important;margin-top:20px;padding:0 0 17px!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 72'%3E%3Cpath fill='%23fff' d='M28 1H172A27 27 0 0 1 192 46L200 71C190 67 178 61 168 55H28A27 27 0 0 1 28 1Z'/%3E%3C/svg%3E")!important;color:#0A2BB5!important;font:800 21px/1 "Sara Ankava",system-ui,sans-serif!important}
+html body .ct .contact__actions .btn--primary.btn--primary .btn__t{color:#0A2BB5!important;font:800 21px/1 "Sara Ankava",system-ui,sans-serif!important}
+html body .ct .contact__actions a.or-wa.or-wa{width:300px!important;height:80px!important;padding:22px 0 0!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 80'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2.6' stroke-linejoin='round' d='M58 22H270A27 27 0 0 1 270 76H30A27 27 0 0 1 38 23L24 3C36 6 48 13 58 22Z'/%3E%3C/svg%3E")!important;color:#fff!important;font:800 21px/1 "Sara Ankava",system-ui,sans-serif!important;white-space:nowrap}
+html body .ct .contact__actions a.or-wa.or-wa:hover{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 80'%3E%3Cpath fill='%23fff' stroke='%23fff' stroke-width='2.6' stroke-linejoin='round' d='M58 22H270A27 27 0 0 1 270 76H30A27 27 0 0 1 38 23L24 3C36 6 48 13 58 22Z'/%3E%3C/svg%3E")!important;color:#0A2BB5!important}
+/* מדבקה: הצורה מהרפרנס, גדולה יותר, רחוקה מהתמונה */
+.stk{width:calc(var(--sw)*1.9)!important}
+.stk .stk__c{clip-path:url(#stkclip)}
+html body .stk .stk__star{left:50%!important;top:48%!important;width:13%!important;height:13%!important}
+.stk--ab{left:-92px!important;top:-18px!important}
+@media (max-width:900px){.stk--ab{left:auto!important;right:6px!important;top:-10px!important}.stk{width:calc(var(--sw)*2.2)!important}}
+/* גריד: גבהי אזורים בכפולות של יחידת הגריד, כדי שהקווים ימשיכו בלי הפרעה */
+@media (min-width:901px){
+  html body .pj3{min-height:calc(var(--P)*7)}
+  html body .lp2.lp2{height:calc(var(--P)*35)}
+  .pr3__cols{height:calc(var(--P)*5)!important;min-height:0!important}
+  .pr3__cols::after{display:none!important}
+  html body .pr3__pc{left:auto!important;right:calc(var(--v6-m) + 84px);bottom:calc(var(--P)*1.5 - 24px)!important;transform:none;gap:10px;font-size:15px}
+  html body .pr3__pc .pr3__pl{font:800 18px/1 "Sara Ankava",system-ui,sans-serif;color:#1B33C9;margin-inline-end:6px}
+  html body .pr3__pc .pr3__pn{font:900 44px/1 "Google Sans","Sara Ankava",system-ui,sans-serif;letter-spacing:-.02em}
+  html body .pr3__pc .pr3__bar{width:140px;height:4px;background:rgb(30 32 31 / .16)}
+  html body .pr3__pc .pr3__bar i{background:linear-gradient(90deg,#1B33C9,#3F6BFF)}
+}
+/* הירו: כרטיסים כמו אובייקטי התהליך (קו דק, גרדיאנט) */
+.hb__card .hb__ck svg circle{fill:url(#pr3g)!important}
+.hb__card .hb__dot{background:linear-gradient(135deg,#1B33C9,#3F6BFF)!important;box-shadow:0 0 0 4px rgb(63 107 255 / .18)!important}
+html[data-theme="light"] .hb__card{box-shadow:inset 0 0 0 .75px rgb(30 32 31 / .26)!important;border-radius:12px!important;background:#FBF8F0!important}
+.hb__card1::before,.hb__card2::before{content:"";position:absolute;left:14px;right:14px;top:0;height:2px;border-radius:2px;background:linear-gradient(90deg,#1B33C9,#3F6BFF)}
+/* תהליך: שורת ריקה, כותרת בין שני קווים, עמודות על קו, מונה בשורה התחתונה */
+@media (min-width:901px){
+  html body .pr3__stick{padding-top:var(--P)!important}
+  html body .pr3__h{align-items:center!important;padding-bottom:0!important;height:var(--P)!important}
+  html body .pr3__pc{bottom:calc(var(--P)*.5 - 24px)!important}
+  html body .stk--pr{width:calc(var(--sw)*1.35)!important;top:calc(var(--P)*.45)!important}
+}
+html body .fb.y,html body .br.nw,html body .pr3__bb,html body .pr3__ob .pr3__bb *,html body .fb.y *,html body .br.nw *{color:#F4F0E6!important}
+@media (min-width:901px){html body .stk--ab{top:-128px!important;left:-60px!important}}
+@media (min-width:901px){html body .stk--ab{top:10px!important;left:-30px!important;width:calc(var(--sw)*1.55)!important}}
+html body .sc__bt,html body .sc text.sc__bt,html body .sc__bt tspan{fill:#F4F0E6!important}
