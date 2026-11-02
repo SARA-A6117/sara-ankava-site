@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="assets/css/header.css?v=20">
 <link rel="stylesheet" href="assets/css/global.css?v=4">
 <link rel="stylesheet" href="assets/css/motion.css?v=10">
-<link rel="stylesheet" href="assets/css/cobalt.css?v=43">
+<link rel="stylesheet" href="assets/css/cobalt.css?v=52">
 <link rel="stylesheet" href="assets/css/light.css?v=14">
 <link rel="stylesheet" href="assets/css/light-lines.css?v=1">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__saReady)document.documentElement.classList.remove('js')},3000)</script>
@@ -170,7 +170,7 @@
           <span class="stk stk--ab" data-ring="מתחילים מהעסק · " aria-hidden="true"></span>
           <img class="ab__ph" src="assets/img/sara-cut.png" alt="שרי אנקווה" width="760" height="824">
         </div>
-        <h2 class="ab__h" id="about-title"><span>לא מתחילים מ<span class="gr gr-text" data-gn="text">אתר</span>,</span> <span>מתחילים מ<span class="gr gr-text" data-gn="text">העסק</span></span></h2>
+        <h2 class="ab__h" id="about-title"><span>לא מתחילים מ<span class="pj__gr gr gr-text" data-gn="text">אתר</span>,</span> <span>מתחילים מ<span class="pj__gr gr gr-text" data-gn="text">העסק</span></span></h2>
       </div>
       <div class="ab__txt" data-rv><p>בניתם עסק אמיתי, עם לקוחות מרוצים ושם טוב. אבל ההזמנות מתפזרות בין אקסל לוואטסאפ, האתר לא מציג אתכם כמו שצריך וככה לקוחות וכסף דולפים בדרך.</p><p>היי, אני שרי, ואני בונה לעסקים את הנוכחות הדיגיטלית שלהם. את הבלגן הזה אני מכירה מבפנים, כאחת שעבדה בניהול דיגיטל לרשת.</p><p>ולכן היום אני מתחילה קודם כל בלהבין איפה העסק דולף, ואז בונה תוכנית שיווק ונכס דיגיטלי אחד שעובדים יחד, ואתם רואים הכול במסך אחד, והעסק רץ גם כשאתם לא שם</p></div>
     </div>
@@ -261,8 +261,8 @@ function set(t){var act=null;items.forEach(function(el,k){var on=t>=k;if(el.clas
 function upd(){if(reduce){set(5);return}var r=s.getBoundingClientRect(),p;if(mob.matches)p=(innerHeight*.85-r.top)/(r.height*.85);else p=-r.top/(s.offsetHeight-innerHeight);p=Math.max(0,Math.min(1,p));set(.3+p*5.3)}
 addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);upd()})()</script>
 <script>(function(){var c=document.querySelector(".pr3__cols");if(!c)return;var mq=matchMedia("(min-width:901px)");function fit(){c.style.height="";if(!mq.matches)return;var P=innerHeight/8;c.style.height=Math.ceil(c.scrollHeight/P)*P+"px"}addEventListener("load",fit);addEventListener("resize",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);fit()})()</script>
-<script>(function(){var t=document.querySelector(".lp2--lp .lp2__h"),st=document.querySelector(".lp2--lp .lp2__stick");if(!t)return;var mq=matchMedia("(min-width:901px)");function fit(){var sp=[].slice.call(t.querySelectorAll("span"));sp.forEach(function(x){x.style.transform=""});if(!mq.matches)return;sp.forEach(function(x){x.style.transform="none"});var P=innerHeight/8,top=st.getBoundingClientRect().top,i=document.createElement("i");i.style.cssText="display:inline-block;width:0;height:0";sp.forEach(function(x,k){x.appendChild(i);var b=i.getBoundingClientRect().bottom-top;i.remove();x.style.transform="translateY("+(((3+k)*P-3)-b)+"px)"})}addEventListener("load",fit);addEventListener("resize",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);fit()})()</script>
+<script>(function(){var t=document.querySelector(".lp2--lp .lp2__h"),st=document.querySelector(".lp2--lp .lp2__stick");if(!t||!st)return;var mq=matchMedia("(min-width:901px)");function oy(e){var y=0;while(e&&e!==st){y+=e.offsetTop;e=e.offsetParent}return e===st?y:null}function fit(){var sp=[].slice.call(t.children);sp.forEach(function(x){x.style.translate="";x.style.transform=""});if(!mq.matches)return;var P=innerHeight/8,i=document.createElement("i");i.style.cssText="display:inline-block;width:0;height:0";sp.forEach(function(x,k){x.appendChild(i);var y=oy(i);i.remove();if(y==null)return;x.style.translate="0 "+(((3+k)*P-3)-y)+"px"})}addEventListener("load",fit);addEventListener("resize",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);setTimeout(fit,600);fit()})()</script>
 <script>(function(){if(!matchMedia("(hover:hover) and (pointer:fine)").matches)return;document.addEventListener("pointermove",function(e){var el=e.target.closest&&e.target.closest("[data-gn=btn]");if(!el)return;var r=el.getBoundingClientRect();el.style.setProperty("--mx",((e.clientX-r.left)/r.width*100).toFixed(1)+"%");el.style.setProperty("--my",((e.clientY-r.top)/r.height*100).toFixed(1)+"%")},{passive:true})})();</script>
-<script src="assets/js/motion.js?v=11" defer></script>
+<script src="assets/js/motion.js?v=12" defer></script>
 </body>
 </html>

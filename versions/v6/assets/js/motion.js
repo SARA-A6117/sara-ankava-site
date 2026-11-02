@@ -23,13 +23,16 @@
     function fit() {
       var circ = pth.getTotalLength() * 1.14, r, len, fs = 9;
       txt.style.fontSize = '9px';
-      for (r = 1; r <= 12; r++) {
+      tp.removeAttribute('textLength');
+      for (r = 1; r <= 14; r++) {
         tp.textContent = rev(new Array(r + 1).join(unit));
         len = txt.getComputedTextLength();
-        fs = len > 0 ? 9 * (circ - 4) / len : 9;
-        if (fs <= 11.5) break;
+        fs = len > 0 ? 9 * (circ - 2) / len : 9;
+        if (fs <= 11) break;
       }
-      txt.style.fontSize = fs.toFixed(2) + 'px';
+      txt.style.fontSize = Math.min(fs, 11).toFixed(2) + 'px';
+      tp.setAttribute('textLength', (circ - 2).toFixed(1));
+      tp.setAttribute('lengthAdjust', 'spacing');
     }
     fit();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
@@ -168,4 +171,14 @@
     });
   }
   [".pr3__h"].forEach(function (s) { var e = document.querySelector(s); if (e) e.style.translate = ""; });
+  
+  /* אודות: הפסקה ממורכזת מול התמונה, לא מול התמונה והכותרת יחד */
+  function abCenter() {
+    var fr = document.querySelector('.ab__frame'), hd = document.querySelector('.ab__h');
+    if (!fr || !hd) return;
+    fr.style.setProperty('--abh', innerWidth > 900 ? hd.offsetHeight + 'px' : '0px');
+  }
+  abCenter(); addEventListener('resize', abCenter); addEventListener('load', abCenter);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(abCenter);
+  setTimeout(abCenter, 800);
   })();
