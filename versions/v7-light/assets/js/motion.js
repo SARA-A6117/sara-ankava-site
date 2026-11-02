@@ -181,4 +181,15 @@
   abCenter(); addEventListener('resize', abCenter); addEventListener('load', abCenter);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(abCenter);
   setTimeout(abCenter, 800);
+  
+  /* 6. חשיפה עמידה: גם בגלילה מהירה כל מה שנמצא בתצוגה או מעליה מגיע למצב הסופי */
+  function settleReveals() {
+    var lim = innerHeight * .96;
+    if (typeof heads !== 'undefined') heads.forEach(function (h) { if (h.getBoundingClientRect().top < lim) h.classList.add('is-in'); });
+    if (typeof SHARP !== 'undefined') SHARP.forEach(function (e) { if (e.classList.contains('sh') && e.getBoundingClientRect().top < lim) e.classList.remove('sh'); });
+  }
+  var settleT; function settleSoon() { clearTimeout(settleT); settleT = setTimeout(settleReveals, 140); }
+  addEventListener('scroll', settleSoon, { passive: true }); addEventListener('resize', settleSoon); addEventListener('load', settleSoon);
+  /* רשת ביטחון: בדיקה תקופתית, למקרה שאירוע גלילה לא נורה (קפיצה מהירה, לשונית ברקע) */
+  var settleIv = setInterval(function () { settleReveals(); if ((typeof heads === 'undefined' || heads.every(function (h) { return h.classList.contains('is-in'); })) && !document.querySelector('.sh')) clearInterval(settleIv); }, 600);
   })();
