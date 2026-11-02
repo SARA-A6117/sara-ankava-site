@@ -81,3 +81,6 @@
 - `/privacy`, `/terms`, `/accessibility` = `versions/v7-light/{privacy,terms,accessibility}.html`, עיצוב ב-`assets/css/legal.css`. הדר ופוטר זהים לעמוד הראשי. ה-`/legal.html` הישן מופנה ל-`/privacy`.
 - פרטים חסרים מסומנים `<mark class="ph">[...]</mark>` (צהוב). לאיתור: `grep -n 'class="ph"' versions/v7-light/{privacy,terms,accessibility}.html`.
 - טופס צור קשר: תיבת סימון חובה `consent` (הוולידציה ב-`main.js`, כי הטופס `novalidate`).
+
+## פס כלים (`.tl`, `#tools`)
+- בין התהליך לאודות ב-`versions/v7-light/index.html`: שלוש עמודות (Meta, Google Ads, Google Analytics), בגובה 2P בדסקטופ, עמודה אחת מתחת ל-700px. לוגואים: נתיבי SVG של Simple Icons (CC0) בתוך הקוד, מלאים ב-`#tlg` (קובלט ל-`#6FD0FF`). חשיפה בגלילה דרך `.rv` הקיים. הסגנון בסוף `cobalt.css`.

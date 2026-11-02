@@ -336,3 +336,22 @@ html body .ct .madlib input:focus{border-bottom-color:#FFE66D!important}
 .consent__l input:focus-visible+.consent__box{outline:2px solid #FFE66D;outline-offset:3px}
 .consent__l input[aria-invalid="true"]+.consent__box{border-color:#FFD7A8;box-shadow:0 0 0 2px #FFD7A8}
 .consent__l a{color:#F4F0E6;text-decoration:underline;text-underline-offset:3px}
+
+/* ===== פס כלים בין התהליך לאודות: שלוש עמודות, קווים דקים, לוגואים בגרדיאנט ===== */
+.tl{position:relative;box-sizing:border-box;padding:0 4vw;background:#F3EEE2;border-top:1px solid rgb(30 32 31 / .16);border-bottom:1px solid rgb(30 32 31 / .16)}
+.tl::before{content:"";position:absolute;inset:0;background-image:var(--grain);background-size:240px;opacity:.07;pointer-events:none}
+.tl__sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tl__row{position:relative;z-index:1;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));height:100%}
+.tl__c{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:28px clamp(20px,3vw,48px)}
+.tl__c+.tl__c{border-inline-start:1px solid rgb(30 32 31 / .16)}
+.tl__c:first-child{padding-inline-start:0}
+.tl__c:last-child{padding-inline-end:0}
+.tl__ic{display:block;width:48px;height:48px;margin-bottom:6px}
+.tl__n{margin:0;font:700 24px/1.1 "Sara Ankava",system-ui,sans-serif;color:#1E201F}
+.tl__d{margin:0;font:300 17px/1.55 "Google Sans","Heebo",system-ui,sans-serif;color:#26282A}
+@media (min-width:901px){.tl{height:calc(var(--P)*2)}.tl__c{padding-block:0}}
+@media (max-width:900px){.tl{padding-block:12px}}
+@media (max-width:699px){.tl__row{grid-template-columns:minmax(0,1fr)}.tl__c{padding:26px 0}.tl__c+.tl__c{border-inline-start:0;border-top:1px solid rgb(30 32 31 / .16);padding-inline:0}}
+@media (prefers-reduced-motion:reduce){.tl .rv{transition:none!important;opacity:1!important;transform:none!important}}
+html body .tl .tl__c{width:100%;max-width:none;justify-self:stretch;box-sizing:border-box}
+html body .tl .tl__d{max-width:none}
