@@ -48,3 +48,70 @@ html[data-theme="light"] .lp2--lp .lp2__row.is-open .lp2__n{background:#1B33C9!i
   .ab{height:calc(var(--P) * 7);box-sizing:border-box}
   .ct .ct__panel{grid-template-rows:var(--P) minmax(calc(var(--P) * 3),auto) var(--P)!important;min-height:calc(var(--P) * 5)!important}
 }
+
+/* ===== סבב תיקונים: הירו, פרויקטים, תהליך, כפתורי קשר, סמן, מדבקות ===== */
+/* הירו: רווח שווה סביב הכותרת הגדולה, הבלוק כולו במרכז המסך */
+@media (min-width:901px){
+  .h6.hb{--hg:clamp(18px,3.2vh,34px);justify-content:center}
+  .hb__small{margin:0 0 var(--hg)!important;translate:none!important}
+  .hb__p{position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;transform:none!important;margin:var(--hg) 0 0!important}
+}
+/* סמן העכבר בקובלט */
+.cursor__dot{background:#1B33C9!important;border-color:transparent}
+.cursor.is-link .cursor__dot{background:transparent!important;border-color:#1B33C9!important}
+.cursor.is-label .cursor__dot{background:#1B33C9!important;color:#F4F0E6!important}
+html:not([data-theme="light"]) .cursor__dot{background:#4F73F5!important}
+html:not([data-theme="light"]) .cursor.is-link .cursor__dot{background:transparent!important;border-color:#4F73F5!important}
+html:not([data-theme="light"]) .cursor.is-label .cursor__dot{background:#4F73F5!important}
+/* אייקוני סושיאל: מילוי גרדיאנט קובלט בריחוף */
+.ftr2__ic a:hover,.ftr2__ic a:focus-visible,html[data-theme="light"] .ftr2__ic a:hover,html[data-theme="light"] .ftr2__ic a:focus-visible{background-color:#1B33C9!important;background-image:var(--grain),var(--mesh-live)!important;background-blend-mode:overlay,normal;color:#F4F0E6!important;border-color:transparent!important}
+/* פרויקטים: הילה כחולה עדינה מתחת למוקאפ */
+.pj3__mk{position:relative;isolation:isolate}
+.pj3__mk::before{content:"";position:absolute;inset:-8% -6% -12%;z-index:-1;pointer-events:none;background:radial-gradient(closest-side,rgb(63 107 255 / .42),rgb(27 51 201 / .18) 55%,transparent 78%);filter:blur(14px)}
+html[data-theme="light"] .pj3__mk::before{background:radial-gradient(closest-side,rgb(63 107 255 / .34),rgb(27 51 201 / .14) 55%,transparent 78%)}
+.pj .pj__h{font-size:clamp(25px,3.55vw,52px)!important}
+/* תהליך: אזור נמוך יותר, ספרות קטנות */
+@media (min-width:901px){
+  .pr3__ob,.pr3__ob{height:clamp(120px,17vh,150px)!important}
+  .pr3__c{gap:18px!important;padding-top:26px!important;padding-bottom:28px!important}
+  .pr3__cols{min-height:0!important}
+}
+.pr3__n{font-size:clamp(34px,3.6vw,56px)!important;line-height:1!important}
+html:not([data-theme="light"]) .pr3__n{color:transparent!important;-webkit-text-fill-color:transparent;-webkit-text-stroke:1px rgb(241 236 224 / .85)!important}
+/* מדבקות: בועת דיבור עגולה ושובבה (לא כמו הכפתורים) */
+.stk__c{border-radius:62% 38% 55% 45% / 48% 58% 42% 52%!important;inset:-4%;rotate:-8deg}
+.stk__c::after{content:"";position:absolute;left:8%;bottom:-10%;width:30%;height:30%;background:inherit;border-radius:0 0 0 100%;clip-path:polygon(0 0,100% 0,0 100%);transform:skewX(-8deg)}
+/* כפתורי טופס: בועות דיבור */
+html body .ct .contact__actions{display:flex;flex-wrap:wrap;gap:26px 22px;align-items:flex-start;padding-bottom:16px}
+html body .ct .contact__actions .btn--primary,html body .ct .contact__actions a.or-wa{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:170px;padding:17px 34px;border-radius:30px 30px 30px 4px!important;font:700 18px/1.1 "Sara Ankava",system-ui,sans-serif!important;letter-spacing:0;border:0!important;box-shadow:none!important;animation:none!important;filter:none!important;text-decoration:none;cursor:pointer;transition:transform .25s ease,background-color .25s ease,color .25s ease}
+html body .ct .contact__actions .btn--primary,html body .ct .contact__actions .btn--primary .btn__t{background:#fff!important;background-image:none!important;color:#14161A!important;font-weight:700!important}
+html body .ct .contact__actions .btn--primary::before{content:"";position:absolute;left:0;bottom:-13px;width:14px;height:14px;background:radial-gradient(circle at 100% 100%,transparent 13.5px,#fff 14px);pointer-events:none}
+html body .ct .contact__actions .btn--primary::after{display:none}
+html body .ct .contact__actions a.or-wa{background:transparent!important;background-image:none!important;color:#fff!important;box-shadow:inset 0 0 0 2px #fff!important}
+html body .ct .contact__actions a.or-wa::before{content:"";position:absolute;left:0;bottom:-15px;width:15px;height:15px;background:radial-gradient(circle at 100% 100%,transparent 12.5px,#fff 13px,#fff 15px,transparent 15.5px),linear-gradient(#fff,#fff) 0 0/2px 100% no-repeat;pointer-events:none}
+html body .ct .contact__actions a.or-wa::after{display:none}
+html body .ct .contact__actions .btn--primary:hover{transform:translateY(-3px)}
+html body .ct .contact__actions a.or-wa:hover{background:#fff!important;color:#1B33C9!important;transform:translateY(-3px)}
+html body .ct .contact__actions a.or-wa:hover::before{background:radial-gradient(circle at 100% 100%,transparent 13.5px,#fff 14px)}
+html body .ct .contact__actions a.or-wa svg{display:none}
+
+@media (min-width:901px){.h6.hb{padding-top:calc(var(--hdr,76px) + 4vh + 50px)!important}}
+/* כותרת פרויקטים: גובה של שתי יחידות גריד, קו הבסיס על הקו התחתון */
+@media (min-width:901px){
+  .pj .pj__h{--ph:clamp(25px,3.55vw,52px);font-size:var(--ph)!important;line-height:1.1!important;box-sizing:border-box!important;height:calc(var(--P)*2)!important;padding:calc(var(--P)*2 - 1.1*var(--ph) + var(--pjd,9px)) var(--v6-m) 0!important;margin:0!important;white-space:nowrap!important}
+}
+html body .ct .contact__actions .btn--primary,html body .ct .contact__actions a.or-wa{height:56px!important;min-height:0!important;padding:0 34px!important;box-sizing:border-box}
+html body .ct .contact__actions .btn--primary .btn__t{display:inline!important;padding:0!important;height:auto!important;min-height:0!important;overflow:visible!important;background:none!important;transform:none!important}
+html body .ct .contact__actions .btn--primary::before{display:block!important}
+html body .ct .contact__actions .btn--primary::before{left:0!important;bottom:-21px!important;width:22px!important;height:22px!important;background:radial-gradient(circle at 100% 100%,transparent 21.4px,#fff 22px)!important}
+html body .ct .contact__actions a.or-wa::before{left:0!important;bottom:-21px!important;width:23px!important;height:23px!important;background:radial-gradient(circle at 100% 100%,transparent 19px,#fff 19.6px,#fff 21.6px,transparent 22.2px),linear-gradient(#fff,#fff) 0 0/2px 100% no-repeat!important}
+html body .ct .contact__actions a.or-wa:hover::before{background:radial-gradient(circle at 100% 100%,transparent 21.4px,#fff 22px)!important}
+html body .ct .contact__actions .btn--primary::before{transform:none!important;z-index:0!important;transition:none!important;opacity:1!important;border-radius:0!important}
+.stk .stk__ring{width:215%!important;height:215%!important}
+.stk .stk__ring text{font-size:10.5px!important}
+.stk{--sw:clamp(96px,8.6vw,128px)}
+.stk .stk__ring{width:calc(var(--sw)*2.15)!important;height:calc(var(--sw)*2.15)!important}
+@media (max-width:900px){.stk{--sw:64px}}
+html body .stk .stk__ring{max-width:none!important;min-width:0!important;width:calc(var(--sw)*2.15)!important;height:calc(var(--sw)*2.15)!important}
+html body .ct .contact__actions .btn--primary::before,html body .ct .contact__actions a.or-wa::before{top:auto!important;right:auto!important;inset-inline-end:auto!important}
+html body .ct .contact__actions .btn--primary.btn--primary::before,html body .ct .contact__actions a.or-wa.or-wa::before{left:0!important;right:auto!important;top:auto!important;bottom:-21px!important;translate:none!important;margin:0!important;scale:none!important;rotate:none!important}

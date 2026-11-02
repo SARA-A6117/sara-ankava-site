@@ -92,9 +92,6 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
     t.addEventListener('click', function () { var n = 0, id = setInterval(function () { place(); if (++n > 24) clearInterval(id); }, 50); });
   }
-  plusGrid('.pj', '.pj3', '.pj3__c');
-  plusGrid('.pr3__stick', '.pr3__cols', '.pr3__c');
-  plusGrid('.lp2__stick', '.lp2__list', '.lp2__vl');
 
 
   if (!reduce && 'IntersectionObserver' in window && document.documentElement.animate) {
@@ -161,6 +158,5 @@
       if (Math.abs(d) < P * .6) el.style.translate = "0 " + d.toFixed(1) + "px";
     });
   }
-  snapHeads(); addEventListener("resize", snapHeads); addEventListener("load", snapHeads);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(snapHeads);
+  [".pr3__h"].forEach(function (s) { var e = document.querySelector(s); if (e) e.style.translate = ""; });
   })();
