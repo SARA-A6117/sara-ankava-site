@@ -345,7 +345,7 @@ body::before,body::after{display:none!important}
 @media (max-width:900px){.cx__title{flex-direction:column;align-items:flex-start;gap:8px}.cx__b{text-align:start}.cx__f{border-top:1px solid var(--paper-12)}}
 
 /* ===== עדכון: סקשן בהיר, גריד קווים ישר, טוש פשוט כמו החיצים, תנועה עדינה, בלי מספרים ===== */
-.cx{background:#E7E6DF;color:#12140f}
+.cx{background:#EDE6D6;color:#12140f}
 .cx__a{color:#12140f}.cx__b{color:#12140f}
 .cx .gr-text{background-image:var(--v6-hard),linear-gradient(100deg,#2F8FE0 0%,#E5B800 100%);background-blend-mode:soft-light,normal;filter:contrast(1.3) saturate(1.3)}
 .cx__row{gap:0;border:1px solid rgb(18 20 15 / .3);border-radius:14px;overflow:hidden;background:transparent}
@@ -422,12 +422,12 @@ body::before,body::after{display:none!important}
 
 /* ===== פרויקטים: רקע בהיר עם גריד קווים אופקי דק כמו בהירו ===== */
 .projects{position:relative;isolation:isolate;color:#12140f}
-.projects::before{content:"";position:absolute;z-index:-1;inset:0 calc(50% - 50vw);background-color:#E7E6DF;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 111px,rgb(18 20 15 / .12) 111px,rgb(18 20 15 / .12) 112px)}
+.projects::before{content:"";position:absolute;z-index:-1;inset:0 calc(50% - 50vw);background-color:#EDE6D6;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 111px,rgb(18 20 15 / .12) 111px,rgb(18 20 15 / .12) 112px)}
 .projects .eyebrow,.projects .h2,.projects .h2 .line,.projects .sec-head p{color:#12140f}
 .projects .eyebrow::before{background:#2F8FE0}
 .projects .h2 .sq{background:#E5B800}
 .projects .btn--ghost{background:transparent;color:#12140f;box-shadow:inset 0 0 0 1.5px rgb(18 20 15 / .55)}
-.projects .btn--ghost:hover{background:#12140f;color:#E7E6DF}
+.projects .btn--ghost:hover{background:#12140f;color:#EDE6D6}
 .projects .acc{color:var(--v6-paper)}
 .projects .acc .acc__title,.projects .acc h3{color:var(--v6-paper)}
 .projects .acc .acc__n,.projects .acc .acc__go{color:var(--v6-sun)}
@@ -552,7 +552,7 @@ body::before,body::after{display:none!important}
 @media (prefers-reduced-motion:reduce){.cta6,.cta-blink,.contact .btn--primary,.h6__btn{animation:none}}
 
 /* ===== פרויקטים · אבן בהירה גרגרית, טקסט פחם, שורות עבות, גרדיאנט חד ב"גם האתר" ===== */
-.pj{background:#E7E6DF;color:#12140f}
+.pj{background:#EDE6D6;color:#12140f}
 .pj::before{mix-blend-mode:multiply;opacity:.2;background-size:170px}
 .pj__st{color:transparent;-webkit-text-stroke:1.4px #12140f}
 .pj__gr.gr-text{background-image:var(--v6-n),linear-gradient(100deg,#1B4FB0 0%,#2F7FD0 38%,#D19A00 100%);background-size:200px,auto;background-blend-mode:soft-light,normal;filter:none;-webkit-text-fill-color:transparent;font-weight:700}
@@ -561,7 +561,7 @@ body::before,body::after{display:none!important}
 .pj__n{color:rgb(18 20 15 / .6);font-weight:500}
 .pj__row .pj__t{font-weight:700;font-size:clamp(28px,3.4vw,48px);color:#12140f}
 .pj__d{font-weight:500;font-size:clamp(16px,1.35vw,19px);color:rgb(18 20 15 / .85)}
-.pj .btn,.pj .btn--primary{background:#12140f!important;color:#E7E6DF!important}
+.pj .btn,.pj .btn--primary{background:#12140f!important;color:#EDE6D6!important}
 .pj .btn:hover{background:#2a2d26!important}
 .pj__float .mk__win{box-shadow:0 18px 40px -14px rgb(18 20 15 / .45)}
 .pj__gr.gr-text{background-image:var(--v6-n),linear-gradient(100deg,#123F9E 0%,#1F6FD0 40%,#E0A100 100%);background-blend-mode:soft-light,normal;background-size:240px,auto}
@@ -600,7 +600,7 @@ body::before,body::after{display:none!important}
 .pj::before{display:none}
 .pj__h{margin-bottom:clamp(30px,4vw,56px)}
 .pj3{display:flex;height:clamp(560px,82vh,760px);border-top:1px solid rgb(18 20 15 / .3);border-bottom:1px solid rgb(18 20 15 / .3)}
-.pj3__c{position:relative;flex:1 1 0;min-width:0;overflow:hidden;background:#E7E6DF;border:0;border-radius:0;outline:none;cursor:pointer;transition:flex-grow .85s var(--ease)}
+.pj3__c{position:relative;flex:1 1 0;min-width:0;overflow:hidden;background:#EDE6D6;border:0;border-radius:0;outline:none;cursor:pointer;transition:flex-grow .85s var(--ease)}
 .pj3__c+.pj3__c{border-inline-start:1px solid rgb(18 20 15 / .3)}
 .pj3__c.is-open{flex-grow:5.6;cursor:default}
 .pj3__rail{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:26px 0;transition:opacity .35s}
@@ -615,7 +615,7 @@ body::before,body::after{display:none!important}
 .pj3__d{margin:0 0 8px;font:500 clamp(16px,1.3vw,19px)/1.55 "Sara Ankava",system-ui,sans-serif;color:rgb(18 20 15 / .85);max-width:36ch}
 .pj3__mk{min-width:0}
 .pj3__mk .mk{width:100%}
-.pj3 .btn,.pj3 .btn--primary{background:#12140f!important;color:#E7E6DF!important}
+.pj3 .btn,.pj3 .btn--primary{background:#12140f!important;color:#EDE6D6!important}
 .pj3__mk .mk__win{box-shadow:0 20px 44px -18px rgb(18 20 15 / .4)}
 @media (max-width:900px){
   .pj3{flex-direction:column;height:auto}
@@ -631,7 +631,7 @@ body::before,body::after{display:none!important}
 .pj3__tx{padding-inline-end:4px}
 
 /* ===== פרויקטים · גרעיניות ברורה ומחוספסת על האבן, ברמת ההירו ===== */
-.pj3__c{background-color:#E9E8E1;background-image:var(--v6-rough);background-size:600px;background-blend-mode:soft-light}
+.pj3__c{background-color:#EDE6D6;background-image:var(--v6-rough);background-size:600px;background-blend-mode:soft-light}
 .pj3__c::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:var(--v6-hard);background-size:320px;mix-blend-mode:multiply;opacity:.3}
 .pj3__rail,.pj3__in{z-index:1}
 .pj3__c::before{opacity:.24}
@@ -665,7 +665,7 @@ body::before,body::after{display:none!important}
 
 /* ===== גרעיניות אחידה ודקה בלבד (רעש דק, בלי כתמים) ===== */
 :root{--v6-fine:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='1' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E")}
-.pj3__c{background-color:#E9E8E1;background-image:none;background-blend-mode:normal}
+.pj3__c{background-color:#EDE6D6;background-image:none;background-blend-mode:normal}
 .pj3__c::before{background-image:var(--v6-fine);background-size:200px;mix-blend-mode:overlay;opacity:.22}
 .lw::before,.lp::before,.pj::before{background-image:var(--v6-fine);background-size:200px;mix-blend-mode:overlay;opacity:.22}
 

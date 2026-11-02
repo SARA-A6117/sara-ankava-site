@@ -6,7 +6,7 @@ body.pgp{background:#1E201F}
 .pp-h{margin:0;font:700 clamp(54px,9vw,170px)/1 "Sara Ankava",system-ui,sans-serif;letter-spacing:-.01em;color:var(--v6-stone);padding-inline:.04em}
 .pp-gr{display:inline-block;padding-inline:.06em}
 .pp-lead{margin:0;max-width:52ch;font:300 clamp(17px,1.5vw,22px)/1.6 "Sara Ankava",system-ui,sans-serif;color:rgb(217 217 210 / .88)}
-.pp-list{background-color:#E7E6DF;color:#12140f}
+.pp-list{background-color:#EDE6D6;color:#12140f}
 .pp-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr);gap:clamp(28px,4vw,72px);align-items:center;padding:clamp(48px,6vw,104px) var(--v6-m);border-top:1px solid rgb(18 20 15 / .3)}
 .pp-row:first-child{border-top:0}
 .pp-row:nth-child(even){grid-template-columns:minmax(0,1.5fr) minmax(0,.9fr)}
