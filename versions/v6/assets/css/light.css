@@ -55,3 +55,33 @@ html[data-theme="light"] :is(.lp2__row,.lp2__bar,.pr3__c,.pr3__cols,.pr3__stick)
 html[data-theme="light"] .pr3__c{border-inline-color:rgb(30 32 31 / .14)!important}
 html[data-theme="light"] .pr3__cols{background-color:#F3EEE2!important}
 html[data-theme="light"] .hdr .menu-btn span{background:#1E201F!important}
+
+/* ===== שלב 1: קובלט כצבע החזק, פונט גוף 17px/400, גריד 8%, צור קשר בקובלט ===== */
+html[data-theme="light"]{--cobalt:#1B33C9;--hl:repeating-linear-gradient(to bottom,transparent 0,transparent calc(12.5svh - 1px),rgb(30 32 31 / .08) calc(12.5svh - 1px),rgb(30 32 31 / .08) 12.5svh)}
+
+/* גרדיאנט במילים: מקובלט לכחול חזק, עם גרעיניות. בלי צהוב על בהיר */
+html[data-theme="light"] [data-gn="text"]{--mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#1B33C9,#1B33C9 34%,transparent 68%),radial-gradient(circle at var(--c2x) var(--c2y),#3F6BFF,#3F6BFF 34%,transparent 68%),radial-gradient(circle at var(--c3x) var(--c3y),#0F1F99,#0F1F99 30%,transparent 66%),radial-gradient(circle at var(--c4x) var(--c4y),#2C8CFF,#2C8CFF 30%,transparent 66%),linear-gradient(135deg,#1B33C9,#2C8CFF)}
+html[data-theme="light"] .hb__title .hb__l[data-gn="text"]{--mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#1B33C9,#1B33C9 22%,transparent 54%),radial-gradient(circle at var(--c2x) var(--c2y),#3F6BFF,#3F6BFF 22%,transparent 54%),radial-gradient(circle at var(--c3x) var(--c3y),#0F1F99,#0F1F99 16%,transparent 46%),radial-gradient(circle at var(--c4x) var(--c4y),#2C8CFF,#2C8CFF 16%,transparent 46%),linear-gradient(100deg,#1B33C9 0%,#1B33C9 36%,#2C8CFF 70%,#3F6BFF 100%)}
+
+/* טקסט רץ: Google Sans, 17px, משקל 400, line-height 1.65 */
+html[data-theme="light"] :is(.pj3__d,.lp2__p,.pr3__p,.pr3__p.pr3__g,.pp-lead,.pr__p,.pr__lead){font-size:17px!important;line-height:1.65!important;font-weight:400!important}
+html[data-theme="light"] .ab__txt p{font-size:17px!important;line-height:1.65!important;font-weight:400!important}
+html[data-theme="light"] .ct .madlib,html[data-theme="light"] .ct .madlib input{font-size:18px!important}
+html[data-theme="light"] :is(.ct .fine,.ct .fine a,.ct__steps li){font-size:16px!important}
+
+/* צור קשר: קובלט מקצה לקצה, גרדיאנט וגרעיניות, טקסט שמנת */
+html[data-theme="light"] .ct .ct__panel{background-color:#1B33C9!important;background-image:var(--grain),
+  radial-gradient(var(--s1) calc(var(--s1) * 1.6) at var(--c1x) var(--c1y),#2F56F0,#2F56F0 28%,transparent 74%),
+  radial-gradient(var(--s2) calc(var(--s2) * 1.5) at var(--c2x) var(--c2y),#4B86FF,#4B86FF 26%,transparent 74%),
+  radial-gradient(var(--s3) calc(var(--s3) * 1.5) at var(--c3x) var(--c3y),#0F1F99,transparent 72%),
+  radial-gradient(var(--s4) calc(var(--s4) * 1.4) at var(--c4x) var(--c4y),rgb(255 226 74 / .55),transparent 70%),
+  linear-gradient(#1B33C9,#1B33C9)!important}
+html[data-theme="light"] .ct :is(.ct__h,.madlib,.madlib input,.fine,.fine a,.ct__steps li,.done,.done *){color:#F4F0E6!important}
+html[data-theme="light"] .ct .madlib input{border-bottom-color:#F4F0E6!important}
+html[data-theme="light"] .ct .madlib input::placeholder{color:rgb(244 240 230 / .72)!important}
+html[data-theme="light"] .ct .madlib input:focus{background:rgb(244 240 230 / .14)!important}
+html[data-theme="light"] .ct .contact__err{color:#FFD7A8!important}
+html[data-theme="light"] .ct__steps li::before{background:#F4F0E6!important;color:#1B33C9!important}
+html[data-theme="light"] .ct .btn--primary,html[data-theme="light"] .ct .btn--primary .btn__t{background:#F4F0E6!important;color:#14161A!important;box-shadow:none!important}
+html[data-theme="light"] .ct .btn--primary:hover,html[data-theme="light"] .ct .btn--primary:hover .btn__t{background:#FFE66D!important;color:#14161A!important}
+html[data-theme="light"] .ct a.or-wa{box-shadow:none!important}
