@@ -98,4 +98,29 @@
       b.addEventListener('pointerleave', function () { tx = ty = 0; kick(); });
     });
   }
+  
+  /* ---- שלב 3: התהליך נבנה בגלילה: מונה התקדמות, סרגל בצד, אובייקטים שנבנים חלק אחרי חלק ---- */
+  (function () {
+    var s = document.querySelector('[data-pr3]'), st = s && s.querySelector('.pr3__stick');
+    if (!s || !st) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'pr3__rl'; wrap.setAttribute('aria-hidden', 'true');
+    wrap.innerHTML = '<i class="pr3__ruler"></i><div class="pr3__pc"><span class="pr3__pl">בנייה</span><b class="pr3__pn">000</b><em>%</em><span class="pr3__bar"><i></i></span></div>';
+    st.appendChild(wrap);
+    var num = wrap.querySelector('.pr3__pn'), bar = wrap.querySelector('.pr3__bar i'), cols = $$('.pr3__c', s);
+    var mob = matchMedia('(max-width:900px)'), busy = 0;
+    function p() {
+      var r = s.getBoundingClientRect(), v;
+      if (mob.matches) v = (innerHeight * .85 - r.top) / (r.height * .85); else v = -r.top / (s.offsetHeight - innerHeight);
+      return Math.max(0, Math.min(1, v));
+    }
+    function upd() {
+      busy = 0;
+      var v = reduce ? 1 : p(), n = Math.round(v * 100);
+      num.textContent = ('00' + n).slice(-3);
+      bar.style.transform = 'scaleX(' + v.toFixed(3) + ')';
+    }
+    function tick() { if (!busy) busy = requestAnimationFrame(upd); }
+    addEventListener('scroll', tick, { passive: true }); addEventListener('resize', tick); upd();
+  })();
   })();
