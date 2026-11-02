@@ -1,0 +1,82 @@
+/* ויזואל ואנימציה: מדבקות עם טבעת טקסט, שורת מספרים, בניית כותרות מילה אחר מילה, אובייקט ממשק באודות */
+
+/* מדבקה עגולה בגרדיאנט, טבעת טקסט מסתובבת, כוכב קטן במרכז */
+.stk{position:absolute;z-index:4;width:clamp(96px,8.6vw,128px);aspect-ratio:1;pointer-events:none}
+.stk__c{position:absolute;inset:0;border-radius:50%;display:block}
+.stk__ring{position:absolute;left:50%;top:50%;width:160%;height:160%;translate:-50% -50%;overflow:visible;animation:hb-ring 34s linear infinite}
+.stk__ring text{direction:ltr;unicode-bidi:bidi-override;font:300 14px "Sara Ankava",system-ui,sans-serif;fill:#F1ECE0}
+.stk__star{position:absolute;left:50%;top:50%;width:24%;height:24%;translate:-50% -50%;overflow:visible}
+.stk--ab{left:-30px;top:26px}
+.stk--pr{left:calc(var(--v6-m) + 14px);top:calc(var(--P) * .95)}
+@media (max-width:900px){
+  .ab,.pr3{position:relative;overflow-x:clip}
+  .stk{width:64px}
+  .stk--ab{left:auto;right:10px;top:6px}
+  .stk--pr{left:34px;right:auto;top:-30px;bottom:auto}
+}
+
+/* כותרות אזורים: מילה אחרי מילה, כל מילה נופלת ונכנסת למקום */
+wd-w{display:inline-block}
+html.wb-on [data-wb] wd-w,html.wb-on [data-wb] [data-wbu]{opacity:0;transform:translateY(-.85em) rotate(-3deg);transition:opacity .45s ease,transform .8s cubic-bezier(.2,1.15,.3,1);transition-delay:calc(var(--i, 0) * 70ms)}
+html.wb-on [data-wb].is-in wd-w,html.wb-on [data-wb].is-in [data-wbu]{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  .stk__ring{animation:none}
+  html.wb-on [data-wb] wd-w,html.wb-on [data-wb] [data-wbu]{opacity:1;transform:none;transition:none}
+}
+
+/* מנצח כללי svg גלובליים (max-width / width) */
+.stk .stk__ring{max-width:none!important;width:160%!important;height:160%!important}
+.stk .stk__star{max-width:none!important;width:24%!important;height:24%!important}
+
+/* אודות: שלוש פסקאות רציפות, 20px, שורה נוחה, רווח קטן בין הפסקאות בלבד */
+.ab__top{position:relative}
+.ab__frame .ab__txt{margin:0;padding:var(--P) clamp(24px,3vw,56px);max-width:none}
+.ab__txt p{margin:0 0 16px;max-width:34em;font:400 20px/1.7 var(--f-body,system-ui)!important;color:#F1ECE0!important;white-space:normal!important}
+.ab__txt p:last-child{margin-bottom:0}
+@media (min-width:901px){.ab__frame .ab__txt{padding-block:0;align-self:center}}
+@media (max-width:900px){.ab__frame .ab__txt{padding:24px var(--v6-m) 40px}}
+
+/* סימני "+" (כמו קווי חיתוך) בפינות המסגרת */
+.ab{position:relative}
+.plus{position:absolute;z-index:3;width:15px;height:15px;translate:-50% -50%;pointer-events:none;color:rgb(241 236 224 / .7)}
+.plus::before,.plus::after{content:"";position:absolute;background:currentColor}
+.plus::before{left:0;right:0;top:50%;height:1px;translate:0 -50%}
+.plus::after{top:0;bottom:0;left:50%;width:1px;translate:-50% 0}
+html[data-theme="light"] .plus{color:rgb(30 32 31 / .6)}
+@media (max-width:900px){.plus{display:none}}
+
+/* טקסט שמתחדד: מוסתר רק עד שנכנס לתצוגה */
+.sh{opacity:.01}
+@media (prefers-reduced-motion:reduce){.sh{opacity:1}}
+
+/* התהליך נבנה בגלילה: סרגל בצד, מונה התקדמות, אובייקטי הממשק נבנים חלק אחרי חלק */
+.pr3__rl{position:absolute;inset:0;pointer-events:none;z-index:3}
+.pr3__ruler{position:absolute;left:0;top:0;bottom:0;width:14px;color:rgb(241 236 224 / .5);
+  background:repeating-linear-gradient(to bottom,currentColor 0 1px,transparent 1px 8px) 0 0 / 6px 100% no-repeat,
+             repeating-linear-gradient(to bottom,currentColor 0 1px,transparent 1px 40px) 0 0 / 14px 100% no-repeat}
+.pr3__pc{position:absolute;left:calc(var(--v6-m) + 4px);bottom:4px;display:flex;align-items:baseline;gap:6px;color:rgb(241 236 224 / .85);font:400 13px/1 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.04em;direction:ltr}
+.pr3__pl{font:400 13px/1 var(--f-body,system-ui);direction:rtl;margin-inline-end:4px;color:rgb(241 236 224 / .65)}
+.pr3__pn{font:500 24px/1 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:-.02em}
+.pr3__pc em{font-style:normal;opacity:.65}
+.pr3__bar{display:block;width:84px;height:2px;background:rgb(241 236 224 / .22);align-self:center;margin-inline-start:8px;overflow:hidden}
+.pr3__bar i{display:block;height:100%;background:linear-gradient(90deg,#FFE24A,#6FD0FF);transform-origin:0 50%;transform:scaleX(0)}
+html[data-theme="light"] .pr3__ruler{color:rgb(30 32 31 / .45)}
+html[data-theme="light"] .pr3__pc{color:#1E201F}
+html[data-theme="light"] .pr3__pl{color:#5E5B52}
+html[data-theme="light"] .pr3__bar{background:rgb(30 32 31 / .16)}
+html[data-theme="light"] .pr3__bar i{background:linear-gradient(90deg,#1B33C9,#2C8CFF)}
+@media (max-width:900px){.pr3__ruler{display:none}.pr3__pc{bottom:8px}.pr3__pn{font-size:22px}}
+
+/* האובייקטים נבנים: כל חלק נכנס בתורו כשהעמודה נדלקת */
+@media (prefers-reduced-motion:no-preference){
+  .pr3__ob .oc>*{opacity:0;transform:translateY(12px) scale(.97);transition:opacity .5s ease,transform .7s cubic-bezier(.2,1.1,.3,1)}
+  .pr3__c.is-lit .pr3__ob .oc>*{opacity:1;transform:none}
+  .pr3__c.is-lit .pr3__ob .oc>*:nth-child(2){transition-delay:.12s}
+  .pr3__c.is-lit .pr3__ob .oc>*:nth-child(3){transition-delay:.24s}
+  .pr3__c.is-lit .pr3__ob .oc>*:nth-child(4){transition-delay:.36s}
+  .pr3__c.is-lit .pr3__ob .oc>*:nth-child(5){transition-delay:.48s}
+  .pr3__ob>.pr3__bb{transition-delay:.5s}
+}
+
+.pj{position:relative}

@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Mesh gradient + grain, built the same way as saraweizman.co.il (our palette):
+   four radial colour fields whose centres are registered @property coordinates, animated fast
+   (4-7s, alternate) on the element itself, over a base ramp, with an SVG-grain layer on top
+   blended with `overlay`. Text uses the same stack through background-clip:text.
+   Palette: yellow #FFE24A, light blue #6FD0FF. Buttons swap the two on hover (--ga/--gb, transitioned).
+   ========================================================================== */
+@property --c1x{syntax:"<percentage>";inherits:false;initial-value:15%}
+@property --c1y{syntax:"<percentage>";inherits:false;initial-value:20%}
+@property --c2x{syntax:"<percentage>";inherits:false;initial-value:85%}
+@property --c2y{syntax:"<percentage>";inherits:false;initial-value:25%}
+@property --c3x{syntax:"<percentage>";inherits:false;initial-value:70%}
+@property --c3y{syntax:"<percentage>";inherits:false;initial-value:85%}
+@property --c4x{syntax:"<percentage>";inherits:false;initial-value:20%}
+@property --c4y{syntax:"<percentage>";inherits:false;initial-value:80%}
+@property --s1{syntax:"<percentage>";inherits:false;initial-value:45%}
+@property --s2{syntax:"<percentage>";inherits:false;initial-value:55%}
+@property --s3{syntax:"<percentage>";inherits:false;initial-value:60%}
+@property --s4{syntax:"<percentage>";inherits:false;initial-value:70%}
+@property --ga{syntax:"<color>";inherits:false;initial-value:#1B33C9}
+@property --gb{syntax:"<color>";inherits:false;initial-value:#3F6BFF}
+@keyframes liveC1{0%{--c1x:10%;--c1y:15%}30%{--c1x:75%;--c1y:30%}55%{--c1x:40%;--c1y:90%}80%{--c1x:90%;--c1y:70%}to{--c1x:25%;--c1y:45%}}
+@keyframes liveC2{0%{--c2x:90%;--c2y:20%}25%{--c2x:30%;--c2y:10%}60%{--c2x:15%;--c2y:65%}to{--c2x:70%;--c2y:95%}}
+@keyframes liveC3{0%{--c3x:70%;--c3y:90%}35%{--c3x:95%;--c3y:40%}65%{--c3x:50%;--c3y:5%}to{--c3x:5%;--c3y:55%}}
+@keyframes liveC4{0%{--c4x:15%;--c4y:85%}40%{--c4x:60%;--c4y:55%}70%{--c4x:85%;--c4y:95%}to{--c4x:45%;--c4y:20%}}
+@keyframes ctaC1{0%{--c1x:0%;--c1y:100%}30%{--c1x:10%;--c1y:88%}65%{--c1x:3%;--c1y:94%}to{--c1x:14%;--c1y:100%}}
+@keyframes ctaC2{0%{--c2x:26%;--c2y:-4%}25%{--c2x:44%;--c2y:10%}55%{--c2x:33%;--c2y:2%}80%{--c2x:50%;--c2y:-2%}to{--c2x:30%;--c2y:14%}}
+@keyframes ctaC3{0%{--c3x:18%;--c3y:60%}35%{--c3x:38%;--c3y:38%}60%{--c3x:26%;--c3y:75%}to{--c3x:44%;--c3y:55%}}
+@keyframes ctaC4{0%{--c4x:92%;--c4y:68%}40%{--c4x:80%;--c4y:45%}70%{--c4x:96%;--c4y:85%}to{--c4x:85%;--c4y:60%}}
+@keyframes ctaS1{0%{--s1:34%}to{--s1:52%}}
+@keyframes ctaS2{0%{--s2:44%}to{--s2:66%}}
+@keyframes ctaS3{0%{--s3:48%}to{--s3:72%}}
+@keyframes ctaS4{0%{--s4:62%}to{--s4:80%}}
+@keyframes liveGlow{0%{box-shadow:-12px 8px 26px -8px #1B33C999,12px 10px 30px -10px #3F6BFF99}35%{box-shadow:10px -6px 28px -8px #3F6BFF99,-6px 12px 26px -10px #1B33C980}70%{box-shadow:-4px 14px 32px -8px #1B33C999,14px 2px 28px -10px #3F6BFF80}to{box-shadow:12px 10px 30px -8px #3F6BFF99,-12px -4px 30px -8px #1B33C980}}
+:root{
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncG type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncB type='linear' slope='2.2' intercept='-.6'/%3E%3CfeFuncA type='linear' slope='0' intercept='.85'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --mesh-anim:liveC1 5.3s ease-in-out infinite alternate,liveC2 7.1s ease-in-out infinite alternate,liveC3 4.3s ease-in-out infinite alternate,liveC4 6.7s ease-in-out infinite alternate;
+  --mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),var(--ga),var(--ga) 34%,transparent 68%),radial-gradient(circle at var(--c2x) var(--c2y),var(--gb),var(--gb) 34%,transparent 68%),radial-gradient(circle at var(--c3x) var(--c3y),var(--ga),var(--ga) 34%,transparent 68%),radial-gradient(circle at var(--c4x) var(--c4y),var(--gb),var(--gb) 34%,transparent 68%),linear-gradient(135deg,var(--ga),var(--gb));
+}
+
+/* רעש דק מעל הרקעים */
+html body::after{display:block!important;content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;background-image:var(--grain);background-size:200px;opacity:.06;mix-blend-mode:overlay}
+
+/* מילים נבחרות בכותרות: גרעיניות + מש חי, כמו ב-.ab-eyebrow באתר ההשראה */
+[data-gn="text"]{
+  --mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#4F73F5,#4F73F5 34%,transparent 68%),radial-gradient(circle at var(--c2x) var(--c2y),#8AB4FF,#8AB4FF 34%,transparent 68%),radial-gradient(circle at var(--c3x) var(--c3y),#2F55E8,#2F55E8 30%,transparent 66%),radial-gradient(circle at var(--c4x) var(--c4y),#6FA0FF,#6FA0FF 30%,transparent 66%),linear-gradient(135deg,#4F73F5,#8AB4FF);
+  background-image:var(--grain),var(--mesh-live)!important;
+  background-size:120px,auto,auto,auto,auto,auto!important;
+  background-position:0 0!important;
+  background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
+  background-blend-mode:overlay,normal,normal,normal,normal,normal!important;
+  -webkit-background-clip:text!important;background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;color:transparent!important;
+  -webkit-text-stroke:0!important;text-shadow:none!important;
+  filter:saturate(1.3)!important;-webkit-mask-image:none;mask-image:none;width:fit-content;
+  animation:var(--mesh-anim)!important
+}
+.hb__title .hb__l[data-gn="text"]{background-position:0 0!important}
+
+/* כפתורי הנעה לפעולה: מש חי תמיד, בהובר הצבעים מתחלפים בהדרגה + הילה שעוקבת אחרי העכבר */
+[data-gn="btn"]{
+  color:#F4F0E6!important;
+  transition:--ga .7s ease,--gb .7s ease,transform .25s;
+  background-image:var(--grain),var(--mesh-live)!important;
+  background-size:150px,auto,auto,auto,auto,auto!important;
+  background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
+  background-blend-mode:overlay,normal,normal,normal,normal,normal!important;
+  background-origin:border-box;background-color:#1B33C9!important;
+  animation:var(--mesh-anim),cta-blink 6s ease-in-out infinite!important
+}
+[data-gn="btn"]:hover,[data-gn="btn"]:focus-visible{
+  --ga:#3F6BFF;--gb:#1B33C9;color:#F4F0E6!important;
+  background-image:var(--grain),radial-gradient(circle at var(--mx,30%) var(--my,50%),rgb(255 255 255 / .55),transparent 60%),var(--mesh-live)!important;
+  background-size:150px,auto,auto,auto,auto,auto,auto!important;
+  background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
+  background-blend-mode:overlay,soft-light,normal,normal,normal,normal,normal!important;
+  animation:var(--mesh-anim),liveGlow 3.1s ease-in-out infinite alternate!important
+}
+[data-gn="btn"] .btn__t{color:#F4F0E6!important}
+[data-gn="btn"]::after{background:#2A45D8!important}
+.pj .btn[data-gn]:hover{background-color:#1B33C9!important}
+
+/* צור קשר: רקע מש חי מלא, צבעים עזים וגרעיניות ברורה (כמו ההשראה), טקסט כהה */
+.ct .ct__panel{
+  background-color:#1B33C9!important;
+  background-image:var(--grain),
+    radial-gradient(var(--s1) calc(var(--s1) * 1.6) at var(--c1x) var(--c1y),#2F4FE0,#2F4FE0 28%,transparent 74%),
+    radial-gradient(var(--s2) calc(var(--s2) * 1.5) at var(--c2x) var(--c2y),#4568EE,#4568EE 24%,transparent 74%),
+    radial-gradient(var(--s3) calc(var(--s3) * 1.5) at var(--c3x) var(--c3y),#0F1F99,transparent 72%),
+    radial-gradient(var(--s4) calc(var(--s4) * 1.4) at var(--c4x) var(--c4y),#0A1670,transparent 78%),
+    linear-gradient(#1B33C9,#1B33C9)!important;
+  background-size:170px,auto,auto,auto,auto,auto!important;
+  background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;
+  background-blend-mode:overlay,normal,normal,normal,normal,normal!important;
+  animation:ctaC1 9.7s ease-in-out infinite alternate,ctaC2 7.3s ease-in-out infinite alternate,ctaC3 8.9s ease-in-out infinite alternate,ctaC4 11.3s ease-in-out infinite alternate,ctaS1 6.1s ease-in-out infinite alternate,ctaS2 5.3s ease-in-out infinite alternate,ctaS3 7.7s ease-in-out infinite alternate,ctaS4 6.7s ease-in-out infinite alternate!important;
+  isolation:isolate
+}
+.ct .ct__panel::before{display:block!important;content:"";position:absolute;inset:0;z-index:1;pointer-events:none;animation:none!important;transform:none!important;rotate:none!important;translate:none!important;scale:none!important;filter:none!important;background:linear-gradient(rgb(30 32 31 / .28),rgb(30 32 31 / .28)) 0 calc(var(--U) - 1px) / 100% 1px no-repeat,linear-gradient(rgb(30 32 31 / .28),rgb(30 32 31 / .28)) 0 calc(var(--U) * 3.5 - 1px) / 100% 1px no-repeat}
+.ct .ct__panel::after{display:none!important}
+@media (max-width:900px){.ct .ct__panel::before{display:none!important}}
+
+/* prefers-reduced-motion: בלי אנימציה, צבע חלק */
+@media (prefers-reduced-motion:reduce){
+  [data-gn="text"]{background:none!important;animation:none!important;-webkit-text-fill-color:#6FA0FF!important;color:#6FA0FF!important}
+  [data-gn="btn"],[data-gn="btn"]:hover,[data-gn="btn"]:focus-visible{animation:none!important;transition:none!important;background-image:none!important;background-color:#1B33C9!important}
+  .ct .ct__panel{animation:none!important;background-image:none!important;background-color:#1B33C9!important}
+  .ct .ct__panel::after{display:none!important}
+}

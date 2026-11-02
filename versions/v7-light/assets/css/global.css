@@ -1,0 +1,31 @@
+/* תיקוני עיצוב גלובליים: פונט גוף (Google Sans, גיבוי Heebo), טקסט רץ 18px+, ופרויקטים פתוחים בנייד */
+@font-face{font-family:"Google Sans";src:url("../fonts/GoogleSans-Variable.ttf") format("truetype");font-weight:100 900;font-style:normal;font-display:swap}
+:root{--f-body:"Google Sans","Heebo",system-ui,sans-serif;--tx1:#F1ECE0;--tx2:#B9B4A8}
+
+/* טקסט רץ ותיאורים (הירו וכותרות לא נוגעים) */
+.pj3__d,.lp2__p,.pr3__p,.pr3__p.pr3__g,.ab__p,.pr__p,.pr__lead,.ab__lines p,.pp-lead,.ct .lead,.ct .done .lead{font-family:var(--f-body)!important;font-weight:400!important;font-size:18px!important;line-height:1.6!important;letter-spacing:0!important}
+.ct .madlib,.ct .madlib input{font-family:var(--f-body)!important;font-weight:400!important;font-size:20px!important}
+.ct .madlib{line-height:1.8!important}
+.ct .fine,.ct .fine a,.ct__steps li{font-family:var(--f-body)!important;font-weight:400!important;font-size:18px!important;line-height:1.6!important}
+.lp2__p,.pr3__p,.ab__p,.pp-lead{color:var(--tx1)}
+.pr3__p.pr3__g{color:var(--tx2)}
+.pj3__d{color:rgb(18 20 15 / .9)}
+
+/* פרויקטים בנייד: הכול פתוח, אנכי, תמונה גדולה ואז טקסט. בלי כרטיסים ובלי אקורדיון. */
+@media (max-width:900px){
+  .pj3{flex-direction:column;height:auto;border:0}
+  .pj3__c{flex:none!important;overflow:visible;cursor:default;border-radius:0;background:transparent}
+  .pj3__c .pj3__rail{display:none!important}
+  .pj3__c .pj3__in{display:grid!important;position:relative!important;width:auto!important;opacity:1!important;pointer-events:auto!important;grid-template-columns:1fr!important;gap:22px;padding:36px var(--v6-m)!important}
+  .pj3__c .pj3__mk{order:-1}
+  .pj3__c .pj3__mk:empty{display:none}
+  .pj3__c .pj3__mk .mk{width:100%}
+  .pj3__c+.pj3__c{border-inline-start:0!important;border-top:1px solid rgb(18 20 15 / .3)!important}
+  .pj3__c .pj3__tx{padding:0}
+}
+
+/* רקע בסיס של הדף: פחם חם (לא שחור מוחלט) */
+html,body{background-color:#1E201F}
+
+/* ספרות בכל האתר: Google Sans במשקל הכי עבה */
+.pr3__n,.lp2__n,.pj3__n,.pj3__rn,.ct__steps li::before,.pp-nn,.pr3__pn,.pj3__rn{font-family:"Google Sans","Heebo",system-ui,sans-serif!important;font-weight:900!important;font-variation-settings:"wght" 900}

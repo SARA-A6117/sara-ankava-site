@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ניהול — Sara Ankava</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1E201F">
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/admin.css?v=1">
+</head>
+<body>
+<header class="ad-top">
+  <span class="ad-brand">Sara Ankava <small>ניהול</small></span>
+  <div class="ad-user" id="user" hidden><span id="user-mail"></span><button type="button" class="ad-btn ad-btn--ghost" id="logout">התנתקות</button></div>
+</header>
+
+<main class="ad-main">
+  <section class="ad-login" id="login" hidden>
+    <h1>כניסה למערכת הניהול</h1>
+    <p id="login-msg" class="ad-msg" role="alert"></p>
+    <button type="button" class="ad-btn ad-btn--grad" id="google">התחברות עם גוגל</button>
+  </section>
+
+  <section id="app" hidden>
+    <nav class="ad-tabs" role="tablist">
+      <button type="button" role="tab" id="tab-projects" aria-selected="true" aria-controls="pane-projects">פרויקטים</button>
+      <button type="button" role="tab" id="tab-leads" aria-selected="false" aria-controls="pane-leads">פניות <b id="leads-new" hidden></b></button>
+    </nav>
+
+    <div id="pane-projects" role="tabpanel">
+      <div class="ad-bar"><p class="ad-hint">גררו כדי לשנות סדר (או השתמשו בחצים). הסדר נשמר מיד.</p><button type="button" class="ad-btn ad-btn--grad" id="add">הוספת פרויקט</button></div>
+      <ul class="ad-list" id="projects" aria-live="polite"></ul>
+    </div>
+
+    <div id="pane-leads" role="tabpanel" hidden>
+      <div class="ad-bar">
+        <label class="ad-field ad-field--inline">סינון
+          <select id="lead-filter"><option value="">הכול</option><option value="new">חדש</option><option value="in_progress">בטיפול</option><option value="closed">סגור</option></select>
+        </label>
+      </div>
+      <ul class="ad-list" id="leads" aria-live="polite"></ul>
+    </div>
+  </section>
+
+  <p class="ad-msg" id="global-msg" role="alert"></p>
+</main>
+
+<div class="ad-modal" id="modal" hidden>
+  <form class="ad-sheet" id="pform" novalidate>
+    <h2 id="pform-title">פרויקט</h2>
+    <label class="ad-field">שם הפרויקט<input name="title" required maxlength="200"></label>
+    <label class="ad-field">שורת סוג<input name="type" maxlength="200" placeholder="למשל: אתר תדמית · קטלוג"></label>
+    <label class="ad-field">תיאור<textarea name="description" rows="4" maxlength="2000"></textarea></label>
+    <label class="ad-field">קישור (לא חובה)<input name="link" type="url" dir="ltr" placeholder="https://" maxlength="500"></label>
+    <div class="ad-imgs">
+      <div class="ad-img"><span>תמונת דסקטופ</span><div class="ad-prev" id="prev-desktop"></div><input type="file" accept="image/*" id="file-desktop"></div>
+      <div class="ad-img"><span>תמונת מובייל</span><div class="ad-prev" id="prev-mobile"></div><input type="file" accept="image/*" id="file-mobile"></div>
+    </div>
+    <label class="ad-check"><input type="checkbox" name="is_concept"> להציג "קונספט"</label>
+    <label class="ad-check"><input type="checkbox" name="published"> מפורסם באתר</label>
+    <p class="ad-msg" id="pform-msg" role="alert"></p>
+    <div class="ad-actions"><button type="submit" class="ad-btn ad-btn--grad" id="psave">שמירה</button><button type="button" class="ad-btn ad-btn--ghost" id="pcancel">ביטול</button></div>
+  </form>
+</div>
+
+<div class="ad-modal" id="confirm" hidden>
+  <div class="ad-sheet ad-sheet--sm" role="alertdialog" aria-labelledby="confirm-t">
+    <h2 id="confirm-t">למחוק את הפרויקט?</h2>
+    <p id="confirm-p"></p>
+    <div class="ad-actions"><button type="button" class="ad-btn ad-btn--danger" id="confirm-yes">מחיקה</button><button type="button" class="ad-btn ad-btn--ghost" id="confirm-no">ביטול</button></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="assets/js/admin-config.js?v=1"></script>
+<script src="assets/js/admin.js?v=1"></script>
+</body>
+</html>

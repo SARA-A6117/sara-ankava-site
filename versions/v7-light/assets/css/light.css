@@ -1,0 +1,110 @@
+/* גרסת צבעים הפוכה: רקע בהיר (קרם) וטקסט כהה. פעילה רק כש-html[data-theme="light"] (כתובת /light או ?theme=light). */
+html[data-theme="light"]{--v6-char:#F3EEE2;--v6-stone:#1E201F;--v6-paper:#1E201F;--tx1:#1E201F;--tx2:#5E5B52;color-scheme:light;
+  --hl:repeating-linear-gradient(to bottom,transparent 0,transparent calc(12.5svh - 1px),rgb(30 32 31 / .1) calc(12.5svh - 1px),rgb(30 32 31 / .1) 12.5svh)}
+html[data-theme="light"],html[data-theme="light"] body{background-color:#F3EEE2;color:#1E201F}
+
+/* משטחים */
+html[data-theme="light"] :is(.h6,.lp2,.lp2__stick,.pr3,.pr3__stick,.ab,.ab__frame,.pj__h,.ftr2,.pp-hero,.pp-next){background-color:#F3EEE2!important}
+html[data-theme="light"] :is(.pj,.pp-list){background-color:#E8DFCB!important}
+html[data-theme="light"] .pj .pj__h{background-color:#F3EEE2!important}
+html[data-theme="light"] .pj3__c{background-color:#E8DFCB!important;background-image:none!important}
+html[data-theme="light"] :is(.ab__frame,.ab__nums){border-color:rgb(30 32 31 / .14)}
+
+/* טקסטים */
+html[data-theme="light"] :is(.hb__small,.hb__p,.hb__l:not([data-gn]),.h6__title,.lp2__t,.lp2__n,.lp2__p,.pr3__t,.pr3__p,.pr3__n,.ab__h span,.ab__txt p,.pp-h,.pp-nh,.pp-lead,.pp-eyebrow,.ftr2 a,.ftr2 li,.ftr2__bottom,.ftr2__bottom span,.motion-toggle){color:#1E201F!important}
+html[data-theme="light"] :is(.hb__p,.pr3__p.pr3__g,.pp-lead,.ftr2__bottom){color:#5E5B52!important}
+html[data-theme="light"] :is(.lp2__p,.pr3__p,.ab__txt p){color:#26282A!important}
+html[data-theme="light"] .pj__st{-webkit-text-stroke-color:#1E201F!important}
+html[data-theme="light"] .lp2 .lp2__h .pj__st,html[data-theme="light"] .pr3__h .pj__st,html[data-theme="light"] .pj .pj__h .pj__st{-webkit-text-stroke-color:#1E201F!important}
+html[data-theme="light"] .pj3__d{color:#26282A}
+
+/* הדר ולוגו */
+html[data-theme="light"] .hdr .logo__img--light{display:none!important}
+html[data-theme="light"] .hdr .logo__img--dark{display:block!important}
+html[data-theme="light"] .hdr .logo::before{background:rgb(243 238 226 / .94)!important;border-color:rgb(30 32 31 / .16)!important}
+html[data-theme="light"] .nav{background:rgb(243 238 226 / .94)!important;border-color:rgb(30 32 31 / .18)!important}
+html[data-theme="light"] .nav a:not(.cta6):not(.btn){color:#1E201F!important}
+html[data-theme="light"] .hdr .menu-btn{background:rgb(243 238 226 / .94)!important;border-color:rgb(30 32 31 / .25)!important;color:#1E201F}
+
+/* כרטיסי הירו, פוטר, מדבקות, אובייקט ממשק */
+html[data-theme="light"] .hb__card{background:rgb(255 255 255 / .62)!important;border-color:rgb(30 32 31 / .16)!important}
+html[data-theme="light"] .hb__card b,html[data-theme="light"] .hb__card li,html[data-theme="light"] .hb__card .hb__ct{color:#1E201F!important}
+html[data-theme="light"] .hb__card span{color:#5E5B52!important}
+html[data-theme="light"] .hb__ck svg circle{fill:#F2B600}
+html[data-theme="light"] .stk__ring text{fill:#1E201F}
+html[data-theme="light"] .hb__ring text,html[data-theme="light"] .hb__badge .hb__ring text{fill:#1E201F}
+html[data-theme="light"] .ftr2__ic a{border-color:rgb(30 32 31 / .4);color:#1E201F}
+html[data-theme="light"] .ftr2__ic a:hover,html[data-theme="light"] .ftr2__ic a:focus-visible{color:#F4F0E6!important}
+html[data-theme="light"] .ftr2__bottom{border-top-color:rgb(30 32 31 / .14)}
+
+/* גרדיאנט קריא על רקע בהיר: גוונים עמוקים יותר בטקסט, כפתורים עם טקסט כהה ושפה עדינה */
+html[data-theme="light"] [data-gn="text"]{--mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#F0AE00,#F0AE00 34%,transparent 68%),radial-gradient(circle at var(--c2x) var(--c2y),#1E86E5,#1E86E5 34%,transparent 68%),radial-gradient(circle at var(--c3x) var(--c3y),#D68A00,#D68A00 30%,transparent 66%),radial-gradient(circle at var(--c4x) var(--c4y),#0F6FC4,#0F6FC4 30%,transparent 66%),linear-gradient(135deg,#F0AE00,#1E86E5)}
+html[data-theme="light"] .hb__title .hb__l[data-gn="text"]{--mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#F0AE00,#F0AE00 20%,transparent 52%),radial-gradient(circle at var(--c2x) var(--c2y),#1E86E5,#1E86E5 20%,transparent 52%),radial-gradient(circle at var(--c3x) var(--c3y),#F0AE00,#F0AE00 14%,transparent 44%),radial-gradient(circle at var(--c4x) var(--c4y),#1E86E5,#1E86E5 14%,transparent 44%),linear-gradient(100deg,#F0AE00 0%,#F0AE00 32%,#1E86E5 68%,#1E86E5 100%)}
+
+/* תיקונים: מילים בגרדיאנט בכותרות, מספרים, קווים */
+html[data-theme="light"] .pj__gr[data-gn]{-webkit-text-fill-color:transparent!important;color:transparent!important;background-image:var(--grain),var(--mesh-live)!important;-webkit-background-clip:text!important;background-clip:text!important}
+html[data-theme="light"] .lp2__n{background:#1E201F!important;color:#F3EEE2!important}
+html[data-theme="light"] .lp2__vl,html[data-theme="light"] .lp2__pb{background-color:rgb(30 32 31 / .3)}
+html[data-theme="light"] .pr3__n{-webkit-text-stroke-color:rgb(30 32 31 / .55)!important}
+html[data-theme="light"] :is(.lp2__row,.lp2__bar,.pr3__c,.pr3__cols,.pr3__stick){border-color:rgb(30 32 31 / .16)!important}
+html[data-theme="light"] .pr3__c{border-inline-color:rgb(30 32 31 / .14)!important}
+html[data-theme="light"] .pr3__cols{background-color:#F3EEE2!important}
+html[data-theme="light"] .hdr .menu-btn span{background:#1E201F!important}
+
+/* ===== שלב 1: קובלט כצבע החזק, פונט גוף 17px/400, גריד 8%, צור קשר בקובלט ===== */
+html[data-theme="light"]{--cobalt:#1B33C9;--hl:repeating-linear-gradient(to bottom,transparent 0,transparent calc(12.5svh - 1px),rgb(30 32 31 / .08) calc(12.5svh - 1px),rgb(30 32 31 / .08) 12.5svh)}
+
+/* גרדיאנט במילים: מקובלט לכחול חזק, עם גרעיניות. בלי צהוב על בהיר */
+html[data-theme="light"] [data-gn="text"]{--mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#1B33C9,#1B33C9 34%,transparent 68%),radial-gradient(circle at var(--c2x) var(--c2y),#3F6BFF,#3F6BFF 34%,transparent 68%),radial-gradient(circle at var(--c3x) var(--c3y),#0F1F99,#0F1F99 30%,transparent 66%),radial-gradient(circle at var(--c4x) var(--c4y),#2C8CFF,#2C8CFF 30%,transparent 66%),linear-gradient(135deg,#1B33C9,#2C8CFF)}
+html[data-theme="light"] .hb__title .hb__l[data-gn="text"]{--mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#1B33C9,#1B33C9 22%,transparent 54%),radial-gradient(circle at var(--c2x) var(--c2y),#3F6BFF,#3F6BFF 22%,transparent 54%),radial-gradient(circle at var(--c3x) var(--c3y),#0F1F99,#0F1F99 16%,transparent 46%),radial-gradient(circle at var(--c4x) var(--c4y),#2C8CFF,#2C8CFF 16%,transparent 46%),linear-gradient(100deg,#1B33C9 0%,#1B33C9 36%,#2C8CFF 70%,#3F6BFF 100%)}
+
+/* טקסט רץ: Google Sans, 17px, משקל 400, line-height 1.65 */
+html[data-theme="light"] :is(.pj3__d,.lp2__p,.pr3__p,.pr3__p.pr3__g,.pp-lead,.pr__p,.pr__lead){font-size:17px!important;line-height:1.65!important;font-weight:400!important}
+html[data-theme="light"] .ab__txt p{font-size:17px!important;line-height:1.65!important;font-weight:400!important}
+html[data-theme="light"] .ct .madlib,html[data-theme="light"] .ct .madlib input{font-size:18px!important}
+html[data-theme="light"] :is(.ct .fine,.ct .fine a,.ct__steps li){font-size:16px!important}
+
+
+
+
+/* ===== שלב 1.5: איורים בהירים, חיצי דוב קובלט, בלי סטרוק על מילויי גרדיאנט ===== */
+/* תהליך: כרטיסי ממשק בהירים עם קו מתאר דק ואלמנטים קובלט */
+html[data-theme="light"] .oc{background:#FBF8F0!important;box-shadow:inset 0 0 0 1px rgb(30 32 31 / .32)}
+html[data-theme="light"] :is(.tr,.br,.fb){background:#ECE5D3!important}
+html[data-theme="light"] .fb:nth-child(2){background:#E4DCC6!important}
+html[data-theme="light"] :is(.fb s,.tr .ic,.br .av,.br .ln){background:rgb(30 32 31 / .42)!important}
+html[data-theme="light"] .br .ck{background:rgb(30 32 31 / .3)!important}
+html[data-theme="light"] .hd i{background:rgb(30 32 31 / .2)!important}
+html[data-theme="light"] .hd i:first-child{background:rgb(30 32 31 / .42)!important}
+html[data-theme="light"] :is(.fb b,.tr em){color:#1E201F!important}
+html[data-theme="light"] .tr u{background:rgb(30 32 31 / .1)!important;color:#1E201F}
+html[data-theme="light"] .pr3__bb{background:#FBF8F0;border-color:rgb(30 32 31 / .45);color:#1E201F}
+html[data-theme="light"] .pr3__bb::after{background:#FBF8F0;border-color:rgb(30 32 31 / .45)}
+html[data-theme="light"] .fb.y{background-color:#1B33C9!important}
+/* לונה פארק: כרטיסי SVG בהירים */
+html[data-theme="light"] .lp2__cmp svg [fill="#2c2f2e"]{fill:#FBF8F0;stroke:#1E201F;stroke-opacity:.38;stroke-width:1}
+html[data-theme="light"] .lp2__cmp svg [fill="#393d3b"]{fill:#ECE5D3}
+html[data-theme="light"] .lp2__cmp svg [fill="#6a6f6c"]{fill:rgb(30 32 31 / .4)}
+html[data-theme="light"] .lp2__cmp svg [fill="#4f5451"]{fill:rgb(30 32 31 / .2)}
+html[data-theme="light"] .lp2__cmp svg text[fill="#D9D9D2"]{fill:#1E201F}
+html[data-theme="light"] .lp2__cmp svg text.sc__t{fill:#1E201F}
+/* ציורי יד (PNG): גוון קובלט */
+html[data-theme="light"] img.dd2[src*="circle"],html[data-theme="light"] img.dd2[src*="arrow-yellow"],html[data-theme="light"] img.dd2[src*="burst"]{filter:hue-rotate(178deg) saturate(2.2) brightness(.62)}
+html[data-theme="light"] img.dd2[src*="curl-blue"]{filter:hue-rotate(28deg) saturate(2.2) brightness(.62)}
+/* מדבקה ועיגול הירו: מילוי בלבד */
+html[data-theme="light"] .stk__ring text,html[data-theme="light"] .hb__ring text{fill:#1E201F}
+
+/* תיקונים: ספרות בעיגולי לונה פארק, וציורי היד בגוון קובלט (גוברים על filter:none) */
+html[data-theme="light"] .lp2--lp .lp2__row .lp2__n{background:#1E201F!important;color:#F4F0E6!important}
+html[data-theme="light"] img.dd2[src*="circle"],html[data-theme="light"] img.dd2[src*="arrow-yellow"],html[data-theme="light"] img.dd2[src*="burst"]{filter:hue-rotate(178deg) saturate(2.2) brightness(.62)!important}
+html[data-theme="light"] img.dd2[src*="curl-blue"]{filter:hue-rotate(28deg) saturate(2.2) brightness(.62)!important}
+
+/* תפריט: הפריט הפעיל על רקע כחול, טקסט לבן */
+html[data-theme="light"] .nav a.is-active:not(.cta6):not(.btn),html[data-theme="light"] .nav a[aria-current]:not(.cta6):not(.btn){color:#F4F0E6!important}
+/* אזורים: כרטיסי הירו כמו אובייקטי התהליך */
+html[data-theme="light"] .hb__card{background:#FBF8F0!important;border:0!important;box-shadow:inset 0 0 0 1px rgb(30 32 31 / .32)!important;-webkit-backdrop-filter:none;backdrop-filter:none;border-radius:14px}
+html[data-theme="light"] .hb__card .hb__ck svg circle{fill:#1B33C9}
+html[data-theme="light"] .hb__card .hb__ck svg path{stroke:#F4F0E6}
+html[data-theme="light"] .pr3__n{color:transparent!important;-webkit-text-fill-color:transparent;-webkit-text-stroke:1px #1E201F!important}
+html[data-theme="light"] img.dd2[src*="circle"],html[data-theme="light"] img.dd2[src*="arrow-yellow"],html[data-theme="light"] img.dd2[src*="burst"]{filter:hue-rotate(186deg) saturate(5) brightness(.7) contrast(1.1)!important}
+html[data-theme="light"] img.dd2[src*="curl-blue"]{filter:hue-rotate(25deg) saturate(5) brightness(.7) contrast(1.1)!important}
