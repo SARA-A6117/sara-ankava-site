@@ -325,3 +325,14 @@ html body .lp2 .lp2__n,html[data-theme="light"] body .lp2--lp .lp2__row .lp2__n,
 html body .hb__card .hb__ck svg path{stroke:#FFE66D!important}
 html body .ct .madlib input:focus{border-bottom-color:#FFE66D!important}
 ::selection{background:#FFE66D;color:#1E201F}
+
+/* ===== הסכמה לפרטיות בטופס צור קשר: תיבת סימון חובה, פינות חדות, יעד לחיצה 44px ===== */
+.consent{margin:18px 0 6px}
+.consent__l{display:flex;align-items:center;gap:12px;min-height:44px;cursor:pointer;color:#F4F0E6;font:400 16px/1.5 "Google Sans","Heebo",system-ui,sans-serif}
+.consent__l input{position:absolute;width:22px;height:22px;margin:0;opacity:0;cursor:pointer}
+.consent__box{flex:none;position:relative;width:22px;height:22px;border:1.5px solid #F4F0E6;background:transparent}
+.consent__l input:checked+.consent__box{background:#FFE66D;border-color:#FFE66D}
+.consent__l input:checked+.consent__box::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid #1E201F;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.consent__l input:focus-visible+.consent__box{outline:2px solid #FFE66D;outline-offset:3px}
+.consent__l input[aria-invalid="true"]+.consent__box{border-color:#FFD7A8;box-shadow:0 0 0 2px #FFD7A8}
+.consent__l a{color:#F4F0E6;text-decoration:underline;text-underline-offset:3px}

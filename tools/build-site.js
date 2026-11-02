@@ -21,6 +21,7 @@ for (const f of ['index.html', 'projects.html']) {
   h = h.replace(/(href|src)="assets\//g, '$1="/dark/assets/')
        .replace(/href="index\.html#/g, 'href="/dark#').replace(/href="index\.html"/g, 'href="/dark"')
        .replace(/href="\/?projects\.html"/g, 'href="/dark/projects"')
+       .replace(/\/legal\.html#accessibility/g, '/accessibility').replace(/\/legal\.html#privacy/g, '/privacy')
        .replace(/<meta name="robots" content="[^"]*">/, '<meta name="robots" content="noindex,follow">')
        .replace(/(rel="canonical" href="https:\/\/sarankava\.com)\/projects"/, '$1/dark/projects"')
        .replace(/(rel="canonical" href="https:\/\/sarankava\.com)\/"/, '$1/dark"');

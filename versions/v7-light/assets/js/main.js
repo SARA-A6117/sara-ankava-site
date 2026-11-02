@@ -129,6 +129,7 @@ const WA_TEXT = 'היי שרי, הגעתי מהאתר ואשמח לדבר על �
         err.textContent = !okN && !okP ? 'חסרים לי השם ומספר הטלפון.' : !okN ? 'רק תגידו לי איך קוראים לכם.' : 'נראה שחסרה ספרה במספר. פורמט: 050-0000000.';
         (!okN ? f.name : f.phone).focus(); return;
       }
+      if (f.consent && !f.consent.checked) { f.consent.setAttribute('aria-invalid', 'true'); err.textContent = 'כדי לשלוח צריך לאשר את מדיניות הפרטיות.'; f.consent.focus(); return; }
       err.textContent = '';
       const about = f.about.value.trim(), pains = f.pains ? f.pains.value : '';
       const msg = `היי שרי, אני ${f.name.value.trim()}.` + (about ? `\nיש לי עסק של ${about}.` : '') +
@@ -137,6 +138,7 @@ const WA_TEXT = 'היי שרי, הגעתי מהאתר ואשמח לדבר על �
       $('[data-who]', box).textContent = f.name.value.trim().split(' ')[0];
       box.classList.add('is-done'); $('.done', box).focus();
     });
+    f.consent?.addEventListener('change', () => { f.consent.setAttribute('aria-invalid', !f.consent.checked); if (f.consent.checked) err.textContent = ''; });
     $('[data-edit]', box)?.addEventListener('click', () => { box.classList.remove('is-done'); f.name.focus(); });
   });
 

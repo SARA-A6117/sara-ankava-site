@@ -76,3 +76,8 @@
 - הכול בסוף `assets/css/cobalt.css` תחת "רספונסיביות, סבב 2": הירו בנייד בטור אחד (פסקה ממורכזת ברוחב מלא, צ'קליסט, מדבקה בזרימה), וואטסאפ צף 48px בנייד, ריפוד בסוף האזורים והפוטר, חיצי תהליך מוסתרים בנייד, `overflow-x: clip` ל-html/body.
 - יעדי לחיצה 44px (עד 1024px): `padding` חיובי + `margin` שלילי, ו-`::after` שקוף על הלוגו וקישורי התפריט (בלי לשנות מראה).
 - חשיפה עמידה: ב-`motion.js` הפונקציה `settleReveals` + בדיקה תקופתית מבטיחות שכותרות ופסקאות מגיעות למצב הסופי גם בגלילה מהירה. ב-prefers-reduced-motion הקוד לא מסתיר דבר.
+
+## עמודים משפטיים (נובמבר 2026)
+- `/privacy`, `/terms`, `/accessibility` = `versions/v7-light/{privacy,terms,accessibility}.html`, עיצוב ב-`assets/css/legal.css`. הדר ופוטר זהים לעמוד הראשי. ה-`/legal.html` הישן מופנה ל-`/privacy`.
+- פרטים חסרים מסומנים `<mark class="ph">[...]</mark>` (צהוב). לאיתור: `grep -n 'class="ph"' versions/v7-light/{privacy,terms,accessibility}.html`.
+- טופס צור קשר: תיבת סימון חובה `consent` (הוולידציה ב-`main.js`, כי הטופס `novalidate`).
