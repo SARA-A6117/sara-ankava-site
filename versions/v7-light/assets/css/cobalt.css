@@ -355,3 +355,22 @@ html body .ct .madlib input:focus{border-bottom-color:#FFE66D!important}
 @media (prefers-reduced-motion:reduce){.tl .rv{transition:none!important;opacity:1!important;transform:none!important}}
 html body .tl .tl__c{width:100%;max-width:none;justify-self:stretch;box-sizing:border-box}
 html body .tl .tl__d{max-width:none}
+
+/* ===== פס כלים: פונט Google Sans לשמות, אנימציה במעבר עכבר ===== */
+html body .tl .tl__n{font:700 24px/1.15 "Google Sans","Heebo",system-ui,sans-serif;letter-spacing:-.005em}
+.tl__c{position:relative;transition:background-color .35s ease}
+.tl__ic{transition:transform .55s cubic-bezier(.2,1.25,.3,1)}
+.tl__n{transition:color .3s ease}
+.tl__c::after{content:"";position:absolute;inset-inline:0;bottom:0;height:2px;background:linear-gradient(90deg,#1B33C9,#6FD0FF);transform:scaleX(0);transform-origin:right center;transition:transform .55s ease}
+@media (hover:hover){
+  .tl__c:hover{background-color:rgb(27 51 201 / .045)}
+  .tl__c:hover .tl__ic{transform:translateY(-5px) rotate(-6deg) scale(1.1)}
+  .tl__c:hover .tl__n{color:#1B33C9}
+  .tl__c:hover::after{transform:scaleX(1)}
+}
+@media (prefers-reduced-motion:reduce){.tl__ic,.tl__c::after{transition:none}.tl__c:hover .tl__ic{transform:none}}
+/* בועות התהליך: טקסט צהוב רק כשהבועה בגרדיאנט (העמודה הפעילה); כשהרקע בהיר, הטקסט כהה */
+html body .pr3__bb{transition:color .4s ease}
+html body .pr3__c:not(.is-act) .pr3__bb{color:#1E201F!important}
+html body .pr3__c.is-act .pr3__bb{color:#FFE66D!important}
+@media (max-width:900px){html body .pr3__c .pr3__bb{color:#FFE66D!important}}
