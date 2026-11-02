@@ -6,21 +6,29 @@
   /* ---- מדבקות: טבעת טקסט (הטקסט הפוך כדי שייקרא נכון לאורך המסלול) + כוכב ---- */
   var n = 0;
   function rev(s) { return Array.from(s).reverse().join(''); }
+  var BUB = 'M100 38C136 38 160 62 160 92C160 122 136 144 104 144C96 144 88 143 81 141L52 160C56 150 58 142 57 134C48 124 40 109 40 92C40 62 64 38 100 38Z';
+  if ($$('.stk').length) {
+    var defs = document.createElement('div');
+    defs.setAttribute('aria-hidden', 'true');
+    defs.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden';
+    defs.innerHTML = '<svg width="0" height="0"><clipPath id="stkclip" clipPathUnits="objectBoundingBox"><path transform="scale(.005)" d="' + BUB + '"/></clipPath></svg>';
+    document.body.appendChild(defs);
+  }
   $$('.stk').forEach(function (el) {
     var id = 'stkp' + (++n), unit = el.getAttribute('data-ring') || '';
     el.innerHTML = '<i class="stk__c" data-gn="btn"></i>' +
-      '<svg class="stk__ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="' + id + '" d="M100 100m-71 0a71 71 0 1 1 142 0a71 71 0 1 1-142 0"/></defs><text><textPath href="#' + id + '"></textPath></text></svg>' +
+      '<svg class="stk__ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="' + id + '" d="' + BUB + '" transform="translate(100 98) scale(1.2) translate(-100 -98)"/></defs><text><textPath href="#' + id + '"></textPath></text></svg>' +
       '<svg class="stk__star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.5 7.2 7.5 .3-6 4.6 2.2 7.3L12 16.7 5.8 20.9 8 13.6 2 9l7.5-.3z" fill="#0c0e0d"/></svg>';
-    var tp = el.querySelector('textPath'), txt = el.querySelector('text');
+    var tp = el.querySelector('textPath'), txt = el.querySelector('text'), pth = el.querySelector('defs path');
     function fit() {
-      var circ = 446, r, len;
-      txt.style.fontSize = '14px';
-      for (r = 1; r <= 10; r++) {
+      var circ = pth.getTotalLength() * 1.2, r, len;
+      txt.style.fontSize = '9px';
+      for (r = 1; r <= 12; r++) {
         tp.textContent = rev(new Array(r + 1).join(unit));
         len = txt.getComputedTextLength();
         if (len >= circ * 0.84) break;
       }
-      if (len > 0) txt.style.fontSize = (14 * (circ - 4) / len).toFixed(2) + 'px';
+      if (len > 0) txt.style.fontSize = (9 * (circ - 4) / len).toFixed(2) + 'px';
     }
     fit();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
