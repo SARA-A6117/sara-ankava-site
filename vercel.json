@@ -65,6 +65,11 @@
       "source": "/legal.html",
       "destination": "/privacy",
       "permanent": false
+    },
+    {
+      "source": "/legal",
+      "destination": "/privacy",
+      "permanent": false
     }
   ],
   "rewrites": [
