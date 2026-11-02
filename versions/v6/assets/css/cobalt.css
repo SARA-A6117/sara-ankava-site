@@ -159,7 +159,7 @@ html body .stk{background:none!important;border-radius:0!important;box-shadow:no
   .lp2--lp .lp2__row:last-child::after{content:"";position:absolute;bottom:0;left:0;right:18px;height:1px;background:rgb(217 217 210 / .14);pointer-events:none}
   html[data-theme="light"] .lp2--lp .lp2__row::before,html[data-theme="light"] .lp2--lp .lp2__row:last-child::after{background:rgb(30 32 31 / .2)}
 }
-.lp2 .sc__dd,.lp2 img.dd2{display:none!important}
+.lp2 img.dd2{scale:.6}
 @media (min-width:901px){
   .lp2--lp .lp2__h{background-color:#1E201F!important}
   html[data-theme="light"] .lp2--lp .lp2__h{background-color:#F3EEE2!important}
@@ -207,3 +207,27 @@ html body .fb.y,html body .br.nw,html body .pr3__bb,html body .pr3__ob .pr3__bb 
 @media (min-width:901px){html body .stk--ab{top:-128px!important;left:-60px!important}}
 @media (min-width:901px){html body .stk--ab{top:10px!important;left:-30px!important;width:calc(var(--sw)*1.55)!important}}
 html body .sc__bt,html body .sc text.sc__bt,html body .sc__bt tspan{fill:#F4F0E6!important}
+
+/* ===== סבב 4 ===== */
+html body .ab__txt p{font-size:22px!important;line-height:1.5!important}
+html body .stk .stk__ring text{font-weight:300!important;letter-spacing:.16em}
+@media (min-width:901px){html body .stk--ab{left:-110px!important}}
+.pj3__mk .mk__win,.pj3__mk .mk--tef .mk__win{box-shadow:0 30px 70px -20px rgb(63 107 255 / .26),0 0 60px 0 rgb(27 51 201 / .1)!important}
+.pj3__mk .mk__phone{box-shadow:0 20px 44px -16px rgb(63 107 255 / .24)!important}
+html body .ct .contact__actions{gap:16px 2px}
+html body .ct .contact__actions a.or-wa.or-wa{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 80'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='1.5' stroke-linejoin='round' d='M58 22H270A27 27 0 0 1 270 76H30A27 27 0 0 1 38 23L24 3C36 6 48 13 58 22Z'/%3E%3C/svg%3E")!important}
+@media (min-width:901px){
+  .pr3__cols::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:rgb(217 217 210 / .1);pointer-events:none}
+  html[data-theme="light"] .pr3__cols::before{background:rgb(30 32 31 / .14)}
+}
+@media (min-width:901px){
+  html body .pr3__stick{background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--P) - 1px),rgb(217 217 210 / .1) calc(var(--P) - 1px),rgb(217 217 210 / .1) var(--P))!important;background-position:0 0!important}
+  html[data-theme="light"] body .pr3__stick{background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--P) - 1px),rgb(30 32 31 / .14) calc(var(--P) - 1px),rgb(30 32 31 / .14) var(--P))!important}
+}
+
+/* לונה פארק: אובייקטים קטנים בקו דק בסגנון התהליך */
+@media (min-width:901px){html body .lp2 .sc{height:250px!important;min-height:0!important;max-height:250px}}
+html body .lp2 .sc rect,html body .lp2 .sc circle,html body .lp2 .sc path{vector-effect:non-scaling-stroke}
+html body .lp2 .sc g[transform]>rect:first-child{stroke:rgb(30 32 31 / .3);stroke-width:1px}
+html body .lp2 .sc__bub rect,html body .lp2 .sc__bub path{stroke:none}
+html:not([data-theme="light"]) body .lp2 .sc g[transform]>rect:first-child{stroke:rgb(241 236 224 / .3)}
