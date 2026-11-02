@@ -1,0 +1,56 @@
+/* גרסת צבעים הפוכה: רקע בהיר (קרם) וטקסט כהה. פעילה רק כש-html[data-theme="light"] (כתובת /light או ?theme=light). */
+html[data-theme="light"]{--v6-char:#F3EEE2;--v6-stone:#1E201F;--v6-paper:#1E201F;--tx1:#1E201F;--tx2:#5E5B52;color-scheme:light;
+  --hl:repeating-linear-gradient(to bottom,transparent 0,transparent calc(12.5svh - 1px),rgb(30 32 31 / .1) calc(12.5svh - 1px),rgb(30 32 31 / .1) 12.5svh)}
+html[data-theme="light"],html[data-theme="light"] body{background-color:#F3EEE2;color:#1E201F}
+
+/* משטחים */
+html[data-theme="light"] :is(.h6,.lp2,.lp2__stick,.pr3,.pr3__stick,.ab,.ab__frame,.pj__h,.ftr2,.pp-hero,.pp-next){background-color:#F3EEE2!important}
+html[data-theme="light"] :is(.pj,.pp-list){background-color:#E8DFCB!important}
+html[data-theme="light"] .pj .pj__h{background-color:#F3EEE2!important}
+html[data-theme="light"] .pj3__c{background-color:#E8DFCB!important;background-image:none!important}
+html[data-theme="light"] :is(.ab__frame,.ab__nums){border-color:rgb(30 32 31 / .14)}
+
+/* טקסטים */
+html[data-theme="light"] :is(.hb__small,.hb__p,.hb__l:not([data-gn]),.h6__title,.lp2__t,.lp2__n,.lp2__p,.pr3__t,.pr3__p,.pr3__n,.ab__h span,.ab__txt p,.pp-h,.pp-nh,.pp-lead,.pp-eyebrow,.ftr2 a,.ftr2 li,.ftr2__bottom,.ftr2__bottom span,.motion-toggle){color:#1E201F!important}
+html[data-theme="light"] :is(.hb__p,.pr3__p.pr3__g,.pp-lead,.ftr2__bottom){color:#5E5B52!important}
+html[data-theme="light"] :is(.lp2__p,.pr3__p,.ab__txt p){color:#26282A!important}
+html[data-theme="light"] .pj__st{-webkit-text-stroke-color:#1E201F!important}
+html[data-theme="light"] .lp2 .lp2__h .pj__st,html[data-theme="light"] .pr3__h .pj__st,html[data-theme="light"] .pj .pj__h .pj__st{-webkit-text-stroke-color:#1E201F!important}
+html[data-theme="light"] .pj3__d{color:#26282A}
+
+/* הדר ולוגו */
+html[data-theme="light"] .hdr .logo__img--light{display:none!important}
+html[data-theme="light"] .hdr .logo__img--dark{display:block!important}
+html[data-theme="light"] .hdr .logo::before{background:rgb(243 238 226 / .94)!important;border-color:rgb(30 32 31 / .16)!important}
+html[data-theme="light"] .nav{background:rgb(243 238 226 / .94)!important;border-color:rgb(30 32 31 / .18)!important}
+html[data-theme="light"] .nav a:not(.cta6):not(.btn){color:#1E201F!important}
+html[data-theme="light"] .hdr .menu-btn{background:rgb(243 238 226 / .94)!important;border-color:rgb(30 32 31 / .25)!important;color:#1E201F}
+
+/* כרטיסי הירו, פוטר, מדבקות, אובייקט ממשק */
+html[data-theme="light"] .hb__card{background:rgb(255 255 255 / .62)!important;border-color:rgb(30 32 31 / .16)!important}
+html[data-theme="light"] .hb__card b,html[data-theme="light"] .hb__card li,html[data-theme="light"] .hb__card .hb__ct{color:#1E201F!important}
+html[data-theme="light"] .hb__card span{color:#5E5B52!important}
+html[data-theme="light"] .hb__ck svg circle{fill:#F2B600}
+html[data-theme="light"] .stk__ring text{fill:#1E201F}
+html[data-theme="light"] .hb__ring text,html[data-theme="light"] .hb__badge .hb__ring text{fill:#1E201F}
+html[data-theme="light"] .ab__chip{background:rgb(255 255 255 / .62);border-color:rgb(30 32 31 / .16)}
+html[data-theme="light"] .ab__chip b{color:#1E201F}
+html[data-theme="light"] .ab__chip span{color:#5E5B52}
+html[data-theme="light"] .ftr2__ic a{border-color:rgb(30 32 31 / .4);color:#1E201F}
+html[data-theme="light"] .ftr2__ic a:hover,html[data-theme="light"] .ftr2__ic a:focus-visible{background:#FFE24A!important;color:#1E201F}
+html[data-theme="light"] .ftr2__bottom{border-top-color:rgb(30 32 31 / .14)}
+
+/* גרדיאנט קריא על רקע בהיר: גוונים עמוקים יותר בטקסט, כפתורים עם טקסט כהה ושפה עדינה */
+html[data-theme="light"] [data-gn="text"]{--mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#F0AE00,#F0AE00 34%,transparent 68%),radial-gradient(circle at var(--c2x) var(--c2y),#1E86E5,#1E86E5 34%,transparent 68%),radial-gradient(circle at var(--c3x) var(--c3y),#D68A00,#D68A00 30%,transparent 66%),radial-gradient(circle at var(--c4x) var(--c4y),#0F6FC4,#0F6FC4 30%,transparent 66%),linear-gradient(135deg,#F0AE00,#1E86E5)}
+html[data-theme="light"] .hb__title .hb__l[data-gn="text"]{--mesh-live:radial-gradient(circle at var(--c1x) var(--c1y),#F0AE00,#F0AE00 20%,transparent 52%),radial-gradient(circle at var(--c2x) var(--c2y),#1E86E5,#1E86E5 20%,transparent 52%),radial-gradient(circle at var(--c3x) var(--c3y),#F0AE00,#F0AE00 14%,transparent 44%),radial-gradient(circle at var(--c4x) var(--c4y),#1E86E5,#1E86E5 14%,transparent 44%),linear-gradient(100deg,#F0AE00 0%,#F0AE00 32%,#1E86E5 68%,#1E86E5 100%)}
+html[data-theme="light"] [data-gn="btn"]{box-shadow:inset 0 0 0 1px rgb(30 32 31 / .22)}
+html[data-theme="light"] .hb__badge .gr-sq[data-gn="btn"],html[data-theme="light"] .stk__c{box-shadow:0 0 0 1px rgb(30 32 31 / .2)}
+
+/* תיקונים: מילים בגרדיאנט בכותרות, מספרים, קווים */
+html[data-theme="light"] .pj__gr[data-gn]{-webkit-text-fill-color:transparent!important;color:transparent!important;background-image:var(--grain),var(--mesh-live)!important;-webkit-background-clip:text!important;background-clip:text!important}
+html[data-theme="light"] .lp2__n{background:#1E201F!important;color:#F3EEE2!important}
+html[data-theme="light"] .lp2__vl,html[data-theme="light"] .lp2__pb{background-color:rgb(30 32 31 / .3)}
+html[data-theme="light"] .pr3__n{-webkit-text-stroke-color:rgb(30 32 31 / .55)!important}
+html[data-theme="light"] :is(.lp2__row,.lp2__bar,.pr3__c,.pr3__cols,.pr3__stick){border-color:rgb(30 32 31 / .16)!important}
+html[data-theme="light"] .pr3__c{border-inline-color:rgb(30 32 31 / .14)!important}
+html[data-theme="light"] .pr3__cols{background-color:#F3EEE2!important}
