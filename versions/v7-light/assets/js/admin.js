@@ -66,18 +66,18 @@
   }
   function renderProjects() {
     var ul = $('#projects');
-    if (!projects.length) { ul.innerHTML = '<li class="ad-empty">עוד אין פרויקטים. לחצו על "הוספת פרויקט".</li>'; return; }
+    if (!projects.length) { ul.innerHTML = '<li class="cp-empty">עוד אין פרויקטים. לחצו על "הוספת פרויקט".</li>'; return; }
     ul.innerHTML = projects.map(function (p, i) {
-      var img = p.desktop_image_url ? '<img class="ad-thumb" src="' + esc(p.desktop_image_url) + '" alt="" loading="lazy">' : '<span class="ad-thumb"></span>';
-      return '<li class="ad-row" draggable="true" data-id="' + p.id + '" data-i="' + i + '">' +
-        '<span class="ad-handle" aria-hidden="true">⠿</span>' + img +
-        '<div class="ad-info"><b>' + esc(p.title) + (p.is_concept ? '<span class="ad-tag">קונספט</span>' : '') + '</b><small>' + esc(p.type || '') + '</small></div>' +
-        '<div class="ad-ctl">' +
-        '<button type="button" class="ad-sm" data-act="up" aria-label="הזזה למעלה"' + (i === 0 ? ' disabled' : '') + '>↑</button>' +
-        '<button type="button" class="ad-sm" data-act="down" aria-label="הזזה למטה"' + (i === projects.length - 1 ? ' disabled' : '') + '>↓</button>' +
-        '<label class="ad-sw"><input type="checkbox" data-act="pub"' + (p.published ? ' checked' : '') + '><i></i>' + (p.published ? 'מפורסם' : 'טיוטה') + '</label>' +
-        '<button type="button" class="ad-sm" data-act="edit">עריכה</button>' +
-        '<button type="button" class="ad-sm" data-act="del">מחיקה</button>' +
+      var img = p.desktop_image_url ? '<img class="cp-thumb" src="' + esc(p.desktop_image_url) + '" alt="" loading="lazy">' : '<span class="cp-thumb"></span>';
+      return '<li class="cp-row" draggable="true" data-id="' + p.id + '" data-i="' + i + '">' +
+        '<span class="cp-handle" aria-hidden="true">⠿</span>' + img +
+        '<div class="cp-info"><b>' + esc(p.title) + (p.is_concept ? '<span class="cp-tag">קונספט</span>' : '') + '</b><small>' + esc(p.type || '') + '</small></div>' +
+        '<div class="cp-ctl">' +
+        '<button type="button" class="cp-sm" data-act="up" aria-label="הזזה למעלה"' + (i === 0 ? ' disabled' : '') + '>↑</button>' +
+        '<button type="button" class="cp-sm" data-act="down" aria-label="הזזה למטה"' + (i === projects.length - 1 ? ' disabled' : '') + '>↓</button>' +
+        '<label class="cp-sw"><input type="checkbox" data-act="pub"' + (p.published ? ' checked' : '') + '><i></i>' + (p.published ? 'מפורסם' : 'טיוטה') + '</label>' +
+        '<button type="button" class="cp-sm" data-act="edit">עריכה</button>' +
+        '<button type="button" class="cp-sm" data-act="del">מחיקה</button>' +
         '</div></li>';
     }).join('');
   }
@@ -100,7 +100,7 @@
   }
   $('#projects').addEventListener('click', function (e) {
     var b = e.target.closest('[data-act]'); if (!b) return;
-    var row = b.closest('.ad-row'), i = +row.dataset.i, p = byId(row.dataset.id), act = b.dataset.act;
+    var row = b.closest('.cp-row'), i = +row.dataset.i, p = byId(row.dataset.id), act = b.dataset.act;
     if (act === 'up') move(i, i - 1);
     else if (act === 'down') move(i, i + 1);
     else if (act === 'edit') openForm(p);
@@ -108,7 +108,7 @@
   });
   $('#projects').addEventListener('change', function (e) {
     var b = e.target.closest('[data-act="pub"]'); if (!b) return;
-    var p = byId(b.closest('.ad-row').dataset.id), val = b.checked;
+    var p = byId(b.closest('.cp-row').dataset.id), val = b.checked;
     sb.from('projects').update({ published: val }).eq('id', p.id).then(function (r) {
       if (r.error) { flash(els.gmsg, 'העדכון נכשל.'); b.checked = !val; return; }
       p.published = val; flash(els.gmsg, ''); renderProjects();
@@ -116,9 +116,9 @@
   });
   /* גרירה */
   var dragI = null;
-  $('#projects').addEventListener('dragstart', function (e) { var r = e.target.closest('.ad-row'); if (!r) return; dragI = +r.dataset.i; r.classList.add('is-drag'); e.dataTransfer.effectAllowed = 'move'; try { e.dataTransfer.setData('text/plain', String(dragI)); } catch (x) {} });
-  $('#projects').addEventListener('dragover', function (e) { var r = e.target.closest('.ad-row'); if (!r || dragI === null) return; e.preventDefault(); Array.prototype.forEach.call($('#projects').children, function (c) { c.classList.remove('is-over'); }); r.classList.add('is-over'); });
-  $('#projects').addEventListener('drop', function (e) { var r = e.target.closest('.ad-row'); if (!r || dragI === null) return; e.preventDefault(); var to = +r.dataset.i, from = dragI; dragI = null; move(from, to); });
+  $('#projects').addEventListener('dragstart', function (e) { var r = e.target.closest('.cp-row'); if (!r) return; dragI = +r.dataset.i; r.classList.add('is-drag'); e.dataTransfer.effectAllowed = 'move'; try { e.dataTransfer.setData('text/plain', String(dragI)); } catch (x) {} });
+  $('#projects').addEventListener('dragover', function (e) { var r = e.target.closest('.cp-row'); if (!r || dragI === null) return; e.preventDefault(); Array.prototype.forEach.call($('#projects').children, function (c) { c.classList.remove('is-over'); }); r.classList.add('is-over'); });
+  $('#projects').addEventListener('drop', function (e) { var r = e.target.closest('.cp-row'); if (!r || dragI === null) return; e.preventDefault(); var to = +r.dataset.i, from = dragI; dragI = null; move(from, to); });
   $('#projects').addEventListener('dragend', function () { dragI = null; renderProjects(); });
 
   /* ---------- טופס פרויקט ---------- */
@@ -218,18 +218,18 @@
       if (qd.length >= 3 && (pd.indexOf(qd) > -1 || (qd.charAt(0) === '0' && pd.indexOf(qd.slice(1)) > -1))) return true;
       return [l.name, l.phone, l.email, l.business, l.message, l.note].join(' ').toLowerCase().indexOf(q) > -1;
     });
-    if (!list.length) { ul.innerHTML = '<li class="ad-empty">אין פניות להצגה.</li>'; return; }
+    if (!list.length) { ul.innerHTML = '<li class="cp-empty">אין פניות להצגה.</li>'; return; }
     ul.innerHTML = list.map(function (l) {
       var ph = String(l.phone || '').replace(/[^\d+]/g, '');
-      return '<li class="ad-lead ad-st-' + esc(l.status) + '" data-id="' + l.id + '"><div><b>' + esc(l.name) + (l.status === 'new' ? '<span class="ad-lead__new">חדש</span>' : '') + '</b><div class="ad-meta">' +
+      return '<li class="cp-lead cp-st-' + esc(l.status) + '" data-id="' + l.id + '"><div><b>' + esc(l.name) + (l.status === 'new' ? '<span class="cp-lead__new">חדש</span>' : '') + '</b><div class="cp-meta">' +
         (l.business ? '<span>' + esc(l.business) + '</span>' : '') +
         '<a href="tel:' + esc(ph) + '" dir="ltr">' + esc(l.phone) + '</a>' +
         (l.email ? '<a href="mailto:' + esc(l.email) + '" dir="ltr">' + esc(l.email) + '</a>' : '') +
         '<span>' + esc(fmt(l.created_at)) + '</span></div>' +
-        (l.message ? '<p class="ad-lead__msg">' + esc(l.message) + '</p>' : '') + '</div>' +
-        '<div class="ad-lead__side"><label class="ad-field ad-field--inline">סטטוס<select data-lead>' + Object.keys(ST).map(function (k) { return '<option value="' + k + '"' + (k === l.status ? ' selected' : '') + '>' + ST[k] + '</option>'; }).join('') + '</select></label>' +
-        '<a class="ad-wa" href="' + esc(waUrl(l.phone)) + '" target="_blank" rel="noopener">ווטסאפ</a></div>' +
-        '<textarea class="ad-note" data-note rows="1" maxlength="2000" placeholder="הערה" aria-label="הערה לליד">' + esc(l.note || '') + '</textarea></li>';
+        (l.message ? '<p class="cp-lead__msg">' + esc(l.message) + '</p>' : '') + '</div>' +
+        '<div class="cp-lead__side"><label class="cp-field cp-field--inline">סטטוס<select data-lead>' + Object.keys(ST).map(function (k) { return '<option value="' + k + '"' + (k === l.status ? ' selected' : '') + '>' + ST[k] + '</option>'; }).join('') + '</select></label>' +
+        '<a class="cp-wa" href="' + esc(waUrl(l.phone)) + '" target="_blank" rel="noopener">ווטסאפ</a></div>' +
+        '<textarea class="cp-note" data-note rows="1" maxlength="2000" placeholder="הערה" aria-label="הערה לליד">' + esc(l.note || '') + '</textarea></li>';
     }).join('');
   }
   $('#lead-filter').addEventListener('change', renderLeads);
@@ -237,7 +237,7 @@
   $('#leads').addEventListener('change', function (e) {
     var s = e.target.closest('[data-lead]');
     if (s) {
-      var li = s.closest('.ad-lead'), id = li.dataset.id, val = s.value;
+      var li = s.closest('.cp-lead'), id = li.dataset.id, val = s.value;
       sb.from('leads').update({ status: val }).eq('id', id).then(function (r) {
         if (r.error) { flash(els.gmsg, 'עדכון הסטטוס נכשל.'); loadLeads(); return; }
         leads.forEach(function (l) { if (l.id === id) l.status = val; }); flash(els.gmsg, ''); renderLeads();
@@ -246,7 +246,7 @@
     }
     var n = e.target.closest('[data-note]');
     if (n) {
-      var id2 = n.closest('.ad-lead').dataset.id, txt = n.value.trim() || null;
+      var id2 = n.closest('.cp-lead').dataset.id, txt = n.value.trim() || null;
       sb.from('leads').update({ note: txt }).eq('id', id2).then(function (r) {
         if (r.error) { flash(els.gmsg, 'שמירת ההערה נכשלה.'); return; }
         leads.forEach(function (l) { if (l.id === id2) l.note = txt; }); flash(els.gmsg, '');
