@@ -400,3 +400,17 @@ html body .tl .tl__c:last-child{padding-inline-end:4vw}
 /* ===== כפתור "כל הפרויקטים" בכותרת אזור הפרויקטים: בקצה הנגדי של שורת הכותרת, מיושר לריפוד 4vw ===== */
 html body .pj .pj__all{position:absolute;inset-inline-end:var(--v6-m);top:calc((var(--P) - 46px) / 2);z-index:3;min-height:46px;margin:0}
 @media (max-width:900px){html body .pj .pj__all{position:relative;inset:auto;top:auto;display:inline-flex;width:max-content;min-height:48px;margin:20px 0 26px;margin-inline-start:var(--v6-m)}}
+
+/* ===== פרויקטים בדף הבית: 2 עד 4 עמודות לפי מספר הפרויקטים. הטור הפתוח תופס flex 5.6 מול 1 לכל סגור, ורוחב התוכן שלו נגזר מזה ===== */
+@media (min-width:901px){
+  html body .pj3{--open:.737}
+  html body .pj3[data-count="1"]{--open:1}
+  html body .pj3[data-count="2"]{--open:.848}
+  html body .pj3[data-count="3"]{--open:.737}
+  html body .pj3[data-count="4"]{--open:.651}
+  html body .pj3 .pj3__in{width:calc(100vw * var(--open))}
+  html body .pj3[data-count="4"] .pj3__in{padding:clamp(24px,2.6vw,44px);gap:clamp(16px,2vw,32px)}
+  html body .pj3[data-count="4"] .pj3__t{font-size:clamp(24px,2.5vw,38px)}
+  html body .pj3[data-count="4"] .pj3__d{font-size:16px!important}
+  html body .pj3__rv{max-height:calc(100% - 90px);overflow:hidden;text-overflow:ellipsis}
+}

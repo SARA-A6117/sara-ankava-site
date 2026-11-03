@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#1E201F">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/admin.css?v=3">
+<link rel="stylesheet" href="assets/css/admin.css?v=4">
 </head>
 <body>
 <header class="cp-top">
@@ -29,7 +29,8 @@
     </nav>
 
     <div id="pane-projects" role="tabpanel">
-      <div class="cp-bar"><p class="cp-hint">גררו כדי לשנות סדר (או השתמשו בחצים). הסדר נשמר מיד.</p><button type="button" class="cp-btn cp-btn--grad" id="add">הוספת פרויקט</button></div>
+      <div class="cp-bar"><p class="cp-hint">גררו בידית ⠿ כדי לשנות סדר (או השתמשו בחצים). הסדר נשמר מיד. <b id="home-count"></b></p><button type="button" class="cp-btn cp-btn--grad" id="add">הוספת פרויקט</button></div>
+      <p class="cp-warn" id="home-warn" role="status" hidden></p>
       <ul class="cp-list" id="projects" aria-live="polite"></ul>
     </div>
 
@@ -51,15 +52,17 @@
   <form class="cp-sheet" id="pform" novalidate>
     <h2 id="pform-title">פרויקט</h2>
     <label class="cp-field">שם הפרויקט<input name="title" required maxlength="200"></label>
-    <label class="cp-field">שורת סוג<input name="type" maxlength="200" placeholder="למשל: אתר תדמית · קטלוג"></label>
+    <label class="cp-field" id="type-field">שורת סוג<input name="type" maxlength="200" placeholder="למשל: אתר תדמית · קטלוג"></label>
     <label class="cp-field">תיאור<textarea name="description" rows="4" maxlength="2000"></textarea></label>
-    <label class="cp-field">קישור (לא חובה)<input name="link" type="url" dir="ltr" placeholder="https://" maxlength="500"></label>
-    <div class="cp-imgs">
+    <label class="cp-field"><span id="link-label">קישור (לא חובה)</span><input name="link" type="text" dir="ltr" placeholder="https://" maxlength="500"></label>
+    <div class="cp-imgs" id="imgs-field">
       <div class="cp-img"><span>תמונת דסקטופ</span><div class="cp-prev" id="prev-desktop"></div><input type="file" accept="image/*" id="file-desktop"></div>
       <div class="cp-img"><span>תמונת מובייל</span><div class="cp-prev" id="prev-mobile"></div><input type="file" accept="image/*" id="file-mobile"></div>
     </div>
-    <label class="cp-check"><input type="checkbox" name="is_concept"> להציג "קונספט"</label>
+    <label class="cp-check" id="concept-field"><input type="checkbox" name="is_concept"> להציג "קונספט"</label>
     <label class="cp-check"><input type="checkbox" name="published"> מפורסם באתר</label>
+    <label class="cp-check"><input type="checkbox" name="show_on_home"> להציג בדף הבית (עד 4)</label>
+    <div class="cp-prevbox"><span class="cp-prevbox__t">תצוגה מקדימה</span><div id="pprev"></div></div>
     <p class="cp-msg" id="pform-msg" role="alert"></p>
     <div class="cp-actions"><button type="submit" class="cp-btn cp-btn--grad" id="psave">שמירה</button><button type="button" class="cp-btn cp-btn--ghost" id="pcancel">ביטול</button></div>
   </form>
@@ -74,7 +77,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 <script src="assets/js/admin-config.js?v=2"></script>
-<script src="assets/js/admin.js?v=4"></script>
+<script src="assets/js/admin.js?v=5"></script>
 </body>
 </html>

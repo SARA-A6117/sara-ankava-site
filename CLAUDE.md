@@ -89,3 +89,9 @@
 - הטופס ב-`versions/v7-light` שומר ליד ב-Supabase דרך REST עם anon key בלבד (`assets/js/admin-config.js`: `window.SB_CONFIG`, ריק עד שהפרויקט קיים). אין שליחה לוואטסאפ מהטופס. ההגנה בצד המסד: honeypot והגבלת קצב (5 ב-10 דקות לכל IP) בטריגר `leads_guard`. RLS: הוספה פתוחה, קריאה ועריכה רק ל-ankavagrafi@gmail.com.
 - מיגרציות: `supabase/001_admin.sql`, `supabase/002_leads_crm.sql` (עמודות email/message/note, טריגרים). מייל על כל ליד: טריגר `leads_notify` קורא ל-Edge Function `supabase/functions/notify-lead` (Resend). המפתחות רק ב-Supabase secrets (`RESEND_API_KEY`, `LEAD_WEBHOOK_SECRET`) וב-Vault (`lead_webhook_secret`, `project_url`). כישלון המייל לא משפיע על שמירת הליד.
 - /admin: התחברות Google, כניסה רק ל-ankavagrafi@gmail.com. לידים מהחדש לישן, תג "חדש", סטטוס, הערה, חיפוש, כפתור ווטסאפ. צעדי הקמה: `supabase/SETUP-he.md`.
+
+## פרויקטים מהמסד (/admin ודף הבית)
+- טבלת `projects` ב-Supabase (מיגרציה `supabase/004_projects_home_and_placeholder.sql`): `published`, `show_on_home`, `is_concept`, `is_placeholder` (כרטיס "הפרויקט הבא שלכם", ניתן לגרירה, כיבוי והחלפת טקסט), `mockup_key='gan'` (המוקאפ המובנה של סטודיו לפרחים), `position`. RLS: קריאה ציבורית רק למפורסמים, כתיבה רק ל-ankavagrafi@gmail.com.
+- `assets/js/projects-data.js` קורא את הנתונים (anon key בלבד) ובונה מחדש את `.pj3` בדף הבית (מקסימום 4, `data-count` קובע את הפריסה) ואת `.pp-list` ב-`/projects` (בלי כרטיס שמור). מסד ריק או שגיאת רשת = נשאר התוכן שבקוד ה-HTML.
+- פריסה בדסקטופ: ב-`cobalt.css` (בסוף) `--open` לפי `data-count`: 2=.848, 3=.737, 4=.651 מרוחב המסך. בנייד הכול פתוח בטור.
+- /admin: SortableJS 1.15.6 (גרירה בידית, מגע עם השהיה 120ms, נשמר מיד), הקטנה והמרה ל-WebP בדפדפן (דסקטופ עד 1600px, מובייל עד 900px), תצוגה מקדימה חיה בטופס, אזהרה כשיותר מ-4 מסומנים לדף הבית (באתר יוצגו 4 הראשונים), מחיקה באישור (כולל מחיקת הקבצים מהאחסון).

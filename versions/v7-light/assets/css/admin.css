@@ -94,3 +94,32 @@ h2{font-size:24px}
 .cp-note{grid-column:1/-1;width:100%;background:#0e100f;border:1px solid var(--line);padding:10px 12px;min-height:44px;resize:vertical;color:var(--ink)}
 .cp-note:focus{outline:2px solid var(--b)}
 @media (max-width:640px){.cp-lead__side{justify-items:start}}
+
+/* ניהול פרויקטים: ידית גרירה (מגע), תגיות, אזהרת יותר מ-4, תצוגה מקדימה */
+.cp-handle{touch-action:none;min-width:44px;min-height:44px;display:grid;place-items:center}
+.cp-row.is-ghost{opacity:.35;background:rgb(63 107 255 / .12)}
+.cp-row.is-drag{opacity:1;box-shadow:0 8px 24px rgb(0 0 0 / .45)}
+.cp-row.cp-draft .cp-info b{opacity:.7}
+.cp-row.cp-over{box-shadow:inset 3px 0 0 #E5A100}
+.cp-thumb{display:grid;place-items:center;font-size:12px;color:var(--mut)}
+.cp-tag--ph{border-color:var(--mut);color:var(--mut)}
+.cp-tag--warn{border-color:#E5A100;color:#E5A100}
+.cp-warn{margin:0 0 12px;padding:12px 14px;border:1px solid #E5A100;background:rgb(229 161 0 / .1);color:#F3CD6B;font-size:15px;line-height:1.5}
+.cp-warn[hidden]{display:none}
+.cp-prevbox{border-top:1px solid var(--line);padding-top:12px;display:grid;gap:8px}
+.cp-prevbox__t{font-size:13px;color:var(--mut)}
+.cp-pv{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);gap:14px;align-items:center;background:#E8DFCB;color:#12140f;padding:16px}
+.cp-pv h3{margin:0 0 6px;font-size:18px;line-height:1.2}
+.cp-pv p{margin:0 0 8px;font-size:13px;line-height:1.5;color:#26282A}
+.cp-pv ul{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-wrap:wrap;gap:4px}
+.cp-pv li{font-size:10px;padding:1px 6px;border:1px solid #12140f}
+.cp-pv li.y{background:#FFE66D}
+.cp-pv__btn{display:inline-block;padding:4px 12px;background:#1B33C9;color:#fff;font-size:12px;border-radius:99px}
+.cp-pv__mk{position:relative}
+.cp-pv__win{border:1px solid #12140f;background:#fff;aspect-ratio:16/10;overflow:hidden;display:grid;place-items:center;font-size:12px;color:#555}
+.cp-pv__win img{width:100%;height:100%;object-fit:cover;object-position:top}
+.cp-pv__phone{position:absolute;inset-inline-start:-6px;bottom:-8px;width:22%;aspect-ratio:9/18;border:2px solid #12140f;background:#fff;overflow:hidden}
+.cp-pv__phone img{width:100%;height:100%;object-fit:cover;object-position:top}
+@media (max-width:560px){.cp-pv{grid-template-columns:1fr}}
+
+.cp-info b{white-space:normal;overflow:visible;text-overflow:clip}
