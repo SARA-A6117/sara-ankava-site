@@ -83,3 +83,14 @@ h2{font-size:24px}
   .ad-lead{grid-template-columns:1fr}
   .ad-imgs{grid-template-columns:1fr}
 }
+
+[hidden]{display:none!important}
+.ad-lead{grid-template-columns:1fr auto;align-items:start}
+.ad-lead__new{display:inline-block;margin-inline-start:10px;padding:0 8px;background:var(--y);color:#1E201F;font-size:12px;font-weight:700;vertical-align:middle}
+.ad-lead__msg{margin:2px 0 0;color:var(--ink);font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere}
+.ad-lead__side{display:grid;gap:8px;justify-items:end}
+.ad-wa{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border:1px solid var(--b);color:var(--b)!important;text-decoration:none;font-weight:500}
+.ad-wa:hover{background:var(--b);color:#1E201F!important}
+.ad-note{grid-column:1/-1;width:100%;background:#0e100f;border:1px solid var(--line);padding:10px 12px;min-height:44px;resize:vertical;color:var(--ink)}
+.ad-note:focus{outline:2px solid var(--b)}
+@media (max-width:640px){.ad-lead__side{justify-items:start}}

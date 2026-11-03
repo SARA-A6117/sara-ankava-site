@@ -135,11 +135,17 @@ const WA_TEXT = 'היי שרי, הגעתי מהאתר ואשמח לדבר על �
       const btn = $('button[type="submit"]', form), lbl = btn && $('.btn__t', btn), old = lbl ? lbl.innerHTML : '';
       if (btn) { btn.disabled = true; if (lbl) lbl.textContent = 'שולחת...'; }
       try {
-        const r = await fetch('/api/contact', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: f.name.value.trim(), about: f.about.value.trim(), phone: f.phone.value.trim(), pains: f.pains ? f.pains.value : '', consent: true, website: f.website ? f.website.value : '', t: Date.now() - started })
-        });
-        if (!r.ok) throw new Error(String(r.status));
+        const SB = window.SB_CONFIG || {};
+        if (!SB.url || !SB.anonKey) throw new Error('config');
+        const bot = (f.website && f.website.value) || Date.now() - started < 2000;   /* בוט או מהיר מדי: מדמים הצלחה ולא שומרים */
+        if (!bot) {
+          const r = await fetch(SB.url.replace(/\/$/, '') + '/rest/v1/leads', {
+            method: 'POST',
+            headers: { apikey: SB.anonKey, Authorization: 'Bearer ' + SB.anonKey, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+            body: JSON.stringify({ name: f.name.value.trim(), business: f.about.value.trim() || null, phone: f.phone.value.trim(), message: (f.pains ? f.pains.value : '').trim() || null, hp: '' })
+          });
+          if (!r.ok) throw new Error(String(r.status));
+        }
         $('[data-who]', box).textContent = f.name.value.trim().split(' ')[0];
         box.classList.add('is-done'); $('.done', box).focus();
       } catch (x) {

@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#1E201F">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/admin.css?v=1">
+<link rel="stylesheet" href="assets/css/admin.css?v=2">
 </head>
 <body>
 <header class="ad-top">
@@ -16,7 +16,7 @@
 </header>
 
 <main class="ad-main">
-  <section class="ad-login" id="login" hidden>
+  <section class="ad-login" id="login">
     <h1>כניסה למערכת הניהול</h1>
     <p id="login-msg" class="ad-msg" role="alert"></p>
     <button type="button" class="ad-btn ad-btn--grad" id="google">התחברות עם גוגל</button>
@@ -35,6 +35,7 @@
 
     <div id="pane-leads" role="tabpanel" hidden>
       <div class="ad-bar">
+        <label class="ad-field ad-field--inline">חיפוש<input type="search" id="lead-search" placeholder="שם, טלפון, עסק, הערה" autocomplete="off"></label>
         <label class="ad-field ad-field--inline">סינון
           <select id="lead-filter"><option value="">הכול</option><option value="new">חדש</option><option value="in_progress">בטיפול</option><option value="closed">סגור</option></select>
         </label>
@@ -74,6 +75,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="assets/js/admin-config.js?v=1"></script>
-<script src="assets/js/admin.js?v=1"></script>
+<script src="assets/js/admin.js?v=3"></script>
 </body>
 </html>

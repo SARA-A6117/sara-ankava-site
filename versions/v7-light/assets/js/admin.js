@@ -201,27 +201,56 @@
     });
   }
   function fmt(d) { try { return new Date(d).toLocaleString('he-IL', { dateStyle: 'short', timeStyle: 'short' }); } catch (x) { return d; } }
+  function waUrl(phone) {
+    var d = String(phone || '').replace(/\D/g, '');
+    if (d.indexOf('00') === 0) d = d.slice(2);
+    else if (d.charAt(0) === '0') d = '972' + d.slice(1);
+    return 'https://wa.me/' + d;
+  }
   function renderLeads() {
-    var f = $('#lead-filter').value, ul = $('#leads');
+    var f = $('#lead-filter').value, q = ($('#lead-search').value || '').trim().toLowerCase(), ul = $('#leads');
     var nNew = leads.filter(function (l) { return l.status === 'new'; }).length, badge = $('#leads-new');
     badge.hidden = !nNew; badge.textContent = nNew;
-    var list = leads.filter(function (l) { return !f || l.status === f; });
+    var list = leads.filter(function (l) {
+      if (f && l.status !== f) return false;
+      if (!q) return true;
+      var qd = q.replace(/\D/g, ''), pd = String(l.phone || '').replace(/\D/g, '');
+      if (qd.length >= 3 && (pd.indexOf(qd) > -1 || (qd.charAt(0) === '0' && pd.indexOf(qd.slice(1)) > -1))) return true;
+      return [l.name, l.phone, l.email, l.business, l.message, l.note].join(' ').toLowerCase().indexOf(q) > -1;
+    });
     if (!list.length) { ul.innerHTML = '<li class="ad-empty">אין פניות להצגה.</li>'; return; }
     ul.innerHTML = list.map(function (l) {
       var ph = String(l.phone || '').replace(/[^\d+]/g, '');
-      return '<li class="ad-lead ad-st-' + esc(l.status) + '" data-id="' + l.id + '"><div><b>' + esc(l.name) + '</b><div class="ad-meta">' +
+      return '<li class="ad-lead ad-st-' + esc(l.status) + '" data-id="' + l.id + '"><div><b>' + esc(l.name) + (l.status === 'new' ? '<span class="ad-lead__new">חדש</span>' : '') + '</b><div class="ad-meta">' +
         (l.business ? '<span>' + esc(l.business) + '</span>' : '') +
-        '<a href="tel:' + esc(ph) + '" dir="ltr">' + esc(l.phone) + '</a><span>' + esc(fmt(l.created_at)) + '</span></div></div>' +
-        '<label class="ad-field ad-field--inline">סטטוס<select data-lead>' + Object.keys(ST).map(function (k) { return '<option value="' + k + '"' + (k === l.status ? ' selected' : '') + '>' + ST[k] + '</option>'; }).join('') + '</select></label></li>';
+        '<a href="tel:' + esc(ph) + '" dir="ltr">' + esc(l.phone) + '</a>' +
+        (l.email ? '<a href="mailto:' + esc(l.email) + '" dir="ltr">' + esc(l.email) + '</a>' : '') +
+        '<span>' + esc(fmt(l.created_at)) + '</span></div>' +
+        (l.message ? '<p class="ad-lead__msg">' + esc(l.message) + '</p>' : '') + '</div>' +
+        '<div class="ad-lead__side"><label class="ad-field ad-field--inline">סטטוס<select data-lead>' + Object.keys(ST).map(function (k) { return '<option value="' + k + '"' + (k === l.status ? ' selected' : '') + '>' + ST[k] + '</option>'; }).join('') + '</select></label>' +
+        '<a class="ad-wa" href="' + esc(waUrl(l.phone)) + '" target="_blank" rel="noopener">ווטסאפ</a></div>' +
+        '<textarea class="ad-note" data-note rows="1" maxlength="2000" placeholder="הערה" aria-label="הערה לליד">' + esc(l.note || '') + '</textarea></li>';
     }).join('');
   }
   $('#lead-filter').addEventListener('change', renderLeads);
+  $('#lead-search').addEventListener('input', renderLeads);
   $('#leads').addEventListener('change', function (e) {
-    var s = e.target.closest('[data-lead]'); if (!s) return;
-    var li = s.closest('.ad-lead'), id = li.dataset.id, val = s.value;
-    sb.from('leads').update({ status: val }).eq('id', id).then(function (r) {
-      if (r.error) { flash(els.gmsg, 'עדכון הסטטוס נכשל.'); loadLeads(); return; }
-      leads.forEach(function (l) { if (l.id === id) l.status = val; }); flash(els.gmsg, ''); renderLeads();
-    });
+    var s = e.target.closest('[data-lead]');
+    if (s) {
+      var li = s.closest('.ad-lead'), id = li.dataset.id, val = s.value;
+      sb.from('leads').update({ status: val }).eq('id', id).then(function (r) {
+        if (r.error) { flash(els.gmsg, 'עדכון הסטטוס נכשל.'); loadLeads(); return; }
+        leads.forEach(function (l) { if (l.id === id) l.status = val; }); flash(els.gmsg, ''); renderLeads();
+      });
+      return;
+    }
+    var n = e.target.closest('[data-note]');
+    if (n) {
+      var id2 = n.closest('.ad-lead').dataset.id, txt = n.value.trim() || null;
+      sb.from('leads').update({ note: txt }).eq('id', id2).then(function (r) {
+        if (r.error) { flash(els.gmsg, 'שמירת ההערה נכשלה.'); return; }
+        leads.forEach(function (l) { if (l.id === id2) l.note = txt; }); flash(els.gmsg, '');
+      });
+    }
   });
 })();
