@@ -1,19 +1,25 @@
 // Sends an email to the site owner for every new lead. Called by the database trigger (public.leads_notify).
-// Secrets (Supabase > Edge Functions > Secrets, never in the repo): RESEND_API_KEY, LEAD_WEBHOOK_SECRET. Optional: RESEND_FROM, ADMIN_URL.
+// The trigger sends a random secret that lives only in Supabase Vault; this function checks it through public.check_lead_webhook.
+// Secret to set in Supabase > Edge Functions > Secrets (never in the repo): RESEND_API_KEY. Optional: RESEND_FROM, ADMIN_URL.
 const TO = 'ankavagrafi@gmail.com';
 const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
-const same = (a: string, b: string) => {
-  if (a.length !== b.length) return false;
-  let d = 0;
-  for (let i = 0; i < a.length; i++) d |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return d === 0;
-};
+
+async function authorized(got: string): Promise<boolean> {
+  const url = Deno.env.get('SUPABASE_URL'), anon = Deno.env.get('SUPABASE_ANON_KEY');
+  if (!url || !anon || !got) return false;
+  try {
+    const r = await fetch(`${url}/rest/v1/rpc/check_lead_webhook`, {
+      method: 'POST',
+      headers: { apikey: anon, Authorization: `Bearer ${anon}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_secret: got }),
+    });
+    return r.ok && (await r.json()) === true;
+  } catch (_) { return false; }
+}
 
 Deno.serve(async (req: Request) => {
   if (req.method !== 'POST') return new Response('method not allowed', { status: 405 });
-  const secret = Deno.env.get('LEAD_WEBHOOK_SECRET') ?? '';
-  const got = req.headers.get('x-webhook-secret') ?? '';
-  if (!secret || !same(secret, got)) return new Response('unauthorized', { status: 401 });
+  if (!(await authorized(req.headers.get('x-webhook-secret') ?? ''))) return new Response('unauthorized', { status: 401 });
 
   const key = Deno.env.get('RESEND_API_KEY');
   if (!key) return new Response('resend not configured', { status: 503 });
