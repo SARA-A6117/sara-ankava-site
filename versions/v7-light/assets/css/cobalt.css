@@ -396,3 +396,7 @@ html body .tl{padding-inline:0}
 html body .tl .tl__c:first-child{padding-inline-start:4vw}
 html body .tl .tl__c:last-child{padding-inline-end:4vw}
 @media (max-width:699px){html body .tl .tl__c{padding-inline:4vw!important}}
+
+/* ===== כפתור "כל הפרויקטים" בכותרת אזור הפרויקטים: בקצה הנגדי של שורת הכותרת, מיושר לריפוד 4vw ===== */
+html body .pj .pj__all{position:absolute;inset-inline-end:var(--v6-m);top:calc((var(--P) - 46px) / 2);z-index:3;min-height:46px;margin:0}
+@media (max-width:900px){html body .pj .pj__all{position:relative;inset:auto;top:auto;display:inline-flex;width:max-content;min-height:48px;margin:20px 0 26px;margin-inline-start:var(--v6-m)}}
