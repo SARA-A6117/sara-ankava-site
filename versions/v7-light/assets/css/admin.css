@@ -123,3 +123,22 @@ h2{font-size:24px}
 @media (max-width:560px){.cp-pv{grid-template-columns:1fr}}
 
 .cp-info b{white-space:normal;overflow:visible;text-overflow:clip}
+
+/* עורך עמודים משפטיים */
+.cp-seg{display:inline-flex;border:1px solid var(--line)}
+.cp-seg button{background:transparent;color:var(--mut);border:0;border-inline-start:1px solid var(--line);padding:10px 16px;font:inherit;cursor:pointer;min-height:44px}
+.cp-seg button:first-child{border-inline-start:0}
+.cp-seg button[aria-pressed="true"]{background:var(--y);color:#1E201F;font-weight:700}
+#pg-date{max-width:190px;color:var(--mut)}
+.cp-tb{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0;padding:8px;border:1px solid var(--line);border-bottom:0;background:#0e100f}
+.cp-tb button{background:var(--panel);color:var(--ink);border:1px solid var(--line);padding:8px 12px;font:inherit;font-size:14px;cursor:pointer;min-height:40px}
+.cp-tb button:hover{border-color:var(--b)}
+.cp-ed{min-height:340px;max-height:60vh;overflow:auto;padding:18px;border:1px solid var(--line);background:#F3EEE2;color:#1E201F;font-size:17px;line-height:1.7;outline:none}
+.cp-ed:focus{border-color:var(--b);box-shadow:0 0 0 2px rgb(111 208 255 / .35)}
+.cp-ed h2{font-size:24px;margin:1em 0 .3em}.cp-ed h3{font-size:19px;margin:1em 0 .2em}.cp-ed p,.cp-ed ul,.cp-ed ol{margin:.4em 0}.cp-ed a{color:#1B33C9}
+mark.ph,.cp-gaps mark{background:#FFE66D;color:#12140f;padding:0 3px}
+.cp-gaps{margin:14px 0;padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.cp-gaps ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.cp-gaps li button{all:unset;cursor:pointer;display:block;width:100%;color:var(--ink);line-height:1.5}
+.cp-gaps li button:hover{text-decoration:underline}
+.cp-gaps .ok{color:#9ED36A}
