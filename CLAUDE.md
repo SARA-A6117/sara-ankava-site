@@ -86,6 +86,6 @@
 - בין התהליך לאודות ב-`versions/v7-light/index.html`: שלוש עמודות (Meta, Google Ads, Google Analytics), בגובה 2P בדסקטופ, עמודה אחת מתחת ל-700px. לוגואים: נתיבי SVG של Simple Icons (CC0) בתוך הקוד, מלאים ב-`#tlg` (קובלט ל-`#6FD0FF`). חשיפה בגלילה דרך `.rv` הקיים. הסגנון בסוף `cobalt.css`.
 
 ## לידים ומערכת ניהול (Supabase)
-- הטופס ב- שומר ליד ב-Supabase דרך REST עם anon key בלבד (: , ריק עד שהפרויקט קיים). אין שליחה לוואטסאפ מהטופס. ההגנה בצד המסד: honeypot והגבלת קצב (5 ב-10 דקות לכל IP) בטריגר , RLS: הוספה פתוחה, קריאה ועריכה רק ל-ankavagrafi@gmail.com.
-- מיגרציות: ,  (עמודות email/message/note, טריגרים). מייל על כל ליד: טריגר  קורא ל-Edge Function  (Resend). המפתחות רק ב-Supabase secrets (, ) ו-Vault (, ). כישלון המייל לא משפיע על שמירת הליד.
-- /admin: התחברות Google, כניסה רק ל-ankavagrafi@gmail.com. לידים מהחדש לישן, תג "חדש", סטטוס, הערה, חיפוש, כפתור ווטסאפ. צעדי הקמה: .
+- הטופס ב-`versions/v7-light` שומר ליד ב-Supabase דרך REST עם anon key בלבד (`assets/js/admin-config.js`: `window.SB_CONFIG`, ריק עד שהפרויקט קיים). אין שליחה לוואטסאפ מהטופס. ההגנה בצד המסד: honeypot והגבלת קצב (5 ב-10 דקות לכל IP) בטריגר `leads_guard`. RLS: הוספה פתוחה, קריאה ועריכה רק ל-ankavagrafi@gmail.com.
+- מיגרציות: `supabase/001_admin.sql`, `supabase/002_leads_crm.sql` (עמודות email/message/note, טריגרים). מייל על כל ליד: טריגר `leads_notify` קורא ל-Edge Function `supabase/functions/notify-lead` (Resend). המפתחות רק ב-Supabase secrets (`RESEND_API_KEY`, `LEAD_WEBHOOK_SECRET`) וב-Vault (`lead_webhook_secret`, `project_url`). כישלון המייל לא משפיע על שמירת הליד.
+- /admin: התחברות Google, כניסה רק ל-ankavagrafi@gmail.com. לידים מהחדש לישן, תג "חדש", סטטוס, הערה, חיפוש, כפתור ווטסאפ. צעדי הקמה: `supabase/SETUP-he.md`.
