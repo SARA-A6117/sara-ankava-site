@@ -430,3 +430,6 @@ html body .ftr2__bottom{padding-inline-start:clamp(64px,6vw,88px)}
 .mk__shot--empty{background:#E8DFCB}
 video.mk__shot{background:#E8DFCB}
 @media (prefers-reduced-motion:reduce){.mk-rot>.mk{transition:none}}
+
+/* שדה המייל בטופס צור קשר (לא חובה) */
+html body .ct .madlib input[name="email"]{min-width:15ch}
