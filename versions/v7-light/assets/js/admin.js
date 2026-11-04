@@ -40,19 +40,21 @@
     flash(els.loginMsg, '');
     els.mail.textContent = email;
     show(els.login, false); show(els.user, true); show(els.app, true);
-    loadProjects(); loadLeads(); loadPages();
+    loadProjects(); loadLeads(); loadPages(); loadTexts();
     tab(new URLSearchParams(location.search).get('view') || 'overview', false);
   }
   sb.auth.getSession().then(function (r) { gate(r.data && r.data.session); });
   sb.auth.onAuthStateChange(function (ev, session) { if (ev === 'SIGNED_IN' || ev === 'SIGNED_OUT') gate(session); });
 
   /* ---------- ניווט: סיידבר, ?view= ב-URL, אזהרה לפני יציאה עם שינויים ---------- */
-  var VIEWS = { overview: 'סקירה', leads: 'פניות', projects: 'פרויקטים', pages: 'עמודים משפטיים' };
-  var dirtyPages = false, formDirty = false, curView = 'overview';
+  var VIEWS = { overview: 'סקירה', leads: 'פניות', projects: 'פרויקטים', pages: 'עמודים משפטיים', texts: 'טקסטי האתר' };
+  var dirtyPages = false, dirtyTexts = false, formDirty = false, curView = 'overview';
   function tab(name, push) {
     if (!VIEWS[name]) name = 'overview';
     if (name !== curView && curView === 'pages' && dirtyPages && !window.confirm('יש שינויים בעמוד המשפטי שעדיין לא נשמרו כטיוטה. לעבור בלי לשמור?')) return;
+    if (name !== curView && curView === 'texts' && dirtyTexts) { saveTextDrafts(); }
     curView = name;
+    if (name === 'texts' && !$('#tx-frame').getAttribute('src')) setFramePage('index');
     Object.keys(VIEWS).forEach(function (n) {
       $('#tab-' + n).setAttribute('aria-selected', String(n === name));
       show($('#pane-' + n), n === name);
@@ -64,7 +66,7 @@
   }
   Object.keys(VIEWS).forEach(function (n) { $('#tab-' + n).addEventListener('click', function () { tab(n, true); }); });
   window.addEventListener('popstate', function () { tab(new URLSearchParams(location.search).get('view') || 'overview', false); });
-  window.addEventListener('beforeunload', function (e) { if (dirtyPages || formDirty) { e.preventDefault(); e.returnValue = ''; } });
+  window.addEventListener('beforeunload', function (e) { if (dirtyPages || formDirty || dirtyTexts) { e.preventDefault(); e.returnValue = ''; } });
   $('#side-tg').addEventListener('click', function () {
     var c = $('#shell').classList.toggle('is-collapsed');
     this.setAttribute('aria-expanded', String(!c));
@@ -77,11 +79,13 @@
     var nNew = leads.filter(function (l) { return l.status === 'new'; }).length;
     var onHome = projects.filter(function (p) { return p.published && p.show_on_home; }).length;
     var drafts = Object.keys(pgData || {}).filter(function (k) { return pgData[k].draft; }).length;
+    var tdr = typeof txCount === 'function' ? txCount() : 0, tb = $('#texts-draft'); tb.hidden = !tdr; tb.textContent = tdr;
     var gaps = 0; Object.keys(pgData || {}).forEach(function (k) { gaps += (String(pgData[k].content || '').match(LH.GAP) || []).length; });
     var cards = [
       { v: 'leads', n: nNew, t: 'פניות חדשות', s: leads.length + ' פניות בסך הכול' },
       { v: 'projects', n: Math.min(onHome, 4) + '/4', t: 'פרויקטים בדף הבית', s: onHome > 4 ? 'מסומנים ' + onHome + ', יוצגו 4 הראשונים' : projects.length + ' פרויקטים בסך הכול' },
       { v: 'pages', n: drafts, t: 'טיוטות שלא פורסמו', s: 'בעמודים המשפטיים' },
+      { v: 'texts', n: tdr, t: 'טקסטים בטיוטה', s: 'בטקסטי האתר, ממתינים לפרסום' },
       { v: 'pages', n: gaps, t: 'פרטים חסרים ([...])', s: 'בעמודים המשפטיים, מודגשים בצהוב' }
     ];
     $('#ov-cards').innerHTML = cards.map(function (c) {
@@ -555,6 +559,115 @@
     $('#pg-title').value = v.data.title || ''; $('#pg-lead').value = v.data.lead || '';
     ed.innerHTML = LH.clean(v.data.content) || ''; LH.markGaps(ed); renderGaps(); markDirty();
     flash($('#pg-msg'), 'הגרסה נטענה כטיוטה. לחצי "פרסום" כדי להעלות אותה לאתר.', true);
+  });
+
+  /* ---------- טקסטי האתר: רשימה לפי אזור, טיוטה אוטומטית, תצוגה מקדימה חיה ופרסום ---------- */
+  var txSlots = [], txRows = {}, txVals = {}, txDirty = {}, txT = null, txPage = 'index';
+  var TX_PAGE_PATH = { index: '/', projects: '/projects', privacy: '/privacy', terms: '/terms', accessibility: '/accessibility' };
+  var TX_PAGE_NAME = { index: 'דף הבית', projects: 'פרויקטים', privacy: 'פרטיות', terms: 'תנאי שימוש', accessibility: 'נגישות' };
+  function txDefault(s) { return s.text; }
+  function txCurrent(s) { var r = txRows[s.key]; return txVals[s.key] != null ? txVals[s.key] : (r && r.draft != null ? r.draft : (r && r.value != null ? r.value : s.text)); }
+  function txPublished(s) { var r = txRows[s.key]; return r && r.value != null ? r.value : s.text; }
+  function txIsDraft(s) { var r = txRows[s.key]; return (txVals[s.key] != null && txVals[s.key] !== txPublished(s)) || (r && r.draft != null && r.draft !== txPublished(s) && txVals[s.key] == null); }
+  function loadTexts() {
+    Promise.all([
+      fetch('/assets/slots.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : { slots: [] }; }).catch(function () { return { slots: [] }; }),
+      sb.from('site_texts').select('*')
+    ]).then(function (res) {
+      txSlots = (res[0].slots || []);
+      txRows = {}; ((res[1] && res[1].data) || []).forEach(function (r) { txRows[r.key] = r; });
+      if (res[1] && res[1].error) { flash($('#tx-status'), 'טעינת הטקסטים נכשלה.'); }
+      renderTexts(); renderOverview();
+    });
+  }
+  function txCount() { return txSlots.filter(txIsDraft).length; }
+  function renderTexts() {
+    var q = ($('#tx-search').value || '').trim().toLowerCase(), groups = {}, order = [];
+    txSlots.forEach(function (s) { if (!groups[s.group]) { groups[s.group] = []; order.push(s.group); } groups[s.group].push(s); });
+    $('#tx-groups').innerHTML = order.map(function (g, gi) {
+      var items = groups[g].filter(function (s) { return !q || (s.key + ' ' + s.text + ' ' + txCurrent(s) + ' ' + g).toLowerCase().indexOf(q) > -1; });
+      if (!items.length) return '';
+      var nd = items.filter(txIsDraft).length;
+      return '<details class="cp-grp"' + (q || gi === 0 ? ' open' : '') + '><summary><b>' + esc(g) + '</b><small>' + items.length + ' טקסטים</small>' + (nd ? '<span class="cp-badge is-draft">' + nd + ' בטיוטה</span>' : '') + '</summary><div class="cp-grp__body">' +
+        items.map(function (s) {
+          var v = txCurrent(s), long = s.kind === 'longtext', label = s.label || (s.pages.length > 1 ? 'מופיע ב-' + s.pages.length + ' עמודים' : TX_PAGE_NAME[s.pages[0]] || ''),
+            ctl = long ? '<textarea data-tx="' + esc(s.key) + '" rows="3" maxlength="600">' + esc(v) + '</textarea>' : '<input data-tx="' + esc(s.key) + '" value="' + esc(v) + '" maxlength="300">';
+          return '<div class="cp-tf' + (txIsDraft(s) ? ' is-draft' : '') + '"><label>' + '<span class="cp-tf__l">' + esc(label) + '</span>' + ctl + '</label>' + (v !== txDefault(s) ? '<button type="button" class="cp-sm" data-tx-reset="' + esc(s.key) + '">החזרה לברירת מחדל</button>' : '') + '</div>';
+        }).join('') + '</div></details>';
+    }).join('') || '<p class="cp-empty">לא נמצאו טקסטים.</p>';
+    var n = txCount(); $('#tx-count').textContent = n ? n + ' טקסטים בטיוטה' : 'אין שינויים שממתינים לפרסום';
+    $('#tx-publish').disabled = !n;
+  }
+  function frameDoc() { try { return $('#tx-frame').contentDocument; } catch (x) { return null; } }
+  function injectOne(key, val) {
+    var d = frameDoc(); if (!d) return;
+    [].forEach.call(d.querySelectorAll('[data-slot="' + key + '"]'), function (el) { el.textContent = val; });
+  }
+  function injectAll() { txSlots.forEach(function (s) { if (txIsDraft(s)) injectOne(s.key, txCurrent(s)); }); }
+  function setFramePage(p) {
+    txPage = p; [].forEach.call($('#tx-pagepick').children, function (b) { b.setAttribute('aria-pressed', String(b.dataset.page === p)); });
+    $('#tx-frame').src = TX_PAGE_PATH[p];
+  }
+  $('#tx-frame').addEventListener('load', injectAll);
+  $('#tx-pagepick').addEventListener('click', function (e) { var b = e.target.closest('[data-page]'); if (b) setFramePage(b.dataset.page); });
+  $('#tx-search').addEventListener('input', renderTexts);
+  $('#tx-groups').addEventListener('input', function (e) {
+    var el = e.target.closest('[data-tx]'); if (!el) return;
+    txVals[el.dataset.tx] = el.value; txDirty[el.dataset.tx] = true; dirtyTexts = true;
+    injectOne(el.dataset.tx, el.value); $('#tx-status').textContent = 'יש שינויים שלא נשמרו...';
+    clearTimeout(txT); txT = setTimeout(saveTextDrafts, 1500);
+  });
+  $('#tx-groups').addEventListener('focusin', function (e) {
+    var el = e.target.closest('[data-tx]'); if (!el) return;
+    var s = txSlots.filter(function (x) { return x.key === el.dataset.tx; })[0]; if (!s) return;
+    if (s.pages.indexOf(txPage) < 0) setFramePage(s.pages[0]);
+    var d = frameDoc(), t = d && d.querySelector('[data-slot="' + s.key + '"]');
+    if (d) [].forEach.call(d.querySelectorAll('[data-cp-hl]'), function (n) { n.style.outline = ''; n.removeAttribute('data-cp-hl'); });
+    if (t) { t.setAttribute('data-cp-hl', '1'); t.style.outline = '3px solid #1B33C9'; t.style.outlineOffset = '4px'; t.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+  });
+  $('#tx-groups').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-tx-reset]'); if (!b) return;
+    var s = txSlots.filter(function (x) { return x.key === b.dataset.txReset; })[0]; if (!s) return;
+    txVals[s.key] = txDefault(s); txDirty[s.key] = true; dirtyTexts = true; injectOne(s.key, txDefault(s)); renderTexts();
+    clearTimeout(txT); txT = setTimeout(saveTextDrafts, 800);
+  });
+  /* שמירת טיוטה: draft בשורת הטקסט. הטקסט המפורסם (value) לא משתנה עד פרסום */
+  function saveTextDrafts() {
+    clearTimeout(txT);
+    var keys = Object.keys(txDirty); if (!keys.length) return Promise.resolve();
+    var rows = keys.map(function (k) { var s = txSlots.filter(function (x) { return x.key === k; })[0]; return { key: k, kind: s && s.kind === 'longtext' ? 'longtext' : 'text', draft: txVals[k] }; });
+    return sb.from('site_texts').upsert(rows).select().then(function (r) {
+      if (r.error) { flash($('#tx-status'), 'שמירת הטיוטה נכשלה. בדקו את ההרשאות ונסו שוב.'); return; }
+      (r.data || []).forEach(function (row) { txRows[row.key] = row; delete txVals[row.key]; delete txDirty[row.key]; });
+      dirtyTexts = false; $('#tx-status').textContent = '✓ הטיוטה נשמרה'; renderTexts(); renderOverview();
+    });
+  }
+  /* פרסום: מעלה את כל הטיוטות, שומר גרסה, ומפעיל בנייה מחדש של האתר */
+  $('#tx-publish').addEventListener('click', function () {
+    var btn = this, st = $('#tx-status'); btn.disabled = true; flash(st, 'מפרסם...', true);
+    saveTextDrafts().then(function () {
+      var jobs = txSlots.filter(function (s) { var r = txRows[s.key]; return r && r.draft != null; });
+      if (!jobs.length) { flash(st, 'אין מה לפרסם.'); return; }
+      return Promise.all(jobs.map(function (s) {
+        var r = txRows[s.key], v = r.draft, val = v === txDefault(s) ? null : v;
+        return sb.from('site_texts').update({ value: val, draft: null, revision: (r.revision || 0) + 1 }).eq('key', s.key).select().then(function (u) {
+          if (u.error || !u.data || !u.data[0]) throw new Error('save');
+          txRows[s.key] = u.data[0];
+          return sb.from('revisions').insert({ entity: 'text', ref: s.key, data: { value: v } });
+        });
+      })).then(function () {
+        renderTexts(); renderOverview();
+        return sb.auth.getSession();
+      }).then(function (ss) {
+        var tok = ss && ss.data && ss.data.session && ss.data.session.access_token;
+        return fetch('/api/publish', { method: 'POST', headers: { Authorization: 'Bearer ' + (tok || '') } }).then(function (r) { return r.status; }, function () { return 0; });
+      }).then(function (code) {
+        if (code === 200) flash(st, 'פורסם. האתר יתעדכן בעוד כדקה, אחרי שהבנייה מסתיימת.', true);
+        else if (code === 429) flash(st, 'הטקסטים נשמרו. בנייה כבר התחילה לפני רגע, האתר יתעדכן בקרוב.', true);
+        else if (code === 503) flash(st, 'הטקסטים נשמרו, אבל חיבור הפרסום לאתר עוד לא הוגדר (משתני סביבה ב-Vercel). עד אז האתר לא יתעדכן.');
+        else flash(st, 'הטקסטים נשמרו, אבל הפעלת הבנייה נכשלה (קוד ' + code + ').');
+      });
+    }).catch(function () { flash(st, 'הפרסום נכשל. נסו שוב.'); }).then(function () { btn.disabled = !txCount(); });
   });
 
   /* ---------- פניות ---------- */

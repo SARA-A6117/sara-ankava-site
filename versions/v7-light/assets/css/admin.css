@@ -278,3 +278,63 @@ h2{font-family:"Sara Ankava",var(--f);font-weight:700}
   .cp-hist li{grid-template-columns:1fr auto}
   .cp-hist li span:nth-child(2){grid-column:1/-1;order:3}
 }
+
+/* ===== שלב 4: ממשק ידידותי. עגול ללחיצה, מעט קווים, בלי רקע של גריד, תוכן רחב ===== */
+html body{background-image:none}
+.cp-main{max-width:min(1760px,100%);padding-inline:clamp(16px,4vw,64px)}
+.cp-top{border-bottom:0}
+.cp-side{border-inline-end:0;padding-inline-end:0}
+/* כל מה שלוחץ: עגול */
+.cp-btn,.cp-btn--ghost,.cp-btn--danger,.cp-sm,.cp-tb button,.cp-wa,.cp-seg,.cp-seg button,.cp-seg--sm button,.cp-side button,.cp-tabs button,.cp-card,.cp-gaps li button,.cp-lead select,.cp-field--inline select{border-radius:999px}
+.cp-side button{border-inline-start:0;min-height:48px}
+.cp-side button[aria-selected="true"]{background:var(--cob);color:#F4F0E6;box-shadow:0 6px 16px -8px rgb(27 51 201 / .7)}
+.cp-tb{border:0;border-radius:18px 18px 0 0;background:var(--panel)}
+.cp-tb button{border-radius:999px;border:0;background:var(--field)}
+.cp-seg{border:0;background:rgb(30 32 31 / .07);padding:4px}
+.cp-seg button{border:0}
+.cp-sm{border:0;background:rgb(30 32 31 / .07);padding-inline:18px}
+.cp-sm:hover{background:rgb(30 32 31 / .13);border:0}
+.cp-btn{border-color:rgb(30 32 31 / .22)}
+/* שדות וכרטיסים: פינות רכות */
+.cp-field input,.cp-field textarea,.cp-field select,.cp-note{border-radius:14px;border-color:rgb(30 32 31 / .16)}
+.cp-ed{border-radius:0 0 18px 18px;border-color:rgb(30 32 31 / .16)}
+.cp-sheet{border-radius:22px;border:0;box-shadow:0 30px 80px -24px rgb(30 32 31 / .5)}
+.cp-prev,.cp-slot__prev,.cp-thumb,.cp-pv,.cp-mkset{border-radius:14px;overflow:hidden}
+.cp-mkset{border:0;background:var(--panel)}
+.cp-tag,.cp-tag--ph,.cp-tag--warn,.cp-badge,.cp-side b,.cp-tabs b,.cp-lead__new{border-radius:999px}
+.cp-warn,.cp-gaps,.cp-hist{border:0;border-radius:16px}
+.cp-gaps,.cp-hist{background:var(--panel)}
+.cp-cards .cp-card{border:0;border-radius:20px;box-shadow:0 1px 2px rgb(30 32 31 / .08),0 8px 24px -16px rgb(30 32 31 / .25)}
+.cp-card:hover{box-shadow:0 1px 2px rgb(30 32 31 / .1),0 14px 30px -14px rgb(27 51 201 / .35);transform:translateY(-1px)}
+.cp-card.is-attn{box-shadow:inset 0 0 0 2px var(--cob),0 8px 24px -16px rgb(27 51 201 / .5)}
+/* רשימות: שורות כסטיקרים רכים במקום קווי הפרדה, מיושרות לגריד אחד */
+.cp-list{border-top:0;gap:10px}
+.cp-row,.cp-lead{background:var(--panel);border:0;border-radius:18px;padding:14px 20px}
+.cp-row{grid-template-columns:44px 84px minmax(0,1fr) auto;gap:16px}
+.cp-lead{padding:18px 22px}
+.cp-row.cp-over{box-shadow:inset 4px 0 0 #E5A100}
+.cp-hist li{border-top:0}
+.cp-hist li:nth-child(even){background:rgb(30 32 31 / .04);border-radius:10px;padding-inline:10px}
+.cp-prevbox,.cp-mk{border-top:0}
+@media (max-width:640px){.cp-row{grid-template-columns:auto 1fr}}
+
+/* טקסטי האתר: רשימה מימין, תצוגה מקדימה חיה משמאל */
+.cp-tx{display:grid;grid-template-columns:minmax(380px,1fr) minmax(340px,520px);gap:clamp(16px,2.5vw,36px);align-items:start}
+.cp-tx__prev{position:sticky;top:96px;display:grid;gap:10px}
+#tx-frame{width:100%;height:calc(100vh - 170px);min-height:420px;border:0;border-radius:20px;background:#fff;box-shadow:0 1px 2px rgb(30 32 31 / .08),0 12px 32px -18px rgb(30 32 31 / .35)}
+.cp-grp{background:var(--panel);border-radius:18px;margin-bottom:10px;overflow:hidden}
+.cp-grp summary{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;list-style:none;min-height:56px}
+.cp-grp summary::-webkit-details-marker{display:none}
+.cp-grp summary::after{content:"+";margin-inline-start:auto;font:500 22px var(--f);color:var(--mut)}
+.cp-grp[open] summary::after{content:"–"}
+.cp-grp summary b{font:700 18px "Sara Ankava",var(--f)}
+.cp-grp summary small{color:var(--mut)}
+.cp-grp__body{display:grid;gap:12px;padding:4px 18px 18px}
+.cp-tf{display:grid;gap:6px}
+.cp-tf label{display:grid;gap:6px}
+.cp-tf__l{font-size:13px;color:var(--mut)}
+.cp-tf input,.cp-tf textarea{background:var(--field);border:1px solid rgb(30 32 31 / .16);border-radius:14px;padding:10px 14px;min-height:44px;width:100%;font:inherit;resize:vertical}
+.cp-tf input:focus,.cp-tf textarea:focus{outline:2px solid var(--cob);border-color:var(--cob)}
+.cp-tf.is-draft input,.cp-tf.is-draft textarea{border-color:#E5A100;background:#FFFBEF}
+.cp-tf .cp-sm{justify-self:start}
+@media (max-width:1100px){.cp-tx{grid-template-columns:1fr}.cp-tx__prev{position:static}#tx-frame{height:520px}}

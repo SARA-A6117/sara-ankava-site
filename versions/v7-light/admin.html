@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#F3EEE2">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/mesh.css?v=14">
-<link rel="stylesheet" href="assets/css/admin.css?v=13">
+<link rel="stylesheet" href="assets/css/admin.css?v=15">
 </head>
 <body>
 <header class="cp-top">
@@ -32,6 +32,7 @@
           <button type="button" role="tab" id="tab-leads" aria-selected="false" aria-controls="pane-leads" title="פניות"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13l3-8h10l3 8v6H4zM4 13h5l1 2h4l1-2h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>פניות</span><b id="leads-new" hidden></b></button>
           <button type="button" role="tab" id="tab-projects" aria-selected="false" aria-controls="pane-projects" title="פרויקטים"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 9h18M7 13h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>פרויקטים</span></button>
           <button type="button" role="tab" id="tab-pages" aria-selected="false" aria-controls="pane-pages" title="עמודים משפטיים"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>עמודים משפטיים</span><b id="pages-gaps" hidden></b></button>
+          <button type="button" role="tab" id="tab-texts" aria-selected="false" aria-controls="pane-texts" title="טקסטי האתר"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>טקסטי האתר</span><b id="texts-draft" hidden></b></button>
         </nav>
       </aside>
       <div class="cp-content">
@@ -64,6 +65,24 @@
       <div class="cp-actions"><button type="button" class="cp-btn cp-btn--grad" data-gn="btn" id="pg-save">פרסום</button><button type="button" class="cp-btn" id="pg-draftbtn">שמירת טיוטה</button><button type="button" class="cp-btn" id="pg-hist-btn" aria-expanded="false" aria-controls="pg-hist">היסטוריה</button><a class="cp-btn cp-btn--ghost" id="pg-view" href="/privacy" target="_blank" rel="noopener">צפייה בעמוד</a></div>
       <p class="cp-msg" id="pg-msg" role="alert"></p>
       <div class="cp-hist" id="pg-hist" hidden></div>
+    </div>
+
+    <div id="pane-texts" role="tabpanel" hidden>
+      <div class="cp-tx">
+        <div class="cp-tx__list">
+          <div class="cp-bar">
+            <label class="cp-field cp-field--inline">חיפוש<input type="search" id="tx-search" placeholder="טקסט, אזור או מפתח" autocomplete="off"></label>
+            <button type="button" class="cp-btn cp-btn--grad" data-gn="btn" id="tx-publish" disabled>פרסום השינויים</button>
+          </div>
+          <p class="cp-hint"><span id="tx-count"></span>. <span id="tx-status" role="status"></span></p>
+          <p class="cp-hint">מה שנכתב כאן מופיע מיד בתצוגה המקדימה. הוא עולה לאתר רק אחרי "פרסום". ההירו ואזור הפרויקטים לא נערכים כאן.</p>
+          <div id="tx-groups"></div>
+        </div>
+        <aside class="cp-tx__prev" aria-label="תצוגה מקדימה">
+          <div class="cp-seg" id="tx-pagepick" role="group" aria-label="עמוד לתצוגה"><button type="button" data-page="index" aria-pressed="true">דף הבית</button><button type="button" data-page="projects" aria-pressed="false">פרויקטים</button><button type="button" data-page="privacy" aria-pressed="false">פרטיות</button></div>
+          <iframe id="tx-frame" title="תצוגה מקדימה של האתר" loading="lazy"></iframe>
+        </aside>
+      </div>
     </div>
 
     <div id="pane-leads" role="tabpanel" hidden>
@@ -119,6 +138,6 @@
 <script src="assets/vendor/purify.min.js"></script>
 <script src="assets/js/admin-config.js?v=2"></script>
 <script src="assets/js/legal-data.js?v=2"></script>
-<script src="assets/js/admin.js?v=11"></script>
+<script src="assets/js/admin.js?v=12"></script>
 </body>
 </html>
