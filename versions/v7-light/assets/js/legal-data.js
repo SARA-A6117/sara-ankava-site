@@ -4,6 +4,8 @@
   'use strict';
   var TAGS = ['h2', 'h3', 'p', 'ul', 'ol', 'li', 'a', 'strong', 'em', 'br'];
   var hooked = false;
+  /* כל סוגריים מרובעים קצרים הם פרט חסר: [...] או [שם], [טלפון], [מייל] */
+  var GAP = /\[[^\]\[\n]{1,20}\]/g, GAP1 = /\[[^\]\[\n]{1,20}\]/;
 
   function clean(html) {
     if (!window.DOMPurify) return null;
@@ -22,13 +24,16 @@
   /* כל [...] שנשאר בטקסט נעטף ב-mark.ph (צהוב). מחזיר כמה נמצאו */
   function markGaps(root) {
     var n = 0, w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), list = [], t;
-    while ((t = w.nextNode())) if (t.nodeValue.indexOf('[...]') > -1) list.push(t);
+    while ((t = w.nextNode())) if (GAP1.test(t.nodeValue)) list.push(t);
     list.forEach(function (tn) {
-      var parts = tn.nodeValue.split('[...]'), f = document.createDocumentFragment();
-      parts.forEach(function (p, i) {
-        if (p) f.appendChild(document.createTextNode(p));
-        if (i < parts.length - 1) { var m = document.createElement('mark'); m.className = 'ph'; m.textContent = '[...]'; f.appendChild(m); n++; }
-      });
+      var txt = tn.nodeValue, f = document.createDocumentFragment(), last = 0, m1;
+      GAP.lastIndex = 0;
+      while ((m1 = GAP.exec(txt))) {
+        if (m1.index > last) f.appendChild(document.createTextNode(txt.slice(last, m1.index)));
+        var m = document.createElement('mark'); m.className = 'ph'; m.textContent = m1[0]; f.appendChild(m); n++;
+        last = m1.index + m1[0].length;
+      }
+      if (last < txt.length) f.appendChild(document.createTextNode(txt.slice(last)));
       tn.parentNode.replaceChild(f, tn);
     });
     return n;
@@ -65,7 +70,7 @@
   }
   function fmtDate(d) { try { return new Date(d).toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' }); } catch (e) { return ''; } }
 
-  window.LegalHTML = { clean: clean, markGaps: markGaps, unmark: unmark, fmtDate: fmtDate, ready: function () { return !!window.DOMPurify; } };
+  window.LegalHTML = { GAP: GAP, GAP1: GAP1, clean: clean, markGaps: markGaps, unmark: unmark, fmtDate: fmtDate, ready: function () { return !!window.DOMPurify; } };
 
   /* ---- עמוד ציבורי ---- */
   var body = document.querySelector('.lg-body');

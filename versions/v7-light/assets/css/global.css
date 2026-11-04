@@ -1,5 +1,5 @@
 /* תיקוני עיצוב גלובליים: פונט גוף (Google Sans, גיבוי Heebo), טקסט רץ 18px+, ופרויקטים פתוחים בנייד */
-@font-face{font-family:"Google Sans";src:url("../fonts/GoogleSans-Variable.ttf") format("truetype");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Google Sans";src:url("../fonts/GoogleSans-Variable.subset.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 :root{--f-body:"Google Sans","Heebo",system-ui,sans-serif;--tx1:#F1ECE0;--tx2:#B9B4A8}
 
 /* טקסט רץ ותיאורים (הירו וכותרות לא נוגעים) */

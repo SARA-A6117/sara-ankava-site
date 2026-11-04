@@ -414,3 +414,11 @@ html body .pj .pj__all{position:absolute;inset-inline-end:var(--v6-m);top:calc((
   html body .pj3[data-count="4"] .pj3__d{font-size:16px!important}
   html body .pj3__rv{max-height:calc(100% - 90px);overflow:hidden;text-overflow:ellipsis}
 }
+
+/* ===== תיקוני נגישות (בדיקת QA/חוקיות): פוקוס נראה, עצירת אנימציות אמיתית, ניגודיות, פוטר מול כפתור הוואטסאפ ===== */
+html[data-theme="light"] :focus-visible{outline:2px solid #1B33C9!important;outline-offset:3px}
+html body .ct :focus-visible{outline-color:#FFE66D!important}
+html body .pj3__c:focus-visible,html body .lp2__row:focus-visible{outline:2px solid #1B33C9!important;outline-offset:-3px}
+html.paused *,html.paused *::before,html.paused *::after{animation-play-state:paused!important}
+html body .pr3__c:not(.is-lit){opacity:.75}
+html body .ftr2__bottom{padding-inline-start:clamp(64px,6vw,88px)}

@@ -198,7 +198,7 @@ const WA_TEXT = 'היי שרי, הגעתי מהאתר ואשמח לדבר על �
   let paused = false; try { paused = localStorage.getItem('sa-paused') === '1'; } catch (e) {}
   const setPaused = p => {
     paused = p; root.classList.toggle('paused', p);
-    $$('[data-motion-toggle]').forEach(b => { b.setAttribute('aria-pressed', p); b.textContent = p ? 'הפעלת אנימציות' : 'עצירת אנימציות'; });
+    $$('[data-motion-toggle]').forEach(b => { b.setAttribute('aria-pressed', p); b.textContent = 'עצירת אנימציות'; });
     try { localStorage.setItem('sa-paused', p ? '1' : '0'); } catch (e) {}
   };
   setPaused(paused);

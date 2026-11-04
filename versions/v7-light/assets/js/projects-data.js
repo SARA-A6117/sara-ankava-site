@@ -29,7 +29,7 @@
   function btn(p, forList) {
     if (p.is_placeholder) return forList ? '' : '<a class="btn cta-blink" href="#contact" data-gn="btn"><span class="btn__t">בואו נדבר</span></a>';
     var l = p.link || '';
-    if (!l) return '';
+    if (!l || !/^(https?:\/\/|\/|#)/i.test(l)) return '';
     if (forList && (l === '/projects' || l === 'projects.html' || l === '/projects.html')) return '';
     var ext = isExt(l);
     return '<a class="btn" data-gn="btn" href="' + esc(l) + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '><span class="btn__t">לפרויקט המלא</span></a>';

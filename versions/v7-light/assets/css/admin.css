@@ -1,5 +1,5 @@
 /* מערכת ניהול, בשפה של האתר הבהיר: קרם #F3EEE2, פחם #1E201F, קובלט #1B33C9 לפעולות. צהוב/תכלת רק בנגיעות. מבנה חד (בלי פינות מעוגלות), חוץ מבועת "הוספת פרויקט". */
-@font-face{font-family:"Google Sans";src:url("../fonts/GoogleSans-Variable.ttf") format("truetype");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Google Sans";src:url("../fonts/GoogleSans-Variable.subset.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 @font-face{font-family:"Sara Ankava";src:url("../fonts/SaraAnkava-Bold-v1.2.woff2") format("woff2");font-weight:700;font-display:swap}
 :root{--bg:#F3EEE2;--panel:#FBF8F0;--field:#FFFDF8;--line:rgb(30 32 31 / .2);--ink:#1E201F;--mut:rgb(30 32 31 / .68);--cob:#1B33C9;--cob2:#3F6BFF;--y:#FFE66D;--b:#6FD0FF;--red:#B3261E;--f:"Google Sans","Heebo",system-ui,sans-serif}
 *{box-sizing:border-box;border-radius:0}

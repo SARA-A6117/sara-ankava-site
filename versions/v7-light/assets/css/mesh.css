@@ -18,7 +18,7 @@
 @property --s3{syntax:"<percentage>";inherits:false;initial-value:60%}
 @property --s4{syntax:"<percentage>";inherits:false;initial-value:70%}
 @property --ga{syntax:"<color>";inherits:false;initial-value:#1B33C9}
-@property --gb{syntax:"<color>";inherits:false;initial-value:#3F6BFF}
+@property --gb{syntax:"<color>";inherits:false;initial-value:#2F55E8}
 @keyframes liveC1{0%{--c1x:10%;--c1y:15%}30%{--c1x:75%;--c1y:30%}55%{--c1x:40%;--c1y:90%}80%{--c1x:90%;--c1y:70%}to{--c1x:25%;--c1y:45%}}
 @keyframes liveC2{0%{--c2x:90%;--c2y:20%}25%{--c2x:30%;--c2y:10%}60%{--c2x:15%;--c2y:65%}to{--c2x:70%;--c2y:95%}}
 @keyframes liveC3{0%{--c3x:70%;--c3y:90%}35%{--c3x:95%;--c3y:40%}65%{--c3x:50%;--c3y:5%}to{--c3x:5%;--c3y:55%}}
@@ -69,7 +69,7 @@ html body::after{display:block!important;content:"";position:fixed;inset:0;z-ind
   animation:var(--mesh-anim),cta-blink 6s ease-in-out infinite!important
 }
 [data-gn="btn"]:hover,[data-gn="btn"]:focus-visible{
-  --ga:#3F6BFF;--gb:#1B33C9;color:#F4F0E6!important;
+  --ga:#2F55E8;--gb:#1B33C9;color:#F4F0E6!important;
   background-image:var(--grain),radial-gradient(circle at var(--mx,30%) var(--my,50%),rgb(255 255 255 / .55),transparent 60%),var(--mesh-live)!important;
   background-size:150px,auto,auto,auto,auto,auto,auto!important;
   background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat!important;

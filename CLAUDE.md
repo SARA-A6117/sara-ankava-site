@@ -105,3 +105,12 @@
 ## מראה /admin (בהיר)
 - `admin.css` בשפת האתר הבהיר: רקע `#F3EEE2`, טקסט `#1E201F`, קובלט `#1B33C9` לפעולות ולמתגים פעילים, צהוב רק ב-`mark.ph` ובתג "חדש". Google Sans (גיבוי Heebo) 300 לטקסט ו-500 לכותרות וכפתורים; "Sara Ankava" רק בלוגו. הכול `border-radius:0`, חוץ מבועת "הוספת פרויקט" (`#add`, קפסולה עם זנב). יעדי מגע 44px, בנייד (390) הטאבים נגללים והכותרת עוטפת.
 - עדכון: /admin נבנה כמו האתר: לוגו תמונה, ניווט (הטאבים) כקפסולה צפה במרכז, כותרת ענק "ניהול האתר" (Google Sans 900 + מילה בגרדיאנט `data-gn="text"`), כפתורי בועה בגרדיאנט הקובלט החי (`mesh.css` נטען ב-admin.html), קווי גריד אופקיים ברקע, מספור 01/02 בשורות. פונט המותג בכותרות ובכפתורים, Google Sans 300 לגוף.
+
+## תיקונים אחרי בדיקת 4 הסוכנים (נובמבר 2026)
+- ספריות צד שלישי מוגשות מהאתר עצמו (`assets/vendor/`: gsap 3.13.0, ScrollTrigger, lenis 1.1.13, DOMPurify 3.2.6, supabase-js 2.45.4, Sortable 1.15.6), לא מ-CDN. לעדכון: להוריד את הגרסה המדויקת ולהחליף את הקובץ.
+- `vercel.json` `headers`: X-Frame-Options DENY, nosniff, Referrer-Policy, Permissions-Policy לכל האתר; CSP ל-`/admin`; מטמון שנה (immutable) ל-`/assets/css|js|vendor|fonts` (חובה להעלות `?v=` בכל שינוי בקבצים האלה!) ויום ל-img/brand/doodles.
+- Google Sans: `assets/fonts/GoogleSans-Variable.subset.woff2` (98KB, עברית+לטינית+ספרות, משקלים 100–900). המקור המלא ב-`fonts-src/` (מחוץ ל-dist).
+- נגישות: פוקוס קובלט, `html.paused` עוצר אנימציות באמת, ניגודיות כפתורי הגרדיאנט, שורת הזכויות בפוטר לא מכוסה בכפתור הוואטסאפ. כל `[...]`/`[שם]` בעמודים המשפטיים מודגש.
+- `supabase/006_hardening_leads_delete.sql`: IP לפי cf-connecting-ip, תקרה יומית 60 ופסקת מייל מעל 15 בשעה, מחיקת לידים מ-/admin (בכפתור עם אישור), אילוץ על `projects.link`.
+- `404.html` בעיצוב הבהיר, `llms.txt`, סכמה כ-`@graph` (WebSite, ProfessionalService, Person עם sameAs).
+- נשאר פתוח (דורש החלטה/תוכן): מילוי `[...]` בעמודים המשפטיים, מועד חיבור sarankava.com והפניות מהוורדפרס, צורת השם העברית, כיבוי ספק המייל+סיסמה ב-Supabase, אישורי זכויות תמונות, H1 תיאורי, favicon.ico.

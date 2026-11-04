@@ -1,0 +1,13 @@
+# Sara Ankava
+
+> אתר התדמית של שרה אנקוה (Sara Ankava): אסטרטגיה, שיווק ובניית נכסים דיגיטליים לעסקים שגדלו. בעברית.
+
+## עמודים
+- [דף הבית](https://sara-ankava-site.vercel.app/): מי אני, איך אני עובדת, כלים, אודות וצור קשר.
+- [פרויקטים](https://sara-ankava-site.vercel.app/projects): עבודות קודמות ופרויקטי קונספט.
+- [מדיניות פרטיות](https://sara-ankava-site.vercel.app/privacy)
+- [תנאי שימוש](https://sara-ankava-site.vercel.app/terms)
+- [הצהרת נגישות](https://sara-ankava-site.vercel.app/accessibility)
+
+## יצירת קשר
+טופס צור קשר בדף הבית, או ווטסאפ: https://wa.me/972533175560

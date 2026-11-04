@@ -246,10 +246,18 @@
 
   /* ---------- מחיקה ---------- */
   var toDelete = null;
-  function askDelete(p) { toDelete = p; $('#confirm-p').textContent = '"' + p.title + '" יימחק לצמיתות.'; show($('#confirm'), true); $('#confirm-no').focus(); }
+  function askDelete(p) { toDelete = p; $('#confirm-t').textContent = 'למחוק את הפרויקט?'; $('#confirm-p').textContent = '"' + p.title + '" יימחק לצמיתות.'; show($('#confirm'), true); $('#confirm-no').focus(); }
+  function askDeleteLead(l) { toDelete = { lead: true, id: l.id }; $('#confirm-t').textContent = 'למחוק את הפנייה?'; $('#confirm-p').textContent = 'הפנייה של "' + l.name + '" תימחק לצמיתות ולא ניתן לשחזר אותה.'; show($('#confirm'), true); $('#confirm-no').focus(); }
   $('#confirm-no').addEventListener('click', function () { toDelete = null; show($('#confirm'), false); });
   $('#confirm-yes').addEventListener('click', function () {
     var p = toDelete; if (!p) return; show($('#confirm'), false); toDelete = null;
+    if (p.lead) {
+      sb.from('leads').delete().eq('id', p.id).then(function (r) {
+        if (r.error) { flash(els.gmsg, 'מחיקת הפנייה נכשלה.'); return; }
+        flash(els.gmsg, ''); loadLeads();
+      });
+      return;
+    }
     sb.from('projects').delete().eq('id', p.id).then(function (r) {
       if (r.error) { flash(els.gmsg, 'המחיקה נכשלה.'); return; }
       var files = [p.desktop_image_url, p.mobile_image_url].map(storagePath).filter(Boolean);
@@ -262,7 +270,7 @@
   /* ---------- עמודים משפטיים ---------- */
   var LH = window.LegalHTML, pgData = {}, pgSlug = 'privacy', ed = $('#pg-ed');
   try { document.execCommand('defaultParagraphSeparator', false, 'p'); } catch (x) {}
-  function gapsIn(html) { return (String(html || '').match(/\[\.\.\.\]/g) || []).length; }
+  function gapsIn(html) { return (String(html || "").match(LH.GAP) || []).length; }
   function loadPages() {
     sb.from('pages').select('*').then(function (r) {
       if (r.error) { flash($('#pg-msg'), 'טעינת העמודים נכשלה.'); return; }
@@ -306,7 +314,7 @@
     var box = $('#pg-gaps'), marks = ed.querySelectorAll('mark'), items = [];
     [].forEach.call(marks, function (m, i) {
       var blk = m.closest('p,li,h2,h3') || m.parentNode, tx = blk.textContent.trim();
-      items.push('<li><button type="button" data-gap="' + i + '">' + esc(tx).replace('[...]', '<mark class="ph">[...]</mark>') + '</button></li>');
+      items.push('<li><button type="button" data-gap="' + i + '">' + esc(tx).replace(LH.GAP1, function (m) { return '<mark class="ph">' + m + '</mark>'; }) + '</button></li>');
     });
     box.innerHTML = items.length ? '<b>עוד חסרים ' + items.length + ' פרטים ([...]):</b><ul>' + items.join('') + '</ul>' : '<b class="ok">אין יותר [...] בעמוד הזה.</b>';
   }
@@ -314,7 +322,7 @@
   function renderGapsLive() {
     var tmp = ed.cloneNode(true); LH.unmark(tmp); LH.markGaps(tmp);
     var box = $('#pg-gaps'), marks = tmp.querySelectorAll('mark'), items = [];
-    [].forEach.call(marks, function (m) { var blk = m.closest('p,li,h2,h3') || m.parentNode; items.push('<li><button type="button">' + esc(blk.textContent.trim()).replace('[...]', '<mark class="ph">[...]</mark>') + '</button></li>'); });
+    [].forEach.call(marks, function (m) { var blk = m.closest('p,li,h2,h3') || m.parentNode; items.push('<li><button type="button">' + esc(blk.textContent.trim()).replace(LH.GAP1, function (m) { return '<mark class="ph">' + m + '</mark>'; }) + '</button></li>'); });
     box.innerHTML = items.length ? '<b>עוד חסרים ' + items.length + ' פרטים ([...]):</b><ul>' + items.join('') + '</ul>' : '<b class="ok">אין יותר [...] בעמוד הזה.</b>';
   }
   ed.addEventListener('input', gapsSoon);
@@ -404,12 +412,17 @@
         '<span>' + esc(fmt(l.created_at)) + '</span></div>' +
         (l.message ? '<p class="cp-lead__msg">' + esc(l.message) + '</p>' : '') + '</div>' +
         '<div class="cp-lead__side"><label class="cp-field cp-field--inline">סטטוס<select data-lead>' + Object.keys(ST).map(function (k) { return '<option value="' + k + '"' + (k === l.status ? ' selected' : '') + '>' + ST[k] + '</option>'; }).join('') + '</select></label>' +
-        '<a class="cp-wa" href="' + esc(waUrl(l.phone)) + '" target="_blank" rel="noopener">ווטסאפ</a></div>' +
+        '<a class="cp-wa" href="' + esc(waUrl(l.phone)) + '" target="_blank" rel="noopener">ווטסאפ</a><button type="button" class="cp-sm" data-lead-del>מחיקה</button></div>' +
         '<textarea class="cp-note" data-note rows="1" maxlength="2000" placeholder="הערה" aria-label="הערה לליד">' + esc(l.note || '') + '</textarea></li>';
     }).join('');
   }
   $('#lead-filter').addEventListener('change', renderLeads);
   $('#lead-search').addEventListener('input', renderLeads);
+  $('#leads').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-lead-del]'); if (!b) return;
+    var id = b.closest('.cp-lead').dataset.id, l = leads.filter(function (x) { return x.id === id; })[0];
+    if (l) askDeleteLead(l);
+  });
   $('#leads').addEventListener('change', function (e) {
     var s = e.target.closest('[data-lead]');
     if (s) {
