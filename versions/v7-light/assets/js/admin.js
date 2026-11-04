@@ -76,13 +76,16 @@
     warn.textContent = hid.length > MAX_HOME ? 'סומנו ' + hid.length + ' פרויקטים להצגה בדף הבית, אבל יש מקום ל-' + MAX_HOME + '. באתר יוצגו ' + MAX_HOME + ' הראשונים לפי הסדר. כדי לשנות, בטלו את "בדף הבית" באחד מהם או שנו את הסדר.' : '';
     if (!projects.length) { ul.innerHTML = '<li class="cp-empty">עוד אין פרויקטים. לחצו על "הוספת פרויקט".</li>'; return; }
     ul.innerHTML = projects.map(function (p, i) {
-      var img = p.desktop_image_url ? '<img class="cp-thumb" src="' + esc(p.desktop_image_url) + '" alt="" loading="lazy">' : '<span class="cp-thumb">' + (p.mockup_key ? 'מובנה' : '') + '</span>';
+      var m0 = (p.mockups && p.mockups[0]) || {}, thumb = m0.desktop && m0.desktop.type === 'image' ? m0.desktop.url : p.desktop_image_url;
+      var nm = (p.mockups || []).length, vid = (p.mockups || []).some(function (x) { return (x.desktop && x.desktop.type === 'video') || (x.mobile && x.mobile.type === 'video'); });
+      var img = thumb ? '<img class="cp-thumb" src="' + esc(thumb) + '" alt="" loading="lazy">' : '<span class="cp-thumb">' + (vid ? 'סרטון' : (p.mockup_key ? 'מובנה' : '')) + '</span>';
       var hi = hid.indexOf(p.id), over = hi >= MAX_HOME;
       return '<li class="cp-row' + (over ? ' cp-over' : '') + (p.published ? '' : ' cp-draft') + '" data-id="' + p.id + '" data-i="' + i + '">' +
         '<span class="cp-handle" aria-label="גרירה לשינוי סדר" role="img">⠿</span>' + img +
         '<div class="cp-info"><b>' + esc(p.title) +
         (p.is_placeholder ? '<span class="cp-tag cp-tag--ph">מקום שמור</span>' : '') +
         (p.is_concept ? '<span class="cp-tag">קונספט</span>' : '') +
+        (nm > 1 ? '<span class="cp-tag">2 מוקאפים</span>' : '') +
         (over ? '<span class="cp-tag cp-tag--warn">לא יוצג, מעל ' + MAX_HOME + '</span>' : '') + '</b>' +
         '<small>' + esc(p.is_placeholder ? 'כרטיס "הפרויקט הבא שלכם"' : (p.type || '')) + '</small></div>' +
         '<div class="cp-ctl">' +
@@ -146,34 +149,102 @@
   /* ---------- טופס פרויקט ---------- */
   var form = $('#pform');
   var MAXW = { desktop: 1600, mobile: 900 };
-  function setPrev(kind, url) { var el = $('#prev-' + kind); el.style.backgroundImage = url ? 'url("' + url.replace(/"/g, '%22') + '")' : ''; el.textContent = url ? '' : 'אין תמונה'; }
-  function imgUrl(kind) { return pending[kind] ? pending[kind].preview : (editing && !removed[kind] ? editing[kind + '_image_url'] : null); }
-  var removed = { desktop: false, mobile: false };
-  /* תצוגה מקדימה חיה: כרטיס פרויקט כפי שיופיע (טקסט, תמונות, כפתור) */
+  var VIDEO_MAX = 25 * 1024 * 1024;
+  var KINDS = ['desktop', 'mobile'], KIND_HE = { desktop: 'דסקטופ', mobile: 'מובייל' };
+  /* מוקאפים בטופס: עד שניים. כל מוקאפ = { desktop: slot, mobile: slot }, slot = { type: 'image'|'video', url, file, preview } */
+  var mk = [];
+  function slotFromJson(s) { return s && s.url ? { type: s.type === 'video' ? 'video' : 'image', url: s.url, file: null, preview: null } : null; }
+  function mkFromProject(p) {
+    var sets = [];
+    if (p && Array.isArray(p.mockups) && p.mockups.length) {
+      p.mockups.slice(0, 2).forEach(function (s) { sets.push({ desktop: slotFromJson(s.desktop), mobile: slotFromJson(s.mobile) }); });
+    } else if (p && (p.desktop_image_url || p.mobile_image_url)) {
+      sets.push({ desktop: slotFromJson(p.desktop_image_url && { type: 'image', url: p.desktop_image_url }), mobile: slotFromJson(p.mobile_image_url && { type: 'image', url: p.mobile_image_url }) });
+    }
+    if (!sets.length) sets.push({ desktop: null, mobile: null });
+    return sets;
+  }
+  function slotUrl(s) { return s ? (s.preview || s.url) : null; }
+  function mediaHtml(s, cls) {
+    var u = slotUrl(s); if (!u) return '';
+    return s.type === 'video' ? '<video class="' + cls + '" src="' + esc(u) + '" muted loop autoplay playsinline></video>' : '<img class="' + cls + '" src="' + esc(u) + '" alt="">';
+  }
+  function renderMk() {
+    var box = $('#mk-sets');
+    box.innerHTML = mk.map(function (set, i) {
+      var cards = KINDS.map(function (k) {
+        var s = set[k], t = s ? s.type : 'image';
+        return '<div class="cp-slot" data-set="' + i + '" data-kind="' + k + '"><div class="cp-slot__h"><b>' + KIND_HE[k] + '</b>' +
+          '<span class="cp-seg cp-seg--sm" role="group" aria-label="סוג מדיה ל' + KIND_HE[k] + '"><button type="button" data-mk="type" data-type="image" aria-pressed="' + (t === 'image') + '">תמונה</button><button type="button" data-mk="type" data-type="video" aria-pressed="' + (t === 'video') + '">סרטון גלילה</button></span></div>' +
+          '<div class="cp-slot__prev">' + (s ? mediaHtml(s, '') : '<span>אין קובץ</span>') + '</div>' +
+          '<input type="file" data-mk="file" accept="' + (t === 'video' ? 'video/mp4,video/webm' : 'image/*') + '" aria-label="קובץ ' + KIND_HE[k] + ' למוקאפ ' + (i + 1) + '">' +
+          (s ? '<button type="button" class="cp-sm" data-mk="clear">הסרה</button>' : '') + '</div>';
+      }).join('');
+      return '<fieldset class="cp-mkset"><legend>מוקאפ ' + (i + 1) + '</legend><div class="cp-mkgrid">' + cards + '</div>' +
+        (i === 1 ? '<button type="button" class="cp-sm" data-mk="remove-set">הסרת מוקאפ 2</button>' : '') + '</fieldset>';
+    }).join('') + (mk.length < 2 ? '<button type="button" class="cp-btn" data-mk="add-set">הוספת מוקאפ שני</button>' : '');
+    show($('#interval-field'), mk.length > 1);
+    renderPreview();
+  }
+  function slotOf(el) { var c = el.closest('.cp-slot'); return c ? { i: +c.dataset.set, k: c.dataset.kind } : null; }
+  $('#mk-sets').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-mk]'); if (!b || b.tagName === 'INPUT') return;
+    var act = b.dataset.mk, sl = slotOf(b);
+    if (act === 'add-set') { mk.push({ desktop: null, mobile: null }); }
+    else if (act === 'remove-set') { mk.splice(1, 1); }
+    else if (act === 'clear' && sl) { mk[sl.i][sl.k] = null; }
+    else if (act === 'type' && sl) {
+      var cur = mk[sl.i][sl.k], t = b.dataset.type;
+      if (!cur || cur.type !== t) mk[sl.i][sl.k] = { type: t, url: null, file: null, preview: null };
+      if (!mk[sl.i][sl.k].url && !mk[sl.i][sl.k].file) { /* סוג נבחר ועוד אין קובץ */ }
+    }
+    renderMk();
+  });
+  $('#mk-sets').addEventListener('change', function (e) {
+    var inp = e.target.closest('input[data-mk="file"]'); if (!inp) return;
+    var sl = slotOf(inp), f = inp.files[0], m = $('#pform-msg'), cur = mk[sl.i][sl.k], t = cur ? cur.type : 'image';
+    if (!f) return;
+    if (t === 'video') {
+      if (!/^video\/(mp4|webm)$/.test(f.type)) { flash(m, 'סרטון חייב להיות mp4 או webm.'); inp.value = ''; return; }
+      if (f.size > VIDEO_MAX) { flash(m, 'הסרטון גדול מ-25MB. אפשר לכווץ אותו (למשל HandBrake) ולהעלות שוב.'); inp.value = ''; return; }
+    } else {
+      if (!/^image\/(jpeg|png|webp|gif)$/.test(f.type)) { flash(m, 'רק תמונות JPG, PNG, WebP או GIF.'); inp.value = ''; return; }
+      if (f.size > 20 * 1024 * 1024) { flash(m, 'התמונה גדולה מ-20MB.'); inp.value = ''; return; }
+    }
+    flash(m, '');
+    mk[sl.i][sl.k] = { type: t, url: cur ? cur.url : null, file: f, preview: URL.createObjectURL(f) };
+    renderMk();
+  });
+  /* תצוגה מקדימה חיה: הכרטיס כפי שיופיע, ולכל מוקאפ חלון דסקטופ וטלפון */
   function renderPreview() {
-    var isPh = !!(editing && editing.is_placeholder), d = imgUrl('desktop'), m = imgUrl('mobile');
+    var isPh = !!(editing && editing.is_placeholder);
     var title = form.title.value.trim() || 'שם הפרויקט', desc = form.description.value.trim(), link = form.link.value.trim();
     var tags = (form.type.value || '').split('·').map(function (t) { return t.trim(); }).filter(Boolean);
     if (form.is_concept.checked && !tags.some(function (t) { return t.toUpperCase() === 'CONCEPT'; })) tags.unshift('CONCEPT');
-    var shot = d ? '<div class="cp-pv__win"><i></i><img src="' + esc(d) + '" alt=""></div>' : (editing && editing.mockup_key ? '<div class="cp-pv__win cp-pv__win--note">מוקאפ מובנה (נשאר כמו שהוא)</div>' : '<div class="cp-pv__win cp-pv__win--note">עוד לא הועלתה תמונה</div>');
-    var phone = m ? '<div class="cp-pv__phone"><img src="' + esc(m) + '" alt=""></div>' : '';
+    var frames = mk.map(function (set, i) {
+      var d = set.desktop ? mediaHtml(set.desktop, '') : '', m = set.mobile ? '<div class="cp-pv__phone">' + mediaHtml(set.mobile, '') + '</div>' : '';
+      if (!d && !m) return i === 0 ? '<div class="cp-pv__win cp-pv__win--note">' + (editing && editing.mockup_key ? 'מוקאפ מובנה (נשאר כמו שהוא)' : 'עוד לא הועלה מוקאפ') + '</div>' : '';
+      return '<div class="cp-pv__fr"><small>מוקאפ ' + (i + 1) + '</small><div class="cp-pv__mk"><div class="cp-pv__win">' + d + '</div>' + m + '</div></div>';
+    }).join('');
     $('#pprev').innerHTML = '<div class="cp-pv"><div class="cp-pv__tx"><h3>' + esc(title) + '</h3>' + (desc ? '<p>' + esc(desc) + '</p>' : '') +
       (tags.length && !isPh ? '<ul>' + tags.map(function (t) { return '<li' + (t.toUpperCase() === 'CONCEPT' ? ' class="y"' : '') + '>' + esc(t) + '</li>'; }).join('') + '</ul>' : '') +
-      (isPh ? '<span class="cp-pv__btn">בואו נדבר</span>' : (link ? '<span class="cp-pv__btn">לפרויקט המלא</span>' : '')) + '</div><div class="cp-pv__mk">' + shot + phone + '</div></div>' +
-      '<p class="cp-hint">' + (form.published.checked ? (form.show_on_home.checked ? 'יופיע בדף הבית (אם נכנס בארבעת הראשונים) ובעמוד הפרויקטים.' : 'יופיע בעמוד הפרויקטים בלבד.') : 'טיוטה: לא יופיע באתר.') + '</p>';
+      (isPh ? '<span class="cp-pv__btn">בואו נדבר</span>' : (link ? '<span class="cp-pv__btn">לפרויקט המלא</span>' : '')) + '</div><div class="cp-pv__frs">' + frames + '</div></div>' +
+      '<p class="cp-hint">' + (mk.filter(function (s) { return s.desktop || s.mobile; }).length > 1 ? 'שני המוקאפים יתחלפו באתר כל ' + (+$('#mk-interval').value || 5) + ' שניות. ' : '') +
+      (form.published.checked ? (form.show_on_home.checked ? 'יופיע בדף הבית (אם נכנס בארבעת הראשונים) ובעמוד הפרויקטים.' : 'יופיע בעמוד הפרויקטים בלבד.') : 'טיוטה: לא יופיע באתר.') + '</p>';
   }
   function openForm(p) {
-    editing = p || null; pending = { desktop: null, mobile: null }; removed = { desktop: false, mobile: false };
+    editing = p || null;
     var isPh = !!(p && p.is_placeholder);
+    mk = mkFromProject(p);
     $('#pform-title').textContent = p ? 'עריכת פרויקט' : 'פרויקט חדש';
     form.title.value = p ? p.title : ''; form.type.value = p ? (p.type || '') : '';
     form.description.value = p ? (p.description || '') : ''; form.link.value = p ? (p.link || '') : '';
     form.is_concept.checked = !!(p && p.is_concept); form.published.checked = !!(p && p.published); form.show_on_home.checked = !!(p && p.show_on_home);
+    $('#mk-interval').value = p && p.mockup_interval ? p.mockup_interval : 5;
     ['type-field', 'concept-field', 'imgs-field'].forEach(function (id) { show($('#' + id), !isPh); });
     $('#link-label').textContent = isPh ? 'לאן הכפתור מוביל' : 'קישור (לא חובה)';
-    $('#file-desktop').value = ''; $('#file-mobile').value = '';
-    setPrev('desktop', p && p.desktop_image_url); setPrev('mobile', p && p.mobile_image_url);
-    flash($('#pform-msg'), ''); renderPreview(); show($('#modal'), true); form.title.focus();
+    $('#mk-builtin').hidden = !(p && p.mockup_key && !(p.mockups && p.mockups.length));
+    flash($('#pform-msg'), ''); renderMk(); show($('#modal'), true); form.title.focus();
   }
   function closeForm() { show($('#modal'), false); editing = null; }
   $('#add').addEventListener('click', function () { openForm(null); });
@@ -181,15 +252,6 @@
   $('#modal').addEventListener('click', function (e) { if (e.target === $('#modal')) closeForm(); });
   form.addEventListener('input', renderPreview);
   form.addEventListener('change', renderPreview);
-  ['desktop', 'mobile'].forEach(function (k) {
-    $('#file-' + k).addEventListener('change', function (e) {
-      var f = e.target.files[0]; var m = $('#pform-msg');
-      if (!f) { pending[k] = null; setPrev(k, editing && editing[k + '_image_url']); renderPreview(); return; }
-      if (!/^image\/(jpeg|png|webp|gif)$/.test(f.type)) { flash(m, 'רק תמונות JPG, PNG, WebP או GIF.'); e.target.value = ''; return; }
-      if (f.size > 20 * 1024 * 1024) { flash(m, 'התמונה גדולה מ-20MB.'); e.target.value = ''; return; }
-      flash(m, ''); var u = URL.createObjectURL(f); pending[k] = { file: f, preview: u }; setPrev(k, u); renderPreview();
-    });
-  });
   /* הקטנה אוטומטית והמרה ל-WebP בדפדפן לפני ההעלאה (חוסך משקל ואחסון) */
   function toWebp(file, maxW) {
     return new Promise(function (res, rej) {
@@ -205,17 +267,25 @@
       img.src = url;
     });
   }
-  function upload(item, kind) {
-    return toWebp(item.file, MAXW[kind]).then(function (blob) {
-      var ext = blob.type === 'image/webp' ? 'webp' : 'png';
-      var path = (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(16).slice(2)) + '.' + ext;
-      return sb.storage.from(BUCKET).upload(path, blob, { contentType: blob.type, cacheControl: '31536000', upsert: false }).then(function (r) {
-        if (r.error) throw r.error;
-        return sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
-      });
+  function uuid() { return crypto.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(16).slice(2); }
+  function putFile(path, blob, type) {
+    return sb.storage.from(BUCKET).upload(path, blob, { contentType: type, cacheControl: '31536000', upsert: false }).then(function (r) {
+      if (r.error) throw r.error;
+      return sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+    });
+  }
+  function upload(slot, kind) {
+    if (slot.type === 'video') return putFile(uuid() + (slot.file.type === 'video/webm' ? '.webm' : '.mp4'), slot.file, slot.file.type);
+    return toWebp(slot.file, MAXW[kind]).then(function (blob) {
+      return putFile(uuid() + (blob.type === 'image/webp' ? '.webp' : '.png'), blob, blob.type);
     });
   }
   function storagePath(u) { var i = u ? u.indexOf('/' + BUCKET + '/') : -1; return i < 0 ? null : decodeURIComponent(u.slice(i + BUCKET.length + 2).split('?')[0]); }
+  function projectUrls(p) {
+    var out = [p.desktop_image_url, p.mobile_image_url];
+    (p.mockups || []).forEach(function (s) { out.push(s.desktop && s.desktop.url, s.mobile && s.mobile.url); });
+    return out.filter(Boolean);
+  }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var m = $('#pform-msg'), btn = $('#psave');
@@ -223,24 +293,39 @@
     if (!title) { flash(m, 'חסר שם לפרויקט.'); form.title.focus(); return; }
     var link = form.link.value.trim();
     if (link && !/^(https?:\/\/|\/|#)/i.test(link)) { flash(m, 'הקישור חייב להתחיל ב-https:// (או / או # לקישור פנימי).'); form.link.focus(); return; }
+    var interval = Math.min(60, Math.max(2, parseInt($('#mk-interval').value, 10) || 5));
     var isPh = !!(editing && editing.is_placeholder);
     btn.disabled = true; flash(m, 'מעלה ושומר...', true);
     var row = { title: title, description: form.description.value.trim() || null, link: link || null, published: form.published.checked, show_on_home: form.show_on_home.checked };
-    if (!isPh) { row.type = form.type.value.trim() || null; row.is_concept = form.is_concept.checked; }
-    var old = editing ? [editing.desktop_image_url, editing.mobile_image_url] : [];
-    Promise.all([pending.desktop ? upload(pending.desktop, 'desktop') : null, pending.mobile ? upload(pending.mobile, 'mobile') : null]).then(function (urls) {
-      if (urls[0]) row.desktop_image_url = urls[0];
-      if (urls[1]) row.mobile_image_url = urls[1];
+    if (!isPh) { row.type = form.type.value.trim() || null; row.is_concept = form.is_concept.checked; row.mockup_interval = interval; }
+    var jobs = [];
+    mk.forEach(function (set) { KINDS.forEach(function (k) { var s = set[k]; if (s && s.file) jobs.push(upload(s, k).then(function (u) { s.url = u; })); }); });
+    Promise.all(isPh ? [] : jobs).then(function () {
+      if (!isPh) {
+        var sets = mk.map(function (set) {
+          var o = {};
+          KINDS.forEach(function (k) { if (set[k] && set[k].url) o[k] = { type: set[k].type, url: set[k].url }; });
+          return o;
+        }).filter(function (o) { return o.desktop || o.mobile; });
+        row.mockups = sets;
+        /* עמודות התמונה הישנות נשארות מסונכרנות (תמונה ראשונה בלבד) כגיבוי וכתמונה ממוזערת */
+        var first = sets[0] || {};
+        row.desktop_image_url = first.desktop && first.desktop.type === 'image' ? first.desktop.url : null;
+        row.mobile_image_url = first.mobile && first.mobile.type === 'image' ? first.mobile.url : null;
+      }
       if (editing) return sb.from('projects').update(row).eq('id', editing.id);
       row.position = projects.length;
       return sb.from('projects').insert(row);
     }).then(function (r) {
       if (r.error) throw r.error;
-      /* תמונה שהוחלפה נמחקת מהאחסון, כדי שלא יצטברו קבצים יתומים */
-      var gone = [pending.desktop ? old[0] : null, pending.mobile ? old[1] : null].map(storagePath).filter(Boolean);
-      if (gone.length) sb.storage.from(BUCKET).remove(gone);
+      /* קבצים שהוסרו או הוחלפו נמחקים מהאחסון, כדי שלא יצטברו קבצים יתומים */
+      if (editing && !isPh) {
+        var keep = {}; (row.mockups || []).forEach(function (s) { KINDS.forEach(function (k) { if (s[k]) keep[s[k].url] = 1; }); });
+        var gone = projectUrls(editing).filter(function (u) { return !keep[u]; }).map(storagePath).filter(Boolean);
+        if (gone.length) sb.storage.from(BUCKET).remove(gone);
+      }
       closeForm(); loadProjects();
-    }).catch(function () { flash(m, 'השמירה נכשלה. בדקו את ההרשאות והתמונות ונסו שוב.'); })
+    }).catch(function () { flash(m, 'השמירה נכשלה. בדקו את ההרשאות והקבצים ונסו שוב.'); })
       .then(function () { btn.disabled = false; });
   });
 
@@ -260,7 +345,7 @@
     }
     sb.from('projects').delete().eq('id', p.id).then(function (r) {
       if (r.error) { flash(els.gmsg, 'המחיקה נכשלה.'); return; }
-      var files = [p.desktop_image_url, p.mobile_image_url].map(storagePath).filter(Boolean);
+      var files = projectUrls(p).map(storagePath).filter(Boolean);
       if (files.length) sb.storage.from(BUCKET).remove(files);
       loadProjects();
     });

@@ -17,13 +17,60 @@
   }
 
   /* מוקאפ: מובנה (gan), או תמונות שהועלו (דסקטופ ומובייל) בתוך אותה מסגרת כמו היום */
+  var okUrl = function (u) { return /^(https?:\/\/|assets\/|\/)/i.test(u || ''); };
+  /* מדיה אחת: תמונה, או סרטון גלילה שרץ בלולאה בלי קול */
+  function media(m, w, h) {
+    if (!m || !okUrl(m.url)) return '';
+    if (m.type === 'video') return '<video class="mk__shot" src="' + esc(m.url) + '" muted loop playsinline preload="metadata" tabindex="-1"></video>';
+    return '<img class="mk__shot" src="' + esc(m.url) + '" alt="" width="' + w + '" height="' + h + '" loading="lazy">';
+  }
+  /* מוקאפ אחד = חלון דסקטופ + טלפון, כל אחד תמונה או סרטון */
+  function frame(set, hostName) {
+    var d = media(set && set.desktop, 800, 500), m = media(set && set.mobile, 390, 760);
+    if (!d && !m) return '';
+    return '<div class="mk mk--tef" aria-hidden="true"><div class="mk__win"><div class="mk__bar"><b></b><b></b><b></b><span lang="en" dir="ltr">' + esc(hostName) + '</span></div>' +
+      '<div class="mk__page mk__page--shot">' + (d || '<div class="mk__shot mk__shot--empty"></div>') + '</div></div>' +
+      (m ? '<div class="mk__phone"><div class="mk__scr mk__scr--shot">' + m + '</div></div>' : '') + '</div>';
+  }
+  /* מוקאפ הפרויקט: עד שניים מתחלפים (data-rot = שניות), אחרת התמונות הישנות, אחרת המוקאפ המובנה */
   function mockup(p, ganHtml) {
-    if (p.mockup_key === 'gan' && ganHtml) return ganHtml;
-    if (!p.desktop_image_url) return '';
+    var sets = Array.isArray(p.mockups) && p.mockups.length ? p.mockups.slice(0, 2) : [];
+    if (!sets.length && (p.desktop_image_url || p.mobile_image_url)) {
+      sets = [{ desktop: p.desktop_image_url ? { type: 'image', url: p.desktop_image_url } : null, mobile: p.mobile_image_url ? { type: 'image', url: p.mobile_image_url } : null }];
+    }
     var h = p.link && isExt(p.link) ? host(p.link) : '';
-    return '<div class="mk mk--tef" aria-hidden="true"><div class="mk__win"><div class="mk__bar"><b></b><b></b><b></b><span lang="en" dir="ltr">' + esc(h) + '</span></div>' +
-      '<div class="mk__page mk__page--shot"><img class="mk__shot" src="' + esc(p.desktop_image_url) + '" alt="" width="800" height="500" loading="lazy"></div></div>' +
-      (p.mobile_image_url ? '<div class="mk__phone"><div class="mk__scr mk__scr--shot"><img class="mk__shot" src="' + esc(p.mobile_image_url) + '" alt="" width="390" height="760" loading="lazy"></div></div>' : '') + '</div>';
+    var frames = sets.map(function (s) { return frame(s, h); }).filter(Boolean);
+    if (frames.length === 1) return frames[0];
+    if (frames.length > 1) {
+      return '<div class="mk-rot" data-rot="' + (+p.mockup_interval || 5) + '">' + frames.map(function (f, i) { return i ? f : f.replace('class="mk mk--tef"', 'class="mk mk--tef is-on"'); }).join('') + '</div>';
+    }
+    return p.mockup_key === 'gan' && ganHtml ? ganHtml : '';
+  }
+  /* החלפת מוקאפים כל N שניות, והפעלת סרטונים רק כשהם נראים (חוסך משקל ובטרייה) */
+  function initMedia(root) {
+    var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+    function visible(v) {
+      var fr = v.closest('.mk'), rot = fr && fr.parentNode.classList.contains('mk-rot');
+      if (rot && !fr.classList.contains('is-on')) return false;
+      var card = v.closest('.pj3__c');
+      if (card && !card.classList.contains('is-open') && matchMedia('(min-width:901px)').matches) return false;
+      var r = v.getBoundingClientRect();
+      return r.width > 0 && r.bottom > 0 && r.top < innerHeight && !document.hidden;
+    }
+    function sync() {
+      [].forEach.call(root.querySelectorAll('video'), function (v) {
+        if (!reduce && visible(v)) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause();
+      });
+    }
+    [].forEach.call(root.querySelectorAll('.mk-rot'), function (r) {
+      var fr = [].slice.call(r.children), i = 0, sec = Math.min(60, Math.max(2, +r.dataset.rot || 5));
+      if (fr.length < 2 || reduce) return;
+      setInterval(function () {
+        if (document.hidden) return;
+        fr[i].classList.remove('is-on'); i = (i + 1) % fr.length; fr[i].classList.add('is-on'); sync();
+      }, sec * 1000);
+    });
+    if (root.querySelector('video')) { sync(); setInterval(sync, 1000); }
   }
 
   function btn(p, forList) {
@@ -57,6 +104,7 @@
         '<div class="pj3__mk">' + mockup(p, ganHtml) + '</div></div></article>';
     }).join('');
     bindHome(root);
+    initMedia(root);
   }
 
   /* עמוד הפרויקטים */
@@ -68,6 +116,7 @@
       return '<article class="pp-row" id="p-' + esc(String(p.id).slice(0, 8)) + '"><div class="pj3__tx"><span class="pj3__n">' + pad(i + 1) + '</span><h2 class="pj3__t">' + esc(p.title) + '</h2>' +
         (p.description ? '<p class="pj3__d">' + esc(p.description) + '</p>' : '') + tagHtml + btn(p, true) + '</div><div class="pj3__mk">' + mockup(p, ganHtml) + '</div></article>';
     }).join('');
+    initMedia(list);
   }
 
   function init() {

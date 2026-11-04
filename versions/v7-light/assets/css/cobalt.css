@@ -422,3 +422,11 @@ html body .pj3__c:focus-visible,html body .lp2__row:focus-visible{outline:2px so
 html.paused *,html.paused *::before,html.paused *::after{animation-play-state:paused!important}
 html body .pr3__c:not(.is-lit){opacity:.75}
 html body .ftr2__bottom{padding-inline-start:clamp(64px,6vw,88px)}
+
+/* ===== מוקאפים מתחלפים (עד שניים לפרויקט) וסרטוני גלילה ===== */
+.mk-rot{display:grid;width:100%}
+.mk-rot>.mk{grid-area:1/1;width:100%;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility 0s .8s}
+.mk-rot>.mk.is-on{opacity:1;visibility:visible;transition:opacity .8s ease}
+.mk__shot--empty{background:#E8DFCB}
+video.mk__shot{background:#E8DFCB}
+@media (prefers-reduced-motion:reduce){.mk-rot>.mk{transition:none}}

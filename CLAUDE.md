@@ -114,3 +114,8 @@
 - `supabase/006_hardening_leads_delete.sql`: IP לפי cf-connecting-ip, תקרה יומית 60 ופסקת מייל מעל 15 בשעה, מחיקת לידים מ-/admin (בכפתור עם אישור), אילוץ על `projects.link`.
 - `404.html` בעיצוב הבהיר, `llms.txt`, סכמה כ-`@graph` (WebSite, ProfessionalService, Person עם sameAs).
 - נשאר פתוח (דורש החלטה/תוכן): מילוי `[...]` בעמודים המשפטיים, מועד חיבור sarankava.com והפניות מהוורדפרס, צורת השם העברית, כיבוי ספק המייל+סיסמה ב-Supabase, אישורי זכויות תמונות, H1 תיאורי, favicon.ico.
+
+## מוקאפים מרובים וסרטוני גלילה
+- `projects.mockups` (jsonb, עד 2): `[{desktop:{type:'image|video',url}, mobile:{type,url}}]` + `mockup_interval` (2–60 שניות, ברירת מחדל 5). מיגרציה: `supabase/007_project_mockups.sql` (גם מרחיבה את באקט `project-images` ל-25MB וסרטוני mp4/webm). העמודות הישנות `desktop_image_url`/`mobile_image_url` נשארות מסונכרנות (תמונה ראשונה) כגיבוי וכתמונה ממוזערת.
+- `projects-data.js`: שני מוקאפים נבנים כ-`.mk-rot` (חלופה בעמעום, `is-on` על הפעיל), סרטון = `<video muted loop playsinline>` שמנוגן רק כשהוא פעיל ונראה (בדסקטופ גם רק בטור הפתוח), `prefers-reduced-motion` = בלי החלפה ובלי ניגון. בלי מוקאפים: התמונות הישנות, ואז המוקאפ המובנה (`mockup_key`).
+- /admin: לכל מוקאפ ולכל גודל בורחים בין תמונה (מומרת ל-WebP) לבין סרטון גלילה (mp4/webm עד 25MB, מועלה כמות שהוא). כפתורים בלוח הניהול עגולים (קפסולות), שדות וטבלאות חדים.

@@ -195,3 +195,39 @@ h2{font-family:"Sara Ankava",var(--f);font-weight:700}
   .cp-tabs button{padding-inline:14px;font-size:15px}
 }
 @media (max-width:640px){span.cp-thumb:empty{display:none}}
+
+/* ===== כל הכפתורים עגולים (קפסולות); שדות וטבלאות נשארים חדים ===== */
+.cp-sm,.cp-tb button,.cp-btn,.cp-wa,.cp-seg button{border-radius:999px}
+.cp-sm{padding-inline:16px}
+.cp-seg button:first-child,.cp-seg button:last-child{border-radius:999px}
+.cp-seg{border-radius:999px;padding:3px;gap:2px;border:1px solid rgb(30 32 31 / .3)}
+.cp-seg button{border:0}
+.cp-sw i{border-radius:999px}
+.cp-sw i::after{border-radius:50%}
+.cp-field input[type="file"]::file-selector-button,.cp-slot input[type="file"]::file-selector-button,.cp-img input[type="file"]::file-selector-button{border:1px solid rgb(30 32 31 / .3);background:var(--field);border-radius:999px;padding:8px 16px;margin-inline-end:10px;font:500 14px "Sara Ankava",var(--f);cursor:pointer}
+.cp-lead select,.cp-field--inline select{border-radius:999px;padding-inline:14px}
+/* מוקאפים בטופס */
+.cp-mk{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:14px}
+.cp-mk__t{font:700 18px "Sara Ankava",var(--f)}
+.cp-mkset{border:1px solid var(--line);padding:12px;margin:0;display:grid;gap:12px;background:var(--panel)}
+.cp-mkset legend{font:700 15px "Sara Ankava",var(--f);padding-inline:8px}
+.cp-mkgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cp-slot{display:grid;gap:8px;align-content:start;min-width:0}
+.cp-slot__h{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.cp-slot__h b{font-weight:500}
+.cp-seg--sm button{padding:6px 12px;min-height:44px;font-size:14px}
+.cp-slot__prev{aspect-ratio:16/10;background:#E8DFCB;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;color:var(--mut);font-size:13px}
+.cp-slot__prev img,.cp-slot__prev video{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.cp-slot input[type="file"]{font-size:13px;max-width:100%;min-height:44px}
+#interval-field input{width:84px;text-align:center}
+.cp-pv__frs{display:grid;gap:14px}
+.cp-pv__fr small{display:block;font-size:11px;color:#26282A;margin-bottom:4px}
+.cp-pv__win video,.cp-pv__phone video{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+@media (max-width:640px){.cp-mkgrid{grid-template-columns:1fr}}
+.cp-mkgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cp-slot__h{flex-direction:column;align-items:flex-start;gap:6px}
+.cp-slot .cp-seg--sm{max-width:100%}
+.cp-seg--sm button{padding:6px 10px}
+.cp-slot .cp-sm,.cp-mkset>.cp-sm,#mk-sets>.cp-btn{justify-self:start}
+.cp-slot[data-kind="mobile"] .cp-slot__prev{aspect-ratio:3/4}
+@media (max-width:640px){.cp-mkgrid{grid-template-columns:1fr}}

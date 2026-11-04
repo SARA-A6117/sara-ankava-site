@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#F3EEE2">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/mesh.css?v=14">
-<link rel="stylesheet" href="assets/css/admin.css?v=8">
+<link rel="stylesheet" href="assets/css/admin.css?v=10">
 </head>
 <body>
 <header class="cp-top">
@@ -75,9 +75,12 @@
     <label class="cp-field" id="type-field">שורת סוג<input name="type" maxlength="200" placeholder="למשל: אתר תדמית · קטלוג"></label>
     <label class="cp-field">תיאור<textarea name="description" rows="4" maxlength="2000"></textarea></label>
     <label class="cp-field"><span id="link-label">קישור (לא חובה)</span><input name="link" type="text" dir="ltr" placeholder="https://" maxlength="500"></label>
-    <div class="cp-imgs" id="imgs-field">
-      <div class="cp-img"><span>תמונת דסקטופ</span><div class="cp-prev" id="prev-desktop"></div><input type="file" accept="image/*" id="file-desktop"></div>
-      <div class="cp-img"><span>תמונת מובייל</span><div class="cp-prev" id="prev-mobile"></div><input type="file" accept="image/*" id="file-mobile"></div>
+    <div class="cp-mk" id="imgs-field">
+      <span class="cp-mk__t">מוקאפים</span>
+      <p class="cp-hint">עד שני מוקאפים. כל מוקאפ בנוי מדסקטופ ומובייל, ולכל אחד מהם אפשר לבחור תמונה או סרטון גלילה (mp4 או webm, עד 25MB). כששניים, הם מתחלפים באתר.</p>
+      <p class="cp-hint" id="mk-builtin" hidden>לפרויקט הזה יש מוקאפ מובנה. אם תעלי מוקאפים כאן, הם יחליפו אותו.</p>
+      <div id="mk-sets"></div>
+      <label class="cp-field cp-field--inline" id="interval-field" hidden>החלפה בין המוקאפים כל <input type="number" id="mk-interval" min="2" max="60" value="5" inputmode="numeric"> שניות</label>
     </div>
     <label class="cp-check" id="concept-field"><input type="checkbox" name="is_concept"> להציג "קונספט"</label>
     <label class="cp-check"><input type="checkbox" name="published"> מפורסם באתר</label>
@@ -101,6 +104,6 @@
 <script src="assets/vendor/purify.min.js"></script>
 <script src="assets/js/admin-config.js?v=2"></script>
 <script src="assets/js/legal-data.js?v=2"></script>
-<script src="assets/js/admin.js?v=7"></script>
+<script src="assets/js/admin.js?v=8"></script>
 </body>
 </html>
