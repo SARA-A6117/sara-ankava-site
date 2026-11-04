@@ -118,10 +118,11 @@ const WA_TEXT = 'היי שרי, הגעתי מהאתר ואשמח לדבר על �
     const form = $('form', box), f = form.elements, err = $('.contact__err', box);
     const valid = {
       name: v => v.trim().length >= 2,
-      phone: v => /^(0\d{8,9}|\+?972\d{8,9})$/.test(v.replace(/[\s-]/g, ''))
+      phone: v => /^(0\d{8,9}|\+?972\d{8,9})$/.test(v.replace(/[\s-]/g, '')),
+      email: v => !v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())   /* לא חובה, אבל אם מולא חייב להיות תקין */
     };
     const mark = k => { const ok = valid[k](f[k].value); f[k].setAttribute('aria-invalid', !ok); return ok; };
-    ['name', 'phone'].forEach(k => f[k].addEventListener('input', () => { if (f[k].getAttribute('aria-invalid') === 'true') mark(k); }));
+    ['name', 'phone', 'email'].forEach(k => f[k].addEventListener('input', () => { if (f[k].getAttribute('aria-invalid') === 'true') mark(k); }));
     const started = Date.now();
     form.addEventListener('submit', async e => {
       e.preventDefault();
@@ -130,6 +131,7 @@ const WA_TEXT = 'היי שרי, הגעתי מהאתר ואשמח לדבר על �
         err.textContent = !okN && !okP ? 'חסרים לי השם ומספר הטלפון.' : !okN ? 'רק תגידו לי איך קוראים לכם.' : 'נראה שחסרה ספרה במספר. פורמט: 050-1234567';
         (!okN ? f.name : f.phone).focus(); return;
       }
+      if (!mark('email')) { err.textContent = 'נראה שהמייל לא תקין. אפשר לתקן, או להשאיר ריק.'; f.email.focus(); return; }
       if (f.consent && !f.consent.checked) { f.consent.setAttribute('aria-invalid', 'true'); err.textContent = 'כדי לשלוח צריך לאשר את מדיניות הפרטיות.'; f.consent.focus(); return; }
       err.textContent = '';
       const btn = $('button[type="submit"]', form), lbl = btn && $('.btn__t', btn), old = lbl ? lbl.innerHTML : '';
@@ -142,7 +144,7 @@ const WA_TEXT = 'היי שרי, הגעתי מהאתר ואשמח לדבר על �
           const r = await fetch(SB.url.replace(/\/$/, '') + '/rest/v1/leads', {
             method: 'POST',
             headers: { apikey: SB.anonKey, Authorization: 'Bearer ' + SB.anonKey, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-            body: JSON.stringify({ name: f.name.value.trim(), business: f.about.value.trim() || null, phone: f.phone.value.trim(), message: (f.pains ? f.pains.value : '').trim() || null, hp: '' })
+            body: JSON.stringify({ name: f.name.value.trim(), business: f.about.value.trim() || null, phone: f.phone.value.trim(), email: f.email.value.trim() || null, message: (f.pains ? f.pains.value : '').trim() || null, hp: '' })
           });
           if (!r.ok) throw new Error(String(r.status));
         }
