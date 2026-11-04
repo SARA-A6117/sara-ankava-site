@@ -7,6 +7,28 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "sara-ankava-site.vercel.app"
+        }
+      ],
+      "destination": "https://sarankava.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path((?!admin(?:/|$)|admin\\.html$|assets/).+)",
+      "has": [
+        {
+          "type": "host",
+          "value": "sara-ankava-site.vercel.app"
+        }
+      ],
+      "destination": "https://sarankava.com/:path",
+      "statusCode": 301
+    },
+    {
       "source": "/wp-admin/:path*",
       "destination": "/",
       "permanent": false

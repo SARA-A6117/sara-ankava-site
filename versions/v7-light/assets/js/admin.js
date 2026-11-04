@@ -23,7 +23,7 @@
   /* ---------- התחברות ---------- */
   $('#google').addEventListener('click', function () {
     flash(els.loginMsg, '');
-    sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + location.pathname, queryParams: { prompt: 'select_account' } } })
+    sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin + '/admin', queryParams: { prompt: 'select_account' } } })
       .then(function (r) { if (r.error) flash(els.loginMsg, 'ההתחברות נכשלה. נסו שוב.'); });
   });
   $('#logout').addEventListener('click', function () { sb.auth.signOut(); });
