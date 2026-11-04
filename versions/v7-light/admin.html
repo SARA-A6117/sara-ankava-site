@@ -7,22 +7,24 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#F3EEE2">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/admin.css?v=6">
+<link rel="stylesheet" href="assets/css/mesh.css?v=13">
+<link rel="stylesheet" href="assets/css/admin.css?v=7">
 </head>
 <body>
 <header class="cp-top">
-  <span class="cp-brand">Sara Ankava <small>ניהול</small></span>
+  <a class="cp-brand" href="/" aria-label="Sara Ankava, לאתר"><img src="assets/brand/logo-black.png" width="1066" height="123" alt="Sara Ankava"><small>ניהול</small></a>
   <div class="cp-user" id="user" hidden><span id="user-mail"></span><button type="button" class="cp-btn cp-btn--ghost" id="logout">התנתקות</button></div>
 </header>
 
 <main class="cp-main">
   <section class="cp-login" id="login">
-    <h1>כניסה למערכת הניהול</h1>
+    <h1 class="cp-hero cp-hero--sm">כניסה <span data-gn="text">לניהול</span></h1>
     <p id="login-msg" class="cp-msg" role="alert"></p>
-    <button type="button" class="cp-btn cp-btn--grad" id="google">התחברות עם גוגל</button>
+    <button type="button" class="cp-btn cp-btn--grad" data-gn="btn" id="google">התחברות עם גוגל</button>
   </section>
 
   <section id="app" hidden>
+    <h1 class="cp-hero">ניהול <span data-gn="text">האתר</span></h1>
     <nav class="cp-tabs" role="tablist">
       <button type="button" role="tab" id="tab-projects" aria-selected="true" aria-controls="pane-projects">פרויקטים</button>
       <button type="button" role="tab" id="tab-pages" aria-selected="false" aria-controls="pane-pages">עמודים משפטיים <b id="pages-gaps" hidden></b></button>
@@ -30,7 +32,7 @@
     </nav>
 
     <div id="pane-projects" role="tabpanel">
-      <div class="cp-bar"><p class="cp-hint">גררו בידית ⠿ כדי לשנות סדר (או השתמשו בחצים). הסדר נשמר מיד. <b id="home-count"></b></p><button type="button" class="cp-btn cp-btn--grad" id="add">הוספת פרויקט</button></div>
+      <div class="cp-bar"><p class="cp-hint">גררו בידית ⠿ כדי לשנות סדר (או השתמשו בחצים). הסדר נשמר מיד. <b id="home-count"></b></p><button type="button" class="cp-btn cp-btn--grad" data-gn="btn" id="add">הוספת פרויקט</button></div>
       <p class="cp-warn" id="home-warn" role="status" hidden></p>
       <ul class="cp-list" id="projects" aria-live="polite"></ul>
     </div>
@@ -48,7 +50,7 @@
       </div>
       <div class="cp-ed" id="pg-ed" contenteditable="true" dir="rtl" role="textbox" aria-multiline="true" aria-label="תוכן העמוד"></div>
       <div class="cp-gaps" id="pg-gaps" aria-live="polite"></div>
-      <div class="cp-actions"><button type="button" class="cp-btn cp-btn--grad" id="pg-save">שמירה</button><a class="cp-btn cp-btn--ghost" id="pg-view" href="/privacy" target="_blank" rel="noopener">צפייה בעמוד</a></div>
+      <div class="cp-actions"><button type="button" class="cp-btn cp-btn--grad" data-gn="btn" id="pg-save">שמירה</button><a class="cp-btn cp-btn--ghost" id="pg-view" href="/privacy" target="_blank" rel="noopener">צפייה בעמוד</a></div>
       <p class="cp-msg" id="pg-msg" role="alert"></p>
     </div>
 
@@ -82,7 +84,7 @@
     <label class="cp-check"><input type="checkbox" name="show_on_home"> להציג בדף הבית (עד 4)</label>
     <div class="cp-prevbox"><span class="cp-prevbox__t">תצוגה מקדימה</span><div id="pprev"></div></div>
     <p class="cp-msg" id="pform-msg" role="alert"></p>
-    <div class="cp-actions"><button type="submit" class="cp-btn cp-btn--grad" id="psave">שמירה</button><button type="button" class="cp-btn cp-btn--ghost" id="pcancel">ביטול</button></div>
+    <div class="cp-actions"><button type="submit" class="cp-btn cp-btn--grad" data-gn="btn" id="psave">שמירה</button><button type="button" class="cp-btn cp-btn--ghost" id="pcancel">ביטול</button></div>
   </form>
 </div>
 

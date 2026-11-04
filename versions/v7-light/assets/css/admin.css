@@ -142,3 +142,56 @@ mark.ph,.cp-gaps mark{background:var(--y);color:#12140f;padding:0 3px}
   .cp-seg{width:100%}.cp-seg button{flex:1 1 auto;padding-inline:10px}
   #pg-date{max-width:none}
 }
+
+/* ===== מראה האתר: לוגו, קפסולת ניווט צפה, כותרות ענק, כפתורי בועה בגרדיאנט קובלט, קווי גריד אופקיים ===== */
+@font-face{font-family:"Sara Ankava";src:url("../fonts/SaraAnkava-Light-v1.2.woff2") format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Sara Ankava";src:url("../fonts/SaraAnkava-Medium-v1.2.woff2") format("woff2");font-weight:500;font-display:swap}
+html body{background-image:linear-gradient(rgb(30 32 31 / .09) 1px,transparent 1px);background-size:100% 112px;background-attachment:fixed}
+html body::after{z-index:1}
+.cp-top{position:relative;background:transparent;border-bottom:0;padding:18px clamp(16px,4vw,56px);min-height:84px}
+.cp-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.cp-brand img{height:26px;width:auto;display:block}
+.cp-brand small{font:300 15px var(--f);color:var(--mut);margin:0}
+.cp-user{font-family:"Sara Ankava",var(--f);font-weight:300}
+.cp-hero{margin:clamp(24px,4vw,56px) 0 clamp(16px,2.4vw,32px);font:900 clamp(56px,10vw,132px)/.95 var(--f);letter-spacing:-.02em;color:var(--ink)}
+.cp-hero--sm{font-size:clamp(48px,8vw,96px)}
+.cp-hero [data-gn="text"]{display:inline-block;padding-inline:.04em}
+.cp-main{max-width:1040px}
+/* קפסולת הניווט (הטאבים) צפה במרכז, כמו הניווט באתר */
+.cp-tabs{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:6;display:flex;gap:2px;padding:5px;margin:0;border:1px solid rgb(30 32 31 / .18);border-radius:999px;background:rgb(243 238 226 / .94);box-shadow:0 14px 34px -18px rgb(30 32 31 / .5);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);overflow:visible;max-width:calc(100vw - 32px)}
+.cp-tabs button{border:0;border-radius:999px;padding:8px 22px;min-height:44px;font:300 16px/1 "Sara Ankava",var(--f);color:var(--ink);background:transparent}
+.cp-tabs button:hover{color:var(--cob)}
+.cp-tabs button[aria-selected="true"]{color:#F4F0E6;font-weight:500;border-bottom-color:transparent;background-color:#1B33C9;background-image:var(--grain),var(--mesh-live);background-size:150px,auto,auto,auto,auto,auto;background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat;background-blend-mode:overlay,normal,normal,normal,normal,normal;animation:var(--mesh-anim)}
+.cp-tabs b{background:var(--y);color:#1E201F;border-radius:999px}
+.cp-tabs button[aria-selected="true"] b{background:#F4F0E6}
+/* כל הכפתורים בועות דיבור: ראשיים בגרדיאנט עם זנב, משניים קפסולת קו */
+.cp-btn{border-radius:999px;font-family:"Sara Ankava",var(--f);font-weight:500;border-color:rgb(30 32 31 / .3)}
+.cp-btn--grad{position:relative;border:0;padding-inline:28px;color:#F4F0E6}
+.cp-btn--grad::after{content:"";position:absolute;bottom:-8px;left:22px;width:16px;height:11px;background:#2A45D8;clip-path:polygon(0 0,100% 0,0 100%)}
+#add::after{background:#2A45D8}
+.cp-actions .cp-btn--grad{margin-bottom:8px}
+.cp-wa,.cp-btn--danger{border-radius:999px}
+.cp-tag,.cp-tag--ph,.cp-tag--warn{border-radius:999px;padding-inline:10px}
+/* רשימות: מספור בספרות כבדות, כותרות בפונט המותג */
+.cp-list{counter-reset:r;border-top:1px solid rgb(30 32 31 / .3)}
+.cp-row{counter-increment:r;background:transparent;border-bottom-color:rgb(30 32 31 / .22);padding-block:16px}
+.cp-info::before{content:counter(r,decimal-leading-zero);display:block;font:900 13px/1 var(--f);color:var(--cob);margin-bottom:4px}
+.cp-info b{font:700 22px/1.2 "Sara Ankava",var(--f);overflow-wrap:anywhere}
+.cp-lead{counter-increment:r;border-bottom-color:rgb(30 32 31 / .22)}
+.cp-lead b{font:700 22px/1.2 "Sara Ankava",var(--f)}
+h2{font-family:"Sara Ankava",var(--f);font-weight:700}
+.cp-sheet h2{font-size:28px}
+.cp-seg{border-radius:999px;overflow:hidden;border-color:rgb(30 32 31 / .3)}
+.cp-seg button{font-family:"Sara Ankava",var(--f);border-inline-start-color:rgb(30 32 31 / .3)}
+.cp-field{font-family:"Sara Ankava",var(--f);font-weight:300}
+.cp-hint{font-family:"Sara Ankava",var(--f)}
+.cp-main > section > .cp-hero,.cp-main #app > .cp-hero{margin-top:8px}
+@media (max-width:900px){
+  .cp-tabs{position:static;transform:none;width:max-content;max-width:100%;margin:0 0 20px;overflow-x:auto}
+  .cp-hero{margin-top:8px}
+}
+@media (max-width:640px){
+  .cp-brand img{height:22px}
+  .cp-tabs button{padding-inline:14px;font-size:15px}
+}
+@media (max-width:640px){span.cp-thumb:empty{display:none}}
