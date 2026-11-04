@@ -119,3 +119,9 @@
 - `projects.mockups` (jsonb, עד 2): `[{desktop:{type:'image|video',url}, mobile:{type,url}}]` + `mockup_interval` (2–60 שניות, ברירת מחדל 5). מיגרציה: `supabase/007_project_mockups.sql` (גם מרחיבה את באקט `project-images` ל-25MB וסרטוני mp4/webm). העמודות הישנות `desktop_image_url`/`mobile_image_url` נשארות מסונכרנות (תמונה ראשונה) כגיבוי וכתמונה ממוזערת.
 - `projects-data.js`: שני מוקאפים נבנים כ-`.mk-rot` (חלופה בעמעום, `is-on` על הפעיל), סרטון = `<video muted loop playsinline>` שמנוגן רק כשהוא פעיל ונראה (בדסקטופ גם רק בטור הפתוח), `prefers-reduced-motion` = בלי החלפה ובלי ניגון. בלי מוקאפים: התמונות הישנות, ואז המוקאפ המובנה (`mockup_key`).
 - /admin: לכל מוקאפ ולכל גודל בורחים בין תמונה (מומרת ל-WebP) לבין סרטון גלילה (mp4/webm עד 25MB, מועלה כמות שהוא). כפתורים בלוח הניהול עגולים (קפסולות), שדות וטבלאות חדים.
+
+## דומיין ראשי: sarankava.com (נובמבר 2026)
+- האתר מוגש מ-https://sarankava.com (www מפנה אליו, 308). כל הכתובות המוחלטות (canonical, og, סכמה, sitemap, llms.txt) על הדומיין החדש. `tools/go-live.js` כבר הורץ.
+- `vercel.json`: כתובת `sara-ankava-site.vercel.app` מופנית ב-301 לאותו נתיב בדומיין הראשי, חוץ מ-`/admin` ו-`/assets/` (כדי שאפשר לבדוק התחברות בשני הדומיינים; לא להסיר את החריג בלי לבדוק). כתובת החזרה של Google היא `window.location.origin + '/admin'`.
+- הפניות 301 מכתובות הוורדפרס הישן (שירותים וקטגוריות ל-`/`, פרויקטים ותיק עבודות ל-`/projects`, משפטיים לעמודים החדשים) ב-`vercel.json`.
+- ב-Supabase: `ADMIN_URL` ב-secrets של notify-lead עדיין כתובת vercel.app/admin כברירת מחדל, ו-`supabase/SETUP-he.md` מזכיר vercel.app; לעדכן בהזדמנות.
