@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#F3EEE2">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/mesh.css?v=14">
-<link rel="stylesheet" href="assets/css/admin.css?v=10">
+<link rel="stylesheet" href="assets/css/admin.css?v=13">
 </head>
 <body>
 <header class="cp-top">
@@ -24,21 +24,31 @@
   </section>
 
   <section id="app" hidden>
-    <h1 class="cp-hero">ניהול <span data-gn="text">האתר</span></h1>
-    <nav class="cp-tabs" role="tablist">
-      <button type="button" role="tab" id="tab-projects" aria-selected="true" aria-controls="pane-projects">פרויקטים</button>
-      <button type="button" role="tab" id="tab-pages" aria-selected="false" aria-controls="pane-pages">עמודים משפטיים <b id="pages-gaps" hidden></b></button>
-      <button type="button" role="tab" id="tab-leads" aria-selected="false" aria-controls="pane-leads">פניות <b id="leads-new" hidden></b></button>
-    </nav>
+    <div class="cp-shell" id="shell">
+      <aside class="cp-side" id="side" aria-label="תפריט ניהול">
+        <button type="button" class="cp-side__tg" id="side-tg" aria-expanded="true" aria-controls="side-nav" aria-label="קיפול התפריט" title="קיפול התפריט"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>קיפול</span></button>
+        <nav class="cp-sidenav" id="side-nav" role="tablist" aria-orientation="vertical">
+          <button type="button" role="tab" id="tab-overview" aria-selected="true" aria-controls="pane-overview" title="סקירה"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>סקירה</span></button>
+          <button type="button" role="tab" id="tab-leads" aria-selected="false" aria-controls="pane-leads" title="פניות"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13l3-8h10l3 8v6H4zM4 13h5l1 2h4l1-2h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>פניות</span><b id="leads-new" hidden></b></button>
+          <button type="button" role="tab" id="tab-projects" aria-selected="false" aria-controls="pane-projects" title="פרויקטים"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 9h18M7 13h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>פרויקטים</span></button>
+          <button type="button" role="tab" id="tab-pages" aria-selected="false" aria-controls="pane-pages" title="עמודים משפטיים"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>עמודים משפטיים</span><b id="pages-gaps" hidden></b></button>
+        </nav>
+      </aside>
+      <div class="cp-content">
+        <h1 class="cp-title" id="view-title">סקירה</h1>
+        <div id="pane-overview" role="tabpanel">
+          <div class="cp-cards" id="ov-cards" aria-live="polite"></div>
+          <p class="cp-hint">האתר החי: <a href="/" target="_blank" rel="noopener">sarankava.com</a></p>
+        </div>
 
-    <div id="pane-projects" role="tabpanel">
+    <div id="pane-projects" role="tabpanel" hidden>
       <div class="cp-bar"><p class="cp-hint">גררו בידית ⠿ כדי לשנות סדר (או השתמשו בחצים). הסדר נשמר מיד. <b id="home-count"></b></p><button type="button" class="cp-btn cp-btn--grad" data-gn="btn" id="add">הוספת פרויקט</button></div>
       <p class="cp-warn" id="home-warn" role="status" hidden></p>
       <ul class="cp-list" id="projects" aria-live="polite"></ul>
     </div>
 
     <div id="pane-pages" role="tabpanel" hidden>
-      <div class="cp-bar"><div class="cp-seg" id="pg-pick" role="group" aria-label="בחירת עמוד"><button type="button" data-slug="privacy" aria-pressed="true">מדיניות פרטיות</button><button type="button" data-slug="terms" aria-pressed="false">תנאי שימוש</button><button type="button" data-slug="accessibility" aria-pressed="false">הצהרת נגישות</button></div><label class="cp-field cp-field--inline">תאריך עדכון אחרון (מתעדכן אוטומטית בשמירה)<input id="pg-date" readonly tabindex="-1"></label></div>
+      <div class="cp-bar"><div class="cp-seg" id="pg-pick" role="group" aria-label="בחירת עמוד"><button type="button" data-slug="privacy" aria-pressed="true">מדיניות פרטיות</button><button type="button" data-slug="terms" aria-pressed="false">תנאי שימוש</button><button type="button" data-slug="accessibility" aria-pressed="false">הצהרת נגישות</button></div></div>
       <p class="cp-hint" id="pg-note"></p>
       <label class="cp-field">כותרת העמוד<input id="pg-title" maxlength="120"></label>
       <label class="cp-field">משפט פתיחה<input id="pg-lead" maxlength="300"></label>
@@ -50,8 +60,10 @@
       </div>
       <div class="cp-ed" id="pg-ed" contenteditable="true" dir="rtl" role="textbox" aria-multiline="true" aria-label="תוכן העמוד"></div>
       <div class="cp-gaps" id="pg-gaps" aria-live="polite"></div>
-      <div class="cp-actions"><button type="button" class="cp-btn cp-btn--grad" data-gn="btn" id="pg-save">שמירה</button><a class="cp-btn cp-btn--ghost" id="pg-view" href="/privacy" target="_blank" rel="noopener">צפייה בעמוד</a></div>
+      <p class="cp-pgstatus"><span class="cp-badge" id="pg-status">מפורסם</span> <span id="pg-saved" class="cp-hint" role="status"></span></p>
+      <div class="cp-actions"><button type="button" class="cp-btn cp-btn--grad" data-gn="btn" id="pg-save">פרסום</button><button type="button" class="cp-btn" id="pg-draftbtn">שמירת טיוטה</button><button type="button" class="cp-btn" id="pg-hist-btn" aria-expanded="false" aria-controls="pg-hist">היסטוריה</button><a class="cp-btn cp-btn--ghost" id="pg-view" href="/privacy" target="_blank" rel="noopener">צפייה בעמוד</a></div>
       <p class="cp-msg" id="pg-msg" role="alert"></p>
+      <div class="cp-hist" id="pg-hist" hidden></div>
     </div>
 
     <div id="pane-leads" role="tabpanel" hidden>
@@ -60,8 +72,11 @@
         <label class="cp-field cp-field--inline">סינון
           <select id="lead-filter"><option value="">הכול</option><option value="new">חדש</option><option value="in_progress">בטיפול</option><option value="closed">סגור</option></select>
         </label>
+        <button type="button" class="cp-btn" id="lead-csv">ייצוא CSV</button>
       </div>
       <ul class="cp-list" id="leads" aria-live="polite"></ul>
+    </div>
+      </div>
     </div>
   </section>
 
@@ -104,6 +119,6 @@
 <script src="assets/vendor/purify.min.js"></script>
 <script src="assets/js/admin-config.js?v=2"></script>
 <script src="assets/js/legal-data.js?v=2"></script>
-<script src="assets/js/admin.js?v=9"></script>
+<script src="assets/js/admin.js?v=11"></script>
 </body>
 </html>

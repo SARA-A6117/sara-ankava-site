@@ -41,20 +41,54 @@
     els.mail.textContent = email;
     show(els.login, false); show(els.user, true); show(els.app, true);
     loadProjects(); loadLeads(); loadPages();
+    tab(new URLSearchParams(location.search).get('view') || 'overview', false);
   }
   sb.auth.getSession().then(function (r) { gate(r.data && r.data.session); });
   sb.auth.onAuthStateChange(function (ev, session) { if (ev === 'SIGNED_IN' || ev === 'SIGNED_OUT') gate(session); });
 
-  /* ---------- טאבים ---------- */
-  function tab(name) {
-    ['projects', 'pages', 'leads'].forEach(function (n) {
+  /* ---------- ניווט: סיידבר, ?view= ב-URL, אזהרה לפני יציאה עם שינויים ---------- */
+  var VIEWS = { overview: 'סקירה', leads: 'פניות', projects: 'פרויקטים', pages: 'עמודים משפטיים' };
+  var dirtyPages = false, formDirty = false, curView = 'overview';
+  function tab(name, push) {
+    if (!VIEWS[name]) name = 'overview';
+    if (name !== curView && curView === 'pages' && dirtyPages && !window.confirm('יש שינויים בעמוד המשפטי שעדיין לא נשמרו כטיוטה. לעבור בלי לשמור?')) return;
+    curView = name;
+    Object.keys(VIEWS).forEach(function (n) {
       $('#tab-' + n).setAttribute('aria-selected', String(n === name));
       show($('#pane-' + n), n === name);
     });
+    $('#view-title').textContent = VIEWS[name];
+    document.title = VIEWS[name] + ' — ניהול — Sara Ankava';
+    if (push) { try { history.pushState({ v: name }, '', '?view=' + name); } catch (x) {} }
+    if (name === 'overview') renderOverview();
   }
-  $('#tab-projects').addEventListener('click', function () { tab('projects'); });
-  $('#tab-pages').addEventListener('click', function () { tab('pages'); });
-  $('#tab-leads').addEventListener('click', function () { tab('leads'); });
+  Object.keys(VIEWS).forEach(function (n) { $('#tab-' + n).addEventListener('click', function () { tab(n, true); }); });
+  window.addEventListener('popstate', function () { tab(new URLSearchParams(location.search).get('view') || 'overview', false); });
+  window.addEventListener('beforeunload', function (e) { if (dirtyPages || formDirty) { e.preventDefault(); e.returnValue = ''; } });
+  $('#side-tg').addEventListener('click', function () {
+    var c = $('#shell').classList.toggle('is-collapsed');
+    this.setAttribute('aria-expanded', String(!c));
+    try { localStorage.setItem('cp-side', c ? '1' : '0'); } catch (x) {}
+  });
+  try { if (localStorage.getItem('cp-side') === '1') { $('#shell').classList.add('is-collapsed'); $('#side-tg').setAttribute('aria-expanded', 'false'); } } catch (x) {}
+
+  /* סקירה: מה דורש תשומת לב */
+  function renderOverview() {
+    var nNew = leads.filter(function (l) { return l.status === 'new'; }).length;
+    var onHome = projects.filter(function (p) { return p.published && p.show_on_home; }).length;
+    var drafts = Object.keys(pgData || {}).filter(function (k) { return pgData[k].draft; }).length;
+    var gaps = 0; Object.keys(pgData || {}).forEach(function (k) { gaps += (String(pgData[k].content || '').match(LH.GAP) || []).length; });
+    var cards = [
+      { v: 'leads', n: nNew, t: 'פניות חדשות', s: leads.length + ' פניות בסך הכול' },
+      { v: 'projects', n: Math.min(onHome, 4) + '/4', t: 'פרויקטים בדף הבית', s: onHome > 4 ? 'מסומנים ' + onHome + ', יוצגו 4 הראשונים' : projects.length + ' פרויקטים בסך הכול' },
+      { v: 'pages', n: drafts, t: 'טיוטות שלא פורסמו', s: 'בעמודים המשפטיים' },
+      { v: 'pages', n: gaps, t: 'פרטים חסרים ([...])', s: 'בעמודים המשפטיים, מודגשים בצהוב' }
+    ];
+    $('#ov-cards').innerHTML = cards.map(function (c) {
+      return '<button type="button" class="cp-card' + (c.n && c.n !== '0/4' ? ' is-attn' : '') + '" data-go="' + c.v + '"><b class="cp-card__n">' + esc(c.n) + '</b><span class="cp-card__t">' + esc(c.t) + '</span><small>' + esc(c.s) + '</small></button>';
+    }).join('');
+  }
+  $('#ov-cards').addEventListener('click', function (e) { var b = e.target.closest('[data-go]'); if (b) tab(b.dataset.go, true); });
 
   /* ---------- פרויקטים ---------- */
   function loadProjects() {
@@ -62,7 +96,7 @@
       .then(function (r) {
         if (r.error) { flash(els.gmsg, 'טעינת הפרויקטים נכשלה.'); return; }
         flash(els.gmsg, '');
-        projects = r.data || []; renderProjects();
+        projects = r.data || []; renderProjects(); renderOverview();
       });
   }
   var MAX_HOME = 4;
@@ -244,12 +278,16 @@
     ['type-field', 'concept-field', 'imgs-field'].forEach(function (id) { show($('#' + id), !isPh); });
     $('#link-label').textContent = isPh ? 'לאן הכפתור מוביל' : 'קישור (לא חובה)';
     $('#mk-builtin').hidden = !(p && p.mockup_key && !(p.mockups && p.mockups.length));
-    flash($('#pform-msg'), ''); renderMk(); show($('#modal'), true); form.title.focus();
+    flash($('#pform-msg'), ''); renderMk(); formDirty = false; show($('#modal'), true); form.title.focus();
   }
-  function closeForm() { show($('#modal'), false); editing = null; }
+  function closeForm(force) {
+    if (force !== true && formDirty && !window.confirm('יש שינויים שלא נשמרו. לסגור בלי לשמור?')) return;
+    formDirty = false; show($('#modal'), false); editing = null;
+  }
   $('#add').addEventListener('click', function () { openForm(null); });
-  $('#pcancel').addEventListener('click', closeForm);
+  $('#pcancel').addEventListener('click', function () { closeForm(); });
   $('#modal').addEventListener('click', function (e) { if (e.target === $('#modal')) closeForm(); });
+  $('#pform').addEventListener('input', function () { formDirty = true; });
   form.addEventListener('input', renderPreview);
   form.addEventListener('change', renderPreview);
   /* הקטנה אוטומטית והמרה ל-WebP בדפדפן לפני ההעלאה (חוסך משקל ואחסון) */
@@ -324,7 +362,7 @@
         var gone = projectUrls(editing).filter(function (u) { return !keep[u]; }).map(storagePath).filter(Boolean);
         if (gone.length) sb.storage.from(BUCKET).remove(gone);
       }
-      closeForm(); loadProjects();
+      closeForm(true); loadProjects();
     }).catch(function () { flash(m, 'השמירה נכשלה. בדקו את ההרשאות והקבצים ונסו שוב.'); })
       .then(function () { btn.disabled = false; });
   });
@@ -352,17 +390,19 @@
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { show($('#confirm'), false); if (!$('#modal').hidden) closeForm(); } });
 
-  /* ---------- עמודים משפטיים ---------- */
-  var LH = window.LegalHTML, pgData = {}, pgSlug = 'privacy', ed = $('#pg-ed');
+  /* ---------- עמודים משפטיים: טיוטה, פרסום, היסטוריה (20 גרסאות) ---------- */
+  var LH = window.LegalHTML, pgData = {}, pgSlug = 'privacy', ed = $('#pg-ed'), draftT = null;
   try { document.execCommand('defaultParagraphSeparator', false, 'p'); } catch (x) {}
-  function gapsIn(html) { return (String(html || "").match(LH.GAP) || []).length; }
+  function gapsIn(html) { return (String(html || '').match(LH.GAP) || []).length; }
+  function setBadge() {
+    var n = 0; Object.keys(pgData).forEach(function (k) { n += gapsIn(pgData[k].content); });
+    var b = $('#pages-gaps'); b.hidden = !n; b.textContent = n; b.title = 'מקומות שעוד חסרים ([...])';
+  }
   function loadPages() {
     sb.from('pages').select('*').then(function (r) {
       if (r.error) { flash($('#pg-msg'), 'טעינת העמודים נכשלה.'); return; }
       pgData = {}; (r.data || []).forEach(function (p) { pgData[p.slug] = p; });
-      var n = 0; Object.keys(pgData).forEach(function (k) { n += gapsIn(pgData[k].content); });
-      var b = $('#pages-gaps'); b.hidden = !n; b.textContent = n; b.title = 'מקומות שעוד חסרים ([...])';
-      showPage(pgSlug);
+      setBadge(); showPage(pgSlug); renderOverview();
     });
   }
   /* גיבוי: אם אין שורה במסד, נשלף התוכן מהעמוד שבקוד כנקודת התחלה (נשמר למסד רק בשמירה) */
@@ -376,41 +416,80 @@
         s.querySelectorAll('mark').forEach(function (m) { m.replaceWith(d.createTextNode(m.textContent)); });
         html += (title ? '<h2>' + title.replace(/</g, '&lt;') + '</h2>' : '') + s.innerHTML;
       });
-      return { slug: slug, title: h1 ? h1.textContent : '', lead: lead ? lead.textContent : '', content: html, updated_at: null, fromCode: true };
-    }).catch(function () { return { slug: slug, title: '', lead: '', content: '', updated_at: null }; });
+      return { slug: slug, title: h1 ? h1.textContent : '', lead: lead ? lead.textContent : '', content: html, updated_at: null, revision: 0, fromCode: true };
+    }).catch(function () { return { slug: slug, title: '', lead: '', content: '', updated_at: null, revision: 0, fromCode: true }; });
+  }
+  function working(p) { return p.draft && typeof p.draft === 'object' ? { title: p.draft.title || '', lead: p.draft.lead || '', content: p.draft.content || '' } : { title: p.title || '', lead: p.lead || '', content: p.content || '' }; }
+  function setStatus(p) {
+    var st = $('#pg-status');
+    st.textContent = p.fromCode ? 'עוד לא במסד' : (p.draft ? 'טיוטה שלא פורסמה' : 'מפורסם');
+    st.classList.toggle('is-draft', !!p.draft || !!p.fromCode);
   }
   function showPage(slug) {
-    pgSlug = slug;
+    if (slug !== pgSlug && dirtyPages && !window.confirm('יש שינויים שעדיין לא נשמרו כטיוטה. לעבור בלי לשמור?')) return;
+    clearTimeout(draftT); dirtyPages = false; pgSlug = slug;
     [].forEach.call($('#pg-pick').children, function (b) { b.setAttribute('aria-pressed', String(b.dataset.slug === slug)); });
     $('#pg-view').setAttribute('href', '/' + slug);
+    show($('#pg-hist'), false); $('#pg-hist-btn').setAttribute('aria-expanded', 'false'); $('#pg-saved').textContent = '';
     var p = pgData[slug];
     (p ? Promise.resolve(p) : fromCode(slug)).then(function (p) {
       if (slug !== pgSlug) return;
-      $('#pg-title').value = p.title || ''; $('#pg-lead').value = p.lead || '';
-      $('#pg-date').value = p.updated_at ? LH.fmtDate(p.updated_at) : 'עוד לא נשמר';
-      $('#pg-note').textContent = p.fromCode ? 'העמוד עוד לא במסד: זה התוכן שבקוד האתר. שמירה תעביר אותו למסד.' : '';
-      var c = LH.clean(p.content);
+      var w = working(p);
+      $('#pg-title').value = w.title; $('#pg-lead').value = w.lead;
+      $('#pg-note').textContent = p.fromCode ? 'העמוד עוד לא במסד: זה התוכן שבקוד האתר. שמירה תעביר אותו למסד.' : (p.updated_at ? 'פורסם לאחרונה: ' + LH.fmtDate(p.updated_at) : '');
+      setStatus(p);
+      var c = LH.clean(w.content);
       if (c === null) { ed.contentEditable = 'false'; flash($('#pg-msg'), 'ספריית הניקוי (DOMPurify) לא נטענה. רעננו את הדף.'); return; }
       ed.contentEditable = 'true'; ed.innerHTML = c; LH.markGaps(ed); renderGaps(); flash($('#pg-msg'), '');
     });
   }
-  /* "מה עוד חסר": כל [...] עם המשפט שסביבו, מודגש בצהוב. לחיצה קופצת אל המקום */
-  function renderGaps() {
-    var box = $('#pg-gaps'), marks = ed.querySelectorAll('mark'), items = [];
+  /* "מה עוד חסר": כל [...] עם המשפט שסביבו, מודגש בצהוב */
+  function gapsHtml(root) {
+    var marks = root.querySelectorAll('mark'), items = [];
     [].forEach.call(marks, function (m, i) {
-      var blk = m.closest('p,li,h2,h3') || m.parentNode, tx = blk.textContent.trim();
-      items.push('<li><button type="button" data-gap="' + i + '">' + esc(tx).replace(LH.GAP1, function (m) { return '<mark class="ph">' + m + '</mark>'; }) + '</button></li>');
+      var blk = m.closest('p,li,h2,h3') || m.parentNode;
+      items.push('<li><button type="button" data-gap="' + i + '">' + esc(blk.textContent.trim()).replace(LH.GAP1, function (x) { return '<mark class="ph">' + x + '</mark>'; }) + '</button></li>');
     });
-    box.innerHTML = items.length ? '<b>עוד חסרים ' + items.length + ' פרטים ([...]):</b><ul>' + items.join('') + '</ul>' : '<b class="ok">אין יותר [...] בעמוד הזה.</b>';
+    return items.length ? '<b>עוד חסרים ' + items.length + ' פרטים ([...]):</b><ul>' + items.join('') + '</ul>' : '<b class="ok">אין יותר [...] בעמוד הזה.</b>';
   }
+  function renderGaps() { $('#pg-gaps').innerHTML = gapsHtml(ed); }
+  function renderGapsLive() { var tmp = ed.cloneNode(true); LH.unmark(tmp); LH.markGaps(tmp); $('#pg-gaps').innerHTML = gapsHtml(tmp); }
+  function cleanEditor() {
+    var tmp = ed.cloneNode(true); LH.unmark(tmp);
+    [].forEach.call(tmp.querySelectorAll('div'), function (d) { var p = document.createElement('p'); p.innerHTML = d.innerHTML; d.replaceWith(p); });
+    [].forEach.call(tmp.querySelectorAll('b'), function (b) { var s = document.createElement('strong'); s.innerHTML = b.innerHTML; b.replaceWith(s); });
+    [].forEach.call(tmp.querySelectorAll('i'), function (b) { var s = document.createElement('em'); s.innerHTML = b.innerHTML; b.replaceWith(s); });
+    var html = LH.clean(tmp.innerHTML);
+    if (html === null) return null;
+    var out = document.createElement('div'); out.innerHTML = html;
+    [].forEach.call(out.querySelectorAll('p,li,h2,h3'), function (n) { if (!n.textContent.trim() && !n.querySelector('br')) n.remove(); });
+    return out.innerHTML.trim();
+  }
+  function snapshot() { return { title: $('#pg-title').value.trim(), lead: $('#pg-lead').value.trim(), content: cleanEditor() }; }
+  /* שמירת טיוטה אוטומטית (השהיה קצרה אחרי הקלדה). לא משנה את האתר הציבורי */
+  function markDirty() {
+    dirtyPages = true; $('#pg-saved').textContent = 'יש שינויים שלא נשמרו...';
+    clearTimeout(draftT); draftT = setTimeout(saveDraft, 2000);
+  }
+  function saveDraft() {
+    clearTimeout(draftT);
+    var s = snapshot(), m = $('#pg-msg'), p = pgData[pgSlug];
+    if (s.content === null) { flash(m, 'ספריית הניקוי לא נטענה. רעננו את הדף.'); return Promise.resolve(); }
+    if (!s.title) { $('#pg-saved').textContent = 'חסרה כותרת: הטיוטה לא נשמרה.'; return Promise.resolve(); }
+    var q = p && !p.fromCode
+      ? sb.from('pages').update({ draft: s }).eq('slug', pgSlug).eq('revision', p.revision || 0).select()
+      : sb.from('pages').upsert({ slug: pgSlug, title: s.title, lead: s.lead || null, content: s.content || ' ', draft: s, revision: 0 }).select();
+    return q.then(function (r) {
+      if (r.error || !r.data || !r.data[0]) { flash(m, 'שמירת הטיוטה נכשלה. אם העמוד נערך בחלון אחר, רעננו את הדף.'); return; }
+      flash(m, ''); pgData[pgSlug] = r.data[0]; dirtyPages = false; setStatus(r.data[0]);
+      $('#pg-saved').textContent = '✓ הטיוטה נשמרה'; renderOverview();
+    });
+  }
+  ed.addEventListener('input', function () { markDirty(); gapsSoon(); });
+  $('#pg-title').addEventListener('input', markDirty);
+  $('#pg-lead').addEventListener('input', markDirty);
+  $('#pg-draftbtn').addEventListener('click', function () { saveDraft(); });
   var gapT; function gapsSoon() { clearTimeout(gapT); gapT = setTimeout(function () { var s = window.getSelection(), inEd = s.rangeCount && ed.contains(s.anchorNode); if (!inEd) LH.markGaps(ed); renderGapsLive(); }, 250); }
-  function renderGapsLive() {
-    var tmp = ed.cloneNode(true); LH.unmark(tmp); LH.markGaps(tmp);
-    var box = $('#pg-gaps'), marks = tmp.querySelectorAll('mark'), items = [];
-    [].forEach.call(marks, function (m) { var blk = m.closest('p,li,h2,h3') || m.parentNode; items.push('<li><button type="button">' + esc(blk.textContent.trim()).replace(LH.GAP1, function (m) { return '<mark class="ph">' + m + '</mark>'; }) + '</button></li>'); });
-    box.innerHTML = items.length ? '<b>עוד חסרים ' + items.length + ' פרטים ([...]):</b><ul>' + items.join('') + '</ul>' : '<b class="ok">אין יותר [...] בעמוד הזה.</b>';
-  }
-  ed.addEventListener('input', gapsSoon);
   ed.addEventListener('blur', function () { LH.unmark(ed); LH.markGaps(ed); renderGaps(); });
   ed.addEventListener('paste', function (e) { e.preventDefault(); var t = (e.clipboardData || window.clipboardData).getData('text/plain'); document.execCommand('insertText', false, t); });
   $('#pg-gaps').addEventListener('click', function (e) {
@@ -430,35 +509,52 @@
       if (!/^(https?:\/\/|mailto:|tel:|\/|#)/i.test(u.trim())) { flash($('#pg-msg'), 'הקישור חייב להתחיל ב-https:// , mailto: , tel: או /'); return; }
       document.execCommand('createLink', false, u.trim());
     } else document.execCommand(c);
-    gapsSoon();
+    markDirty(); gapsSoon();
   });
-  function cleanEditor() {
-    var tmp = ed.cloneNode(true); LH.unmark(tmp);
-    [].forEach.call(tmp.querySelectorAll('div'), function (d) { var p = document.createElement('p'); p.innerHTML = d.innerHTML; d.replaceWith(p); });
-    [].forEach.call(tmp.querySelectorAll('b'), function (b) { var s = document.createElement('strong'); s.innerHTML = b.innerHTML; b.replaceWith(s); });
-    [].forEach.call(tmp.querySelectorAll('i'), function (b) { var s = document.createElement('em'); s.innerHTML = b.innerHTML; b.replaceWith(s); });
-    var html = LH.clean(tmp.innerHTML);
-    if (html === null) return null;
-    var out = document.createElement('div'); out.innerHTML = html;
-    [].forEach.call(out.querySelectorAll('p,li,h2,h3'), function (n) { if (!n.textContent.trim() && !n.querySelector('br')) n.remove(); });
-    return out.innerHTML.trim();
-  }
+  /* פרסום: מעלה את הטיוטה לאתר, מנקה את הטיוטה, ושומר גרסה בהיסטוריה */
   $('#pg-save').addEventListener('click', function () {
-    var m = $('#pg-msg'), btn = this, title = $('#pg-title').value.trim(), html = cleanEditor();
-    if (html === null) { flash(m, 'ספריית הניקוי לא נטענה. רעננו את הדף.'); return; }
-    if (!title) { flash(m, 'חסרה כותרת לעמוד.'); return; }
-    if (!html) { flash(m, 'התוכן ריק. לא נשמר.'); return; }
-    btn.disabled = true; flash(m, 'שומר...', true);
-    sb.from('pages').upsert({ slug: pgSlug, title: title, lead: $('#pg-lead').value.trim() || null, content: html }).select().then(function (r) {
+    var m = $('#pg-msg'), btn = this, s = snapshot(), p = pgData[pgSlug];
+    if (s.content === null) { flash(m, 'ספריית הניקוי לא נטענה. רעננו את הדף.'); return; }
+    if (!s.title) { flash(m, 'חסרה כותרת לעמוד.'); return; }
+    if (!s.content) { flash(m, 'התוכן ריק. לא פורסם.'); return; }
+    clearTimeout(draftT); btn.disabled = true; flash(m, 'מפרסם...', true);
+    var rev = p && !p.fromCode ? (p.revision || 0) : 0;
+    var q = p && !p.fromCode
+      ? sb.from('pages').update({ title: s.title, lead: s.lead || null, content: s.content, draft: null, revision: rev + 1 }).eq('slug', pgSlug).eq('revision', rev).select()
+      : sb.from('pages').upsert({ slug: pgSlug, title: s.title, lead: s.lead || null, content: s.content, draft: null, revision: 1 }).select();
+    q.then(function (r) {
       btn.disabled = false;
-      if (r.error || !r.data || !r.data[0]) { flash(m, 'השמירה נכשלה. בדקו את ההרשאות ונסו שוב.'); return; }
-      pgData[pgSlug] = r.data[0];
-      $('#pg-date').value = LH.fmtDate(r.data[0].updated_at); $('#pg-note').textContent = '';
+      if (r.error || !r.data || !r.data[0]) { flash(m, 'הפרסום נכשל. אם העמוד נערך בחלון אחר, רעננו את הדף.'); return; }
+      pgData[pgSlug] = r.data[0]; dirtyPages = false; setStatus(r.data[0]); setBadge(); renderOverview();
+      $('#pg-note').textContent = 'פורסם לאחרונה: ' + LH.fmtDate(r.data[0].updated_at); $('#pg-saved').textContent = '';
       ed.innerHTML = LH.clean(r.data[0].content) || ''; LH.markGaps(ed); renderGaps();
-      var n = 0; Object.keys(pgData).forEach(function (k) { n += gapsIn(pgData[k].content); });
-      var b = $('#pages-gaps'); b.hidden = !n; b.textContent = n;
-      flash(m, 'נשמר. העמוד באתר מתעדכן מיד.', true);
+      sb.from('revisions').insert({ entity: 'page', ref: pgSlug, data: { title: s.title, lead: s.lead || '', content: s.content } }).then(function () { if (!$('#pg-hist').hidden) loadHistory(); });
+      flash(m, 'פורסם. העמוד באתר מתעדכן מיד.', true);
     });
+  });
+  /* היסטוריה: 20 הגרסאות האחרונות שפורסמו. שחזור טוען לטיוטה ולא מפרסם */
+  function loadHistory() {
+    sb.from('revisions').select('*').eq('entity', 'page').eq('ref', pgSlug).order('created_at', { ascending: false }).limit(20).then(function (r) {
+      var box = $('#pg-hist');
+      if (r.error) { box.innerHTML = '<p class="cp-msg">טעינת ההיסטוריה נכשלה.</p>'; return; }
+      var rows = r.data || [];
+      box.innerHTML = rows.length ? '<b>גרסאות שפורסמו (עד 20)</b><ul>' + rows.map(function (v, i) {
+        return '<li><span>' + esc(new Date(v.created_at).toLocaleString('he-IL', { dateStyle: 'short', timeStyle: 'short' })) + '</span><span>' + esc((v.data && v.data.title) || '') + '</span><button type="button" class="cp-sm" data-restore="' + i + '">שחזור לטיוטה</button></li>';
+      }).join('') + '</ul>' : '<p class="cp-hint">עוד אין גרסאות שמורות. כל פרסום נשמר כאן.</p>';
+      box._rows = rows;
+    });
+  }
+  $('#pg-hist-btn').addEventListener('click', function () {
+    var open = $('#pg-hist').hidden; show($('#pg-hist'), open); this.setAttribute('aria-expanded', String(open));
+    if (open) loadHistory();
+  });
+  $('#pg-hist').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-restore]'); if (!b) return;
+    var v = $('#pg-hist')._rows[+b.dataset.restore]; if (!v || !v.data) return;
+    if (!window.confirm('לטעון את הגרסה הזו לעורך כטיוטה? האתר לא ישתנה עד שתפרסמי.')) return;
+    $('#pg-title').value = v.data.title || ''; $('#pg-lead').value = v.data.lead || '';
+    ed.innerHTML = LH.clean(v.data.content) || ''; LH.markGaps(ed); renderGaps(); markDirty();
+    flash($('#pg-msg'), 'הגרסה נטענה כטיוטה. לחצי "פרסום" כדי להעלות אותה לאתר.', true);
   });
 
   /* ---------- פניות ---------- */
@@ -466,7 +562,7 @@
   function loadLeads() {
     sb.from('leads').select('*').order('created_at', { ascending: false }).limit(500).then(function (r) {
       if (r.error) { flash(els.gmsg, 'טעינת הפניות נכשלה.'); return; }
-      leads = r.data || []; renderLeads();
+      leads = r.data || []; renderLeads(); renderOverview();
     });
   }
   function fmt(d) { try { return new Date(d).toLocaleString('he-IL', { dateStyle: 'short', timeStyle: 'short' }); } catch (x) { return d; } }
@@ -526,5 +622,22 @@
         leads.forEach(function (l) { if (l.id === id2) l.note = txt; }); flash(els.gmsg, '');
       });
     }
+  });
+
+  /* ---------- ייצוא פניות ל-CSV (מוגן מהזרקת נוסחאות, עם BOM כדי שאקסל יציג עברית) ---------- */
+  function csvCell(v) {
+    var s = String(v == null ? '' : v).replace(/\r?\n/g, ' ');
+    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+    return '"' + s.replace(/"/g, '""') + '"';
+  }
+  $('#lead-csv').addEventListener('click', function () {
+    var ST2 = { new: 'חדש', in_progress: 'בטיפול', closed: 'סגור' };
+    var rows = [['תאריך', 'שם', 'עסק', 'טלפון', 'מייל', 'הודעה', 'סטטוס', 'הערה']].concat(leads.map(function (l) {
+      return [fmt(l.created_at), l.name, l.business, l.phone, l.email, l.message, ST2[l.status] || l.status, l.note];
+    }));
+    var blob = new Blob(['﻿' + rows.map(function (r) { return r.map(csvCell).join(','); }).join('\r\n')], { type: 'text/csv;charset=utf-8' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = 'leads-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
   });
 })();

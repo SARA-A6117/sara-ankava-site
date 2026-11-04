@@ -231,3 +231,50 @@ h2{font-family:"Sara Ankava",var(--f);font-weight:700}
 .cp-slot .cp-sm,.cp-mkset>.cp-sm,#mk-sets>.cp-btn{justify-self:start}
 .cp-slot[data-kind="mobile"] .cp-slot__prev{aspect-ratio:3/4}
 @media (max-width:640px){.cp-mkgrid{grid-template-columns:1fr}}
+
+/* ===== שלב 3: שלד ניהול חדש (סיידבר, סקירה), מבנה חד. קפסולה רק לפעולה ראשית ===== */
+.cp-main{max-width:1320px;padding-top:clamp(12px,2vw,24px)}
+.cp-shell{display:grid;grid-template-columns:248px minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:start}
+.cp-shell.is-collapsed{grid-template-columns:64px minmax(0,1fr)}
+.cp-side{position:sticky;top:96px;display:grid;gap:10px;border-inline-end:1px solid var(--line);padding-inline-end:clamp(10px,1.5vw,18px)}
+.cp-sidenav{display:grid;gap:4px}
+.cp-side button{display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:0 12px;background:transparent;border:0;border-inline-start:3px solid transparent;color:var(--ink);font:500 16px/1 "Sara Ankava",var(--f);cursor:pointer;text-align:start;position:relative}
+.cp-side button:hover{background:rgb(30 32 31 / .06)}
+.cp-side button[aria-selected="true"]{background:var(--cob);color:#F4F0E6;border-inline-start-color:var(--y)}
+.cp-side .cp-ic{width:22px;height:22px;flex:none}
+.cp-side b{margin-inline-start:auto;min-width:22px;padding:0 6px;background:var(--y);color:#1E201F;font-size:12px;font-weight:500;text-align:center}
+.cp-side__tg{color:var(--mut)!important;font-weight:300!important}
+.cp-shell.is-collapsed .cp-side span,.cp-shell.is-collapsed .cp-side b{display:none}
+.cp-shell.is-collapsed .cp-side button{justify-content:center;padding:0}
+.cp-content{min-width:0}
+.cp-title{margin:0 0 clamp(14px,2vw,24px);font:900 clamp(32px,4vw,52px)/1.05 var(--f);letter-spacing:-.01em}
+.cp-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px}
+.cp-card{display:grid;gap:4px;text-align:start;padding:18px;background:var(--panel);border:1px solid var(--line);cursor:pointer;min-height:132px;align-content:start}
+.cp-card:hover{border-color:var(--ink)}
+.cp-card__n{font:900 48px/1 var(--f)}
+.cp-card__t{font:500 17px "Sara Ankava",var(--f)}
+.cp-card small{color:var(--mut);font-size:14px}
+.cp-card.is-attn{border-color:var(--cob)}
+.cp-card.is-attn .cp-card__n{color:var(--cob)}
+.cp-sm,.cp-tb button,.cp-btn,.cp-wa,.cp-seg,.cp-seg button,.cp-seg--sm button,.cp-lead select,.cp-field--inline select{border-radius:0}
+.cp-btn--grad{border-radius:999px}
+.cp-tag,.cp-tag--ph,.cp-tag--warn{border-radius:0}
+.cp-badge{display:inline-block;padding:2px 10px;border:1px solid var(--cob);color:var(--cob);font:500 13px var(--f)}
+.cp-badge.is-draft{border-color:#E5A100;color:#8a5f00;background:rgb(229 161 0 / .12)}
+.cp-pgstatus{display:flex;align-items:center;gap:10px;margin:12px 0 0}
+.cp-hist{border:1px solid var(--line);background:var(--panel);padding:12px 14px;margin-top:12px}
+.cp-hist ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0}
+.cp-hist li{display:grid;grid-template-columns:150px 1fr auto;gap:12px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.cp-hist li:first-child{border-top:0}
+@media (max-width:900px){
+  .cp-shell,.cp-shell.is-collapsed{grid-template-columns:1fr;gap:12px}
+  .cp-side{position:static;border-inline-end:0;padding-inline-end:0;border-bottom:1px solid var(--line);padding-bottom:8px}
+  .cp-side .cp-side__tg{display:none}
+  .cp-sidenav{display:flex;overflow-x:auto;scrollbar-width:none;gap:4px}
+  .cp-sidenav::-webkit-scrollbar{display:none}
+  .cp-side button{flex:none;width:auto;border-inline-start:0;border-bottom:3px solid transparent}
+  .cp-side button[aria-selected="true"]{border-bottom-color:var(--y)}
+  .cp-shell.is-collapsed .cp-side span{display:inline}
+  .cp-hist li{grid-template-columns:1fr auto}
+  .cp-hist li span:nth-child(2){grid-column:1/-1;order:3}
+}
