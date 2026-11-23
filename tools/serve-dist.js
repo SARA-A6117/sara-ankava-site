@@ -6,6 +6,7 @@ const T = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'tex
 http.createServer((q, s) => {
   const u = new URL(q.url, 'http://x'); let p = decodeURIComponent(u.pathname);
   for (const r of cfg.redirects || []) {
+    if (r.has) continue;   /* חוקי host (vercel.app) לא חלים מקומית */
     const base = r.source.replace(/\/:path\*$/, '');
     if (p === base || (r.source.endsWith(':path*') && p.startsWith(base + '/'))) { s.writeHead(r.permanent ? 308 : 307, { Location: r.destination }); return s.end(); }
   }
