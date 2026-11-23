@@ -94,6 +94,8 @@ function applyTexts(map) {
 
 (async () => {
   const slotsN = manifest();
+  const tree = require('./elements.js').treeFor(dist);   /* עץ אלמנטים לעורך העיצובי */
+  fs.writeFileSync(path.join(dist, 'assets', 'tree.json'), JSON.stringify(tree));
   const map = await loadTexts();
   const applied = applyTexts(map);
   console.log('slots: ' + slotsN + ', replaced from DB: ' + applied);
