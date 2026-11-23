@@ -9,7 +9,7 @@ const PAGES = ['index', 'projects', 'privacy', 'terms', 'accessibility'];
 const VOID = new Set(['meta', 'link', 'img', 'input', 'br', 'hr', 'source', 'area', 'base', 'col', 'embed', 'param', 'track', 'wbr']);
 const SCOPE_HE = { nav: 'תפריט עליון', footer: 'פוטר', top: 'הירו', projects: 'פרויקטים', why: 'למה (לונה פארק)', process: 'תהליך', about: 'אודות', tools: 'כלים', contact: 'צור קשר', 'pp-hero': 'פתיח פרויקטים', 'pp-list': 'רשימת פרויקטים', 'pp-next': 'הפרויקט הבא', lp2__bar: 'למה (לונה פארק)', hdr: 'תפריט עליון' };
 const TEXT_TAGS = new Set(['h1', 'h2', 'h3', 'h4', 'p', 'li', 'span', 'small', 'b', 'strong', 'em', 'label']);
-const LOCK_CLASS = [[/\b(cta6|btn|cta-blink)\b/, 'button'], [/\b(stk)\b/, 'sticker'], [/\b(mk|mk--tef|mk--gan|doodle|pj3|pp-list)\b/, 'projects'], [/\b(lg-hero|lg-wrap|lg-body|lg-toc)\b/, 'legal'], [/\b(cursor|skip|sr-only|hp|wa|done)\b/, 'js']];
+const LOCK_CLASS = [[/\b(cta6|btn|cta-blink)\b/, 'button'], [/\b(stk)\b/, 'sticker'], [/\b(pj__st)\b/, 'outline'], [/\b(mk|mk--tef|mk--gan|doodle|pj3|pp-list)\b/, 'projects'], [/\b(lg-hero|lg-wrap|lg-body|lg-toc)\b/, 'legal'], [/\b(cursor|skip|sr-only|hp|wa|done)\b/, 'js']];
 const PINNED = new Set(['why', 'process']);
 
 function tokens(html) { return [...html.matchAll(/<!--[\s\S]*?-->|<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<svg[\s\S]*?<\/svg>|<(\/?)([a-zA-Z0-9]+)([^>]*)>|([^<]+)/g)]; }
