@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ניהול (גרסה קודמת) — Sara Ankava</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#F3EEE2">
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/mesh.css?v=14">
+<link rel="stylesheet" href="assets/css/admin-old.css?v=1">
+</head>
+<body>
+<header class="cp-top">
+  <a class="cp-brand" href="/" aria-label="Sara Ankava, לאתר"><img src="assets/brand/logo-black.png" width="1066" height="123" alt="Sara Ankava"><small>ניהול</small></a>
+  <div class="cp-user" id="user" hidden><span id="user-mail"></span><button type="button" class="cp-btn cp-btn--ghost" id="logout">התנתקות</button></div>
+</header>
+
+<main class="cp-main">
+  <section class="cp-login" id="login">
+    <h1 class="cp-hero cp-hero--sm">כניסה <span data-gn="text">לניהול</span></h1>
+    <p id="login-msg" class="cp-msg" role="alert"></p>
+    <button type="button" class="cp-btn cp-btn--grad" data-gn="btn" id="google">התחברות עם גוגל</button>
+  </section>
+
+  <section id="app" hidden>
+    <h1 class="cp-hero">ניהול <span data-gn="text">האתר</span></h1>
+    <nav class="cp-tabs" role="tablist">
+      <button type="button" role="tab" id="tab-projects" aria-selected="true" aria-controls="pane-projects">פרויקטים</button>
+      <button type="button" role="tab" id="tab-pages" aria-selected="false" aria-controls="pane-pages">עמודים משפטיים <b id="pages-gaps" hidden></b></button>
+      <button type="button" role="tab" id="tab-leads" aria-selected="false" aria-controls="pane-leads">פניות <b id="leads-new" hidden></b></button>
+    </nav>
+
+    <div id="pane-projects" role="tabpanel">
+      <div class="cp-bar"><p class="cp-hint">גררו בידית ⠿ כדי לשנות סדר (או השתמשו בחצים). הסדר נשמר מיד. <b id="home-count"></b></p><button type="button" class="cp-btn cp-btn--grad" data-gn="btn" id="add">הוספת פרויקט</button></div>
+      <p class="cp-warn" id="home-warn" role="status" hidden></p>
+      <ul class="cp-list" id="projects" aria-live="polite"></ul>
+    </div>
+
+    <div id="pane-pages" role="tabpanel" hidden>
+      <div class="cp-bar"><div class="cp-seg" id="pg-pick" role="group" aria-label="בחירת עמוד"><button type="button" data-slug="privacy" aria-pressed="true">מדיניות פרטיות</button><button type="button" data-slug="terms" aria-pressed="false">תנאי שימוש</button><button type="button" data-slug="accessibility" aria-pressed="false">הצהרת נגישות</button></div><label class="cp-field cp-field--inline">תאריך עדכון אחרון (מתעדכן אוטומטית בשמירה)<input id="pg-date" readonly tabindex="-1"></label></div>
+      <p class="cp-hint" id="pg-note"></p>
+      <label class="cp-field">כותרת העמוד<input id="pg-title" maxlength="120"></label>
+      <label class="cp-field">משפט פתיחה<input id="pg-lead" maxlength="300"></label>
+      <div class="cp-tb" role="toolbar" aria-label="עיצוב טקסט">
+        <button type="button" data-cmd="h2">כותרת</button><button type="button" data-cmd="h3">תת-כותרת</button><button type="button" data-cmd="p">פסקה</button>
+        <button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button>
+        <button type="button" data-cmd="ul">רשימה</button><button type="button" data-cmd="ol">רשימה ממוספרת</button>
+        <button type="button" data-cmd="link">קישור</button><button type="button" data-cmd="unlink">הסרת קישור</button>
+      </div>
+      <div class="cp-ed" id="pg-ed" contenteditable="true" dir="rtl" role="textbox" aria-multiline="true" aria-label="תוכן העמוד"></div>
+      <div class="cp-gaps" id="pg-gaps" aria-live="polite"></div>
+      <div class="cp-actions"><button type="button" class="cp-btn cp-btn--grad" data-gn="btn" id="pg-save">שמירה</button><a class="cp-btn cp-btn--ghost" id="pg-view" href="/privacy" target="_blank" rel="noopener">צפייה בעמוד</a></div>
+      <p class="cp-msg" id="pg-msg" role="alert"></p>
+    </div>
+
+    <div id="pane-leads" role="tabpanel" hidden>
+      <div class="cp-bar">
+        <label class="cp-field cp-field--inline">חיפוש<input type="search" id="lead-search" placeholder="שם, טלפון, עסק, הערה" autocomplete="off"></label>
+        <label class="cp-field cp-field--inline">סינון
+          <select id="lead-filter"><option value="">הכול</option><option value="new">חדש</option><option value="in_progress">בטיפול</option><option value="closed">סגור</option></select>
+        </label>
+      </div>
+      <ul class="cp-list" id="leads" aria-live="polite"></ul>
+    </div>
+  </section>
+
+  <p class="cp-msg" id="global-msg" role="alert"></p>
+</main>
+
+<div class="cp-modal" id="modal" hidden>
+  <form class="cp-sheet" id="pform" novalidate>
+    <h2 id="pform-title">פרויקט</h2>
+    <label class="cp-field">שם הפרויקט<input name="title" required maxlength="200"></label>
+    <label class="cp-field" id="type-field">שורת סוג<input name="type" maxlength="200" placeholder="למשל: אתר תדמית · קטלוג"></label>
+    <label class="cp-field">תיאור<textarea name="description" rows="4" maxlength="2000"></textarea></label>
+    <label class="cp-field"><span id="link-label">קישור (לא חובה)</span><input name="link" type="text" dir="ltr" placeholder="https://" maxlength="500"></label>
+    <div class="cp-mk" id="imgs-field">
+      <span class="cp-mk__t">מוקאפים</span>
+      <p class="cp-hint">עד שני מוקאפים. כל מוקאפ בנוי מדסקטופ ומובייל, ולכל אחד מהם אפשר לבחור תמונה או סרטון גלילה (mp4 או webm, עד 25MB). כששניים, הם מתחלפים באתר.</p>
+      <p class="cp-hint" id="mk-builtin" hidden>לפרויקט הזה יש מוקאפ מובנה. אם תעלי מוקאפים כאן, הם יחליפו אותו.</p>
+      <div id="mk-sets"></div>
+      <label class="cp-field cp-field--inline" id="interval-field" hidden>החלפה בין המוקאפים כל <input type="number" id="mk-interval" min="2" max="60" value="5" inputmode="numeric"> שניות</label>
+    </div>
+    <label class="cp-check" id="concept-field"><input type="checkbox" name="is_concept"> להציג "קונספט"</label>
+    <label class="cp-check"><input type="checkbox" name="published"> מפורסם באתר</label>
+    <label class="cp-check"><input type="checkbox" name="show_on_home"> להציג בדף הבית (עד 4)</label>
+    <div class="cp-prevbox"><span class="cp-prevbox__t">תצוגה מקדימה</span><div id="pprev"></div></div>
+    <p class="cp-msg" id="pform-msg" role="alert"></p>
+    <div class="cp-actions"><button type="submit" class="cp-btn cp-btn--grad" data-gn="btn" id="psave">שמירה</button><button type="button" class="cp-btn cp-btn--ghost" id="pcancel">ביטול</button></div>
+  </form>
+</div>
+
+<div class="cp-modal" id="confirm" hidden>
+  <div class="cp-sheet cp-sheet--sm" role="alertdialog" aria-labelledby="confirm-t">
+    <h2 id="confirm-t">למחוק את הפרויקט?</h2>
+    <p id="confirm-p"></p>
+    <div class="cp-actions"><button type="button" class="cp-btn cp-btn--danger" id="confirm-yes">מחיקה</button><button type="button" class="cp-btn cp-btn--ghost" id="confirm-no">ביטול</button></div>
+  </div>
+</div>
+
+<script src="assets/vendor/supabase.js"></script>
+<script src="assets/vendor/Sortable.min.js"></script>
+<script src="assets/vendor/purify.min.js"></script>
+<script src="assets/js/admin-config.js?v=2"></script>
+<script src="assets/js/legal-data.js?v=2"></script>
+<script src="assets/js/admin-old.js?v=1"></script>
+</body>
+</html>

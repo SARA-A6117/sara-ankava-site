@@ -1,0 +1,233 @@
+/* מערכת ניהול, בשפה של האתר הבהיר: קרם #F3EEE2, פחם #1E201F, קובלט #1B33C9 לפעולות. צהוב/תכלת רק בנגיעות. מבנה חד (בלי פינות מעוגלות), חוץ מבועת "הוספת פרויקט". */
+@font-face{font-family:"Google Sans";src:url("../fonts/GoogleSans-Variable.subset.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Sara Ankava";src:url("../fonts/SaraAnkava-Bold-v1.2.woff2") format("woff2");font-weight:700;font-display:swap}
+:root{--bg:#F3EEE2;--panel:#FBF8F0;--field:#FFFDF8;--line:rgb(30 32 31 / .2);--ink:#1E201F;--mut:rgb(30 32 31 / .68);--cob:#1B33C9;--cob2:#3F6BFF;--y:#FFE66D;--b:#6FD0FF;--red:#B3261E;--f:"Google Sans","Heebo",system-ui,sans-serif}
+*{box-sizing:border-box;border-radius:0}
+html{background:var(--bg)}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font:300 17px/1.6 var(--f)}
+button,input,select,textarea{font:inherit;color:inherit}
+.cp-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,4vw,48px);border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
+.cp-brand{font:700 22px "Sara Ankava",var(--f)}
+.cp-brand small{font:300 15px var(--f);color:var(--mut);margin-inline-start:8px}
+.cp-user{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--mut)}
+.cp-user span{direction:ltr;max-width:34vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cp-main{max-width:980px;margin:0 auto;padding:clamp(20px,4vw,48px) clamp(16px,4vw,48px) 96px}
+h1,h2{font-weight:500;margin:0 0 16px}
+h1{font-size:clamp(28px,5vw,44px)}
+h2{font-size:24px}
+.cp-login{display:grid;gap:18px;justify-items:start;padding-block:8vh}
+.cp-msg{margin:0;min-height:1.4em;font-size:15px;color:var(--red)}
+.cp-msg.ok{color:var(--cob)}
+.cp-btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:10px 20px;cursor:pointer;min-height:44px;font-weight:500;text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.cp-btn:hover{background:var(--ink);color:var(--bg)}
+.cp-btn--ghost{background:transparent}
+.cp-btn--grad{border:0;color:#F3EEE2;background:var(--cob);font-weight:500}
+.cp-btn--grad:hover{background:var(--cob2);color:#fff}
+.cp-btn--danger{border-color:var(--red);color:var(--red)}
+.cp-btn--danger:hover{background:var(--red);color:#fff}
+.cp-btn:disabled{opacity:.5;cursor:default}
+/* "הוספת פרויקט": בועת דיבור עם זנב, כמו כפתורי האתר */
+#add{position:relative;border-radius:999px;padding-inline:26px;margin-bottom:12px}
+#add::after{content:"";position:absolute;bottom:-9px;left:22px;width:16px;height:12px;background:var(--cob);clip-path:polygon(0 0,100% 0,0 100%);transition:background .2s}
+#add:hover::after{background:var(--cob2)}
+.cp-tabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin-bottom:24px;overflow-x:auto;scrollbar-width:none}
+.cp-tabs::-webkit-scrollbar{display:none}
+.cp-tabs button{flex:none;background:none;border:0;border-bottom:3px solid transparent;padding:10px 22px;min-height:48px;cursor:pointer;font-weight:500;color:var(--mut);white-space:nowrap}
+.cp-tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--cob)}
+.cp-tabs b{display:inline-block;min-width:22px;padding:0 6px;margin-inline-start:6px;background:var(--cob);color:#F3EEE2;font-size:13px;font-weight:500;text-align:center}
+.cp-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.cp-hint{margin:0;color:var(--mut);font-size:14px}
+.cp-list{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.cp-row{display:grid;grid-template-columns:auto auto 1fr auto;align-items:center;gap:14px;padding:12px 4px;border-bottom:1px solid var(--line);background:var(--bg)}
+.cp-row.is-ghost{opacity:.4;background:rgb(27 51 201 / .08)}
+.cp-row.is-drag{opacity:1;background:var(--panel);box-shadow:0 8px 24px rgb(30 32 31 / .2)}
+.cp-row.cp-draft .cp-info b{opacity:.6}
+.cp-row.cp-over{box-shadow:inset 3px 0 0 var(--cob)}
+.cp-handle{cursor:grab;color:var(--mut);font-size:20px;line-height:1;user-select:none;touch-action:none;min-width:44px;min-height:44px;display:grid;place-items:center}
+.cp-thumb{width:84px;height:54px;background:#E8DFCB;border:1px solid var(--line);object-fit:cover;object-position:top;display:grid;place-items:center;font-size:12px;color:var(--mut)}
+.cp-info{min-width:0}
+.cp-info b{display:block;font-weight:500;white-space:normal}
+.cp-info small{color:var(--mut);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cp-tag{display:inline-block;margin-inline-start:8px;padding:0 7px;border:1px solid var(--cob);color:var(--cob);font-size:12px;font-weight:500}
+.cp-tag--ph{border-color:var(--mut);color:var(--mut)}
+.cp-tag--warn{border-color:var(--red);color:var(--red)}
+.cp-ctl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.cp-sm{border:1px solid var(--line);background:none;min-width:44px;min-height:44px;cursor:pointer;padding:0 12px;font-weight:500}
+.cp-sm:hover{border-color:var(--ink);background:var(--panel)}
+.cp-sm:disabled{opacity:.35;cursor:default}
+.cp-sw{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;color:var(--mut);min-height:44px}
+.cp-sw input{position:absolute;opacity:0;pointer-events:none}
+.cp-sw i{width:44px;height:24px;border:1px solid var(--ink);position:relative;background:var(--field)}
+.cp-sw i::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:16px;height:16px;background:var(--ink);transition:inset .2s,background .2s}
+.cp-sw input:checked + i{background:var(--cob);border-color:var(--cob)}
+.cp-sw input:checked + i::after{inset-inline-start:23px;background:#F3EEE2}
+.cp-sw input:checked ~ * {color:inherit}
+.cp-sw input:focus-visible + i{outline:2px solid var(--cob);outline-offset:2px}
+.cp-empty{padding:32px 4px;color:var(--mut)}
+.cp-warn{margin:0 0 12px;padding:12px 14px;border:1px solid var(--red);background:rgb(179 38 30 / .07);color:var(--red);font-size:15px;line-height:1.5}
+.cp-lead{display:grid;grid-template-columns:1fr auto;gap:10px 16px;padding:16px 4px;border-bottom:1px solid var(--line);align-items:start}
+.cp-lead b{font-weight:500;font-size:18px}
+.cp-lead .cp-meta{color:var(--mut);font-size:14px;display:flex;gap:6px 16px;flex-wrap:wrap}
+.cp-lead a{color:var(--cob)}
+.cp-lead select{background:var(--field);border:1px solid var(--line);padding:8px 10px;min-height:44px}
+.cp-st-new select{border-color:var(--cob)}
+.cp-lead__new{display:inline-block;margin-inline-start:10px;padding:0 8px;background:var(--y);color:#1E201F;font-size:12px;font-weight:500;vertical-align:middle}
+.cp-lead__msg{margin:2px 0 0;color:var(--ink);font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere}
+.cp-lead__side{display:grid;gap:8px;justify-items:end}
+.cp-wa{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border:1px solid var(--cob);color:var(--cob)!important;text-decoration:none;font-weight:500}
+.cp-wa:hover{background:var(--cob);color:#F3EEE2!important}
+.cp-note{grid-column:1/-1;width:100%;background:var(--field);border:1px solid var(--line);padding:10px 12px;min-height:44px;resize:vertical}
+.cp-note:focus{outline:2px solid var(--cob)}
+.cp-modal{position:fixed;inset:0;z-index:20;background:rgb(30 32 31 / .5);display:grid;place-items:start center;overflow:auto;padding:4vh 12px}
+.cp-modal[hidden]{display:none}
+.cp-sheet{width:min(640px,100%);background:var(--panel);border:1px solid var(--ink);padding:clamp(18px,3vw,32px);display:grid;gap:14px}
+.cp-sheet--sm{width:min(440px,100%)}
+.cp-field{display:grid;gap:6px;font-size:15px;color:var(--mut)}
+.cp-field--inline{display:flex;align-items:center;gap:10px}
+.cp-field input,.cp-field textarea,.cp-field select{background:var(--field);border:1px solid var(--line);padding:10px 12px;color:var(--ink);min-height:44px;width:100%}
+.cp-field--inline select{width:auto}
+.cp-field input:focus,.cp-field textarea:focus,.cp-field select:focus{outline:2px solid var(--cob);outline-offset:0;border-color:var(--cob)}
+.cp-check{display:flex;align-items:center;gap:10px;cursor:pointer;min-height:44px}
+.cp-check input{width:22px;height:22px;accent-color:var(--cob)}
+.cp-imgs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cp-img{display:grid;gap:8px;font-size:15px;color:var(--mut)}
+.cp-img input{font-size:13px;max-width:100%;min-height:44px}
+.cp-prev{aspect-ratio:16/10;background:#E8DFCB;border:1px solid var(--line);background-size:cover;background-position:top center;display:grid;place-items:center;color:var(--mut);font-size:13px}
+.cp-actions{display:flex;gap:10px;flex-wrap:wrap}
+.cp-prevbox{border-top:1px solid var(--line);padding-top:12px;display:grid;gap:8px}
+.cp-prevbox__t{font-size:13px;color:var(--mut)}
+.cp-pv{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);gap:14px;align-items:center;background:#E8DFCB;color:#12140f;padding:16px;border:1px solid var(--line)}
+.cp-pv h3{margin:0 0 6px;font-size:18px;font-weight:500;line-height:1.2}
+.cp-pv p{margin:0 0 8px;font-size:13px;line-height:1.5;color:#26282A}
+.cp-pv ul{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-wrap:wrap;gap:4px}
+.cp-pv li{font-size:10px;padding:1px 6px;border:1px solid #12140f}
+.cp-pv li.y{background:var(--y)}
+.cp-pv__btn{display:inline-block;padding:4px 12px;background:var(--cob);color:#fff;font-size:12px;border-radius:99px}
+.cp-pv__mk{position:relative}
+.cp-pv__win{border:1px solid #12140f;background:#fff;aspect-ratio:16/10;overflow:hidden;display:grid;place-items:center;font-size:12px;color:#555}
+.cp-pv__win img{width:100%;height:100%;object-fit:cover;object-position:top}
+.cp-pv__phone{position:absolute;inset-inline-start:-6px;bottom:-8px;width:22%;aspect-ratio:9/18;border:2px solid #12140f;background:#fff;overflow:hidden}
+.cp-pv__phone img{width:100%;height:100%;object-fit:cover;object-position:top}
+/* עורך עמודים משפטיים */
+.cp-seg{display:inline-flex;border:1px solid var(--ink);flex-wrap:wrap}
+.cp-seg button{background:transparent;color:var(--ink);border:0;border-inline-start:1px solid var(--ink);padding:10px 16px;font-weight:500;cursor:pointer;min-height:44px}
+.cp-seg button:first-child{border-inline-start:0}
+.cp-seg button[aria-pressed="true"]{background:var(--cob);color:#F3EEE2}
+#pg-date{max-width:190px;color:var(--mut);background:transparent}
+.cp-tb{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0;padding:8px;border:1px solid var(--line);border-bottom:0;background:var(--panel)}
+.cp-tb button{background:var(--field);color:var(--ink);border:1px solid var(--line);padding:8px 12px;font-size:14px;font-weight:500;cursor:pointer;min-height:44px}
+.cp-tb button:hover{border-color:var(--cob);color:var(--cob)}
+.cp-ed{min-height:340px;max-height:60vh;overflow:auto;padding:18px;border:1px solid var(--line);background:var(--field);color:var(--ink);font-size:17px;line-height:1.7;outline:none}
+.cp-ed:focus{border-color:var(--cob);box-shadow:0 0 0 2px rgb(27 51 201 / .25)}
+.cp-ed h2{font-size:24px;margin:1em 0 .3em}.cp-ed h3{font-size:19px;margin:1em 0 .2em}.cp-ed p,.cp-ed ul,.cp-ed ol{margin:.4em 0}.cp-ed a{color:var(--cob)}
+mark.ph,.cp-gaps mark{background:var(--y);color:#12140f;padding:0 3px}
+.cp-gaps{margin:14px 0;padding:12px 14px;border:1px solid var(--line);background:var(--panel);font-size:15px}
+.cp-gaps ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.cp-gaps li button{all:unset;cursor:pointer;display:block;width:100%;color:var(--ink);line-height:1.5;padding:8px 0;min-height:44px;box-sizing:border-box}
+.cp-gaps li button:hover{text-decoration:underline}
+.cp-gaps b{font-weight:500}
+.cp-gaps .ok{color:var(--cob)}
+[hidden]{display:none!important}
+@media (max-width:640px){
+  .cp-row{grid-template-columns:auto 1fr;grid-template-areas:"h i" "t t" "c c"}
+  .cp-row .cp-handle{grid-area:h}.cp-row .cp-info{grid-area:i}.cp-row .cp-thumb{grid-area:t;width:100%;height:auto;aspect-ratio:16/8}
+  .cp-row .cp-ctl{grid-area:c;justify-content:flex-start}
+  .cp-lead{grid-template-columns:1fr}
+  .cp-lead__side{justify-items:start}
+  .cp-imgs{grid-template-columns:1fr}
+  .cp-pv{grid-template-columns:1fr}
+  .cp-top{flex-wrap:wrap;gap:8px 12px}.cp-user{gap:8px;min-width:0;flex:1 1 auto;justify-content:flex-end}.cp-user span{max-width:30vw}
+  .cp-brand{font-size:18px;white-space:nowrap}.cp-brand small{display:block;margin:0;font-size:13px}
+  .cp-tabs button{padding-inline:16px}
+  .cp-seg{width:100%}.cp-seg button{flex:1 1 auto;padding-inline:10px}
+  #pg-date{max-width:none}
+}
+
+/* ===== מראה האתר: לוגו, קפסולת ניווט צפה, כותרות ענק, כפתורי בועה בגרדיאנט קובלט, קווי גריד אופקיים ===== */
+@font-face{font-family:"Sara Ankava";src:url("../fonts/SaraAnkava-Light-v1.2.woff2") format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Sara Ankava";src:url("../fonts/SaraAnkava-Medium-v1.2.woff2") format("woff2");font-weight:500;font-display:swap}
+html body{background-image:linear-gradient(rgb(30 32 31 / .09) 1px,transparent 1px);background-size:100% 112px;background-attachment:fixed}
+html body::after{z-index:1}
+.cp-top{position:relative;background:transparent;border-bottom:0;padding:18px clamp(16px,4vw,56px);min-height:84px}
+.cp-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.cp-brand img{height:26px;width:auto;display:block}
+.cp-brand small{font:300 15px var(--f);color:var(--mut);margin:0}
+.cp-user{font-family:"Sara Ankava",var(--f);font-weight:300}
+.cp-hero{margin:clamp(24px,4vw,56px) 0 clamp(16px,2.4vw,32px);font:900 clamp(56px,10vw,132px)/.95 var(--f);letter-spacing:-.02em;color:var(--ink)}
+.cp-hero--sm{font-size:clamp(48px,8vw,96px)}
+.cp-hero [data-gn="text"]{display:inline-block;padding-inline:.04em}
+.cp-main{max-width:1040px}
+/* קפסולת הניווט (הטאבים) צפה במרכז, כמו הניווט באתר */
+.cp-tabs{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:6;display:flex;gap:2px;padding:5px;margin:0;border:1px solid rgb(30 32 31 / .18);border-radius:999px;background:rgb(243 238 226 / .94);box-shadow:0 14px 34px -18px rgb(30 32 31 / .5);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);overflow:visible;max-width:calc(100vw - 32px)}
+.cp-tabs button{border:0;border-radius:999px;padding:8px 22px;min-height:44px;font:300 16px/1 "Sara Ankava",var(--f);color:var(--ink);background:transparent}
+.cp-tabs button:hover{color:var(--cob)}
+.cp-tabs button[aria-selected="true"]{color:#F4F0E6;font-weight:500;border-bottom-color:transparent;background-color:#1B33C9;background-image:var(--grain),var(--mesh-live);background-size:150px,auto,auto,auto,auto,auto;background-repeat:repeat,no-repeat,no-repeat,no-repeat,no-repeat,no-repeat;background-blend-mode:overlay,normal,normal,normal,normal,normal;animation:var(--mesh-anim)}
+.cp-tabs b{background:var(--y);color:#1E201F;border-radius:999px}
+.cp-tabs button[aria-selected="true"] b{background:#F4F0E6}
+/* כל הכפתורים בועות דיבור: ראשיים בגרדיאנט עם זנב, משניים קפסולת קו */
+.cp-btn{border-radius:999px;font-family:"Sara Ankava",var(--f);font-weight:500;border-color:rgb(30 32 31 / .3)}
+.cp-btn--grad{position:relative;border:0;padding-inline:28px;color:#F4F0E6}
+.cp-btn--grad::after{content:"";position:absolute;bottom:-8px;left:22px;width:16px;height:11px;background:#2A45D8;clip-path:polygon(0 0,100% 0,0 100%)}
+#add::after{background:#2A45D8}
+.cp-actions .cp-btn--grad{margin-bottom:8px}
+.cp-wa,.cp-btn--danger{border-radius:999px}
+.cp-tag,.cp-tag--ph,.cp-tag--warn{border-radius:999px;padding-inline:10px}
+/* רשימות: מספור בספרות כבדות, כותרות בפונט המותג */
+.cp-list{counter-reset:r;border-top:1px solid rgb(30 32 31 / .3)}
+.cp-row{counter-increment:r;background:transparent;border-bottom-color:rgb(30 32 31 / .22);padding-block:16px}
+.cp-info::before{content:counter(r,decimal-leading-zero);display:block;font:900 13px/1 var(--f);color:var(--cob);margin-bottom:4px}
+.cp-info b{font:700 22px/1.2 "Sara Ankava",var(--f);overflow-wrap:anywhere}
+.cp-lead{counter-increment:r;border-bottom-color:rgb(30 32 31 / .22)}
+.cp-lead b{font:700 22px/1.2 "Sara Ankava",var(--f)}
+h2{font-family:"Sara Ankava",var(--f);font-weight:700}
+.cp-sheet h2{font-size:28px}
+.cp-seg{border-radius:999px;overflow:hidden;border-color:rgb(30 32 31 / .3)}
+.cp-seg button{font-family:"Sara Ankava",var(--f);border-inline-start-color:rgb(30 32 31 / .3)}
+.cp-field{font-family:"Sara Ankava",var(--f);font-weight:300}
+.cp-hint{font-family:"Sara Ankava",var(--f)}
+.cp-main > section > .cp-hero,.cp-main #app > .cp-hero{margin-top:8px}
+@media (max-width:900px){
+  .cp-tabs{position:static;transform:none;width:max-content;max-width:100%;margin:0 0 20px;overflow-x:auto}
+  .cp-hero{margin-top:8px}
+}
+@media (max-width:640px){
+  .cp-brand img{height:22px}
+  .cp-tabs button{padding-inline:14px;font-size:15px}
+}
+@media (max-width:640px){span.cp-thumb:empty{display:none}}
+
+/* ===== כל הכפתורים עגולים (קפסולות); שדות וטבלאות נשארים חדים ===== */
+.cp-sm,.cp-tb button,.cp-btn,.cp-wa,.cp-seg button{border-radius:999px}
+.cp-sm{padding-inline:16px}
+.cp-seg button:first-child,.cp-seg button:last-child{border-radius:999px}
+.cp-seg{border-radius:999px;padding:3px;gap:2px;border:1px solid rgb(30 32 31 / .3)}
+.cp-seg button{border:0}
+.cp-sw i{border-radius:999px}
+.cp-sw i::after{border-radius:50%}
+.cp-field input[type="file"]::file-selector-button,.cp-slot input[type="file"]::file-selector-button,.cp-img input[type="file"]::file-selector-button{border:1px solid rgb(30 32 31 / .3);background:var(--field);border-radius:999px;padding:8px 16px;margin-inline-end:10px;font:500 14px "Sara Ankava",var(--f);cursor:pointer}
+.cp-lead select,.cp-field--inline select{border-radius:999px;padding-inline:14px}
+/* מוקאפים בטופס */
+.cp-mk{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:14px}
+.cp-mk__t{font:700 18px "Sara Ankava",var(--f)}
+.cp-mkset{border:1px solid var(--line);padding:12px;margin:0;display:grid;gap:12px;background:var(--panel)}
+.cp-mkset legend{font:700 15px "Sara Ankava",var(--f);padding-inline:8px}
+.cp-mkgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cp-slot{display:grid;gap:8px;align-content:start;min-width:0}
+.cp-slot__h{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.cp-slot__h b{font-weight:500}
+.cp-seg--sm button{padding:6px 12px;min-height:44px;font-size:14px}
+.cp-slot__prev{aspect-ratio:16/10;background:#E8DFCB;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;color:var(--mut);font-size:13px}
+.cp-slot__prev img,.cp-slot__prev video{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.cp-slot input[type="file"]{font-size:13px;max-width:100%;min-height:44px}
+#interval-field input{width:84px;text-align:center}
+.cp-pv__frs{display:grid;gap:14px}
+.cp-pv__fr small{display:block;font-size:11px;color:#26282A;margin-bottom:4px}
+.cp-pv__win video,.cp-pv__phone video{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+@media (max-width:640px){.cp-mkgrid{grid-template-columns:1fr}}
+.cp-mkgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cp-slot__h{flex-direction:column;align-items:flex-start;gap:6px}
+.cp-slot .cp-seg--sm{max-width:100%}
+.cp-seg--sm button{padding:6px 10px}
+.cp-slot .cp-sm,.cp-mkset>.cp-sm,#mk-sets>.cp-btn{justify-self:start}
+.cp-slot[data-kind="mobile"] .cp-slot__prev{aspect-ratio:3/4}
+@media (max-width:640px){.cp-mkgrid{grid-template-columns:1fr}}

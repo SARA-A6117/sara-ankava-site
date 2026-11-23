@@ -585,8 +585,21 @@
       txSlots = (res[0].slots || []);
       txRows = {}; ((res[1] && res[1].data) || []).forEach(function (r) { txRows[r.key] = r; });
       if (res[1] && res[1].error) { flash($('#tx-status'), 'טעינת הטקסטים נכשלה.'); }
+      if (location.hostname === 'sara-ankava-site.vercel.app') flash($('#tx-status'), 'התצוגה המקדימה והפרסום עובדים מ-sarankava.com/admin.');
       renderTexts(); renderOverview();
     });
+  }
+  /* עדכון סימוני טיוטה בלי לצייר מחדש את הרשימה (לא מאבד פוקוס, הקלדה או קבוצות פתוחות) */
+  function txRefreshMarks() {
+    [].forEach.call(document.querySelectorAll('#tx-groups [data-tx]'), function (el) {
+      var s = txSlots.filter(function (x) { return x.key === el.dataset.tx; })[0]; if (s && el.closest('.cp-tf')) el.closest('.cp-tf').classList.toggle('is-draft', !!txIsDraft(s));
+    });
+    txButtons();
+  }
+  var txBuildPending = false;
+  function txButtons() {
+    var n = txCount(); $('#tx-count').textContent = n ? n + ' טקסטים בטיוטה' : 'אין שינויים שממתינים לפרסום';
+    var retry = !n && txBuildPending; $('#tx-publish').disabled = !n && !txBuildPending; $('#tx-publish').textContent = retry ? 'הפעלת בנייה שוב' : 'פרסום השינויים';
   }
   function txCount() { return txSlots.filter(txIsDraft).length; }
   function renderTexts() {
@@ -603,8 +616,7 @@
           return '<div class="cp-tf' + (txIsDraft(s) ? ' is-draft' : '') + '"><label>' + '<span class="cp-tf__l">' + esc(label) + '</span>' + ctl + '</label>' + (v !== txDefault(s) ? '<button type="button" class="cp-sm" data-tx-reset="' + esc(s.key) + '">החזרה לברירת מחדל</button>' : '') + '</div>';
         }).join('') + '</div></details>';
     }).join('') || '<p class="cp-empty">לא נמצאו טקסטים.</p>';
-    var n = txCount(); $('#tx-count').textContent = n ? n + ' טקסטים בטיוטה' : 'אין שינויים שממתינים לפרסום';
-    $('#tx-publish').disabled = !n;
+    txButtons();
   }
   function frameDoc() { try { return $('#tx-frame').contentDocument; } catch (x) { return null; } }
   function injectOne(key, val) {
@@ -643,40 +655,51 @@
   function saveTextDrafts() {
     clearTimeout(txT);
     var keys = Object.keys(txDirty); if (!keys.length) return Promise.resolve();
-    var rows = keys.map(function (k) { var s = txSlots.filter(function (x) { return x.key === k; })[0]; return { key: k, kind: s && s.kind === 'longtext' ? 'longtext' : 'text', draft: txVals[k] }; });
+    var sent = {}, rows = keys.map(function (k) { var s = txSlots.filter(function (x) { return x.key === k; })[0]; sent[k] = txVals[k]; return { key: k, kind: s && s.kind === 'longtext' ? 'longtext' : 'text', draft: txVals[k] }; });
     return sb.from('site_texts').upsert(rows).select().then(function (r) {
       if (r.error) { flash($('#tx-status'), 'שמירת הטיוטה נכשלה. בדקו את ההרשאות ונסו שוב.'); return; }
-      (r.data || []).forEach(function (row) { txRows[row.key] = row; delete txVals[row.key]; delete txDirty[row.key]; });
-      dirtyTexts = false; $('#tx-status').textContent = '✓ הטיוטה נשמרה'; renderTexts(); renderOverview();
+      (r.data || []).forEach(function (row) { txRows[row.key] = row; if (txVals[row.key] === sent[row.key]) { delete txVals[row.key]; delete txDirty[row.key]; } });
+      dirtyTexts = Object.keys(txDirty).length > 0;
+      if (dirtyTexts) { clearTimeout(txT); txT = setTimeout(saveTextDrafts, 800); }
+      $('#tx-status').textContent = dirtyTexts ? 'יש שינויים שלא נשמרו...' : '✓ הטיוטה נשמרה';
+      txRefreshMarks(); renderOverview();
     });
   }
   /* פרסום: מעלה את כל הטיוטות, שומר גרסה, ומפעיל בנייה מחדש של האתר */
   $('#tx-publish').addEventListener('click', function () {
     var btn = this, st = $('#tx-status'); btn.disabled = true; flash(st, 'מפרסם...', true);
+    if (!txCount() && txBuildPending) { txBuild().then(txButtons); return; }
     saveTextDrafts().then(function () {
       var jobs = txSlots.filter(function (s) { var r = txRows[s.key]; return r && r.draft != null; });
       if (!jobs.length) { flash(st, 'אין מה לפרסם.'); return; }
       return Promise.all(jobs.map(function (s) {
-        var r = txRows[s.key], v = r.draft, val = v === txDefault(s) ? null : v;
+        var r = txRows[s.key], v = r.draft, val = (!String(v).trim() || v === txDefault(s)) ? null : v;
         return sb.from('site_texts').update({ value: val, draft: null, revision: (r.revision || 0) + 1 }).eq('key', s.key).select().then(function (u) {
           if (u.error || !u.data || !u.data[0]) throw new Error('save');
           txRows[s.key] = u.data[0];
           return sb.from('revisions').insert({ entity: 'text', ref: s.key, data: { value: v } });
         });
       })).then(function () {
-        renderTexts(); renderOverview();
-        return sb.auth.getSession();
-      }).then(function (ss) {
-        var tok = ss && ss.data && ss.data.session && ss.data.session.access_token;
-        return fetch('/api/publish', { method: 'POST', headers: { Authorization: 'Bearer ' + (tok || '') } }).then(function (r) { return r.status; }, function () { return 0; });
-      }).then(function (code) {
-        if (code === 200) flash(st, 'פורסם. האתר יתעדכן בעוד כדקה, אחרי שהבנייה מסתיימת.', true);
+        txBuildPending = true; renderTexts(); renderOverview();
+        return txBuild();
+      });
+    }).catch(function () { flash(st, 'הפרסום נכשל. נסו שוב.'); }).then(function () { txButtons(); });
+  });
+  /* הפעלת בנייה מחדש של האתר. אם נכשלה, הכפתור הופך ל"הפעלת בנייה שוב" */
+  function txBuild() {
+    var st = $('#tx-status');
+    return sb.auth.getSession().then(function (ss) {
+      var tok = ss && ss.data && ss.data.session && ss.data.session.access_token;
+      return fetch('/api/publish', { method: 'POST', headers: { Authorization: 'Bearer ' + (tok || '') } }).then(function (r) { return r.status; }, function () { return 0; });
+    }).then(function (code) {
+      if (code === 200 || code === 429) txBuildPending = false;
+      if (code === 200) flash(st, 'פורסם. האתר יתעדכן בעוד כדקה, אחרי שהבנייה מסתיימת.', true);
         else if (code === 429) flash(st, 'הטקסטים נשמרו. בנייה כבר התחילה לפני רגע, האתר יתעדכן בקרוב.', true);
         else if (code === 503) flash(st, 'הטקסטים נשמרו, אבל חיבור הפרסום לאתר עוד לא הוגדר (משתני סביבה ב-Vercel). עד אז האתר לא יתעדכן.');
-        else flash(st, 'הטקסטים נשמרו, אבל הפעלת הבנייה נכשלה (קוד ' + code + ').');
-      });
-    }).catch(function () { flash(st, 'הפרסום נכשל. נסו שוב.'); }).then(function () { btn.disabled = !txCount(); });
-  });
+        else flash(st, 'הטקסטים נשמרו, אבל הפעלת הבנייה נכשלה (קוד ' + code + '). אפשר ללחוץ "הפעלת בנייה שוב".');
+      txButtons();
+    });
+  }
 
   /* ---------- פניות ---------- */
   var ST = { new: 'חדש', in_progress: 'בטיפול', closed: 'סגור' };
