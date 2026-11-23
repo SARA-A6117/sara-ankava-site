@@ -64,7 +64,10 @@ async function loadTexts() {
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const map = {}; (await r.json()).forEach((x) => { if (x.value && x.value.trim()) map[x.key] = x.value; });
     return map;
-  } catch (e) { console.warn('site_texts: using texts from code (' + e.message + ')'); return {}; }
+  } catch (e) {
+    if (process.env.VERCEL) throw new Error('site_texts: could not read texts from Supabase, aborting the build so the previous version stays live (' + e.message + ')');
+    console.warn('site_texts: using texts from code (' + e.message + ')'); return {};
+  }
 }
 
 function applyTexts(map) {
@@ -75,8 +78,10 @@ function applyTexts(map) {
       if (k.startsWith('seo.')) {
         const m = k.match(/^seo\.([a-z]+)\.(title|description)$/); if (!m || m[1] !== p) continue;
         const val = esc(v);
-        if (m[2] === 'title') h = h.replace(/<title>[^<]*<\/title>/, '<title>' + val + '</title>').replace(/(<meta property="og:title" content=")[^"]*"/, '$1' + val + '"').replace(/(<meta name="twitter:title" content=")[^"]*"/, '$1' + val + '"');
-        else h = h.replace(/(<meta name="description" content=")[^"]*"/, '$1' + val + '"').replace(/(<meta property="og:description" content=")[^"]*"/, '$1' + val + '"').replace(/(<meta name="twitter:description" content=")[^"]*"/, '$1' + val + '"');
+        /* פונקציות החלפה (לא מחרוזות), כדי ש-$ בטקסט לא יתפרש כהוראת החלפה */
+        const put = (a) => a + val + '"';
+        if (m[2] === 'title') h = h.replace(/<title>[^<]*<\/title>/, () => '<title>' + val + '</title>').replace(/(<meta property="og:title" content=")[^"]*"/, (_, a) => put(a)).replace(/(<meta name="twitter:title" content=")[^"]*"/, (_, a) => put(a));
+        else h = h.replace(/(<meta name="description" content=")[^"]*"/, (_, a) => put(a)).replace(/(<meta property="og:description" content=")[^"]*"/, (_, a) => put(a)).replace(/(<meta name="twitter:description" content=")[^"]*"/, (_, a) => put(a));
         n++; continue;
       }
       const re = new RegExp('(<[a-zA-Z0-9]+[^>]*\\sdata-slot="' + escRe(k) + '"[^>]*>)([^<]*)(<)', 'g');

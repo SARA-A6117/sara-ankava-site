@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   if (!token) return send(401, { error: 'unauthorized' });
   let user = null;
   try {
-    const r = await fetch(SUPABASE_URL.replace(/\/$/, '') + '/auth/v1/user', { headers: { apikey: SUPABASE_ANON_KEY, Authorization: 'Bearer ' + token } });
+    const r = await fetch(SUPABASE_URL.replace(/\/$/, '') + '/auth/v1/user', { signal: AbortSignal.timeout(8000), headers: { apikey: SUPABASE_ANON_KEY, Authorization: 'Bearer ' + token } });
     if (!r.ok) return send(401, { error: 'unauthorized' });
     user = await r.json();
   } catch (e) { return send(502, { error: 'auth_unreachable' }); }
@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
   const now = Date.now();
   if (now - last < 30000) return send(429, { error: 'too_soon', retryAfterSeconds: Math.ceil((30000 - (now - last)) / 1000) });
   try {
-    const h = await fetch(VERCEL_DEPLOY_HOOK_URL, { method: 'POST' });
+    const h = await fetch(VERCEL_DEPLOY_HOOK_URL, { method: 'POST', signal: AbortSignal.timeout(8000) });
     if (!h.ok) return send(502, { error: 'hook_failed' });
   } catch (e) { return send(502, { error: 'hook_unreachable' }); }
   last = now;
