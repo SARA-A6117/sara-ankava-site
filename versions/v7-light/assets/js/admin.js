@@ -48,7 +48,10 @@
 
   /* ---------- ניווט: סיידבר, ?view= ב-URL, אזהרה לפני יציאה עם שינויים ---------- */
   var VIEWS = { overview: 'סקירה', leads: 'פניות', projects: 'פרויקטים', pages: 'עמודים משפטיים', texts: 'טקסטי האתר' };
-  var dirtyPages = false, dirtyTexts = false, formDirty = false, curView = 'overview';
+  var dirtyPages = false, dirtyTexts = false, formDirty = false, curView = 'overview', lastFocus = null;
+  /* חלון קופץ: משבית את הדף שמאחוריו (Tab לא בורח החוצה) ומחזיר פוקוס לכפתור שפתח אותו */
+  function modalOn() { if (!lastFocus) lastFocus = document.activeElement; $('.cp-top').inert = true; $('.cp-main').inert = true; }
+  function modalOff() { $('.cp-top').inert = false; $('.cp-main').inert = false; if (lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus(); lastFocus = null; }
   function tab(name, push) {
     if (!VIEWS[name]) name = 'overview';
     if (name !== curView && curView === 'pages' && dirtyPages && !window.confirm('יש שינויים בעמוד המשפטי שעדיין לא נשמרו כטיוטה. לעבור בלי לשמור?')) return;
@@ -65,6 +68,11 @@
     if (name === 'overview') renderOverview();
   }
   Object.keys(VIEWS).forEach(function (n) { $('#tab-' + n).addEventListener('click', function () { tab(n, true); }); });
+  $('#side-nav').addEventListener('keydown', function (e) {
+    var k = e.key; if (k !== 'ArrowDown' && k !== 'ArrowUp' && k !== 'ArrowLeft' && k !== 'ArrowRight') return;
+    var tabs = [].slice.call($('#side-nav').querySelectorAll('[role=tab]')), i = tabs.indexOf(document.activeElement); if (i < 0) return;
+    e.preventDefault(); var n = (k === 'ArrowDown' || k === 'ArrowRight') ? (i + 1) % tabs.length : (i - 1 + tabs.length) % tabs.length; tabs[n].focus();
+  });
   window.addEventListener('popstate', function () { tab(new URLSearchParams(location.search).get('view') || 'overview', false); });
   window.addEventListener('beforeunload', function (e) { if (dirtyPages || formDirty || dirtyTexts) { e.preventDefault(); e.returnValue = ''; } });
   $('#side-tg').addEventListener('click', function () {
@@ -282,11 +290,11 @@
     ['type-field', 'concept-field', 'imgs-field'].forEach(function (id) { show($('#' + id), !isPh); });
     $('#link-label').textContent = isPh ? 'לאן הכפתור מוביל' : 'קישור (לא חובה)';
     $('#mk-builtin').hidden = !(p && p.mockup_key && !(p.mockups && p.mockups.length));
-    flash($('#pform-msg'), ''); renderMk(); formDirty = false; show($('#modal'), true); form.title.focus();
+    flash($('#pform-msg'), ''); renderMk(); formDirty = false; modalOn(); show($('#modal'), true); form.title.focus();
   }
   function closeForm(force) {
     if (force !== true && formDirty && !window.confirm('יש שינויים שלא נשמרו. לסגור בלי לשמור?')) return;
-    formDirty = false; show($('#modal'), false); editing = null;
+    formDirty = false; show($('#modal'), false); modalOff(); editing = null;
   }
   $('#add').addEventListener('click', function () { openForm(null); });
   $('#pcancel').addEventListener('click', function () { closeForm(); });
@@ -373,11 +381,11 @@
 
   /* ---------- מחיקה ---------- */
   var toDelete = null;
-  function askDelete(p) { toDelete = p; $('#confirm-t').textContent = 'למחוק את הפרויקט?'; $('#confirm-p').textContent = '"' + p.title + '" יימחק לצמיתות.'; show($('#confirm'), true); $('#confirm-no').focus(); }
+  function askDelete(p) { toDelete = p; $('#confirm-t').textContent = 'למחוק את הפרויקט?'; $('#confirm-p').textContent = '"' + p.title + '" יימחק לצמיתות.'; modalOn(); show($('#confirm'), true); $('#confirm-no').focus(); }
   function askDeleteLead(l) { toDelete = { lead: true, id: l.id }; $('#confirm-t').textContent = 'למחוק את הפנייה?'; $('#confirm-p').textContent = 'הפנייה של "' + l.name + '" תימחק לצמיתות ולא ניתן לשחזר אותה.'; show($('#confirm'), true); $('#confirm-no').focus(); }
-  $('#confirm-no').addEventListener('click', function () { toDelete = null; show($('#confirm'), false); });
+  $('#confirm-no').addEventListener('click', function () { toDelete = null; show($('#confirm'), false); modalOff(); });
   $('#confirm-yes').addEventListener('click', function () {
-    var p = toDelete; if (!p) return; show($('#confirm'), false); toDelete = null;
+    var p = toDelete; if (!p) return; show($('#confirm'), false); modalOff(); toDelete = null;
     if (p.lead) {
       sb.from('leads').delete().eq('id', p.id).then(function (r) {
         if (r.error) { flash(els.gmsg, 'מחיקת הפנייה נכשלה.'); return; }
@@ -392,7 +400,7 @@
       loadProjects();
     });
   });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { show($('#confirm'), false); if (!$('#modal').hidden) closeForm(); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { show($('#confirm'), false); modalOff(); if (!$('#modal').hidden) closeForm(); } });
 
   /* ---------- עמודים משפטיים: טיוטה, פרסום, היסטוריה (20 גרסאות) ---------- */
   var LH = window.LegalHTML, pgData = {}, pgSlug = 'privacy', ed = $('#pg-ed'), draftT = null;
@@ -590,7 +598,7 @@
       var nd = items.filter(txIsDraft).length;
       return '<details class="cp-grp"' + (q || gi === 0 ? ' open' : '') + '><summary><b>' + esc(g) + '</b><small>' + items.length + ' טקסטים</small>' + (nd ? '<span class="cp-badge is-draft">' + nd + ' בטיוטה</span>' : '') + '</summary><div class="cp-grp__body">' +
         items.map(function (s) {
-          var v = txCurrent(s), long = s.kind === 'longtext', label = s.label || (s.pages.length > 1 ? 'מופיע ב-' + s.pages.length + ' עמודים' : TX_PAGE_NAME[s.pages[0]] || ''),
+          var v = txCurrent(s), long = s.kind === 'longtext', label = s.label || (s.group + (s.pages.length > 1 ? ' (כל העמודים)' : '') + ' · ' + s.text.slice(0, 28)),
             ctl = long ? '<textarea data-tx="' + esc(s.key) + '" rows="3" maxlength="600">' + esc(v) + '</textarea>' : '<input data-tx="' + esc(s.key) + '" value="' + esc(v) + '" maxlength="300">';
           return '<div class="cp-tf' + (txIsDraft(s) ? ' is-draft' : '') + '"><label>' + '<span class="cp-tf__l">' + esc(label) + '</span>' + ctl + '</label>' + (v !== txDefault(s) ? '<button type="button" class="cp-sm" data-tx-reset="' + esc(s.key) + '">החזרה לברירת מחדל</button>' : '') + '</div>';
         }).join('') + '</div></details>';

@@ -338,3 +338,8 @@ html body{background-image:none}
 .cp-tf.is-draft input,.cp-tf.is-draft textarea{border-color:#E5A100;background:#FFFBEF}
 .cp-tf .cp-sm{justify-self:start}
 @media (max-width:1100px){.cp-tx{grid-template-columns:1fr}.cp-tx__prev{position:static}#tx-frame{height:520px}}
+
+/* נגישות: פוקוס גלוי */
+.cp-gaps li button:focus-visible{outline:2px solid var(--cob);outline-offset:2px}
+.cp-ed:focus{outline:2px solid var(--cob);outline-offset:0}
+.cp-side button:focus-visible,.cp-card:focus-visible{outline:2px solid var(--cob);outline-offset:2px}
