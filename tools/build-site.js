@@ -28,6 +28,11 @@ for (const f of ['index.html', 'projects.html']) {
   fs.writeFileSync(p, h);
 }
 
+/* העורך העיצובי בדפדפן משתמש באותו קוד ניקוי כמו הבנייה (tools/design.js), כדי שאי אפשר לסטות ביניהם */
+fs.writeFileSync(path.join(dist, 'assets', 'js', 'design-core.js'), '(function(){var module={exports:{}};' + fs.readFileSync(path.join(__dirname, 'design.js'), 'utf8') + ';window.DesignCore=module.exports;})();');
+const dh = require('crypto').createHash('sha1').update(fs.readFileSync(path.join(__dirname, 'design.js'))).digest('hex').slice(0, 8);
+for (const f of ['admin.html']) { const p = path.join(dist, f); fs.writeFileSync(p, fs.readFileSync(p, 'utf8').replace(/design-core\.js\?v=[a-z0-9]+/, () => 'design-core.js?v=' + dh)); }
+
 /* ---- טקסטי האתר: manifest לעורך, והחלפת טקסטים מפורסמים מהמסד (אם אין חיבור, נשאר הטקסט שבקוד) ---- */
 const { scan, PAGES, SCOPE_NAMES } = require('./slots.js');
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -92,10 +97,44 @@ function applyTexts(map) {
   return n;
 }
 
+/* ---- שינויי עיצוב מהעורך העיצובי: מסד -> רשימה לבנה -> overrides.css (נטען אחרון ורק אם יש שינויים) ---- */
+async function loadDesign() {
+  if (process.env.DESIGN_JSON) return JSON.parse(fs.readFileSync(process.env.DESIGN_JSON, 'utf8'));   /* לבדיקות */
+  try {
+    const cfg = fs.readFileSync(path.join(root, 'versions', 'v7-light', 'assets', 'js', 'admin-config.js'), 'utf8');
+    const url = (cfg.match(/url:\s*'([^']+)'/) || [])[1], key = (cfg.match(/anonKey:\s*'([^']+)'/) || [])[1];
+    if (!url || !key || process.env.SKIP_TEXTS === '1') return {};
+    const r = await fetch(url.replace(/\/$/, '') + '/rest/v1/design_overrides?select=el,props', { headers: { apikey: key, Authorization: 'Bearer ' + key }, signal: AbortSignal.timeout(8000) });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const map = {}; (await r.json()).forEach((x) => { if (x.props && Object.keys(x.props).length) map[x.el] = x.props; });
+    return map;
+  } catch (e) {
+    if (process.env.VERCEL) throw new Error('design_overrides: could not read from Supabase, aborting the build so the previous version stays live (' + e.message + ')');
+    console.warn('design_overrides: building without design changes (' + e.message + ')'); return {};
+  }
+}
+function applyDesign(map, tree) {
+  const nodes = new Map(); Object.values(tree.pages).forEach((list) => list.forEach((n) => nodes.set(n.id, n)));
+  const { css, errors, applied } = require('./design.js').generate(map, nodes);
+  errors.forEach((e) => console.warn('design: skipped ' + e.el + ': ' + e.msg));
+  if (!css) return { applied: 0, errors: errors.length };
+  const hash = require('crypto').createHash('sha1').update(css).digest('hex').slice(0, 8);
+  fs.writeFileSync(path.join(dist, 'assets', 'css', 'overrides.css'), css);
+  for (const p of Object.keys(PAGES)) {
+    const f = path.join(dist, p + '.html'); let h = fs.readFileSync(f, 'utf8');
+    h = h.replace('</head>', () => '<link rel="stylesheet" href="assets/css/overrides.css?v=' + hash + '">\n</head>');
+    fs.writeFileSync(f, h);
+  }
+  return { applied, errors: errors.length };
+}
+
 (async () => {
   const slotsN = manifest();
+  const tree = require('./elements.js').treeFor(dist);   /* עץ אלמנטים לעורך העיצובי */
+  fs.writeFileSync(path.join(dist, 'assets', 'tree.json'), JSON.stringify(tree));
   const map = await loadTexts();
   const applied = applyTexts(map);
-  console.log('slots: ' + slotsN + ', replaced from DB: ' + applied);
+  const design = applyDesign(await loadDesign(), tree);
+  console.log('slots: ' + slotsN + ', replaced from DB: ' + applied + ', design overrides applied: ' + design.applied + (design.errors ? ' (skipped ' + design.errors + ')' : ''));
   console.log('dist ready');
 })();

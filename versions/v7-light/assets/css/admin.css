@@ -343,3 +343,34 @@ html body{background-image:none}
 .cp-gaps li button:focus-visible{outline:2px solid var(--cob);outline-offset:2px}
 .cp-ed:focus{outline:2px solid var(--cob);outline-offset:0}
 .cp-side button:focus-visible,.cp-card:focus-visible{outline:2px solid var(--cob);outline-offset:2px}
+
+/* עורך עיצובי */
+.cp-dz{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:20px;align-items:start}
+.cp-dz__side{display:grid;gap:12px;max-height:calc(100vh - 150px);overflow:auto;padding-inline-end:4px}
+.cp-dz__prev{position:sticky;top:12px;min-width:0}
+.dz-stage{overflow:hidden}.dz-wrap{height:calc(100vh - 230px);min-height:420px;overflow:hidden;border-radius:20px;background:#fff;box-shadow:0 1px 2px rgb(30 32 31 / .08),0 12px 32px -18px rgb(30 32 31 / .35);margin-inline:auto}
+#dz-frame{border:0;display:block;transform-origin:top left;background:#fff}
+.dz-tools{flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.dz-panel{background:var(--panel);border-radius:18px;padding:14px 16px;display:grid;gap:12px}
+.dz-h{margin:0;font:700 18px "Sara Ankava",var(--f)}.dz-h small{display:block;font:400 13px var(--f);color:var(--mut)}
+.dz-f{display:grid;gap:6px}.dz-f>span{font-weight:500;font-size:14px}
+.dz-seg{display:flex;flex-wrap:wrap;gap:4px}
+.dz-seg button{border:0;background:rgb(30 32 31 / .07);color:var(--ink);padding:8px 12px;min-height:44px;border-radius:999px;cursor:pointer;font-family:var(--f)}
+.dz-seg button[aria-pressed="true"]{background:var(--cob);color:#F3EEE2}
+.dz-sw{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dz-c{width:44px;height:44px;border-radius:50%;border:2px solid rgb(30 32 31 / .25);background:var(--c);cursor:pointer;padding:0}
+.dz-c.is-on{outline:3px solid var(--cob);outline-offset:2px}
+.dz-rows{gap:2px}
+.dz-row{display:flex;align-items:center;gap:8px;text-align:start;border:0;background:transparent;color:var(--ink);padding:8px 10px;padding-inline-start:calc(10px + var(--d,0)*12px);min-height:44px;border-radius:12px;cursor:pointer;font-family:var(--f)}
+.dz-row:hover{background:rgb(30 32 31 / .06)}.dz-row.is-sel{background:var(--cob);color:#F3EEE2}
+.dz-row.is-locked{opacity:.55}.dz-row__k{font-size:12px;opacity:.7;min-width:52px}.dz-row__l{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dz-dot{width:9px;height:9px;border-radius:50%;background:#FFE66D;border:1px solid #1E201F;flex:none}
+#dz-status.ok{color:var(--cob)}
+@media (max-width:1100px){.cp-dz{grid-template-columns:1fr}.cp-dz__side{max-height:none}.cp-dz__prev{position:static}.dz-wrap{height:520px}}
+.cp-hist__row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0}
+.dz-c.is-off{opacity:.3;cursor:not-allowed;position:relative}.dz-c.is-off::after{content:"";position:absolute;inset:50% 4px auto;border-top:2px solid #1E201F;transform:rotate(-45deg)}
+
+/* תיקוני QA: תצוגה מקדימה ב-RTL, מתיחת עמודה בנייד, תצוגה נגישה בטאבלט */
+.dz-wrap{direction:ltr}
+.dz-row{min-width:0}.cp-dz__side{min-width:0}
+@media (max-width:1100px){.cp-dz{grid-template-columns:minmax(0,1fr)}.cp-dz__side{max-height:46vh;overflow:auto}.dz-wrap{height:60vh}}

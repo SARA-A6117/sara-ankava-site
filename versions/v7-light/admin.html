@@ -33,6 +33,7 @@
           <button type="button" role="tab" id="tab-projects" aria-selected="false" aria-controls="pane-projects" title="פרויקטים"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 9h18M7 13h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>פרויקטים</span></button>
           <button type="button" role="tab" id="tab-pages" aria-selected="false" aria-controls="pane-pages" title="עמודים משפטיים"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>עמודים משפטיים</span><b id="pages-gaps" hidden></b></button>
           <button type="button" role="tab" id="tab-texts" aria-selected="false" aria-controls="pane-texts" title="טקסטי האתר"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>טקסטי האתר</span><b id="texts-draft" hidden></b></button>
+          <button type="button" role="tab" id="tab-design" aria-selected="false" aria-controls="pane-design" title="עיצוב"><svg class="cp-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 100 18c1.2 0 2-.8 2-1.8 0-.5-.2-.9-.5-1.3-.3-.3-.5-.7-.5-1.2 0-1 .8-1.7 1.8-1.7H17a4 4 0 004-4c0-4.4-4-8-9-8zM7.5 12h.01M10 8h.01M14 8h.01" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg><span>עיצוב</span><b id="design-draft" hidden></b></button>
         </nav>
       </aside>
       <div class="cp-content">
@@ -82,6 +83,26 @@
           <div class="cp-seg" id="tx-pagepick" role="group" aria-label="עמוד לתצוגה"><button type="button" data-page="index" aria-pressed="true">דף הבית</button><button type="button" data-page="projects" aria-pressed="false">פרויקטים</button><button type="button" data-page="privacy" aria-pressed="false">פרטיות</button></div>
           <iframe id="tx-frame" title="תצוגה מקדימה של האתר" loading="lazy"></iframe>
         </aside>
+      </div>
+    </div>
+
+    <div id="pane-design" role="tabpanel" aria-labelledby="tab-design" hidden>
+      <div class="cp-bar"><div class="cp-seg" id="dz-pagepick" role="group" aria-label="עמוד"></div><div class="cp-seg" id="dz-devpick" role="group" aria-label="מכשיר לתצוגה"></div>
+        <button type="button" class="cp-btn cp-btn--grad" data-gn="btn" id="dz-publish" disabled>פרסום השינויים</button></div>
+      <p class="cp-hint"><span id="dz-count"></span>. <span id="dz-status" role="status"></span></p>
+      <div class="cp-warn" id="dz-block" role="alert" hidden></div>
+      <p class="cp-hint">בוחרים אלמנט ברשימה או לוחצים עליו בתצוגה. אפשר לשנות רק צבע (מהצבעים של המותג), מדרגת גודל, משקל, רווח והסתרה לפי מכשיר. ההירו, אזור הפרויקטים, הגרדיאנטים והכפתורים נעולים (🔒). הכול נשמר כטיוטה ועולה לאתר רק אחרי "פרסום", ואחרי בדיקת פריסה אוטומטית.</p>
+      <div class="cp-dz">
+        <div class="cp-dz__side">
+          <label class="cp-field cp-field--inline">חיפוש<input type="search" id="dz-search" placeholder="שם או אזור" autocomplete="off"></label>
+          <div id="dz-panel" class="dz-panel" aria-live="polite"></div>
+          <div id="dz-tree"></div>
+        </div>
+        <section class="cp-dz__prev" aria-label="תצוגה מקדימה">
+          <div class="cp-actions dz-tools"><button type="button" class="cp-sm" id="dz-undo" disabled>↶ ביטול</button><button type="button" class="cp-sm" id="dz-redo" disabled>↷ חזרה</button><button type="button" class="cp-sm" id="dz-ba" aria-pressed="false">לפני / אחרי</button><button type="button" class="cp-sm" id="dz-reset-page">איפוס העמוד</button><button type="button" class="cp-sm" id="dz-hist-btn" aria-expanded="false" aria-controls="dz-hist">היסטוריה</button></div>
+          <div class="cp-hist" id="dz-hist" hidden></div>
+          <div id="dz-stage" class="dz-stage"><div id="dz-wrap" class="dz-wrap"><iframe id="dz-frame" title="תצוגה מקדימה של האתר לעריכת עיצוב"></iframe></div></div>
+        </section>
       </div>
     </div>
 
@@ -139,6 +160,9 @@
 <script src="assets/vendor/purify.min.js"></script>
 <script src="assets/js/admin-config.js?v=2"></script>
 <script src="assets/js/legal-data.js?v=2"></script>
-<script src="assets/js/admin.js?v=14"></script>
+<script src="assets/js/design-core.js?v=1"></script>
+<script src="assets/js/layout-guard.js?v=1"></script>
+<script src="assets/js/design-editor.js?v=1"></script>
+<script src="assets/js/admin.js?v=15"></script>
 </body>
 </html>

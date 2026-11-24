@@ -47,7 +47,7 @@
   sb.auth.onAuthStateChange(function (ev, session) { if (ev === 'SIGNED_IN' || ev === 'SIGNED_OUT') gate(session); });
 
   /* ---------- ניווט: סיידבר, ?view= ב-URL, אזהרה לפני יציאה עם שינויים ---------- */
-  var VIEWS = { overview: 'סקירה', leads: 'פניות', projects: 'פרויקטים', pages: 'עמודים משפטיים', texts: 'טקסטי האתר' };
+  var VIEWS = { overview: 'סקירה', leads: 'פניות', projects: 'פרויקטים', pages: 'עמודים משפטיים', texts: 'טקסטי האתר', design: 'עיצוב' };
   var dirtyPages = false, dirtyTexts = false, formDirty = false, curView = 'overview', lastFocus = null;
   /* חלון קופץ: משבית את הדף שמאחוריו (Tab לא בורח החוצה) ומחזיר פוקוס לכפתור שפתח אותו */
   function modalOn() { if (!lastFocus) lastFocus = document.activeElement; $('.cp-top').inert = true; $('.cp-main').inert = true; }
@@ -56,7 +56,9 @@
     if (!VIEWS[name]) name = 'overview';
     if (name !== curView && curView === 'pages' && dirtyPages && !window.confirm('יש שינויים בעמוד המשפטי שעדיין לא נשמרו כטיוטה. לעבור בלי לשמור?')) return;
     if (name !== curView && curView === 'texts' && dirtyTexts) { saveTextDrafts(); }
+    if (name !== curView && curView === 'design' && window.DesignEditor) { window.DesignEditor.flush(); }
     curView = name;
+    if (name === 'design' && window.DesignEditor) { window.DesignEditor.mount({ sb: sb }); setTimeout(window.DesignEditor.fit, 50); }
     if (name === 'texts' && !$('#tx-frame').getAttribute('src')) setFramePage('index');
     Object.keys(VIEWS).forEach(function (n) {
       $('#tab-' + n).setAttribute('aria-selected', String(n === name));
@@ -74,7 +76,7 @@
     e.preventDefault(); var n = (k === 'ArrowDown' || k === 'ArrowRight') ? (i + 1) % tabs.length : (i - 1 + tabs.length) % tabs.length; tabs[n].focus();
   });
   window.addEventListener('popstate', function () { tab(new URLSearchParams(location.search).get('view') || 'overview', false); });
-  window.addEventListener('beforeunload', function (e) { if (dirtyPages || formDirty || dirtyTexts) { e.preventDefault(); e.returnValue = ''; } });
+  window.addEventListener('beforeunload', function (e) { if (dirtyPages || formDirty || dirtyTexts || (window.DesignEditor && window.DesignEditor.isDirty())) { e.preventDefault(); e.returnValue = ''; } });
   $('#side-tg').addEventListener('click', function () {
     var c = $('#shell').classList.toggle('is-collapsed');
     this.setAttribute('aria-expanded', String(!c));
