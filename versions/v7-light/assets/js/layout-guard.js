@@ -60,6 +60,7 @@
         if (cand.scrollW > Math.max(base.scrollW, cand.innerW) + TOL) res.overflow = { base: base.scrollW, now: cand.scrollW, viewport: cand.innerW };
         var spilled = Object.keys(cand.spill).filter(function (k) { return !base.spill[k]; });
         if (spilled.length && !res.overflow) res.overflow = { spilled: spilled.slice(0, 5), viewport: cand.innerW };
+        if (ids.length && !res.checked) res.error = 'לא נמצאו אזורים למדידה בעמוד, אי אפשר לאשר את הפריסה';
         frame.remove();
         return res;
       });
