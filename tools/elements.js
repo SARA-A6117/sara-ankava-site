@@ -80,33 +80,41 @@ function kindOf(el) {
 function allowFor(c, kind) {
   if (c.locked) return [];
   const textish = kind === 'heading' || kind === 'text' || kind === 'link';
-  if (c.scope === 'footer') return textish ? ['color', 'size', 'weight'] : [];
+  /* כותרות לא מוסתרות (SEO ונגישות). קישורי פוטר: בלי שינוי גודל (יעד לחיצה קטן) */
+  if (c.scope === 'footer') return kind === 'link' ? ['color', 'weight'] : textish ? ['color', 'size', 'weight'] : [];
   if (c.pinned) return textish ? ['color', 'size', 'weight'] : [];
-  if (textish) return ['color', 'size', 'weight', 'space', 'hide'];
+  if (textish) return kind === 'heading' ? ['color', 'size', 'weight', 'space'] : ['color', 'size', 'weight', 'space', 'hide'];
   if (kind === 'list' || kind === 'container') return c.scope === 'contact' ? ['space'] : ['space', 'hide'];
   if (kind === 'section') return c.scope === 'tools' || c.scope === 'about' ? ['space', 'hide'] : c.scope === 'contact' ? ['space'] : [];
   return [];
 }
 
+/* רקעים אפשריים מאחורי הטקסט (לבדיקת ניגודיות): צור קשר קובלט, שבב ספרות בלמה פחם/קובלט, השאר קרם */
+function bgFor(c) { if (c.scope === 'contact') return ['cobalt']; if (/\blp2__n\b/.test(c.cls)) return ['charcoal', 'cobalt']; return ['cream']; }
+
 function build(page, html) {
   const { root } = parse(html), items = classify(page, root), counters = {}, nodes = [], inserts = [];
   const keyOf = new Map();
+  const baseOf = (c) => { const shared = c.scope === 'nav' || c.scope === 'footer' || c.scope === 'hdr'; return (shared ? (c.scope === 'hdr' ? 'nav' : c.scope) : (page === 'index' ? '' : page + '.') + c.scope) || 'page'; };
+  for (const c of items) { if (!c.el.key) continue; const b = baseOf(c), pre = b + '.' + c.el.tag, m = c.el.key.startsWith(pre) && /^\d+$/.test(c.el.key.slice(pre.length)) ? Number(c.el.key.slice(pre.length)) : 0; counters[b + '|' + c.el.tag] = Math.max(counters[b + '|' + c.el.tag] || 0, m); }
+  const seen = new Set();
   for (const c of items) {
     const shared = c.scope === 'nav' || c.scope === 'footer' || c.scope === 'hdr';
     const base = (shared ? (c.scope === 'hdr' ? 'nav' : c.scope) : (page === 'index' ? '' : page + '.') + c.scope) || 'page';
     let key = c.el.key;
     if (!key) {
       const t = c.el.tag; counters[base + '|' + t] = (counters[base + '|' + t] || 0) + 1;
-      key = base + '.' + t + counters[base + '|' + t]; inserts.push({ at: c.el.tagEnd, key });
+      key = base.replace(/\.$/, '') + '.' + t + counters[base + '|' + t]; inserts.push({ at: c.el.tagEnd, key });
     }
-    keyOf.set(c.el, key);
+    if (seen.has(key)) throw new Error('duplicate data-el in ' + page + ': ' + key);
+    seen.add(key); keyOf.set(c.el, key);
   }
   for (const c of items) {
     const kind = kindOf(c.el); let anc = c.el.parent, parent = null;
     while (anc && !parent) { parent = keyOf.get(anc) || null; anc = anc.parent; }
     const own = c.el.texts.join(' ');
     const label = (SCOPE_HE[c.scope] && /^(section|header|footer|nav)$/.test(c.el.tag)) ? SCOPE_HE[c.scope] : own ? own.slice(0, 32) : (c.cls ? c.cls.split(/\s+/)[0] : kind);
-    nodes.push({ id: keyOf.get(c.el), parent, tag: c.el.tag, kind, label, scope: SCOPE_HE[c.scope] || c.scope, locked: c.locked || null, allow: allowFor(c, kind) });
+    nodes.push({ id: keyOf.get(c.el), parent, tag: c.el.tag, kind, label, scope: SCOPE_HE[c.scope] || c.scope, locked: c.locked || null, allow: allowFor(c, kind), bg: bgFor(c) });
   }
   return { nodes, inserts };
 }

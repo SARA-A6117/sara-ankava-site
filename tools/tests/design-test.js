@@ -28,13 +28,15 @@ const bad = [
   ['unknown device key', { desktop: { color: 'cobalt' } }], ['css injection in key', { 'base}body{display:none': { color: 'cobalt' } }],
 ];
 for (const [n, p] of bad) { const x = D.normalize(p, ['color', 'size', 'weight', 'space', 'hide']); ok('rejects: ' + n, x.errors.length > 0 && JSON.stringify(x.props) === '{}', x.errors[0]); }
+for (const k of ["constructor", "toString", "__proto__", "hasOwnProperty"]) { let x; try { x = D.normalize({ hide: JSON.parse('{"' + k + '":true}') }, ["hide"]); } catch (e) { x = { props: { crash: 1 }, errors: [] }; } ok("rejects hide key: " + k, !x.props.hide && x.errors.length > 0 && !x.props.crash); }
+ok("inherited prop name rejected", D.normalize({ base: JSON.parse('{"constructor":"x"}') }, ["color"]).errors.length > 0);
 // 3) הרשאות לפי אלמנט
 r = D.normalize({ base: { color: 'cobalt', mt: 'group' } }, ['color']); ok('space not allowed when only color allowed', r.errors.length === 1 && r.props.base.color === 'cobalt');
 // 4) מחולל: אלמנט נעול / לא קיים / מוצמד
 const map = {};
 map[aboutH.id] = { base: { color: 'cobalt', size: 'fs-3', weight: 900, mt: 'group' }, tablet: { size: 'fs-4' }, mobile: { size: 'fs-5', mb: 'none' } };
 map[toolsSec.id] = { hide: { mobile: true, tablet: true } };
-map[footerA.id] = { base: { color: 'yellow' } };
+map[footerA.id] = { base: { color: 'cobalt' } };
 map[heroEl.id] = { base: { color: 'cobalt' } };
 map[gradEl.id] = { base: { color: 'cobalt' } };
 map[pinnedTxt.id] = { base: { color: 'cobalt', size: 'fs-4', mt: 'outer' }, hide: { mobile: true } };
@@ -51,6 +53,12 @@ ok('errors reported for rejected items', g.errors.filter((e) => /locked|unknown/
 ok('CSS never contains forbidden properties', !/(background|position|transform|animation|z-index|width\s*:|height\s*:|filter|clip-path)/.test(g.css.replace(/data-el="[^"]*"/g, '').replace(/@media[^{]*/g, '')));
 ok('all CSS values come from tokens', [...g.css.matchAll(/(color|font-size|font-weight|margin-top|margin-bottom):([^;!]*)!important/g)].every((m) => /^(#[0-9A-F]{6}|var\(--(fs|sp)-[a-z0-9]+\)|[0-9]+|0)$/.test(m[2])));
 ok('media queries only the allowed ones', [...g.css.matchAll(/@media ([^{]*)\{/g)].every((m) => ['(max-width:1024px)', '(max-width:900px)', '(min-width:1025px)', '(min-width:901px) and (max-width:1024px)'].includes(m[1])), [...g.css.matchAll(/@media ([^{]*)\{/g)].map((m) => m[1]).join(' ; '));
+const contactH = idx.find((n) => n.scope === 'צור קשר' && n.kind === 'heading' && !n.locked), para = idx.find((n) => n.tag === 'p' && !n.locked && n.allow.includes('size') && n.scope !== 'פוטר'), aboutHead = aboutH;
+ok('low contrast rejected (yellow footer link on cream)', D.generate({ [footerA.id]: { base: { color: 'yellow' } } }, nodes).css === '');
+ok('low contrast rejected (charcoal on cobalt contact)', !contactH || D.generate({ [contactH.id]: { base: { color: 'charcoal' } } }, nodes).css === '');
+ok('good contrast accepted (white on cobalt contact)', !contactH || D.generate({ [contactH.id]: { base: { color: 'white' } } }, nodes).css !== '');
+ok('fs-5 and weight 300 rejected on body text', !para || (D.generate({ [para.id]: { base: { size: 'fs-5' } } }, nodes).css === '' && D.generate({ [para.id]: { base: { weight: 300 } } }, nodes).css === ''));
+ok('headings cannot be hidden, footer links cannot change size', D.generate({ [aboutHead.id]: { hide: { mobile: true } } }, nodes).css === '' && D.generate({ [footerA.id]: { base: { size: 'fs-4' } } }, nodes).css === '');
 ok('empty map -> empty css', D.generate({}, nodes).css === '');
 console.log(out.join('\n')); console.log('\n' + out.filter((x) => x.startsWith('PASS')).length + '/' + out.length + ' passed');
 if (process.argv[2]) fs.writeFileSync(process.argv[2], JSON.stringify(map));

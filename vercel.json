@@ -480,7 +480,7 @@
       ]
     },
     {
-      "source": "/assets/slots.json",
+      "source": "/assets/(slots|tree).json",
       "headers": [
         {
           "key": "X-Robots-Tag",

@@ -30,6 +30,8 @@ for (const f of ['index.html', 'projects.html']) {
 
 /* העורך העיצובי בדפדפן משתמש באותו קוד ניקוי כמו הבנייה (tools/design.js), כדי שאי אפשר לסטות ביניהם */
 fs.writeFileSync(path.join(dist, 'assets', 'js', 'design-core.js'), '(function(){var module={exports:{}};' + fs.readFileSync(path.join(__dirname, 'design.js'), 'utf8') + ';window.DesignCore=module.exports;})();');
+const dh = require('crypto').createHash('sha1').update(fs.readFileSync(path.join(__dirname, 'design.js'))).digest('hex').slice(0, 8);
+for (const f of ['admin.html']) { const p = path.join(dist, f); fs.writeFileSync(p, fs.readFileSync(p, 'utf8').replace(/design-core\.js\?v=[a-z0-9]+/, () => 'design-core.js?v=' + dh)); }
 
 /* ---- טקסטי האתר: manifest לעורך, והחלפת טקסטים מפורסמים מהמסד (אם אין חיבור, נשאר הטקסט שבקוד) ---- */
 const { scan, PAGES, SCOPE_NAMES } = require('./slots.js');
@@ -117,10 +119,10 @@ function applyDesign(map, tree) {
   errors.forEach((e) => console.warn('design: skipped ' + e.el + ': ' + e.msg));
   if (!css) return { applied: 0, errors: errors.length };
   const hash = require('crypto').createHash('sha1').update(css).digest('hex').slice(0, 8);
-  fs.writeFileSync(path.join(dist, 'assets', 'overrides.css'), css);
+  fs.writeFileSync(path.join(dist, 'assets', 'css', 'overrides.css'), css);
   for (const p of Object.keys(PAGES)) {
     const f = path.join(dist, p + '.html'); let h = fs.readFileSync(f, 'utf8');
-    h = h.replace('</head>', () => '<link rel="stylesheet" href="assets/overrides.css?v=' + hash + '">\n</head>');
+    h = h.replace('</head>', () => '<link rel="stylesheet" href="assets/css/overrides.css?v=' + hash + '">\n</head>');
     fs.writeFileSync(f, h);
   }
   return { applied, errors: errors.length };

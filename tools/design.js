@@ -13,7 +13,16 @@ const PROP_NEEDS = { color: 'color', size: 'size', weight: 'weight', mt: 'space'
 const EL_RE = /^[a-z0-9._-]{2,90}$/;
 
 /* מנקה אובייקט של אלמנט אחד. מחזיר { props, errors }. ערך אסור נזרק (ונרשם בשגיאות), לא נכנס ל-CSS */
-function normalize(raw, allow) {
+/* ניגודיות WCAG: צבע טקסט חייב לעבור 4.5:1 מול כל רקע אפשרי של האלמנט (node.bg) */
+const lum = (hex) => { const c = [1, 3, 5].map((i) => { const v = parseInt(hex.slice(i, i + 2), 16) / 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+const colorOk = (name, node) => !node || !node.bg || node.bg.every((bg) => ratio(COLORS[name], COLORS[bg]) >= 4.5);
+/* בגוף טקסט, כותרות ורשימות: לא הקטן ביותר (14px) ולא משקל דק (300) */
+const BODYISH = new Set(['p', 'li', 'h1', 'h2', 'h3', 'h4']);
+const sizeOk = (v, node) => !(node && BODYISH.has(node.tag) && v === 'fs-5');
+const weightOk = (v, node) => !(node && BODYISH.has(node.tag) && v === 300);
+
+function normalize(raw, allow, node) {
   const errors = [], out = {}, a = new Set(allow || []);
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return { props: {}, errors: ['props is not an object'] };
   for (const k of Object.keys(raw)) {
@@ -23,11 +32,11 @@ function normalize(raw, allow) {
     if (!d || typeof d !== 'object' || Array.isArray(d)) { errors.push(k + ' is not an object'); continue; }
     for (const p of Object.keys(d)) {
       const v = d[p];
-      if (!PROP_NEEDS[p]) { errors.push('property not allowed: ' + p); continue; }
+      if (!Object.prototype.hasOwnProperty.call(PROP_NEEDS, p)) { errors.push('property not allowed: ' + p); continue; }
       if (!a.has(PROP_NEEDS[p])) { errors.push(p + ' not allowed on this element'); continue; }
-      if (p === 'color' && Object.prototype.hasOwnProperty.call(COLORS, v)) o.color = v;
-      else if (p === 'size' && Object.prototype.hasOwnProperty.call(SIZES, v)) o.size = v;
-      else if (p === 'weight' && WEIGHTS.includes(v)) o.weight = v;
+      if (p === 'color' && Object.prototype.hasOwnProperty.call(COLORS, v)) { if (colorOk(v, node)) o.color = v; else errors.push('low contrast: ' + v); }
+      else if (p === 'size' && Object.prototype.hasOwnProperty.call(SIZES, v)) { if (sizeOk(v, node)) o.size = v; else errors.push('size too small for body text: ' + v); }
+      else if (p === 'weight' && WEIGHTS.includes(v)) { if (weightOk(v, node)) o.weight = v; else errors.push('weight too thin for body text'); }
       else if ((p === 'mt' || p === 'mb') && Object.prototype.hasOwnProperty.call(SPACES, v)) o[p] = v;
       else errors.push('value not allowed: ' + p + '=' + JSON.stringify(v).slice(0, 30));
     }
@@ -36,7 +45,7 @@ function normalize(raw, allow) {
   if (raw.hide !== undefined) {
     if (!a.has('hide')) errors.push('hide not allowed on this element');
     else if (raw.hide && typeof raw.hide === 'object' && !Array.isArray(raw.hide)) {
-      const h = {}; for (const d of Object.keys(raw.hide)) { if (HIDE_MQ[d] && raw.hide[d] === true) h[d] = true; else if (!HIDE_MQ[d] || raw.hide[d] !== false) errors.push('bad hide ' + d); }
+      const h = {}; for (const d of Object.keys(raw.hide)) { const known = Object.prototype.hasOwnProperty.call(HIDE_MQ, d); if (known && raw.hide[d] === true) h[d] = true; else if (!known || raw.hide[d] !== false) errors.push('bad hide ' + d); }
       if (Object.keys(h).length) out.hide = h;
     } else errors.push('hide is not an object');
   }
@@ -62,7 +71,7 @@ function generate(map, treeNodes) {
     const node = treeNodes.get(el);
     if (!EL_RE.test(el) || !node) { errors.push({ el, msg: 'unknown element' }); continue; }
     if (node.locked) { errors.push({ el, msg: 'locked element (' + node.locked + ')' }); continue; }
-    const r = normalize(map[el], node.allow);
+    const r = normalize(map[el], node.allow, node);
     r.errors.forEach((m) => errors.push({ el, msg: m }));
     for (const d of DEVICES) if (r.props[d]) { const x = decls(r.props[d]); if (x) rules[d].push(sel(el) + '{' + x + '}'); }
     if (r.props.hide) for (const d of Object.keys(r.props.hide)) rules.hide[d].push(sel(el) + '{display:none!important}');
@@ -75,4 +84,4 @@ function generate(map, treeNodes) {
   return { css: applied ? css : '', errors, applied };
 }
 
-module.exports = { COLORS, SIZES, WEIGHTS, SPACES, DEVICES, MQ, HIDE_MQ, normalize, generate };
+module.exports = { colorOk, sizeOk, weightOk, ratio, COLORS, SIZES, WEIGHTS, SPACES, DEVICES, MQ, HIDE_MQ, normalize, generate };

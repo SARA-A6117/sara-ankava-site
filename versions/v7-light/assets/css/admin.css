@@ -368,3 +368,4 @@ html body{background-image:none}
 #dz-status.ok{color:var(--cob)}
 @media (max-width:1100px){.cp-dz{grid-template-columns:1fr}.cp-dz__side{max-height:none}.cp-dz__prev{position:static}.dz-wrap{height:520px}}
 .cp-hist__row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0}
+.dz-c.is-off{opacity:.3;cursor:not-allowed;position:relative}.dz-c.is-off::after{content:"";position:absolute;inset:50% 4px auto;border-top:2px solid #1E201F;transform:rotate(-45deg)}

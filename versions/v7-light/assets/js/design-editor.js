@@ -20,7 +20,7 @@
   function snap() { return JSON.stringify(cur); }
   function pushUndo() { undo.push(snap()); if (undo.length > 60) undo.shift(); redo = []; }
   function same(a, b) { return JSON.stringify(a || {}) === JSON.stringify(b || {}); }
-  function norm(el) { var n = nodes[el]; return n ? C.normalize(cur[el] || {}, n.allow).props : {}; }
+  function norm(el) { var n = nodes[el]; return n ? C.normalize(cur[el] || {}, n.allow, n).props : {}; }
   function pending() { return Object.keys(Object.assign({}, rows, cur)).filter(function (el) { var r = rows[el]; return !same(norm(el), r ? r.props : {}); }); }
   function msg(t, ok) { var e = $('#dz-status'); e.textContent = t || ''; e.classList.toggle('ok', !!ok); }
 
@@ -139,9 +139,9 @@
       box.innerHTML = h + '<p class="cp-warn">' + esc(n.locked ? (LOCK_HE[n.locked] || 'האלמנט נעול.') : 'באלמנט הזה אין תכונות שמותר לשנות.') + '</p>'; return;
     }
     h += '<div class="dz-dev" role="group" aria-label="מכשיר">' + seg('data-dev', Object.keys(DEV).map(function (k) { return [k, DEV[k][0]]; }), dev) + '</div><p class="cp-hint">טאבלט ונייד יורשים ממחשב, אלא אם הוגדר להם אחרת.</p>';
-    if (allow.indexOf('color') > -1) h += '<div class="dz-f"><span>צבע</span><div class="dz-sw">' + Object.keys(C.COLORS).map(function (k) { return '<button type="button" data-set="color" data-v="' + k + '" class="dz-c' + (o.color === k ? ' is-on' : '') + '" style="--c:' + C.COLORS[k] + '" title="' + COLOR_HE[k] + '" aria-label="' + COLOR_HE[k] + '" aria-pressed="' + (o.color === k) + '"></button>'; }).join('') + '<button type="button" class="cp-sm" data-set="color" data-v="">ברירת מחדל</button></div></div>';
-    if (allow.indexOf('size') > -1) h += '<div class="dz-f"><span>גודל</span>' + seg('data-set-size', [['', 'ברירת מחדל']].concat(Object.keys(C.SIZES).map(function (k) { return [k, SIZE_HE[k] || k]; })), o.size || '') + '</div>';
-    if (allow.indexOf('weight') > -1) h += '<div class="dz-f"><span>משקל</span>' + seg('data-set-weight', [['', 'ברירת מחדל']].concat(C.WEIGHTS.map(function (w) { return [w, w]; })), o.weight || '') + '</div>';
+    if (allow.indexOf('color') > -1) h += '<div class="dz-f"><span>צבע</span><div class="dz-sw">' + Object.keys(C.COLORS).map(function (k) { var ok = C.colorOk(k, n); return '<button type="button" data-set="color" data-v="' + k + '" class="dz-c' + (o.color === k ? ' is-on' : '') + (ok ? '' : ' is-off') + '" style="--c:' + C.COLORS[k] + '" title="' + COLOR_HE[k] + (ok ? '' : ' (ניגודיות נמוכה מול הרקע, לא זמין)') + '" aria-label="' + COLOR_HE[k] + (ok ? '' : ', לא זמין: ניגודיות נמוכה') + '"' + (ok ? '' : ' disabled') + ' aria-pressed="' + (o.color === k) + '"></button>'; }).join('') + '<button type="button" class="cp-sm" data-set="color" data-v="">ברירת מחדל</button></div></div>';
+    if (allow.indexOf('size') > -1) h += '<div class="dz-f"><span>גודל</span>' + seg('data-set-size', [['', 'ברירת מחדל']].concat(Object.keys(C.SIZES).filter(function (k) { return C.sizeOk(k, n); }).map(function (k) { return [k, SIZE_HE[k] || k]; })), o.size || '') + '</div>';
+    if (allow.indexOf('weight') > -1) h += '<div class="dz-f"><span>משקל</span>' + seg('data-set-weight', [['', 'ברירת מחדל']].concat(C.WEIGHTS.filter(function (w) { return C.weightOk(w, n); }).map(function (w) { return [w, w]; })), o.weight || '') + '</div>';
     if (allow.indexOf('space') > -1) {
       var sp = [['', 'ברירת מחדל']].concat(Object.keys(C.SPACES).map(function (k) { return [k, SPACE_HE[k]]; }));
       h += '<div class="dz-f"><span>רווח מעל</span>' + seg('data-set-mt', sp, o.mt || '') + '</div><div class="dz-f"><span>רווח מתחת</span>' + seg('data-set-mb', sp, o.mb || '') + '</div>';
@@ -152,6 +152,7 @@
   }
   function setProp(key, val) {
     if (!sel || !nodes[sel] || nodes[sel].locked) return;
+    if (key === 'hide' && nodes[sel].kind === 'section' && !((cur[sel] || {}).hide || {})[val] && !window.confirm('להסתיר את כל האזור הזה ב' + { desktop: 'מחשב', tablet: 'טאבלט', mobile: 'נייד' }[val] + '? תוכן מוסתר לא נראה למבקרים, וגוגל נותן לו פחות משקל (בנייד הוא כמעט לא נסרק). אפשר לבטל אחר כך.')) return;
     pushUndo();
     var p = JSON.parse(JSON.stringify(cur[sel] || {}));
     if (key === 'hide') { p.hide = p.hide || {}; if (p.hide[val]) delete p.hide[val]; else p.hide[val] = true; if (!Object.keys(p.hide).length) delete p.hide; }
