@@ -28,6 +28,9 @@ for (const f of ['index.html', 'projects.html']) {
   fs.writeFileSync(p, h);
 }
 
+/* העורך העיצובי בדפדפן משתמש באותו קוד ניקוי כמו הבנייה (tools/design.js), כדי שאי אפשר לסטות ביניהם */
+fs.writeFileSync(path.join(dist, 'assets', 'js', 'design-core.js'), '(function(){var module={exports:{}};' + fs.readFileSync(path.join(__dirname, 'design.js'), 'utf8') + ';window.DesignCore=module.exports;})();');
+
 /* ---- טקסטי האתר: manifest לעורך, והחלפת טקסטים מפורסמים מהמסד (אם אין חיבור, נשאר הטקסט שבקוד) ---- */
 const { scan, PAGES, SCOPE_NAMES } = require('./slots.js');
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
